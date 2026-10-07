@@ -1,7 +1,7 @@
 <template>
   <div class="product-image" :class="{ 'product-image-small': small }">
     <img v-if="src && !failed" :src="assetUrl(src)" :alt="alt" @error="failed = true" />
-    <div v-else class="product-image-placeholder"><span>拾</span><small>商品图片</small></div>
+    <div v-else class="product-image-placeholder">暂无商品图片</div>
     <slot name="overlay" />
   </div>
 </template>

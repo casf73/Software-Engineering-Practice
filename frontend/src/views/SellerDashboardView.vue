@@ -1,20 +1,34 @@
 <template>
-  <div class="content-width dashboard-page">
-    <PageHeader eyebrow="SELLER WORKSPACE" title="卖家工作台" description="发布一件商品，按队列顺序处理购买意向，并记录线下交易结果。">
-      <template #actions><el-button round class="outline-button" @click="refresh">刷新数据</el-button><el-button round @click="logout">退出登录</el-button></template>
-    </PageHeader>
+  <div class="content-width dashboard-page seller-layout">
+    <aside class="seller-sidebar" aria-label="卖家后台目录">
+      <div class="seller-sidebar-title">卖家后台</div>
+      <el-menu :default-active="activeSection" @select="activeSection = $event">
+        <el-menu-item index="overview">概览</el-menu-item>
+        <el-menu-item index="product">商品管理</el-menu-item>
+        <el-menu-item index="queue">购买意向</el-menu-item>
+      </el-menu>
+    </aside>
+    <div class="seller-content">
+      <PageHeader :title="sectionMeta[activeSection].title" :description="sectionMeta[activeSection].description">
+        <template #actions><el-button @click="refresh">刷新数据</el-button><el-button @click="logout">退出登录</el-button></template>
+      </PageHeader>
 
-    <div v-if="loading" class="loading-panel"><el-skeleton :rows="8" animated /></div>
-    <template v-else>
-      <div class="dashboard-summary">
-        <AppCard class="summary-card"><span class="summary-label">当前商品</span><strong>{{ workbench.product ? workbench.product.name : '暂无商品' }}</strong><small>{{ workbench.product ? productLabel(workbench.product.status) : '发布后买家即可查看' }}</small></AppCard>
-        <AppCard class="summary-card"><span class="summary-label">等待处理</span><strong>{{ workbench.waitingCount || 0 }}<small class="summary-unit"> 位</small></strong><small>意向按提交时间先后排列</small></AppCard>
-        <AppCard class="summary-card"><span class="summary-label">本次交易</span><strong>{{ workbench.activeIntent ? '进行中' : '未开始' }}</strong><small>{{ workbench.activeIntent ? '正在处理队首买家' : '由你决定何时开始' }}</small></AppCard>
-      </div>
+      <div v-if="loading" class="loading-panel"><el-skeleton :rows="8" animated /></div>
+      <template v-else>
+        <div v-if="activeSection === 'overview'" class="dashboard-summary">
+          <AppCard class="summary-card"><span class="summary-label">当前商品</span><strong>{{ workbench.product ? workbench.product.name : '暂无商品' }}</strong><small>{{ workbench.product ? productLabel(workbench.product.status) : '发布后买家即可查看' }}</small></AppCard>
+          <AppCard class="summary-card"><span class="summary-label">等待处理</span><strong>{{ workbench.waitingCount || 0 }}<small class="summary-unit"> 位</small></strong><small>意向按提交时间先后排列</small></AppCard>
+          <AppCard class="summary-card"><span class="summary-label">本次交易</span><strong>{{ workbench.activeIntent ? '进行中' : '未开始' }}</strong><small>{{ workbench.activeIntent ? '正在处理队首买家' : '由你决定何时开始' }}</small></AppCard>
+        </div>
+        <el-card v-if="activeSection === 'overview'" shadow="never" class="overview-actions">
+          <template #header>快捷操作</template>
+          <el-button type="primary" @click="activeSection = 'product'">商品管理</el-button>
+          <el-button @click="activeSection = 'queue'">查看购买意向</el-button>
+        </el-card>
 
-      <AppCard class="seller-product-card">
+      <AppCard v-if="activeSection === 'product'" class="seller-product-card">
         <template #header>
-          <div class="section-title"><div><p class="eyebrow">商品管理</p><h2>{{ workbench.product ? '当前上架商品' : '发布一件商品' }}</h2></div><StatusBadge v-if="workbench.product" kind="product" :status="workbench.product.status" /></div>
+          <div class="section-title"><h2>{{ workbench.product ? '当前上架商品' : '发布商品' }}</h2><StatusBadge v-if="workbench.product" kind="product" :status="workbench.product.status" /></div>
         </template>
         <div v-if="workbench.product" class="seller-product-content">
           <ProductGallery class="seller-product-image" :images="workbench.product.images" :alt="workbench.product.name" />
@@ -26,11 +40,11 @@
             <el-button v-if="workbench.product.status !== 'DELISTED'" type="danger" plain :disabled="workbench.product.status === 'IN_TRADE'" @click="delistDialogVisible = true">商品下架</el-button>
           </div>
         </div>
-        <div v-else class="publish-empty"><EmptyState title="还没有上架商品" description="首轮只支持同时上架一件商品。填写商品信息后，买家就能提交购买意向。" mark="上"><el-button type="primary" @click="openProductDialog">发布商品</el-button></EmptyState></div>
+        <div v-else class="publish-empty"><EmptyState title="暂无上架商品" description="目前只支持同时上架一件商品。"><el-button type="primary" @click="openProductDialog">发布商品</el-button></EmptyState></div>
       </AppCard>
 
-      <AppCard class="queue-card">
-        <template #header><div class="section-title"><div><p class="eyebrow">FIRST IN, FIRST OUT</p><h2>购买意向队列</h2></div><el-tag effect="plain" round>{{ workbench.intents?.length || 0 }} 条记录</el-tag></div></template>
+      <AppCard v-if="activeSection === 'queue'" class="queue-card">
+        <template #header><div class="section-title"><h2>购买意向队列</h2><el-tag effect="plain">{{ workbench.intents?.length || 0 }} 条记录</el-tag></div></template>
         <div v-if="workbench.intents?.length" class="queue-table-wrap">
           <el-table :data="workbench.intents" row-key="id" stripe>
             <el-table-column label="排位" width="86"><template #default="scope"><span class="queue-position">{{ scope.row.position ? String(scope.row.position).padStart(2, '0') : '—' }}</span></template></el-table-column>
@@ -51,29 +65,30 @@
             </el-table-column>
           </el-table>
         </div>
-        <EmptyState v-else title="队列暂时为空" description="买家提交意向后，会按照提交时间出现在这里。" mark="队" />
+        <EmptyState v-else title="队列暂时为空" description="买家提交意向后，会按照提交时间出现在这里。" />
       </AppCard>
-      <p class="privacy-note dashboard-note">买家姓名和电话仅在卖家工作台中展示。首轮验收不提供历史记录页面。</p>
-    </template>
+      <p v-if="activeSection === 'queue'" class="privacy-note dashboard-note">买家姓名和电话仅在卖家工作台中展示。</p>
+      </template>
+    </div>
   </div>
 
   <AppDialog v-model="productDialogVisible" :title="workbench.product ? '编辑商品' : '发布商品'" width="600px">
-    <template #title><div class="dialog-title-slot"><span class="dialog-title-mark">物</span><div><strong>{{ workbench.product ? '编辑商品' : '发布商品' }}</strong><small>首轮上架一件商品</small></div></div></template>
+    <template #title>{{ workbench.product ? '编辑商品' : '发布商品' }}</template>
     <el-form ref="productFormRef" :model="productForm" :rules="productRules" label-position="top">
       <el-form-item label="商品名称" prop="name"><el-input v-model="productForm.name" maxlength="80" show-word-limit placeholder="例如：机械键盘" /></el-form-item>
       <el-form-item label="商品价格（元）" prop="price"><el-input v-model="productForm.price" placeholder="请输入价格，最多两位小数"><template #prefix>¥</template></el-input></el-form-item>
       <el-form-item label="商品描述"><el-input v-model="productForm.description" type="textarea" :rows="3" maxlength="500" show-word-limit placeholder="选填，介绍商品成色、配置或交易说明" /></el-form-item>
       <el-form-item label="商品图片（选填）">
         <div class="image-editor">
-          <input ref="imageInputRef" class="visually-hidden" type="file" accept="image/jpeg,image/png" multiple @change="onImageChange">
-          <el-button :disabled="imageRows.length >= 5" @click="imageInputRef?.click()">选择图片（{{ imageRows.length }}/5）</el-button>
+          <input ref="imageInputRef" class="visually-hidden" type="file" accept="image/jpeg,image/png" @change="onImageChange">
+          <el-button :disabled="imageRows.length >= 1" @click="imageInputRef?.click()">选择图片</el-button>
           <div v-if="imageRows.length" class="image-preview-grid">
             <div v-for="(image, index) in imageRows" :key="image.key" class="image-preview-item">
               <img :src="image.url" :alt="'商品图片 ' + (index + 1)">
               <button type="button" :aria-label="'移除第 ' + (index + 1) + ' 张图片'" @click="removeImage(index)">×</button>
             </div>
           </div>
-          <small class="field-hint">最多 5 张 JPG/PNG，每张不超过 5 MB。</small>
+          <small class="field-hint">最多 1 张 JPG/PNG，不超过 5 MB。更换图片请先移除原图。</small>
         </div>
       </el-form-item>
     </el-form>
@@ -118,6 +133,12 @@ import { formatDate, formatPrice } from '../utils/format'
 import { productLabel } from '../utils/status'
 
 const router = useRouter()
+const activeSection = ref('overview')
+const sectionMeta = {
+  overview: { title: '概览', description: '查看当前商品、排队人数和交易状态。' },
+  product: { title: '商品管理', description: '发布或编辑当前商品。' },
+  queue: { title: '购买意向', description: '按排队顺序处理购买意向并登记交易结果。' },
+}
 const loading = ref(true)
 const workbench = ref({ product: null, intents: [], waitingCount: 0, activeIntent: null })
 const productDialogVisible = ref(false)
@@ -152,13 +173,13 @@ function openProductDialog() {
   const current = workbench.value.product
   Object.assign(productForm, { name: current?.name || '', price: current?.price ? String(current.price) : '', description: current?.description || '' })
   releaseTemporaryPreviews()
-  imageRows.value = (current?.images || []).map((url) => ({ key: url, url, file: null }))
+  imageRows.value = (current?.images || []).slice(0, 1).map((url) => ({ key: url, url, file: null }))
   productDialogVisible.value = true
 }
 function onImageChange(event) {
   const files = Array.from(event.target.files || [])
-  const remaining = 5 - imageRows.value.length
-  if (files.length > remaining) ElMessage.warning('商品图片最多上传 5 张')
+  const remaining = 1 - imageRows.value.length
+  if (files.length > remaining) ElMessage.warning('商品图片最多上传 1 张')
   for (const file of files.slice(0, remaining)) {
     if (!['image/jpeg', 'image/png'].includes(file.type)) { ElMessage.warning('只支持 JPG 或 PNG 图片'); continue }
     if (file.size > 5 * 1024 * 1024) { ElMessage.warning('单张图片不能超过 5 MB'); continue }

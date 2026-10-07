@@ -1,51 +1,41 @@
 <template>
   <div class="content-width">
     <PageHeader
-      eyebrow="本期好物 · 仅此一件"
-      title="找到喜欢的，就排进队伍"
-      description="免注册提交购买意向，系统按提交顺序排队。线下交易由卖家确认。"
+      title="商品"
+      description="查看当前商品，提交购买意向或查询排队进度。"
     >
-      <template #actions><el-button round class="outline-button" @click="openQueryDialog">口令码查询</el-button></template>
+      <template #actions><el-button @click="openQueryDialog">口令码查询</el-button></template>
     </PageHeader>
 
     <div v-if="loading" class="loading-panel"><el-skeleton :rows="6" animated /></div>
-    <div v-else-if="!product" class="empty-product-panel">
-      <EmptyState title="卖家还没有上架商品" description="商品发布后会显示在这里，欢迎稍后再来看看。" mark="空" />
-    </div>
+    <el-card v-else-if="!product" class="empty-product-panel" shadow="never">
+      <EmptyState title="暂无在售商品" description="卖家上架商品后会显示在这里。" />
+    </el-card>
     <div v-else class="store-layout">
       <AppCard class="product-card">
         <ProductGallery :images="product.images" :alt="product.name">
           <template #overlay>
             <div class="image-topline">
               <StatusBadge kind="product" :status="product.status" />
-              <span class="single-item-pill">单件商品</span>
             </div>
           </template>
         </ProductGallery>
         <div class="product-copy">
           <div class="product-title-row">
-            <div><p class="eyebrow">当期商品</p><h2>{{ product.name }}</h2></div>
+            <h2>{{ product.name }}</h2>
             <div class="product-price"><small>¥</small>{{ formatPrice(product.price) }}</div>
           </div>
           <p class="product-description">{{ product.description || '卖家暂未补充商品描述。' }}</p>
-          <div class="product-facts">
-            <span><i class="fact-dot fact-dot-blue" />线下完成交易</span>
-            <span><i class="fact-dot fact-dot-green" />按提交时间排队</span>
-          </div>
         </div>
       </AppCard>
 
       <AppCard class="intent-card">
         <template #header>
           <div class="card-heading-copy">
-            <p class="eyebrow">购买意向</p>
-            <h2>{{ product.status === 'IN_TRADE' ? '商品正在交易中' : '想要这件商品？' }}</h2>
+            <h2>{{ product.status === 'IN_TRADE' ? '商品正在交易中' : '提交购买意向' }}</h2>
           </div>
         </template>
-        <div v-if="product.status === 'IN_TRADE'" class="trade-notice">
-          <div class="notice-icon">交</div>
-          <div><strong>当前买家已进入交易</strong><p>暂不接收新的购买意向。已排队的买家仍可查询或撤销自己的意向。</p></div>
-        </div>
+        <el-alert v-if="product.status === 'IN_TRADE'" title="商品交易中" description="暂不接收新的购买意向。已排队的买家仍可查询或撤销自己的意向。" type="info" :closable="false" show-icon />
         <template v-else>
           <p class="form-intro">留下姓名和联系电话，提交后即可获得专属口令码。</p>
           <el-form ref="intentFormRef" :model="intentForm" :rules="intentRules" label-position="top" @submit.prevent="submitIntent">
@@ -53,26 +43,19 @@
             <el-form-item label="联系电话" prop="phone"><el-input v-model="intentForm.phone" placeholder="请输入联系电话" size="large" autocomplete="tel" /></el-form-item>
             <el-button type="primary" size="large" class="full-button" :loading="submitting" @click="submitIntent">提交购买意向</el-button>
           </el-form>
-          <div class="privacy-note"><span class="privacy-lock">●</span>无需注册。口令码只用于查询你自己的意向。</div>
+          <p class="privacy-note">无需注册。请妥善保存提交后获得的口令码。</p>
         </template>
       </AppCard>
     </div>
 
-    <section class="how-it-works">
-      <div class="how-title"><p class="eyebrow">简单三步</p><h2>排队规则清清楚楚</h2></div>
-      <div class="steps-grid">
-        <div class="step-item"><span>01</span><div><strong>提交意向</strong><p>填写姓名和电话，保存好页面展示的口令码。</p></div></div>
-        <div class="step-item"><span>02</span><div><strong>按顺序排队</strong><p>系统以有效提交时间排序，不跳过队首。</p></div></div>
-        <div class="step-item"><span>03</span><div><strong>线下交易</strong><p>卖家开始交易并登记结果，页面同步显示状态。</p></div></div>
-      </div>
-    </section>
+    <el-alert class="store-guidance" title="排队说明" description="买家免注册提交意向，系统按有效提交时间排序；卖家开启交易并登记结果。" type="info" :closable="false" show-icon />
   </div>
 
   <AppDialog v-model="queryDialogVisible" title="口令码查询" width="520px">
     <p class="dialog-lead">输入提交意向后获得的口令码，查询排队位置和处理状态。</p>
     <el-input v-model="queryCode" size="large" placeholder="请输入口令码" clearable @keyup.enter="queryIntent" />
     <div v-if="queryResult" class="query-result">
-      <div class="result-header"><div><p class="eyebrow">查询结果</p><strong>{{ queryResult.name }}</strong></div><StatusBadge :status="queryResult.status" /></div>
+      <div class="result-header"><strong>{{ queryResult.name }}</strong><StatusBadge :status="queryResult.status" /></div>
       <div class="result-grid">
         <div><small>意向状态</small><strong>{{ intentLabel(queryResult.status) }}</strong></div>
         <div><small>当前排位</small><strong>{{ queryResult.position ? '第 ' + queryResult.position + ' 位' : '—' }}</strong></div>
@@ -88,11 +71,8 @@
   </AppDialog>
 
   <AppDialog v-model="issueDialogVisible" title="意向已提交" width="460px">
-    <div class="passcode-success">
-      <span class="success-mark">✓</span><h3>已经排进队伍</h3>
-      <p>请保存下面的口令码。关闭后不会再次显示。</p>
-      <div class="passcode-box"><span>{{ issuedPasscode }}</span><el-button text type="primary" @click="copyPasscode">复制</el-button></div>
-    </div>
+    <el-result icon="success" title="提交成功" sub-title="请保存口令码，关闭后不会再次显示。" />
+    <div class="passcode-box"><span>{{ issuedPasscode }}</span><el-button text type="primary" @click="copyPasscode">复制</el-button></div>
     <template #footer><el-button type="primary" @click="issueDialogVisible = false; openQueryDialog(issuedPasscode)">查看排队状态</el-button></template>
   </AppDialog>
 

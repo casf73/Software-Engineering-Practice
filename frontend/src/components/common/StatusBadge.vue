@@ -1,4 +1,4 @@
-<template><el-tag :type="tagType" effect="light" round>{{ label }}</el-tag></template>
+<template><el-tag :type="tagType" effect="plain">{{ label }}</el-tag></template>
 <script setup>
 import { computed } from 'vue'
 import { intentLabel, intentTagType, productLabel, productTagType } from '../../utils/status'

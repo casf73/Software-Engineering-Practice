@@ -204,7 +204,7 @@ public class StoreService {
         product.setDescription(request.description() == null ? "" : request.description().trim());
         List<String> images = request.images() == null ? List.of() : request.images().stream()
                 .map(String::trim).filter(value -> !value.isEmpty()).toList();
-        if (images.size() > 5) throw ApiException.badRequest("商品图片最多上传 5 张");
+        if (images.size() > 1) throw ApiException.badRequest("商品图片最多上传 1 张");
         if (images.stream().anyMatch(image -> !image.startsWith("/uploads/"))) {
             throw ApiException.badRequest("商品图片地址无效");
         }
@@ -214,7 +214,7 @@ public class StoreService {
     private ProductView productView(Product product) {
         return new ProductView(product.getId(), product.getName(), product.getPrice(), product.getDescription(),
                 product.getImageUrls() == null || product.getImageUrls().isBlank()
-                        ? List.of() : Arrays.asList(product.getImageUrls().split(Pattern.quote("|"))),
+                        ? List.of() : Arrays.stream(product.getImageUrls().split(Pattern.quote("|"))).limit(1).toList(),
                 product.getStatus(), product.getCreatedAt());
     }
 
