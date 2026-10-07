@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        same-site: lax
+spring:
+  application:
+    name: single-seller-store
+  datasource:
+    url: jdbc:h2:file:./data/storedb;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+app:
+  seller:
+    username: admin
+    password: "123456"
+  upload-directory: ./data/uploads
+  allowed-origin: http://localhost:5173
