@@ -14,7 +14,7 @@
 
     mvn spring-boot:run
 
-后端地址为 http://localhost:8080。H2 数据库文件和上传图片保存在 backend/data，应用重启后仍保留。
+后端地址为 http://localhost:8080   H2 数据库文件和上传图片保存在 backend/data，应用重启后仍保留。
 
 ## 启动前端
 
@@ -23,7 +23,7 @@
     npm install
     npm run dev
 
-访问 http://localhost:5173。前端开发服务器会把 /api 和 /uploads 请求转发到后端。
+访问 http://localhost:5173  前端开发服务器会把 /api 和 /uploads 请求转发到后端。
 
 ## 已实现的前端功能
 
