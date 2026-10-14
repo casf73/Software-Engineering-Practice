@@ -1,0 +1,10 @@
+{
+  "id": "T05-01",
+  "caseId": "T05",
+  "title": "138 号码失败作废",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1382000000"
+  },
+  "expected": "商品恢复在售；失败买家原码失效；下一位仍排队"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "T09-03",
+  "caseId": "T09",
+  "title": "蓝色样图上传",
+  "mode": "automated",
+  "input": {
+    "png": "sample.png",
+    "jpg": "sample.jpg",
+    "invalid": "invalid.txt",
+    "oversized": "oversized.png",
+    "color": "blue"
+  },
+  "expected": "文件类型、大小和单图限制均生效"
+}

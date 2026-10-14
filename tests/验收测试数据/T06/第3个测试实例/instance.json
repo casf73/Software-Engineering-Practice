@@ -1,0 +1,10 @@
+{
+  "id": "T06-03",
+  "caseId": "T06",
+  "title": "137 号码失败重排",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1373000000"
+  },
+  "expected": "重排后没有进行中交易"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "T09-02",
+  "caseId": "T09",
+  "title": "绿色样图上传",
+  "mode": "automated",
+  "input": {
+    "png": "sample.png",
+    "jpg": "sample.jpg",
+    "invalid": "invalid.txt",
+    "oversized": "oversized.png",
+    "color": "green"
+  },
+  "expected": "上传后返回 /uploads/ 地址，双图关联返回 400"
+}

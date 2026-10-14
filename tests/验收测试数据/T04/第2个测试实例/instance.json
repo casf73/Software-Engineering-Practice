@@ -1,0 +1,10 @@
+{
+  "id": "T04-02",
+  "caseId": "T04",
+  "title": "139 号码冻结边界",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1391000000"
+  },
+  "expected": "交易中拒绝新意向和直接下架"
+}

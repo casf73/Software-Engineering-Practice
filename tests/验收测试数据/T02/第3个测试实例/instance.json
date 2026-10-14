@@ -1,0 +1,12 @@
+{
+  "id": "T02-03",
+  "caseId": "T02",
+  "title": "商品丙发布与编辑",
+  "mode": "automated",
+  "input": {
+    "productName": "测试商品丙",
+    "updatedName": "更新商品丙",
+    "price": 120
+  },
+  "expected": "第二件商品被拒绝；首件编辑成功"
+}

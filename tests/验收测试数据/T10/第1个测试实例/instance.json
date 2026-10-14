@@ -1,0 +1,11 @@
+{
+  "id": "T10-01",
+  "caseId": "T10",
+  "title": "旧数据两张图片",
+  "mode": "automated",
+  "input": {
+    "firstImage": "/uploads/old-first-a.jpg",
+    "secondImage": "/uploads/old-second-a.jpg"
+  },
+  "expected": "公开接口仅返回第一张图片"
+}

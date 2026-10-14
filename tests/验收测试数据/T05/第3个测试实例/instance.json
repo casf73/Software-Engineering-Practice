@@ -1,0 +1,10 @@
+{
+  "id": "T05-03",
+  "caseId": "T05",
+  "title": "137 号码失败作废",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1372000000"
+  },
+  "expected": "卖家记录为 TRADE_FAILED，等待计数保持"
+}

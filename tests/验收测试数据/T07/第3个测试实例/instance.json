@@ -1,0 +1,10 @@
+{
+  "id": "T07-03",
+  "caseId": "T07",
+  "title": "137 号码成交收尾",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1374000000"
+  },
+  "expected": "卖家记录成功与失败状态正确"
+}

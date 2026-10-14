@@ -1,0 +1,10 @@
+{
+  "id": "T04-01",
+  "caseId": "T04",
+  "title": "138 号码冻结边界",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1381000000"
+  },
+  "expected": "只选队首；交易者不能撤销，等待者可以撤销"
+}

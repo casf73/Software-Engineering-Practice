@@ -1,0 +1,11 @@
+{
+  "id": "T10-02",
+  "caseId": "T10",
+  "title": "旧数据另一组图片",
+  "mode": "automated",
+  "input": {
+    "firstImage": "/uploads/old-first-b.png",
+    "secondImage": "/uploads/old-second-b.png"
+  },
+  "expected": "首轮接口不展示第二张图片"
+}

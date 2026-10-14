@@ -1,0 +1,10 @@
+{
+  "id": "T01-03",
+  "caseId": "T01",
+  "title": "大小写错误密码",
+  "mode": "automated",
+  "input": {
+    "wrongPassword": "123456A"
+  },
+  "expected": "密码区分大小写，错误登录 401，退出后后台仍为 401"
+}

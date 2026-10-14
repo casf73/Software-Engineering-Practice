@@ -1,0 +1,11 @@
+{
+  "id": "T10-03",
+  "caseId": "T10",
+  "title": "旧数据混合格式",
+  "mode": "automated",
+  "input": {
+    "firstImage": "/uploads/old-first-c.jpg",
+    "secondImage": "/uploads/old-second-c.png"
+  },
+  "expected": "数据库旧记录保留，读取时限制为首图"
+}

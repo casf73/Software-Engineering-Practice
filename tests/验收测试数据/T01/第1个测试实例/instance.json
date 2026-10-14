@@ -1,0 +1,10 @@
+{
+  "id": "T01-01",
+  "caseId": "T01",
+  "title": "错误密码与未登录拦截",
+  "mode": "automated",
+  "input": {
+    "wrongPassword": "wrong-01"
+  },
+  "expected": "未登录和错误密码均为 401；正确登录后可访问，退出后失效"
+}

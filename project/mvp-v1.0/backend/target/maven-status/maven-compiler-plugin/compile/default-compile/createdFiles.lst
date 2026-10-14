@@ -20,6 +20,7 @@ cn\codelyy\store\api\ApiModels$BuyerIntentView.class
 cn\codelyy\store\api\ApiModels$TradeResultRequest.class
 cn\codelyy\store\repository\IntentRepository.class
 cn\codelyy\store\api\PublicController.class
+cn\codelyy\store\config\SpaForwardController.class
 cn\codelyy\store\api\ApiModels$WorkbenchView.class
 cn\codelyy\store\domain\ProductStatus.class
 cn\codelyy\store\repository\ProductRepository.class

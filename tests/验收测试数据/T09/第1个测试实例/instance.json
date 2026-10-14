@@ -1,0 +1,14 @@
+{
+  "id": "T09-01",
+  "caseId": "T09",
+  "title": "红色样图上传",
+  "mode": "automated",
+  "input": {
+    "png": "sample.png",
+    "jpg": "sample.jpg",
+    "invalid": "invalid.txt",
+    "oversized": "oversized.png",
+    "color": "red"
+  },
+  "expected": "JPG/PNG 可上传，错误格式与超 5 MB 被拒绝，商品只允许一张"
+}

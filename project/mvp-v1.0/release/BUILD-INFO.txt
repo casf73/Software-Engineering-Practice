@@ -1,0 +1,10 @@
+﻿在线购物系统构建结果
+构建时间：2026-10-14 21:00:37 +08:00
+Node.js：v24.17.0
+npm：11.13.0
+Maven：Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Java：17
+前端：Vite build 成功，静态资源已装入 JAR
+后端：Maven package 成功；跳过测试执行
+JAR：app.jar
+JAR SHA256：CDA6F5C0934AF6028F6307086D06F90901D89624E07AAE2CA34B1BCAE478046F

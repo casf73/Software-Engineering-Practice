@@ -1,0 +1,14 @@
+services:
+  store:
+    build: .
+    image: online-shopping-system:1.0.0
+    ports:
+      - "8080:8080"
+    environment:
+      APP_SELLER_PASSWORD: ${APP_SELLER_PASSWORD:?请先在 .env 中设置 APP_SELLER_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/app/data/storedb
+      APP_UPLOAD_DIRECTORY: /app/data/uploads
+      APP_ALLOWED_ORIGIN: http://localhost:8080
+    volumes:
+      - ./docker-data:/app/data
+    restart: unless-stopped

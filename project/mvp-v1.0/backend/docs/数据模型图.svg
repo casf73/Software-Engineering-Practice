@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1160" viewBox="0 0 1800 1160" role="img" aria-labelledby="title desc">
+  <title id="title">在线购物系统后端数据模型图</title>
+  <desc id="desc">products 商品表与 purchase_intents 购买意向表是一对多关系，购买意向通过 product_id 关联商品。</desc>
+  <style>
+    text { font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #253047; }
+    .title { font-size: 42px; font-weight: 700; }
+    .subtitle { font-size: 21px; fill: #697586; }
+    .head { font-size: 29px; font-weight: 700; }
+    .head-sub { font-size: 19px; fill: #697586; }
+    .field { font-size: 22px; }
+    .type { font-size: 19px; fill: #526070; }
+    .key { font-size: 17px; fill: #2f6194; font-weight: 700; }
+    .relation { font-size: 23px; font-weight: 700; fill: #2f6194; }
+    .note-title { font-size: 23px; font-weight: 700; }
+    .note { font-size: 19px; fill: #526070; }
+  </style>
+  <rect width="1800" height="1160" fill="#ffffff"/>
+  <text x="100" y="92" class="title">在线购物系统 · 后端数据模型</text>
+  <text x="102" y="132" class="subtitle">依据当前 Spring Data JPA 实体类 · MVP v1.0</text>
+  <line x1="100" y1="160" x2="1700" y2="160" stroke="#c9d2dc" stroke-width="2"/>
+
+  <rect x="100" y="220" width="690" height="670" rx="10" fill="#ffffff" stroke="#b6c4d2" stroke-width="2"/>
+  <line x1="100" y1="310" x2="790" y2="310" stroke="#b6c4d2" stroke-width="2"/>
+  <text x="130" y="267" class="head">products</text>
+  <text x="130" y="296" class="head-sub">商品表</text>
+  <text x="130" y="356" class="field">id</text><text x="460" y="356" class="type">BIGINT</text><text x="690" y="356" class="key">PK</text>
+  <text x="130" y="414" class="field">name</text><text x="460" y="414" class="type">VARCHAR(80)</text>
+  <text x="130" y="472" class="field">price</text><text x="460" y="472" class="type">DECIMAL(12,2)</text>
+  <text x="130" y="530" class="field">description</text><text x="460" y="530" class="type">VARCHAR(500)</text>
+  <text x="130" y="588" class="field">image_urls</text><text x="460" y="588" class="type">VARCHAR(3000)</text>
+  <text x="130" y="646" class="field">active_slot</text><text x="460" y="646" class="type">BOOLEAN</text><text x="690" y="646" class="key">UK</text>
+  <text x="130" y="704" class="field">status</text><text x="460" y="704" class="type">VARCHAR(20)</text>
+  <text x="130" y="762" class="field">created_at</text><text x="460" y="762" class="type">TIMESTAMP</text>
+  <text x="130" y="820" class="field">updated_at</text><text x="460" y="820" class="type">TIMESTAMP</text>
+
+  <rect x="1010" y="220" width="690" height="670" rx="10" fill="#ffffff" stroke="#b6c4d2" stroke-width="2"/>
+  <line x1="1010" y1="310" x2="1700" y2="310" stroke="#b6c4d2" stroke-width="2"/>
+  <text x="1040" y="267" class="head">purchase_intents</text>
+  <text x="1040" y="296" class="head-sub">购买意向表</text>
+  <text x="1040" y="356" class="field">id</text><text x="1370" y="356" class="type">BIGINT</text><text x="1600" y="356" class="key">PK</text>
+  <text x="1040" y="414" class="field">product_id</text><text x="1370" y="414" class="type">BIGINT</text><text x="1600" y="414" class="key">FK</text>
+  <text x="1040" y="472" class="field">name</text><text x="1370" y="472" class="type">VARCHAR(80)</text>
+  <text x="1040" y="530" class="field">phone</text><text x="1370" y="530" class="type">VARCHAR(30)</text>
+  <text x="1040" y="588" class="field">passcode</text><text x="1370" y="588" class="type">VARCHAR(24)</text><text x="1600" y="588" class="key">UK</text>
+  <text x="1040" y="646" class="field">status</text><text x="1370" y="646" class="type">VARCHAR(24)</text>
+  <text x="1040" y="704" class="field">submitted_at</text><text x="1370" y="704" class="type">TIMESTAMP</text>
+  <text x="1040" y="762" class="field">queue_at</text><text x="1370" y="762" class="type">TIMESTAMP</text>
+
+  <line x1="790" y1="405" x2="1010" y2="405" stroke="#2f6194" stroke-width="3"/>
+  <line x1="795" y1="388" x2="795" y2="422" stroke="#2f6194" stroke-width="3"/>
+  <line x1="992" y1="405" x2="1010" y2="388" stroke="#2f6194" stroke-width="3"/>
+  <line x1="992" y1="405" x2="1010" y2="422" stroke="#2f6194" stroke-width="3"/>
+  <text x="800" y="373" class="relation">1</text>
+  <text x="979" y="373" class="relation">N</text>
+  <text x="855" y="455" class="note">商品意向</text>
+
+  <line x1="100" y1="940" x2="1700" y2="940" stroke="#c9d2dc" stroke-width="2"/>
+  <text x="100" y="990" class="note-title">关系与约束</text>
+  <text x="100" y="1030" class="note">一件商品可对应多条购买意向；purchase_intents.product_id → products.id。</text>
+  <text x="100" y="1065" class="note">PK 主键　FK 外键　UK 唯一；active_slot 和 passcode 均允许为空。</text>
+  <text x="100" y="1100" class="note">队列排序依据 queue_at、id；图片地址保存在 image_urls 字符串中。</text>
+</svg>

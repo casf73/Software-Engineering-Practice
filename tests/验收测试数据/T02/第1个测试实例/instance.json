@@ -1,0 +1,12 @@
+{
+  "id": "T02-01",
+  "caseId": "T02",
+  "title": "商品甲发布与编辑",
+  "mode": "automated",
+  "input": {
+    "productName": "测试商品甲",
+    "updatedName": "更新商品甲",
+    "price": 88
+  },
+  "expected": "必填校验 400；单件限制 409；公开查询返回更新商品甲"
+}

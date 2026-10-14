@@ -1,0 +1,10 @@
+{
+  "id": "T06-01",
+  "caseId": "T06",
+  "title": "138 号码失败重排",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1383000000"
+  },
+  "expected": "原码继续有效；原买家回到队尾"
+}
