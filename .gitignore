@@ -10,3 +10,6 @@ backend/uploads/
 /project/mvp-v1.0/release/.env
 /project/mvp-v1.0/release/docker-data/
 /project/mvp-v1.0/backend/src/main/resources/static/
+/project/mvp-v1.0/deployment-setup/
+
+/project/mvp-v1.0/*-image.tar
