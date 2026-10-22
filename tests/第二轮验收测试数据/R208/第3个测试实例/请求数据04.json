@@ -1,0 +1,10 @@
+{
+  "name": "商品",
+  "price": 88.5,
+  "stock": 2,
+  "categoryId": null,
+  "images": [
+    "${image}"
+  ],
+  "description": "<p onclick=\"alert(1)\">安全文字</p><img src=\"${image}\"><script>alert(1)</script>"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "鼠标",
+  "price": 88.5,
+  "stock": 2,
+  "categoryId": "${root}",
+  "images": [],
+  "description": "办公"
+}

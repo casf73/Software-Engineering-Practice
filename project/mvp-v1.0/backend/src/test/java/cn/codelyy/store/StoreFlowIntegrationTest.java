@@ -69,7 +69,7 @@ class StoreFlowIntegrationTest {
 
     @ParameterizedTest(name = "T02 {index} {0}")
     @MethodSource("casesT02")
-    @DisplayName("T02 商品必填校验、发布、编辑和单件限制")
+    @DisplayName("T02 商品必填校验、发布、编辑和多商品")
     void productCreationAndValidation(Path instanceFile) throws Exception {
         JsonNode input = fixture(instanceFile).path("input");
         String productName = input.path("productName").asText();
@@ -91,16 +91,17 @@ class StoreFlowIntegrationTest {
         assertEquals("ON_SALE", created.path("status").asText());
         assertEquals(productName, created.path("name").asText());
         assertEquals(0, created.path("images").size());
-        mvc.perform(post("/api/seller/products").session(session).contentType(MediaType.APPLICATION_JSON)
-                        .content(productJson("第二件商品", 88)))
-                .andExpect(status().isConflict());
-
         JsonNode changed = body(mvc.perform(put("/api/seller/products/current").session(session)
                         .contentType(MediaType.APPLICATION_JSON).content(productJson(updatedName, price + 11)))
                 .andExpect(status().isOk()).andReturn());
         assertEquals(updatedName, changed.path("name").asText());
         assertEquals(updatedName, body(mvc.perform(get("/api/public/products/current"))
                 .andExpect(status().isOk()).andReturn()).path("name").asText());
+        mvc.perform(post("/api/seller/products").session(session).contentType(MediaType.APPLICATION_JSON)
+                        .content(productJson("第二件商品", 88)))
+                .andExpect(status().isCreated());
+
+        mvc.perform(get("/api/public/products/current")).andExpect(status().isConflict());
     }
 
     @ParameterizedTest(name = "T03 {index} {0}")
@@ -248,7 +249,7 @@ class StoreFlowIntegrationTest {
 
     @ParameterizedTest(name = "T09 {index} {0}")
     @MethodSource("casesT09")
-    @DisplayName("T09 图片上传：格式、大小和首轮单图上限")
+    @DisplayName("T09 图片上传：格式、大小和多图支持")
     void imageUploadValidation(Path instanceFile) throws Exception {
         JsonNode input = fixture(instanceFile).path("input");
         Path folder = instanceFile.getParent();
@@ -273,7 +274,7 @@ class StoreFlowIntegrationTest {
         String twoImages = "{\"name\":\"测试商品\",\"price\":88,\"images\":[\"" + imageUrl + "\",\"/uploads/second.png\"]}";
         mvc.perform(put("/api/seller/products/current").session(session)
                         .contentType(MediaType.APPLICATION_JSON).content(twoImages))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk());
 
         MockMultipartFile other = new MockMultipartFile("file", input.path("invalid").asText(), "text/plain",
                 Files.readAllBytes(folder.resolve(input.path("invalid").asText())));
@@ -287,8 +288,8 @@ class StoreFlowIntegrationTest {
 
     @ParameterizedTest(name = "T10 {index} {0}")
     @MethodSource("casesT10")
-    @DisplayName("T10 旧版多图数据在首轮接口中只展示第一张")
-    void oldMultiImageProductShowsOnlyFirstImage(Path instanceFile) throws Exception {
+    @DisplayName("T10 既有多图数据完整返回")
+    void oldMultiImageProductReturnsAllImages(Path instanceFile) throws Exception {
         JsonNode input = fixture(instanceFile).path("input");
         String firstImage = input.path("firstImage").asText();
         String secondImage = input.path("secondImage").asText();
@@ -300,7 +301,8 @@ class StoreFlowIntegrationTest {
 
         JsonNode current = body(mvc.perform(get("/api/public/products/current"))
                 .andExpect(status().isOk()).andReturn());
-        assertEquals(1, current.path("images").size());
+        assertEquals(2, current.path("images").size());
+        assertEquals(secondImage, current.path("images").get(1).asText());
         assertEquals(firstImage, current.path("images").get(0).asText());
     }
 

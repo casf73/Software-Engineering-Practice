@@ -1,0 +1,16 @@
+{
+  "name": "商品",
+  "price": 88.5,
+  "images": [
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image2}"
+  ]
+}

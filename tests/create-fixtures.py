@@ -12,14 +12,14 @@ ROOT = Path(__file__).resolve().parent / "验收测试数据"
 
 CASE_TITLES = {
     "T01": "卖家登录、鉴权和退出",
-    "T02": "商品校验、发布、编辑和单件限制",
+    "T02": "商品校验、发布、编辑和多商品支持",
     "T03": "购买意向、口令码和先进先出队列",
     "T04": "交易冻结与撤销边界",
     "T05": "交易失败并作废",
     "T06": "交易失败并重新排队",
     "T07": "交易成功后的商品与意向收尾",
     "T08": "卖家主动下架",
-    "T09": "图片上传与首轮单图限制",
+    "T09": "图片上传格式大小及多图支持",
     "T10": "旧版多图记录的首轮展示",
     "U01": "买家空状态与无图商品",
     "U02": "买家表单与口令码查询",
@@ -37,9 +37,9 @@ AUTOMATED = {
         ("大小写错误密码", {"wrongPassword": "123456A"}, "密码区分大小写，错误登录 401，退出后后台仍为 401"),
     ],
     "T02": [
-        ("商品甲发布与编辑", {"productName": "测试商品甲", "updatedName": "更新商品甲", "price": 88}, "必填校验 400；单件限制 409；公开查询返回更新商品甲"),
+        ("商品甲发布与编辑", {"productName": "测试商品甲", "updatedName": "更新商品甲", "price": 88}, "必填校验 400；第二件商品发布 201；编辑成功；多个有效商品时 current 接口返回 409"),
         ("商品乙发布与编辑", {"productName": "测试商品乙", "updatedName": "更新商品乙", "price": 99}, "发布状态 ON_SALE；编辑和公开查询一致"),
-        ("商品丙发布与编辑", {"productName": "测试商品丙", "updatedName": "更新商品丙", "price": 120}, "第二件商品被拒绝；首件编辑成功"),
+        ("商品丙发布与编辑", {"productName": "测试商品丙", "updatedName": "更新商品丙", "price": 120}, "第二件商品发布 201；首件编辑成功"),
     ],
     "T03": [
         ("138 号码三人队列", {"phonePrefix": "1380000000"}, "唯一口令码；撤销、重排、作废后排位和有效性正确"),
@@ -72,14 +72,14 @@ AUTOMATED = {
         ("137 号码主动下架", {"phonePrefix": "1375000000"}, "相关意向记录仍存在于后端数据库"),
     ],
     "T09": [
-        ("红色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "red"}, "JPG/PNG 可上传，错误格式与超 5 MB 被拒绝，商品只允许一张"),
-        ("绿色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "green"}, "上传后返回 /uploads/ 地址，双图关联返回 400"),
-        ("蓝色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "blue"}, "文件类型、大小和单图限制均生效"),
+        ("红色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "red"}, "JPG/PNG 可上传；错误格式和超 5 MB 返回 400；两张图片可以关联保存"),
+        ("绿色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "green"}, "上传后返回 /uploads/ 地址，双图关联返回 200"),
+        ("蓝色样图上传", {"png": "sample.png", "jpg": "sample.jpg", "invalid": "invalid.txt", "oversized": "oversized.png", "color": "blue"}, "JPG/PNG 可上传；错误格式和超 5 MB 返回 400；两张图片可以关联保存"),
     ],
     "T10": [
-        ("旧数据两张图片", {"firstImage": "/uploads/old-first-a.jpg", "secondImage": "/uploads/old-second-a.jpg"}, "公开接口仅返回第一张图片"),
-        ("旧数据另一组图片", {"firstImage": "/uploads/old-first-b.png", "secondImage": "/uploads/old-second-b.png"}, "首轮接口不展示第二张图片"),
-        ("旧数据混合格式", {"firstImage": "/uploads/old-first-c.jpg", "secondImage": "/uploads/old-second-c.png"}, "数据库旧记录保留，读取时限制为首图"),
+        ("旧数据两张图片", {"firstImage": "/uploads/old-first-a.jpg", "secondImage": "/uploads/old-second-a.jpg"}, "既有记录的两张图片全部返回，保持原图片顺序"),
+        ("旧数据另一组图片", {"firstImage": "/uploads/old-first-b.png", "secondImage": "/uploads/old-second-b.png"}, "接口按原顺序返回两张图片"),
+        ("旧数据混合格式", {"firstImage": "/uploads/old-first-c.jpg", "secondImage": "/uploads/old-second-c.png"}, "数据库旧记录保留，读取时完整返回图片列表"),
     ],
 }
 

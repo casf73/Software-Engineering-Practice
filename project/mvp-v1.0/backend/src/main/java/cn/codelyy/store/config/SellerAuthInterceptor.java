@@ -1,5 +1,6 @@
 package cn.codelyy.store.config;
 
+import cn.codelyy.store.service.SellerCredentialService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -10,10 +11,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class SellerAuthInterceptor implements HandlerInterceptor {
     public static final String SESSION_KEY = "seller-authenticated";
 
+    private final SellerCredentialService credentials;
+    public SellerAuthInterceptor(SellerCredentialService credentials) { this.credentials = credentials; }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         var session = request.getSession(false);
-        if (session != null && Boolean.TRUE.equals(session.getAttribute(SESSION_KEY))) return true;
+        if (session != null && credentials.isCurrentSession(session.getAttribute(SESSION_KEY))) return true;
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write("{\"message\":\"卖家登录已失效，请重新登录\"}");

@@ -10,5 +10,6 @@
     "oversized": "oversized.png",
     "color": "green"
   },
-  "expected": "上传后返回 /uploads/ 地址，双图关联返回 400"
+  "expected": "JPG/PNG 可上传；错误格式和超 5 MB 返回 400；两张图片可以关联保存",
+  "revision": "2026-10-21 随 A.1 调整自动化预期，原始输入保留"
 }

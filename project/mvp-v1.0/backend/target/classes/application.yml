@@ -6,6 +6,9 @@ server:
         http-only: true
         same-site: lax
 spring:
+  jackson:
+    deserialization:
+      accept-float-as-int: false
   application:
     name: single-seller-store
   datasource:

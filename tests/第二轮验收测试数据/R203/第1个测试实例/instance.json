@@ -1,0 +1,45 @@
+{
+  "id": "R203-01",
+  "caseId": "R203",
+  "title": "原密码错误被拒绝",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "other",
+      "bodyFile": "请求数据02.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/password",
+      "status": 400,
+      "session": "seller",
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/session",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/authenticated": true
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言"
+}

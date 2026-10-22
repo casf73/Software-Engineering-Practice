@@ -1,0 +1,67 @@
+{
+  "id": "R203-03",
+  "caseId": "R203",
+  "title": "改密撤销全部旧会话",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "other",
+      "bodyFile": "请求数据02.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/password",
+      "status": 204,
+      "session": "seller",
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/products",
+      "status": 401,
+      "session": "other"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 401,
+      "bodyFile": "请求数据05.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "new",
+      "bodyFile": "请求数据06.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/products",
+      "status": 200,
+      "session": "new",
+      "assertions": {
+        "/total": 0
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言"
+}

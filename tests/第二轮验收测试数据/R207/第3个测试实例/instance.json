@@ -1,0 +1,114 @@
+{
+  "id": "R207-03",
+  "caseId": "R207",
+  "title": "分类包含子类并分页",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "root": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据03.json",
+      "capture": {
+        "child": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据04.json",
+      "capture": {
+        "p": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据05.json",
+      "capture": {
+        "other": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据06.json",
+      "capture": {
+        "gone": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products/${gone}/delist",
+      "status": 204,
+      "session": "seller"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?categoryId=${root}&page=0&size=1",
+      "status": 200,
+      "assertions": {
+        "/total": 2,
+        "/items/0/name": "鼠标"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?categoryId=${root}&page=1&size=1",
+      "status": 200,
+      "assertions": {
+        "/total": 2,
+        "/items/0/name": "Keyboard红轴"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?page=-1",
+      "status": 400
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?size=101",
+      "status": 400
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/session",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/customers",
+      "status": 404,
+      "session": "seller"
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言"
+}

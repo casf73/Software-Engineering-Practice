@@ -13,11 +13,11 @@ public class Product {
     private String name;
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
-    @Column(length = 500)
+    @Column(length = 20000)
     private String description;
-    @Column(name = "image_urls", length = 3000)
+    @Column(name = "image_urls", length = 6000)
     private String imageUrls;
-    @Column(name = "active_slot", unique = true)
+    @Column(name = "active_slot")
     private Boolean activeSlot;
     @Enumerated(EnumType.STRING) @Column(nullable = false, length = 20)
     private ProductStatus status;
@@ -26,6 +26,14 @@ public class Product {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column(nullable=false, columnDefinition="integer default 1")
+    private int stock = 1;
+    @ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="category_id")
+    private Category category;
+    public int getStock(){return stock;}
+    public void setStock(int value){stock=value;}
+    public Category getCategory(){return category;}
+    public void setCategory(Category value){category=value;}
     @PrePersist void onCreate() { createdAt = LocalDateTime.now(); updatedAt = createdAt; }
     @PreUpdate void onUpdate() { updatedAt = LocalDateTime.now(); }
     public Long getId() { return id; }

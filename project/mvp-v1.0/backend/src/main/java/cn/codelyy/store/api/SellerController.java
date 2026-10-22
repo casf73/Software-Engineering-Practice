@@ -2,7 +2,7 @@ package cn.codelyy.store.api;
 
 import cn.codelyy.store.api.ApiModels.*;
 import cn.codelyy.store.config.SellerAuthInterceptor;
-import cn.codelyy.store.config.SellerProperties;
+import cn.codelyy.store.service.SellerCredentialService;
 import cn.codelyy.store.service.StoreService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -19,25 +19,23 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/seller")
 public class SellerController {
-    private final SellerProperties sellerProperties;
+    private final SellerCredentialService credentials;
     private final StoreService store;
     private final Path uploadPath;
 
-    public SellerController(SellerProperties sellerProperties, StoreService store,
+    public SellerController(SellerCredentialService credentials, StoreService store,
                             @Value("${app.upload-directory}") String uploadDirectory) {
-        this.sellerProperties = sellerProperties;
+        this.credentials = credentials;
         this.store = store;
         this.uploadPath = Path.of(uploadDirectory).toAbsolutePath().normalize();
     }
 
     @PostMapping("/login")
     public Map<String, Boolean> login(@Valid @RequestBody LoginRequest request, HttpServletRequest servletRequest) {
-        if (!sellerProperties.username().equals(request.username()) || !sellerProperties.password().equals(request.password())) {
-            throw new ApiException(HttpStatus.UNAUTHORIZED, "账号或密码错误");
-        }
+        long version = credentials.authenticate(request.username(), request.password());
         HttpSession old = servletRequest.getSession(false);
         if (old != null) old.invalidate();
-        servletRequest.getSession(true).setAttribute(SellerAuthInterceptor.SESSION_KEY, true);
+        servletRequest.getSession(true).setAttribute(SellerAuthInterceptor.SESSION_KEY, version);
         return Map.of("authenticated", true);
     }
 
@@ -51,8 +49,22 @@ public class SellerController {
     @GetMapping("/session")
     public Map<String, Boolean> session(HttpServletRequest request) {
         var session = request.getSession(false);
-        return Map.of("authenticated", session != null && Boolean.TRUE.equals(session.getAttribute(SellerAuthInterceptor.SESSION_KEY)));
+        return Map.of("authenticated", session != null && credentials.isCurrentSession(session.getAttribute(SellerAuthInterceptor.SESSION_KEY)));
     }
+
+    @PutMapping("/password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void changePassword(@Valid @RequestBody ChangePasswordRequest request, HttpServletRequest servletRequest) {
+        HttpSession session = servletRequest.getSession(false);
+        credentials.changePassword(request, session.getAttribute(SellerAuthInterceptor.SESSION_KEY));
+        session.invalidate();
+    }
+
+    @PostMapping("/products/current/freeze")
+    public ProductView freezeProduct() { return store.freezeCurrentProduct(); }
+
+    @PostMapping("/products/current/unfreeze")
+    public ProductView unfreezeProduct() { return store.unfreezeCurrentProduct(); }
 
     @GetMapping("/workbench")
     public WorkbenchView workbench() { return store.workbench(); }

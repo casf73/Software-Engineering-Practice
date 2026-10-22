@@ -8,7 +8,7 @@ const intentLabels = {
   PRODUCT_DELISTED: '商品已下架',
 }
 
-const productLabels = { ON_SALE: '在售', IN_TRADE: '交易中', DELISTED: '商品下架' }
+const productLabels = { ON_SALE: '在售', MANUALLY_FROZEN: '手动冻结', IN_TRADE: '交易中', DELISTED: '商品下架' }
 
 export function intentLabel(status) { return intentLabels[status] || '状态未知' }
 export function productLabel(status) { return productLabels[status] || '暂未上架' }
@@ -22,7 +22,7 @@ export function intentTagType(status) {
 
 export function productTagType(status) {
   if (status === 'ON_SALE') return 'success'
-  if (status === 'IN_TRADE') return 'warning'
+  if (['IN_TRADE', 'MANUALLY_FROZEN'].includes(status)) return 'warning'
   return 'info'
 }
 

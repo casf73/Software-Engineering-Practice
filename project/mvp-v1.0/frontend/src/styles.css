@@ -106,7 +106,7 @@ a { color: inherit; text-decoration: none; }
 .image-preview-grid { display: flex; flex-wrap: wrap; gap: 10px; }
 .image-preview-item { position: relative; width: 78px; height: 64px; }
 .image-preview-item img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--el-border-radius-base); }
-.image-preview-item button { position: absolute; top: -7px; right: -7px; width: 22px; height: 22px; border: 0; border-radius: 50%; color: #fff; background: var(--el-text-color-secondary); cursor: pointer; }
+.image-preview-item > button:not(.el-button) { position: absolute; top: -7px; right: -7px; width: 22px; height: 22px; border: 0; border-radius: 50%; color: #fff; background: var(--el-text-color-secondary); cursor: pointer; }
 .trade-result-options { display: grid; gap: 10px; }
 .trade-result-option { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--el-border-color); border-radius: var(--el-border-radius-base); background: var(--el-bg-color); text-align: left; cursor: pointer; }
 .trade-result-option strong { font-size: 14px; }
@@ -143,3 +143,11 @@ a { color: inherit; text-decoration: none; }
   .login-card .surface-card-body { padding: 24px; }
   .el-dialog { width: calc(100vw - 28px) !important; }
 }
+
+.account-form { max-width: 440px; }
+
+/* 第二轮：多商品、两级分类与客户中心 */
+.catalog-filters{display:flex;gap:12px;align-items:center;margin:16px 0;flex-wrap:wrap}.catalog-filters .el-input{flex:1;min-width:180px}.native-select{min-height:36px;border:1px solid #dcdfe6;border-radius:4px;padding:6px 12px;max-width:100%;background:white;color:#303133}.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin:24px 0}.catalog-item{display:flex;flex-direction:column;gap:8px;text-align:left;background:white;border:1px solid #e4e7ed;border-radius:6px;padding:12px;cursor:pointer;color:#303133}.catalog-item.selected{border-color:#5574aa;outline:1px solid #5574aa}.catalog-item img,.catalog-no-image{width:100%;height:140px;object-fit:contain;background:#fafafa}.catalog-no-image{display:grid;place-items:center;color:#909399}.pager{display:flex;justify-content:center;align-items:center;gap:16px;margin:20px 0;flex-wrap:wrap}.gallery-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.gallery-thumbs button{border:1px solid #dcdfe6;padding:2px;background:white;cursor:pointer}.gallery-thumbs button.selected{border-color:#5574aa}.gallery-thumbs img{width:52px;height:52px;object-fit:contain}.rich-description{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}.rich-description img{max-width:100%;height:auto}.rich-editor{width:100%}.editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.editor-toolbar .el-button+.el-button{margin-left:0}.rich-source{box-sizing:border-box;width:100%;padding:10px;border:1px solid #dcdfe6;border-radius:4px;font:inherit;resize:vertical}.rich-editor details{margin-top:10px}.image-preview-item{height:auto!important;min-height:100px}.image-preview-item .el-button{position:relative;z-index:1}.seller-content>.el-card,.seller-content>.app-card{margin-bottom:20px}
+@media(max-width:640px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-item img,.catalog-no-image{height:110px}.catalog-filters>*{width:100%}.pager{gap:8px}.rich-source{font-size:16px}}
+
+.image-preview-item{width:105px;display:flex;flex-direction:column;gap:6px}.image-preview-item img{height:72px}.image-preview-item .el-button{position:static;width:auto;height:26px;border-radius:4px;background:white;color:#5574aa;border:1px solid #dcdfe6}

@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    java.util.List<Product> findByStatusInOrderByCreatedAtDesc(Collection<ProductStatus> statuses);
+    boolean existsByCategoryId(Long categoryId);
     Optional<Product> findFirstByStatusInOrderByCreatedAtDesc(Collection<ProductStatus> statuses);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select p from Product p where p.id = :id")

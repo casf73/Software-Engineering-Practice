@@ -18,12 +18,17 @@ public class PublicController {
     @PostMapping("/intents")
     @ResponseStatus(HttpStatus.CREATED)
     public IssuedIntentView submitIntent(@Valid @RequestBody IntentRequest request) {
-        return store.submitIntent(request);
+        return store.submitIntent(null,request);
     }
 
     @GetMapping("/intents/{passcode}")
     public BuyerIntentView queryIntent(@PathVariable String passcode) {
         return store.queryIntent(passcode);
+    }
+
+    @PutMapping("/intents/{passcode}")
+    public BuyerIntentView updateIntentContact(@PathVariable String passcode, @Valid @RequestBody IntentRequest request) {
+        return store.updateIntentContact(passcode, request);
     }
 
     @DeleteMapping("/intents/{passcode}")

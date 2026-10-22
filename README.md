@@ -1,97 +1,105 @@
-# 单卖家排队购物系统
+# 在线购物系统
 
-首轮验收实现：Vue 3 + Element Plus 前端、Spring Boot 后端。买家免注册，填写姓名和电话后按先到先得顺序进入队列；卖家账号固定为 admin，初始密码为 123456。
+Vue 3 + Element Plus 前端，Spring Boot + H2 后端。源码沿用 `project/mvp-v1.0` 目录，当前为第二轮验收功能：三项基础改进及挑战需求 A.1。
 
-## 环境要求
+## 第二轮功能
 
-- Node.js 22 及以上（当前锁定依赖中 `@vueuse` 要求 Node.js 22 及以上）
-- Java 17 及以上
-- Maven 3.6.3 及以上
+| 功能 | 当前实现 |
+| --- | --- |
+| 买家修改联系信息 | 等待中凭口令码修改姓名、电话，不影响原排位。 |
+| 卖家手动冻结/解冻 | 暂停某件商品新意向，保留其队列；不能手动解除交易冻结。 |
+| 卖家修改密码 | 原密码校验、随机盐 PBKDF2 持久化，旧会话失效。 |
+| 多商品同时发布 | 每件商品独立库存、状态、队列与交易。 |
+| 两级分类 | 分类新增、编辑、删除及一级包含子类的商品筛选。 |
+| 库存 | 每次成交扣减 1，有余量继续在售，售罄自动下架。 |
+| 浏览与搜索 | 商品分页浏览、名称/描述关键词搜索、分类筛选。 |
+| 多图和富媒体 | 每商品最多 9 张 JPG/PNG，每张 5 MB；缩略图切换、格式化文字和内嵌本地图片。 |
 
-## 启动后端
+详细规则与第二轮验收归属：[第二轮功能说明](project/mvp-v1.0/第二轮功能说明.md)。挑战需求 A.1 的 5 项全部计入第二轮，本轮合计 8 项。A.2 客户升级已回退，暂不纳入第二轮。独立商品视频、商品多标签和完整事件流水仍未实现。
 
-在 backend 目录运行：
+## 运行环境
 
-    mvn spring-boot:run
+- Node.js 22 及以上；前端依赖以 package-lock.json 为准。
+- Java 17 及以上、Maven 3.6.3 及以上。
+- 初始卖家账号 `admin`、密码 `123456`，仅首次建库使用。可通过 `APP_SELLER_PASSWORD` 覆盖初始密码；修改密码后重启不会重置。
 
-后端地址为 http://localhost:8080   H2 数据库文件和上传图片保存在 backend/data，应用重启后仍保留。
+## 开发启动
 
-## 启动前端
+在 `project/mvp-v1.0/backend` 运行：
 
-在 frontend 目录运行：
+```powershell
+mvn spring-boot:run
+```
 
-    npm install
-    npm run dev
+在 `project/mvp-v1.0/frontend` 运行：
 
-访问 http://localhost:5173  前端开发服务器会把 /api 和 /uploads 请求转发到后端。
+```powershell
+npm ci
+npm run dev
+```
 
-## 已实现的前端功能
+访问 `http://localhost:5173`，开发服务器转发 `/api` 和 `/uploads` 到后端 8080。
 
-### 买家页面（`/`）
+| 入口 | 地址 |
+| --- | --- |
+| 商品浏览、搜索、购买、口令码查询 | `/` |
+| 卖家登录 | `/seller/login` |
+| 商品、队列、分类与账号管理 | `/seller/dashboard` |
 
-- 免注册查看当前商品的名称、价格、描述、图片和状态；无商品时显示空状态。商品进入交易后仍可查看，但页面暂停接收新意向。
-- 在商品在售时填写姓名、联系电话提交购买意向，提交成功后弹窗展示口令码，并提供复制按钮。买家应自行保存口令码，以便之后查询进度。
-- 输入口令码查询自己的意向状态、当前排位和商品状态。仍在排队的买家可在确认弹窗中撤销，即使商品正在与队首买家交易；已经进入交易的买家不能撤销。
+集成运行：在 `project/mvp-v1.0/release-iteration2` 运行 `java -jar app.jar`，访问 `http://localhost:8080`。集成包包含本轮前端资源。
 
-### 卖家页面（`/seller/login`、`/seller/dashboard`）
+## 业务约定
 
-- 使用固定卖家账号登录；后台提供“概览、商品管理、购买意向”侧边菜单，可查看当前商品、等待人数、交易状态并退出登录。
-- 发布或编辑当前商品，填写必需的名称和价格；描述、图片可选。首轮每件商品最多 1 张 JPG/PNG 图片，单张不超过 5 MB。商品交易中不能编辑。
-- 查看按排队顺序排列的买家姓名、联系电话、排队时间和状态；对排队意向可选择作废或排到队尾，也可由卖家主动开启与队首买家的交易。
-- 登记交易成功或失败；失败时选择作废当前意向或重新排到队尾。商品在售时可主动下架，交易中不可下架。
+1. 支持多商品同时发布，选择商品后提交意向；每次意向对应 1 件。按商品独立 FIFO，开始交易不预扣库存，成功后扣减。
+2. 成功后仍有库存则恢复在售，等待队列保持；归零下架并结束等待意向。失败不扣库存，选择作废或重排。
+3. 买家免注册，填写姓名和电话提交意向，保存口令码进行查询；没有客户账号或客户历史接口。
+4. 卖家继续使用原有会话鉴权；账号密码修改、买家联系信息修改均保留。
+5. 分类只支持两级，不能循环；被商品或子分类引用的分类不能删除。下架商品可编辑补库存后重新上架。
+6. 描述按白名单清理，可插入格式化文字与上传图片，不执行脚本或事件属性。
+7. H2 数据库与上传目录默认在启动工作目录的 `data`。使用 `ddl-auto:update` 保留既有商品、意向及凭据，补充库存和分类字段；既有商品库存默认 1。
 
-前端使用 Vue 3、Element Plus 和 Vue Router；对需要确认的操作使用弹窗。公共组件位于 `frontend/src/components/common`，见下节。
+## 文档和成果物
 
-## 已实现的后端功能与规则
+| 成果物 | 链接 |
+| --- | --- |
+| 总体需求规格 | [需求文档目录](requirement) |
+| 第二轮功能完成与验收范围 | [第二轮功能说明](project/mvp-v1.0/第二轮功能说明.md) |
+| 全部 34 个后端接口与请求示例 | [后端接口说明](project/mvp-v1.0/backend/后端接口说明.md) |
+| 数据模型图及 Mermaid 源码 | [数据模型说明](project/mvp-v1.0/backend/docs/数据模型图.md) |
+| 数据模型 SVG | [模型图](project/mvp-v1.0/backend/docs/数据模型图.svg) |
+| 前端源码 | [frontend](project/mvp-v1.0/frontend) |
+| 后端源码 | [backend](project/mvp-v1.0/backend) |
+| 第二轮集成运行包 | [app.jar](project/mvp-v1.0/release-iteration2/app.jar) |
+| 首轮测试资料 | [测试目录](tests) |
 
-- Spring Boot 提供买家公开接口和卖家接口。卖家登录使用服务端会话；除登录、会话检查外，`/api/seller/**` 接口均需已登录。初始账号为 `admin`，初始密码为 `123456`，配置见 `backend/src/main/resources/application.yml`。
-- 同时只允许一件商品处于在售或交易中。商品可发布、编辑、上传图片、主动下架；商品信息及购买意向保存在文件型 H2 数据库 `backend/data` 中。图片上传到 `backend/data/uploads`，通过 `/uploads/` 路径访问。
-- 买家提交意向后生成唯一口令码，等待队列按排队时间及编号排序。卖家开启交易时系统自动选取队首，商品进入交易中并拒绝新意向；其余等待买家仍可撤销。
-- 撤销或作废意向后，口令码立即失效。重新排队时将原意向移到队尾，原口令码继续有效；交易失败后商品恢复在售，卖家可再次决定何时开启交易。
-- 交易成功时商品下架，其他等待意向标记为交易失败，本商品口令码失效。卖家主动下架时，等待意向标记为商品下架并使口令码失效。当前工作台只返回在售或交易中的商品及其队列。
-- 后端校验必填字段、价格、图片格式和 5 MB 大小上限，并拒绝给商品关联超过 1 张图片。后续迭代计划将每件商品图片上限扩展至 5 张；当前代码尚未开放该功能。
+旧 `current` 等无商品编号接口仅在唯一有效商品时适用；新页面均使用明确商品编号。旧首轮 v1.0.0 ZIP、Docker 镜像和 TAR 为原发布物，本次未重新发布。
 
-## 共用组件与弹窗
+## 构建与测试记录
 
-公共组件位于 frontend/src/components/common。AppHeader、PageHeader、AppCard、StatusBadge、ProductImage、ProductGallery 和 EmptyState 供多个页面复用。AppDialog 封装 Element Plus Dialog：默认插槽承载正文，title 插槽自定义标题，footer 插槽放置页面所需操作按钮。
+第二轮测试用例均由实际文件驱动：8 个用例各 3 个实例，共 24 个，覆盖三项基础改进及 A.1 五项功能。数据位于 `tests/第二轮验收测试数据`，每个目录含 `instance.json`、逐步请求 JSON；多图用例另有真实图片及错误/超大文件。
 
-## 后端接口清单
+在项目根目录执行：
 
-接口基址为 `http://localhost:8080`。下表路径包含 `/api` 前缀；请求体字段使用 JSON，图片上传使用 `multipart/form-data`。卖家登录后需在后续请求中携带会话 Cookie，前端请求已配置 `withCredentials`。`{passcode}` 是买家口令码，`{intentId}` 是卖家工作台返回的意向编号。
+```bat
+tests\run-tests.cmd
+```
 
-### 买家公开接口
+只执行第二轮文件驱动测试：
 
-| 方法 | 路径 | 请求 | 返回与作用 |
-| --- | --- | --- | --- |
-| `GET` | `/api/public/products/current` | 无 | 当前商品的编号、名称、价格、描述、图片、状态、发布时间；无当前商品时返回 404。 |
-| `POST` | `/api/public/intents` | `{"name":"姓名","phone":"联系电话"}` | 创建排队意向；返回 201、`passcode` 和初始 `position`。商品交易中不接收新意向。 |
-| `GET` | `/api/public/intents/{passcode}` | 路径中的口令码 | 返回买家姓名、意向状态、等待排位及商品状态；无效或失效口令码返回 404。 |
-| `DELETE` | `/api/public/intents/{passcode}` | 路径中的口令码 | 撤销仍在排队中的意向，返回 204，口令码立即失效；已进入交易则拒绝撤销。 |
+```bat
+tests\run-iteration2-tests.cmd
+```
 
-### 卖家接口
+测试使用独立内存 H2，正常业务数据不受影响。具体执行结果及时间见 [第二轮测试说明](tests/第二轮测试说明.md)。前一轮文档和结果作为首轮历史资料保留，第二轮使用下面的新成果物。
 
-| 方法 | 路径 | 请求 | 返回与作用 |
-| --- | --- | --- | --- |
-| `POST` | `/api/seller/login` | `{"username":"admin","password":"123456"}` | 校验账号密码并建立会话，返回 `{"authenticated":true}`。 |
-| `GET` | `/api/seller/session` | 无 | 返回当前会话的 `authenticated` 布尔值；无需先登录。 |
-| `POST` | `/api/seller/logout` | 无 | 退出并注销会话，返回 204。 |
-| `GET` | `/api/seller/workbench` | 无 | 返回当前商品、队列 `intents`、等待人数 `waitingCount` 和当前交易意向 `activeIntent`。 |
-| `POST` | `/api/seller/products` | `{"name":"商品名称","price":99.00,"description":"描述","images":[]}` | 发布商品，返回 201 和商品信息；已有在售或交易中商品时拒绝重复发布。 |
-| `PUT` | `/api/seller/products/current` | 同发布商品的请求体 | 修改当前商品；交易中不可修改。`images` 最多包含 1 个上传后返回的图片地址。 |
-| `POST` | `/api/seller/products/image` | 表单字段 `file`，JPG/PNG，最大 5 MB | 上传单个图片文件，返回 `{"url":"/uploads/文件名"}`。上传后仍需在发布或编辑商品时提交该地址。 |
-| `POST` | `/api/seller/intents/{intentId}/action` | `{"action":"VOID"}` 或 `{"action":"REQUEUE"}` | 作废排队意向，或保留原口令码并排到队尾；返回 204。 |
-| `POST` | `/api/seller/trades/start` | 无 | 自动选取队首买家开始交易，返回当前交易意向；商品进入交易中。 |
-| `POST` | `/api/seller/trades/{intentId}/result` | 成功：`{"success":true}`；失败：`{"success":false,"disposition":"VOID"}` 或 `{"success":false,"disposition":"REQUEUE"}` | 登记线下交易结果，返回 204；失败时必须选择当前意向的后续处理方式。 |
-| `POST` | `/api/seller/products/current/delist` | 无 | 主动下架当前商品并使等待意向的口令码失效，返回 204；交易中不可下架。 |
+| 测试成果物 | 链接 |
+| --- | --- |
+| 第二轮测试说明与结果 | [测试说明](tests/第二轮测试说明.md) |
+| 测试用例 Word | [第二轮测试用例](tests/在线购物系统第二轮验收测试用例.docx) |
+| 测试用例 Markdown | [完整 Markdown](tests/在线购物系统第二轮验收测试用例.md) |
+| 测试数据 Excel | [数据清单](tests/第二轮测试用例数据清单.xlsx) |
+| 测试实例文件目录 | [第二轮验收测试数据](tests/第二轮验收测试数据) |
 
-接口通过 `message` 字段返回错误说明：常见状态为 400（参数无效）、401（未登录或账号密码错误）、404（商品或口令码不存在）、409（当前状态不允许操作）。
+构建第二轮集成包：`powershell -ExecutionPolicy Bypass -File project/mvp-v1.0/scripts/build-iteration2.ps1 -Offline`。输出 `project/mvp-v1.0/release-iteration2/app.jar`。浏览器交互和真实服务重启需另行验收，后端自动化通过不等同于人工界面验收通过。
 
-## 首轮验收测试
-
-测试的目的是核对买家免注册提交意向、口令码查询、FIFO 排队、买家撤销、卖家登录及商品管理、交易成功/失败和商品下架等基础流程，防止状态或排位错误、口令码失效不及时。自动化测试还检查必填字段、单件商品限制和图片上传类型。
-
-测试文件及详细用例清单位于 [tests/测试说明.md](tests/测试说明.md)。在项目根目录运行 `tests\run-tests.cmd`，或进入 `backend` 目录执行 `mvn test`。自动化测试使用独立的内存 H2 数据库，不会清空日常使用的 `backend/data`；测试报告由 Maven 输出到 `backend/target/surefire-reports/`。
-
-2026-10-07 本机执行结果：10 个后端集成测试通过、0 个失败，前端 `npm run build` 成功。浏览器操作和服务重启检查仍需按测试文档执行并留存证据。
-
-网页实际显示、窄屏布局和服务重启后的数据保留，需要按测试文档的人工检查表另行记录并留存截图或录屏。首轮商品图片上限已统一为 1 张；姓名、电话等字段的校验差异仍在测试文档中列为待处理问题。
+2026-10-21 本机实际结果：后端 64 项测试通过，失败 0、错误 0；前端生产构建和后端打包成功。

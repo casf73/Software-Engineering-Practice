@@ -1,0 +1,7 @@
+{
+  "name": "商品",
+  "price": 88.5,
+  "images": [
+    "javascript:alert(1)"
+  ]
+}

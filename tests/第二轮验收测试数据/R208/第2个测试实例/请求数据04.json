@@ -1,0 +1,18 @@
+{
+  "name": "商品",
+  "price": 88.5,
+  "stock": 2,
+  "categoryId": null,
+  "images": [
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}",
+    "${image}"
+  ],
+  "description": "商品说明"
+}

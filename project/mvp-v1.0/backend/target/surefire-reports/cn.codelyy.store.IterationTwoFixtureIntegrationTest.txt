@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cn.codelyy.store.IterationTwoFixtureIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.71 s -- in cn.codelyy.store.IterationTwoFixtureIntegrationTest

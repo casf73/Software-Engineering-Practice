@@ -7,5 +7,6 @@
     "firstImage": "/uploads/old-first-a.jpg",
     "secondImage": "/uploads/old-second-a.jpg"
   },
-  "expected": "公开接口仅返回第一张图片"
+  "expected": "既有记录的两张图片全部返回，保持原图片顺序",
+  "revision": "2026-10-21 随 A.1 调整自动化预期，原始输入保留"
 }

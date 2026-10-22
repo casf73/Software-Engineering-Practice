@@ -1,0 +1,115 @@
+{
+  "id": "R206-02",
+  "caseId": "R206",
+  "title": "失败重排不扣库存且重复结果不再扣",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "p": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p}/intents",
+      "status": 201,
+      "bodyFile": "请求数据03.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "code": "/passcode"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p}/intents",
+      "status": 201,
+      "bodyFile": "请求数据04.json",
+      "assertions": {
+        "/position": 2
+      },
+      "capture": {
+        "second": "/passcode"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products/${p}/trades/start",
+      "status": 200,
+      "session": "seller",
+      "capture": {
+        "trade": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/trades/${trade}/result",
+      "status": 204,
+      "session": "seller",
+      "bodyFile": "请求数据06.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}",
+      "status": 200,
+      "assertions": {
+        "/stock": 1
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products/${p}/trades/start",
+      "status": 200,
+      "session": "seller",
+      "capture": {
+        "trade2": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/trades/${trade2}/result",
+      "status": 204,
+      "session": "seller",
+      "bodyFile": "请求数据09.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/trades/${trade2}/result",
+      "status": 409,
+      "session": "seller",
+      "bodyFile": "请求数据10.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/products/${p}/workbench",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/product/stock": 0,
+        "/product/status": "DELISTED"
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言"
+}

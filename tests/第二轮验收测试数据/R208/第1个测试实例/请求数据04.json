@@ -1,0 +1,11 @@
+{
+  "name": "商品",
+  "price": 88.5,
+  "stock": 2,
+  "categoryId": null,
+  "images": [
+    "${image}",
+    "${image2}"
+  ],
+  "description": "<h3>介绍</h3><p><strong>九成新</strong></p>"
+}
