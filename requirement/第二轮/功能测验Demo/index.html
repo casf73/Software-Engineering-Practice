@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第二轮功能测验 Demo · 在线购物系统</title>
+  <link rel="stylesheet" href="./vendor/element-plus.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <header class="header">
+    <div class="header-inner"><strong>在线购物系统</strong><span class="header-caption">第二轮需求体验 Demo</span><el-button text @click="helpVisible=true">使用说明</el-button></div>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">需求提前测验</p><h1>先体验操作，再确认业务规则</h1><p class="muted">联系信息修改、手动冻结与解冻、卖家密码修改。所有操作仅作用于本页模拟数据。</p></div>
+      <el-button @click="resetDemo">重置演示</el-button>
+    </section>
+    <section class="scenario-bar">
+      <span class="label">演示场景</span>
+      <el-select v-model="scene" @change="applyScene" style="width:255px" aria-label="选择演示场景">
+        <el-option label="在售 · 等待买家修改信息" value="sale"></el-option>
+        <el-option label="手动冻结 · 等待队列保留" value="frozen"></el-option>
+        <el-option label="他人交易中 · 等待者仍可修改" value="otherTrade"></el-option>
+        <el-option label="本人交易中 · 禁止修改或撤销" value="ownTrade"></el-option>
+      </el-select>
+      <span class="muted scenario-hint">{{ sceneHint }}</span>
+    </section>
+    <el-tabs v-model="view" class="main-tabs">
+      <el-tab-pane label="买家视角" name="buyer">
+        <div class="workspace">
+          <section class="product-section">
+            <div class="section-head"><h2>当前商品</h2><el-tag :type="statusType" effect="plain">{{ statusLabel }}</el-tag></div>
+            <div class="product-heading"><div class="product-icon">书</div><div><h3>软件工程学习书籍</h3><p class="muted">课堂学习用书，书页整洁，可当面交接。</p><strong class="price">¥ 38.00</strong></div></div>
+            <el-descriptions :column="1" class="product-meta">
+              <el-descriptions-item label="商品编号">P001</el-descriptions-item>
+              <el-descriptions-item label="等待人数">{{ waiting.length }} 人</el-descriptions-item>
+              <el-descriptions-item label="当前交易">{{ activeBuyer ? activeBuyer.name : '暂无' }}</el-descriptions-item>
+            </el-descriptions>
+            <p class="rule-note">{{ productHint }}</p>
+            <h3 class="subheading">提交购买意向</h3>
+            <el-form label-position="top" @submit.prevent="submitIntent">
+              <el-form-item label="姓名"><el-input v-model="newBuyer.name" placeholder="输入演示姓名" :disabled="status!=='sale'"></el-input></el-form-item>
+              <el-form-item label="联系电话"><el-input v-model="newBuyer.phone" placeholder="输入演示电话" :disabled="status!=='sale'"></el-input></el-form-item>
+              <el-button type="primary" native-type="submit" :disabled="status!=='sale'">提交意向</el-button>
+            </el-form>
+          </section>
+          <section class="query-section">
+            <div class="section-head"><h2>口令码查询与修改</h2><span class="muted">等待时可修改或撤销</span></div>
+            <el-form @submit.prevent="queryBuyer"><el-form-item><el-input v-model="codeInput" placeholder="输入口令码，例如 DEMO002" clearable aria-label="口令码"><template #append><el-button native-type="submit">查询</el-button></template></el-input></el-form-item></el-form>
+            <div class="sample-codes"><span class="muted">演示口令码：</span><el-button v-for="b in buyers.filter(x=>x.state!=='cancelled')" :key="b.id" link type="primary" @click="chooseBuyer(b)">{{ b.code }} · {{ b.name }}</el-button></div>
+            <template v-if="selected">
+              <div class="result-heading"><h3>{{ selected.name }}</h3><el-tag :type="selected.state==='trading'?'warning':'info'" effect="plain">{{ buyerState(selected) }}</el-tag></div>
+              <el-descriptions :column="2" class="query-meta">
+                <el-descriptions-item label="联系电话">{{ selected.phone }}</el-descriptions-item>
+                <el-descriptions-item label="当前排位">{{ position(selected) }}</el-descriptions-item>
+                <el-descriptions-item label="口令码">{{ selected.code }}</el-descriptions-item>
+                <el-descriptions-item label="提交时间">{{ selected.submitted }}</el-descriptions-item>
+              </el-descriptions>
+              <template v-if="selected.state==='waiting'">
+                <p class="rule-note">{{ status==='sale'?'可修改姓名和联系电话，原口令码、提交时间和排位保持不变。':'商品冻结期间，等待者仍可修改联系信息或撤销意向。' }}</p>
+                <el-form label-position="top" @submit.prevent="saveContact" class="edit-form">
+                  <el-form-item label="姓名"><el-input v-model="contact.name"></el-input></el-form-item>
+                  <el-form-item label="联系电话"><el-input v-model="contact.phone"></el-input></el-form-item>
+                  <div class="actions"><el-button type="primary" native-type="submit">保存联系信息</el-button><el-button @click="fillContact">取消修改</el-button><el-button type="danger" plain @click="withdraw">撤销意向</el-button></div>
+                </el-form>
+              </template>
+              <p v-else class="rule-note">当前买家正在交易，暂不允许修改联系信息或撤销意向。其他等待买家仍可正常操作。</p>
+            </template>
+            <el-empty v-else description="输入口令码，或点击上方演示口令码" :image-size="75"></el-empty>
+          </section>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="卖家视角" name="seller">
+        <template v-if="loggedIn">
+          <div class="section-head seller-heading"><div><h2>商品与等待队列</h2><p class="muted">冻结保留队列，买家修改信息后，这里的资料同步更新。</p></div><el-tag :type="statusType" effect="plain">{{ statusLabel }}</el-tag></div>
+          <div class="seller-product"><div><h3>软件工程学习书籍 <span class="muted small">P001</span></h3><p class="muted">当前等待 {{ waiting.length }} 人 · {{ activeBuyer ? '正在与 '+activeBuyer.name+' 交易' : '暂无进行中的交易' }}</p></div>
+            <div class="actions"><el-button v-if="status==='sale'" @click="freeze">手动冻结</el-button><el-button v-if="status==='frozen'" type="primary" plain @click="unfreeze">解除冻结</el-button><el-button type="primary" :disabled="status!=='sale'||!waiting.length" @click="startTrade">与队首开始模拟交易</el-button><el-button v-if="status==='trading'" @click="endTrade">结束模拟交易</el-button></div>
+          </div>
+          <p class="rule-note">{{ status==='trading'?'交易冻结不能手动解除。可通过“结束模拟交易”恢复演示，买家返回原队列；此按钮仅用于切换演示场景。':productHint }}</p>
+          <el-table :data="queueRows" style="width:100%" empty-text="暂无购买意向">
+            <el-table-column label="排位" width="95"><template #default="s">{{ position(s.row) }}</template></el-table-column>
+            <el-table-column prop="name" label="买家姓名" min-width="130"></el-table-column>
+            <el-table-column prop="phone" label="联系电话" min-width="160"></el-table-column>
+            <el-table-column prop="code" label="口令码" min-width="135"></el-table-column>
+            <el-table-column prop="submitted" label="提交时间" min-width="130"></el-table-column>
+            <el-table-column label="意向状态" width="120"><template #default="s"><el-tag :type="s.row.state==='trading'?'warning':'info'" effect="plain">{{ buyerState(s.row) }}</el-tag></template></el-table-column>
+          </el-table>
+          <p class="muted table-tip">试一试：切到买家视角修改 DEMO002，再回到此处查看姓名和电话。</p>
+        </template>
+        <el-empty v-else description="模拟会话已失效，请重新登录" :image-size="80"><el-button type="primary" @click="view='account'">前往账号登录</el-button></el-empty>
+      </el-tab-pane>
+      <el-tab-pane label="卖家账号" name="account">
+        <section class="account-section">
+          <div class="section-head"><h2>{{ loggedIn?'修改卖家密码':'卖家重新登录' }}</h2><el-tag :type="loggedIn?'success':'info'" effect="plain">{{ loggedIn?'已登录':'未登录' }}</el-tag></div>
+          <p class="muted">演示账号：admin。初始演示密码：123456。仅模拟会话变化，请勿输入真实密码。</p>
+          <el-form v-if="loggedIn" label-position="top" @submit.prevent="changePassword" class="account-form">
+            <el-form-item label="当前密码"><el-input v-model="passwordForm.old" type="password" show-password autocomplete="off"></el-input></el-form-item>
+            <el-form-item label="新密码"><el-input v-model="passwordForm.next" type="password" show-password autocomplete="off" placeholder="演示仅检查非空"></el-input></el-form-item>
+            <el-form-item label="确认新密码"><el-input v-model="passwordForm.confirm" type="password" show-password autocomplete="off"></el-input></el-form-item>
+            <p class="rule-note">保存成功后，模拟旧会话失效；用新密码重新登录，再查看卖家页面。</p>
+            <el-button type="primary" native-type="submit">保存新密码</el-button>
+            <el-button @click="loggedIn=false;record('退出卖家模拟登录')">退出登录</el-button>
+          </el-form>
+          <el-form v-else label-position="top" @submit.prevent="login" class="account-form">
+            <el-form-item label="账号"><el-input v-model="loginForm.username"></el-input></el-form-item>
+            <el-form-item label="密码"><el-input v-model="loginForm.password" type="password" show-password autocomplete="off"></el-input></el-form-item>
+            <el-button type="primary" native-type="submit">登录</el-button>
+            <p class="muted">忘记演示密码时，点击“重置演示”恢复初始状态。</p>
+          </el-form>
+        </section>
+      </el-tab-pane>
+    </el-tabs>
+    <section class="activity"><el-collapse><el-collapse-item title="操作记录 · 查看刚才发生了什么" name="logs"><el-empty v-if="!logs.length" description="进行一次操作后将在这里记录" :image-size="45"></el-empty><ul v-else class="log-list"><li v-for="(log,i) in logs" :key="i"><time>{{ log.time }}</time><span>{{ log.text }}</span></li></ul></el-collapse-item></el-collapse></section>
+    <footer>需求演示原型 · Vue 3 + Element Plus · 无后端、无真实数据库 · 刷新页面恢复初始演示数据</footer>
+  </main>
+  <el-dialog v-model="helpVisible" title="如何提前测验需求" width="560px">
+    <ol class="guide"><li>选择“在售”场景，在买家视角查询 DEMO002，修改姓名和电话。</li><li>切到卖家视角，核对资料已同步，口令码、时间和排位保持。</li><li>点击手动冻结，确认队列保留；切回买家视角，等待者仍可修改，但不能提交新意向。</li><li>切换“他人交易中”与“本人交易中”，比较允许操作的差别。</li><li>在账号页修改演示密码，观察会话失效，使用新密码重新登录。</li></ol>
+    <p class="muted">这里只保留便于体验的必填和状态判断，不做完整校验、真实认证、加密或持久化。页面内容与业务系统相互独立。</p>
+    <template #footer><el-button type="primary" @click="helpVisible=false">开始体验</el-button></template>
+  </el-dialog>
+</div>
+<script src="./vendor/vue.global.prod.js"></script>
+<script src="./vendor/element-plus.full.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
