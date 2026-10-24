@@ -33,8 +33,8 @@ public class SellerController {
     @PostMapping("/login")
     public Map<String, Boolean> login(@Valid @RequestBody LoginRequest request, HttpServletRequest servletRequest) {
         long version = credentials.authenticate(request.username(), request.password());
-        HttpSession old = servletRequest.getSession(false);
-        if (old != null) old.invalidate();
+        // 更换会话编号防止固定会话，同时保留独立的客户登录身份。
+        if (servletRequest.getSession(false) != null) servletRequest.changeSessionId();
         servletRequest.getSession(true).setAttribute(SellerAuthInterceptor.SESSION_KEY, version);
         return Map.of("authenticated", true);
     }
@@ -43,7 +43,7 @@ public class SellerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null) session.invalidate();
+        if (session != null) session.removeAttribute(SellerAuthInterceptor.SESSION_KEY);
     }
 
     @GetMapping("/session")
@@ -57,7 +57,7 @@ public class SellerController {
     public void changePassword(@Valid @RequestBody ChangePasswordRequest request, HttpServletRequest servletRequest) {
         HttpSession session = servletRequest.getSession(false);
         credentials.changePassword(request, session.getAttribute(SellerAuthInterceptor.SESSION_KEY));
-        session.invalidate();
+        session.removeAttribute(SellerAuthInterceptor.SESSION_KEY);
     }
 
     @PostMapping("/products/current/freeze")

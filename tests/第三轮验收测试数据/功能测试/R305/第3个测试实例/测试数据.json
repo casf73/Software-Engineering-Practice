@@ -1,0 +1,53 @@
+{
+  "对应接口实例": "R305-03",
+  "场景": "描述图片二次保存及危险内容清理",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "admin",
+        "password": "123456"
+      }
+    },
+    {
+      "步骤": 4,
+      "输入": {
+        "name": "商品",
+        "price": 88.5,
+        "stock": 2,
+        "categoryId": null,
+        "images": [
+          "${image}"
+        ],
+        "description": "<p onclick=\"alert(1)\">安全文字</p><img src=\"${image}\"><script>alert(1)</script>"
+      }
+    },
+    {
+      "步骤": 6,
+      "输入": {
+        "name": "商品",
+        "price": 88.5,
+        "images": [
+          "${image}"
+        ],
+        "description": "${description}"
+      }
+    },
+    {
+      "步骤": 7,
+      "输入": {
+        "name": "商品",
+        "price": 88.5,
+        "images": [
+          "javascript:alert(1)"
+        ]
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": [
+    "sample.png",
+    "sample.jpg"
+  ],
+  "素材使用说明": "本文件夹中的图片供网页选择上传；oversized.png为5MB加1字节；invalid.txt用于错误格式。"
+}

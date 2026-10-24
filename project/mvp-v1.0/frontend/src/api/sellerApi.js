@@ -1,6 +1,9 @@
 import http from './http'
 
 export const sellerApi = {
+  customers: (params) => http.get('/seller/customers', { params }),
+  customer: (id) => http.get(`/seller/customers/${id}`),
+  customerOrders: (id, params) => http.get(`/seller/customers/${id}/orders`, { params }),
   login: (payload) => http.post('/seller/login', payload),
   logout: () => http.post('/seller/logout'),
   session: () => http.get('/seller/session'),

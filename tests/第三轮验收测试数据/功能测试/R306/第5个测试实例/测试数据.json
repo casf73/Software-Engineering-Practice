@@ -1,0 +1,17 @@
+{
+  "对应接口实例": "R306-05",
+  "场景": "用户名33位过长",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "password": "Buyer1234",
+        "phone": "13800000001",
+        "defaultLocation": "学校南门"
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": []
+}

@@ -49,13 +49,15 @@
         </template>
         <el-alert v-if="product.status !== 'ON_SALE'" :title="product.status === 'MANUALLY_FROZEN' ? '商品已手动冻结' : '商品交易中'" description="暂不接收新的购买意向。仍在排队的买家可以查询、修改联系信息或撤销意向。" type="info" :closable="false" show-icon />
         <template v-else>
-          <p class="form-intro">留下姓名和联系电话，提交后即可获得专属口令码。</p>
+          <p class="form-intro">{{ customerSession.customer ? '确认联系信息和交易地点，提交后保存到我的购买记录。' : '留下姓名和联系电话，提交后即可获得专属口令码。' }}</p>
           <el-form ref="intentFormRef" :model="intentForm" :rules="intentRules" label-position="top" @submit.prevent="submitIntent">
             <el-form-item label="姓名" prop="name"><el-input v-model="intentForm.name" placeholder="请输入姓名" size="large" autocomplete="name" /></el-form-item>
             <el-form-item label="联系电话" prop="phone"><el-input v-model="intentForm.phone" placeholder="请输入联系电话" size="large" autocomplete="tel" /></el-form-item>
+            <el-form-item v-if="customerSession.customer" label="交易地点" prop="meetingLocation"><el-input v-model="intentForm.meetingLocation" maxlength="200" placeholder="本次交易地点，默认使用注册时填写的地点" /></el-form-item>
             <el-button type="primary" size="large" class="full-button" :loading="submitting" @click="submitIntent">提交购买意向</el-button>
           </el-form>
-          <p class="privacy-note">无需注册。请妥善保存提交后获得的口令码。</p>
+          <p v-if="customerSession.customer" class="privacy-note">已登录：{{ customerSession.customer.username }}。可在 <RouterLink to="/customer/account">我的购买</RouterLink> 查看记录。</p>
+          <p v-else class="privacy-note">可以访客身份提交并保存口令码，或先 <RouterLink to="/customer/login">登录 / 注册</RouterLink> 以保存购买记录。</p>
         </template>
       </AppCard>
     </div>
@@ -107,7 +109,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { customerApi } from '../api/customerApi'
+import { customerSession, loadCustomerSession, clearCustomerSession } from '../stores/customerSession'
 import { ElMessage } from 'element-plus'
 import AppCard from '../components/common/AppCard.vue'
 import AppDialog from '../components/common/AppDialog.vue'
@@ -122,6 +127,7 @@ import { safeDescription } from '../utils/richText'
 import { formatPrice } from '../utils/format'
 import { intentLabel, productLabel } from '../utils/status'
 
+const route = useRoute()
 const product = ref(null)
 const items = ref([]), total = ref(0), page = ref(0), search = ref(''), categoryId = ref(''), categories = ref([])
 const categoryOptions = computed(() => categories.value.filter(c => !c.parentId).flatMap(c => [{ ...c, label: c.name }, ...categories.value.filter(x => x.parentId === c.id).map(x => ({ ...x, label: c.name + ' / ' + x.name }))]))
@@ -131,8 +137,14 @@ const submitting = ref(false)
 const querying = ref(false)
 const cancelling = ref(false)
 const intentFormRef = ref()
-const intentForm = reactive({ name: '', phone: '' })
+const intentForm = reactive({ name: '', phone: '', meetingLocation: '' })
+function fillCustomerContact() {
+  const customer = customerSession.customer
+  Object.assign(intentForm, { name: customer?.username || '', phone: customer?.phone || '', meetingLocation: customer?.defaultLocation || '' })
+}
+watch(() => customerSession.customer, fillCustomerContact, { immediate: true })
 const intentRules = {
+  meetingLocation: [{ required: true, whitespace: true, max: 200, message: '请输入不超过 200 字的交易地点', trigger: 'blur' }],
   name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
   phone: [{ required: true, message: '请输入联系电话', trigger: 'blur' }, { pattern: /^(?=.*[0-9])[0-9+() -]{6,30}$/, message: '请输入有效联系电话', trigger: 'blur' }],
 }
@@ -161,17 +173,22 @@ async function loadProduct() {
 }
 
 async function submitIntent() {
-  if (!intentFormRef.value || product.value?.status !== 'ON_SALE') return
+  if (submitting.value || !intentFormRef.value || product.value?.status !== 'ON_SALE') return
   const valid = await intentFormRef.value.validate().catch(() => false)
   if (!valid) return
   submitting.value = true
   try {
-    const { data } = await catalogApi.submit(product.value.id, { ...intentForm })
+    const body = { name: intentForm.name.trim(), phone: intentForm.phone.trim() }
+    const { data } = customerSession.customer
+      ? await customerApi.submitIntent(product.value.id, { ...body, meetingLocation: intentForm.meetingLocation.trim() })
+      : await catalogApi.submit(product.value.id, body)
     issuedPasscode.value = data.passcode
     issueDialogVisible.value = true
-    intentForm.name = ''
-    intentForm.phone = ''
-  } catch (error) { ElMessage.error(apiErrorMessage(error, '提交失败')) }
+    fillCustomerContact()
+  } catch (error) {
+    if (error.response?.status === 401) clearCustomerSession()
+    ElMessage.error(apiErrorMessage(error, '提交失败'))
+  }
   finally { submitting.value = false }
 }
 
@@ -244,6 +261,8 @@ async function copyPasscode() {
 }
 
 onMounted(async () => {
+  await loadCustomerSession(true).catch(() => {})
+  if (typeof route.query.passcode === 'string') openQueryDialog(route.query.passcode)
   await loadProduct()
   try { categories.value = (await catalogApi.categories()).data } catch (e) { ElMessage.error(apiErrorMessage(e, '分类加载失败')) }
 })

@@ -1,0 +1,46 @@
+{
+  "对应接口实例": "R305-06",
+  "场景": "10张图片越界",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "admin",
+        "password": "123456"
+      }
+    },
+    {
+      "步骤": 3,
+      "输入": {
+        "name": "多图",
+        "price": 88.5,
+        "images": [
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}",
+          "${image}"
+        ]
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": [
+    "sample01.png",
+    "sample02.png",
+    "sample03.png",
+    "sample04.png",
+    "sample05.png",
+    "sample06.png",
+    "sample07.png",
+    "sample08.png",
+    "sample09.png",
+    "sample10.png"
+  ],
+  "素材使用说明": "本文件夹中的图片供网页选择上传；oversized.png为5MB加1字节；invalid.txt用于错误格式。"
+}

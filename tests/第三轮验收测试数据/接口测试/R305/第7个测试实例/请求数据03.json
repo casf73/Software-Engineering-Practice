@@ -1,0 +1,7 @@
+{
+  "name": "非法图片",
+  "price": 88.5,
+  "images": [
+    "javascript:alert(1)"
+  ]
+}

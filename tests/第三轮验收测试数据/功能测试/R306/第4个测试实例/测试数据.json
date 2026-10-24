@@ -1,0 +1,17 @@
+{
+  "对应接口实例": "R306-04",
+  "场景": "用户名32位上界",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+        "password": "Buyer1234",
+        "phone": "13800000001",
+        "defaultLocation": "学校南门"
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": []
+}

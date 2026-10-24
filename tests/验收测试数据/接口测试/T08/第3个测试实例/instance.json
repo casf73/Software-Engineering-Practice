@@ -1,0 +1,14 @@
+{
+  "id": "T08-03",
+  "caseId": "T08",
+  "title": "137 号码主动下架",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1375000000"
+  },
+  "expected": "相关意向记录仍存在于后端数据库",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

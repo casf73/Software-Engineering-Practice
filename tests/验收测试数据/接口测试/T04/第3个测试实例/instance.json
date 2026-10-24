@@ -1,0 +1,14 @@
+{
+  "id": "T04-03",
+  "caseId": "T04",
+  "title": "137 号码冻结边界",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1371000000"
+  },
+  "expected": "等待者撤销后后续排位前移",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

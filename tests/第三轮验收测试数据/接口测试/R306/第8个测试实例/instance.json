@@ -1,0 +1,61 @@
+{
+  "id": "R306-08",
+  "caseId": "R306",
+  "iteration": 3,
+  "type": "接口测试",
+  "title": "登录退出会话",
+  "mode": "automated",
+  "designMethod": "等价类划分",
+  "preconditions": "独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true,
+        "/customer/username": "buyer01",
+        "/customer/defaultLocation": "学校南门"
+      },
+      "capture": {
+        "buyerId": "/customer/id"
+      },
+      "absent": [
+        "/customer/passwordHash",
+        "/customer/password"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/logout",
+      "status": 204,
+      "session": "buyer"
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/orders",
+      "status": 401,
+      "session": "buyer"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/login",
+      "status": 401,
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/login",
+      "status": 200,
+      "saveSession": "again",
+      "bodyFile": "请求数据05.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    }
+  ],
+  "expected": "逐步验证 HTTP 状态码及响应字段，详见步骤断言。",
+  "result": "通过"
+}

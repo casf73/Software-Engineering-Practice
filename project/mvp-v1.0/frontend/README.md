@@ -1,23 +1,15 @@
-# 前端项目
+# 在线购物系统前端
 
-技术栈：Vue 3、Vite、Element Plus、Vue Router、Axios。
+第三轮版本，Vue3、Element Plus、Vue Router、Axios。需要Node22及以上。
 
 ## 启动
 
-需要 Node.js 16.20 及以上版本。
+frontend目录执行npm ci、npm run dev，访问http://localhost:5173；/api和/uploads代理至后端8080。构建命令npm run build。
 
-1. 在 frontend 目录安装依赖：npm install
-2. 启动开发服务器：npm run dev
+## 页面与数据
 
-开发服务器默认地址为 http://localhost:5173，/api 和 /uploads 请求会代理到 http://localhost:8080。
+StorefrontView负责多商品、搜索、分类、相册和购买意向；CustomerAuthView负责客户注册登录；CustomerAccountView负责本人历史；SellerDashboardView负责商品分类库存和队列，SellerCustomers负责客户查询与历史。customerSession维护客户身份，sellerApi和customerApi分别封装接口。
 
-## 构建
+## 验收
 
-运行 npm run build。
-
-## 主要目录
-
-- src/views：商品首页、卖家登录、卖家工作台。
-- src/components/common：页面共用组件。AppDialog 通过默认插槽承载弹窗主体，通过 title、footer 插槽自定义标题和操作区。
-- src/api：Axios 实例和接口封装。
-- src/utils：状态文案与日期、价格格式化。
+三轮功能测试资料位于tests各轮数据目录的功能测试子目录，每例包含操作步骤、数据和预期。页面人工测试结果单独填写，不直接使用接口测试通过状态。

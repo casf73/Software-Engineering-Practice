@@ -1,0 +1,31 @@
+{
+  "id": "R303-05",
+  "caseId": "R303",
+  "iteration": 3,
+  "type": "接口测试",
+  "title": "负库存拒绝",
+  "mode": "automated",
+  "designMethod": "边界值分析",
+  "preconditions": "独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 400,
+      "session": "seller",
+      "bodyFile": "请求数据02.json"
+    }
+  ],
+  "expected": "逐步验证 HTTP 状态码及响应字段，详见步骤断言。",
+  "result": "通过"
+}

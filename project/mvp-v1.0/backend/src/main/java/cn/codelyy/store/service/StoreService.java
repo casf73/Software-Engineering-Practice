@@ -43,12 +43,23 @@ public class StoreService {
 
     @Transactional
     public IssuedIntentView submitIntent(Long productId, IntentRequest request) {
+        return createIntent(productId,request,null,null);
+    }
+    @Transactional
+    public IssuedIntentView submitCustomerIntent(Long productId,CustomerIntentRequest request,Customer customer) {
+        return createIntent(productId,new IntentRequest(request.name(),request.phone()),customer,request.meetingLocation().trim());
+    }
+    private IssuedIntentView createIntent(Long productId,IntentRequest request,Customer customer,String meetingLocation) {
         Product product = lockProduct(productId);
         if (product.getStatus() != ProductStatus.ON_SALE) throw ApiException.conflict(product.getStatus() == ProductStatus.MANUALLY_FROZEN
                 ? "商品已手动冻结，暂不接受新的购买意向" : "商品正在交易中，暂不接受新的购买意向");
         if(product.getStock()<=0)throw ApiException.conflict("商品库存不足");
         PurchaseIntent intent = new PurchaseIntent();
         intent.setProduct(product);
+        intent.setCustomer(customer);
+        intent.setProductNameSnapshot(product.getName());
+        intent.setPriceSnapshot(product.getPrice());
+        intent.setMeetingLocation(meetingLocation);
         intent.setName(request.name().trim());
         intent.setPhone(request.phone().trim());
         intent.setPasscode(newPasscode());
@@ -241,7 +252,7 @@ public class StoreService {
     @Transactional(readOnly=true) public PageView<ProductView> catalog(String q,Long categoryId,int page,int size,boolean includeDelisted){
         String keyword=q==null?"":q.trim().toLowerCase(Locale.ROOT);
         var all=products.findAll().stream().filter(p->includeDelisted||LIVE_STATUSES.contains(p.getStatus()))
-            .filter(p->keyword.isEmpty()||p.getName().toLowerCase(Locale.ROOT).contains(keyword)||p.getDescription()!=null&&p.getDescription().replaceAll("<[^>]*>"," ").toLowerCase(Locale.ROOT).contains(keyword))
+            .filter(p->keyword.isEmpty()||p.getName().toLowerCase(Locale.ROOT).contains(keyword)||p.getDescription()!=null&&org.springframework.web.util.HtmlUtils.htmlUnescape(p.getDescription().replaceAll("<[^>]*>"," ")).toLowerCase(Locale.ROOT).contains(keyword))
             .filter(p->categoryId==null||p.getCategory()!=null&&(categoryId.equals(p.getCategory().getId())||p.getCategory().getParent()!=null&&categoryId.equals(p.getCategory().getParent().getId())))
             .sorted(Comparator.comparing(Product::getId).reversed()).toList();
         return new PageView<>(all.stream().skip((long)page*size).limit(size).map(this::productView).toList(),all.size(),page,size);
@@ -308,7 +319,7 @@ public class StoreService {
     }
 
     private IntentView intentView(PurchaseIntent intent, Integer position) {
-        return new IntentView(intent.getId(), intent.getName(), intent.getPhone(), intent.getStatus(), position, intent.getQueueAt());
+        return new IntentView(intent.getId(),intent.getName(),intent.getPhone(),intent.getStatus(),position,intent.getQueueAt(),intent.getMeetingLocation(),intent.getCustomer()==null?null:intent.getCustomer().getUsername());
     }
 
     private int indexOf(List<PurchaseIntent> list, Long id) {

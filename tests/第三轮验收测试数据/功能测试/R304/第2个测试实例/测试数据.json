@@ -1,0 +1,62 @@
+{
+  "对应接口实例": "R304-02",
+  "场景": "描述关键词忽略大小写",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "admin",
+        "password": "123456"
+      }
+    },
+    {
+      "步骤": 2,
+      "输入": {
+        "name": "数码",
+        "parentId": null
+      }
+    },
+    {
+      "步骤": 3,
+      "输入": {
+        "name": "键盘",
+        "parentId": "${root}"
+      }
+    },
+    {
+      "步骤": 4,
+      "输入": {
+        "name": "Keyboard红轴",
+        "price": 88.5,
+        "stock": 2,
+        "categoryId": "${child}",
+        "images": [],
+        "description": "<p>USB Keyboard Good</p>"
+      }
+    },
+    {
+      "步骤": 5,
+      "输入": {
+        "name": "鼠标",
+        "price": 88.5,
+        "stock": 2,
+        "categoryId": "${root}",
+        "images": [],
+        "description": "办公"
+      }
+    },
+    {
+      "步骤": 6,
+      "输入": {
+        "name": "已下架键盘",
+        "price": 88.5,
+        "stock": 2,
+        "categoryId": null,
+        "images": [],
+        "description": "商品说明"
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": []
+}

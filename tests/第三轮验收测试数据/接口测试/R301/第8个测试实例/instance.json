@@ -1,0 +1,73 @@
+{
+  "id": "R301-08",
+  "caseId": "R301",
+  "iteration": 3,
+  "type": "接口测试",
+  "title": "多商品旧current接口冲突",
+  "mode": "automated",
+  "designMethod": "场景法",
+  "preconditions": "独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "p": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据03.json",
+      "capture": {
+        "other": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p}/intents",
+      "status": 201,
+      "bodyFile": "请求数据04.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "code": "/passcode"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${other}/intents",
+      "status": 201,
+      "bodyFile": "请求数据05.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "otherCode": "/passcode"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/current",
+      "status": 409
+    }
+  ],
+  "expected": "逐步验证 HTTP 状态码及响应字段，详见步骤断言。",
+  "result": "通过"
+}

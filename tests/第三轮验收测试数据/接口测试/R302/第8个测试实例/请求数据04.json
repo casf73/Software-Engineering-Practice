@@ -1,0 +1,8 @@
+{
+  "name": "测试商品",
+  "price": 88.5,
+  "stock": 1,
+  "categoryId": "${child}",
+  "images": [],
+  "description": "商品说明"
+}

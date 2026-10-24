@@ -1,0 +1,95 @@
+{
+  "id": "R304-02",
+  "caseId": "R304",
+  "title": "描述关键词忽略大小写",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "root": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据03.json",
+      "capture": {
+        "child": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据04.json",
+      "capture": {
+        "p": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据05.json",
+      "capture": {
+        "other": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据06.json",
+      "capture": {
+        "gone": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products/${gone}/delist",
+      "status": 204,
+      "session": "seller"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?q=usb",
+      "status": 200,
+      "assertions": {
+        "/total": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products?q=notfound",
+      "status": 200,
+      "assertions": {
+        "/total": 0
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言",
+  "iteration": 3,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

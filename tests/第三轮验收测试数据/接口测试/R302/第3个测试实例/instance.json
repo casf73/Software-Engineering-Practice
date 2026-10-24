@@ -1,0 +1,73 @@
+{
+  "id": "R302-03",
+  "caseId": "R302",
+  "title": "分类改名及未引用分类删除",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "root": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据03.json",
+      "capture": {
+        "child": "/id"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/categories/${child}",
+      "status": 200,
+      "session": "seller",
+      "bodyFile": "请求数据04.json",
+      "assertions": {
+        "/name": "机械键盘"
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/seller/categories/${child}",
+      "status": 204,
+      "session": "seller"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/seller/categories/${root}",
+      "status": 204,
+      "session": "seller"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/categories",
+      "status": 200,
+      "assertions": {
+        "": []
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言",
+  "iteration": 3,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

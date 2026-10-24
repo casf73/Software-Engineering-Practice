@@ -1,0 +1,19 @@
+{
+  "id": "T09-02",
+  "caseId": "T09",
+  "title": "绿色样图上传",
+  "mode": "automated",
+  "input": {
+    "png": "sample.png",
+    "jpg": "sample.jpg",
+    "invalid": "invalid.txt",
+    "oversized": "oversized.png",
+    "color": "green"
+  },
+  "expected": "JPG/PNG可上传并关联一张图片；错误格式、超过5MB返回400。",
+  "revision": "2026-10-21 随 A.1 调整自动化预期，原始输入保留",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

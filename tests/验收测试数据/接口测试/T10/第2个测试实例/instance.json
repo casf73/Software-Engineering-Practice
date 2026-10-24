@@ -1,0 +1,16 @@
+{
+  "id": "T10-02",
+  "caseId": "T10",
+  "title": "既有图片记录的首图顺序兼容",
+  "mode": "automated",
+  "input": {
+    "firstImage": "/uploads/old-first-b.png",
+    "secondImage": "/uploads/old-second-b.png"
+  },
+  "expected": "既有记录读取成功，第一张图片的地址和顺序保持。",
+  "revision": "2026-10-21 随 A.1 调整自动化预期，原始输入保留",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

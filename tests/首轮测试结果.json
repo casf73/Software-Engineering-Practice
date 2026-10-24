@@ -1,0 +1,852 @@
+{
+  "iteration": 1,
+  "updatedAt": "2026-10-24",
+  "scope": [
+    "卖家登录与权限",
+    "商品发布和编辑",
+    "口令码与 FIFO 队列",
+    "交易冻结及撤销边界",
+    "交易失败并作废",
+    "交易失败重新排队",
+    "单件商品成交收尾",
+    "卖家主动下架",
+    "图片上传和文件限制",
+    "既有图片记录读取",
+    "商品页面浏览",
+    "意向表单与查询",
+    "页面队列及开始交易",
+    "页面冻结与撤销",
+    "服务重启与数据保留",
+    "上传页面与无图发布",
+    "桌面及窄屏显示"
+  ],
+  "interface": {
+    "total": 80,
+    "passed": 80,
+    "failed": 0,
+    "pending": 0
+  },
+  "functional": {
+    "total": 56,
+    "passed": 0,
+    "pending": 56
+  },
+  "instances": [
+    {
+      "id": "U01-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U01-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U01-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U01-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U01-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U01-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U01-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U01-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U01/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U02-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U02-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U02-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U02-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U02-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U02-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U02-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U02-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U02/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U03-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U03-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U03-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U03-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U03-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U03-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U03-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U03-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U03/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U04-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U04-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U04-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U04-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U04-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U04-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U04-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U04-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U04/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U05-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U05-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U05-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U05-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U05-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U05-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U05-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U05-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U05/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U06-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U06-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U06-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U06-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U06-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U06-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U06-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U06-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U06/第8个测试实例/instance.json"
+    },
+    {
+      "id": "U07-01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第1个测试实例/instance.json"
+    },
+    {
+      "id": "U07-02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第2个测试实例/instance.json"
+    },
+    {
+      "id": "U07-03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第3个测试实例/instance.json"
+    },
+    {
+      "id": "U07-04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第4个测试实例/instance.json"
+    },
+    {
+      "id": "U07-05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第5个测试实例/instance.json"
+    },
+    {
+      "id": "U07-06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第6个测试实例/instance.json"
+    },
+    {
+      "id": "U07-07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第7个测试实例/instance.json"
+    },
+    {
+      "id": "U07-08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "验收测试数据/功能测试/U07/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T01-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T01-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T01-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T01-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T01-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T01-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T01-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T01-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T01/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T02-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T02-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T02-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T02-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T02-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T02-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T02-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T02-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T02/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T03-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T03-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T03-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T03-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T03-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T03-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T03-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T03-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T03/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T04-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T04-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T04-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T04-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T04-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T04-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T04-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T04-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T04/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T05-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T05-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T05-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T05-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T05-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T05-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T05-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T05-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T05/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T06-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T06-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T06-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T06-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T06-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T06-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T06-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T06-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T06/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T07-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T07-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T07-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T07-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T07-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T07-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T07-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T07-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T07/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T08-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T08-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T08-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T08-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T08-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T08-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T08-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T08-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T08/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T09-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T09-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T09-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T09-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T09-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T09-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T09-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T09-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T09/第8个测试实例/instance.json"
+    },
+    {
+      "id": "T10-01",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第1个测试实例/instance.json"
+    },
+    {
+      "id": "T10-02",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第2个测试实例/instance.json"
+    },
+    {
+      "id": "T10-03",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第3个测试实例/instance.json"
+    },
+    {
+      "id": "T10-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第4个测试实例/instance.json"
+    },
+    {
+      "id": "T10-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第5个测试实例/instance.json"
+    },
+    {
+      "id": "T10-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第6个测试实例/instance.json"
+    },
+    {
+      "id": "T10-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第7个测试实例/instance.json"
+    },
+    {
+      "id": "T10-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "验收测试数据/接口测试/T10/第8个测试实例/instance.json"
+    }
+  ]
+}

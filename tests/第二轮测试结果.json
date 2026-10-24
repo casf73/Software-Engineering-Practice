@@ -1,831 +1,310 @@
 {
-  "date": "2026-10-21",
-  "scope": "第二轮三项基础功能：联系信息修改、手动冻结与解冻、卖家密码修改",
-  "items": [
+  "iteration": 2,
+  "updatedAt": "2026-10-24",
+  "scope": [
+    "等待买家修改联系信息",
+    "手动冻结与解冻",
+    "卖家改密与会话撤销"
+  ],
+  "interface": {
+    "total": 24,
+    "passed": 24,
+    "failed": 0,
+    "pending": 0
+  },
+  "functional": {
+    "total": 24,
+    "passed": 0,
+    "pending": 24
+  },
+  "instances": [
+    {
+      "id": "R201-F01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第1个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第2个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第3个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R201-F08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R201/第8个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第1个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第2个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第3个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R202-F08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R202/第8个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F01",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第1个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F02",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第2个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F03",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第3个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F04",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F05",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F06",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F07",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R203-F08",
+      "type": "功能测试",
+      "result": "待人工执行",
+      "file": "第二轮验收测试数据/功能测试/R203/第8个测试实例/instance.json"
+    },
     {
       "id": "R201-01",
-      "caseId": "R201",
-      "title": "正常修改并保留排位",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据03.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "first": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 2
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 200,
-          "bodyFile": "请求数据05.json",
-          "assertions": {
-            "/name": "更新姓名1",
-            "/position": 2
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 400,
-          "bodyFile": "请求数据06.json"
-        },
-        {
-          "method": "DELETE",
-          "path": "/api/public/intents/${code}",
-          "status": 204
-        },
-        {
-          "method": "GET",
-          "path": "/api/public/intents/${code}",
-          "status": 404
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R201/第1个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json",
-        "请求数据05.json",
-        "请求数据06.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R201/第1个测试实例/instance.json"
     },
     {
       "id": "R201-02",
-      "caseId": "R201",
-      "title": "手动冻结期间修改",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据03.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "first": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 2
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/freeze",
-          "status": 200,
-          "session": "seller"
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 200,
-          "bodyFile": "请求数据06.json",
-          "assertions": {
-            "/name": "更新姓名2",
-            "/position": 2
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 400,
-          "bodyFile": "请求数据07.json"
-        },
-        {
-          "method": "DELETE",
-          "path": "/api/public/intents/${code}",
-          "status": 204
-        },
-        {
-          "method": "GET",
-          "path": "/api/public/intents/${code}",
-          "status": 404
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R201/第2个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json",
-        "请求数据06.json",
-        "请求数据07.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R201/第2个测试实例/instance.json"
     },
     {
       "id": "R201-03",
-      "caseId": "R201",
-      "title": "他人交易期间修改",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据03.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "first": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 2
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/trades/start",
-          "status": 200,
-          "session": "seller",
-          "capture": {
-            "trade": "/id"
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${first}",
-          "status": 409,
-          "bodyFile": "请求数据06.json"
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 200,
-          "bodyFile": "请求数据07.json",
-          "assertions": {
-            "/name": "更新姓名3",
-            "/position": 1
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/public/intents/${code}",
-          "status": 400,
-          "bodyFile": "请求数据08.json"
-        },
-        {
-          "method": "DELETE",
-          "path": "/api/public/intents/${code}",
-          "status": 204
-        },
-        {
-          "method": "GET",
-          "path": "/api/public/intents/${code}",
-          "status": 404
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R201/第3个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json",
-        "请求数据06.json",
-        "请求数据07.json",
-        "请求数据08.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R201/第3个测试实例/instance.json"
+    },
+    {
+      "id": "R201-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R201/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R201-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R201/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R201-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R201/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R201-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R201/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R201-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R201/第8个测试实例/instance.json"
     },
     {
       "id": "R202-01",
-      "caseId": "R202",
-      "title": "冻结后保留原有等待队列",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据03.json",
-          "capture": {
-            "other": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/freeze",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/status": "MANUALLY_FROZEN"
-          }
-        },
-        {
-          "method": "GET",
-          "path": "/api/public/intents/${code}",
-          "status": 200,
-          "assertions": {
-            "/position": 1
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 409,
-          "bodyFile": "请求数据07.json"
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${other}/intents",
-          "status": 201,
-          "bodyFile": "请求数据08.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "otherCode": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/delist",
-          "status": 409,
-          "session": "seller"
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/unfreeze",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/status": "ON_SALE"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/trades/start",
-          "status": 200,
-          "session": "seller",
-          "capture": {
-            "trade": "/id"
-          }
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R202/第1个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json",
-        "请求数据07.json",
-        "请求数据08.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R202/第1个测试实例/instance.json"
     },
     {
       "id": "R202-02",
-      "caseId": "R202",
-      "title": "解冻恢复交易且队列顺序不变",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据03.json",
-          "capture": {
-            "other": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/freeze",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/status": "MANUALLY_FROZEN"
-          }
-        },
-        {
-          "method": "GET",
-          "path": "/api/public/intents/${code}",
-          "status": 200,
-          "assertions": {
-            "/position": 1
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 409,
-          "bodyFile": "请求数据07.json"
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${other}/intents",
-          "status": 201,
-          "bodyFile": "请求数据08.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "otherCode": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/delist",
-          "status": 409,
-          "session": "seller"
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/unfreeze",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/status": "ON_SALE"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/trades/start",
-          "status": 200,
-          "session": "seller",
-          "capture": {
-            "trade": "/id"
-          }
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R202/第2个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json",
-        "请求数据07.json",
-        "请求数据08.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R202/第2个测试实例/instance.json"
     },
     {
       "id": "R202-03",
-      "caseId": "R202",
-      "title": "交易冻结不可手动解除",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据02.json",
-          "capture": {
-            "p": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products",
-          "status": 201,
-          "session": "seller",
-          "bodyFile": "请求数据03.json",
-          "capture": {
-            "other": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/public/products/${p}/intents",
-          "status": 201,
-          "bodyFile": "请求数据04.json",
-          "assertions": {
-            "/position": 1
-          },
-          "capture": {
-            "code": "/passcode"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/trades/start",
-          "status": 200,
-          "session": "seller",
-          "capture": {
-            "trade": "/id"
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/unfreeze",
-          "status": 409,
-          "session": "seller"
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/products/${p}/freeze",
-          "status": 409,
-          "session": "seller"
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R202/第3个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据04.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R202/第3个测试实例/instance.json"
+    },
+    {
+      "id": "R202-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R202/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R202-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R202/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R202-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R202/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R202-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R202/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R202-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R202/第8个测试实例/instance.json"
     },
     {
       "id": "R203-01",
-      "caseId": "R203",
-      "title": "原密码错误被拒绝",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "other",
-          "bodyFile": "请求数据02.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/seller/password",
-          "status": 400,
-          "session": "seller",
-          "bodyFile": "请求数据03.json"
-        },
-        {
-          "method": "GET",
-          "path": "/api/seller/session",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/authenticated": true
-          }
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R203/第1个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R203/第1个测试实例/instance.json"
     },
     {
       "id": "R203-02",
-      "caseId": "R203",
-      "title": "新密码长度限制",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "other",
-          "bodyFile": "请求数据02.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/seller/password",
-          "status": 400,
-          "session": "seller",
-          "bodyFile": "请求数据03.json"
-        },
-        {
-          "method": "GET",
-          "path": "/api/seller/session",
-          "status": 200,
-          "session": "seller",
-          "assertions": {
-            "/authenticated": true
-          }
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R203/第2个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json"
-      ]
+      "file": "第二轮验收测试数据/接口测试/R203/第2个测试实例/instance.json"
     },
     {
       "id": "R203-03",
-      "caseId": "R203",
-      "title": "改密撤销全部旧会话",
-      "mode": "automated",
-      "steps": [
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "seller",
-          "bodyFile": "请求数据01.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "other",
-          "bodyFile": "请求数据02.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "PUT",
-          "path": "/api/seller/password",
-          "status": 204,
-          "session": "seller",
-          "bodyFile": "请求数据03.json"
-        },
-        {
-          "method": "GET",
-          "path": "/api/seller/products",
-          "status": 401,
-          "session": "other"
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 401,
-          "bodyFile": "请求数据05.json"
-        },
-        {
-          "method": "POST",
-          "path": "/api/seller/login",
-          "status": 200,
-          "saveSession": "new",
-          "bodyFile": "请求数据06.json",
-          "assertions": {
-            "/authenticated": true
-          }
-        },
-        {
-          "method": "GET",
-          "path": "/api/seller/products",
-          "status": 200,
-          "session": "new",
-          "assertions": {
-            "/total": 0
-          }
-        }
-      ],
-      "expected": "全部步骤满足状态码和响应字段断言",
+      "type": "接口测试",
       "result": "通过",
-      "folder": "第二轮验收测试数据/R203/第3个测试实例",
-      "files": [
-        "instance.json",
-        "请求数据01.json",
-        "请求数据02.json",
-        "请求数据03.json",
-        "请求数据05.json",
-        "请求数据06.json"
-      ]
-    }
-  ],
-  "cases": {
-    "R201": "等待买家修改联系信息",
-    "R202": "按商品手动冻结与解冻",
-    "R203": "卖家密码修改与会话撤销"
-  },
-  "total": 18,
-  "failures": 0,
-  "errors": 0,
-  "fileDrivenInstances": 9,
-  "basicRegressionTests": 9,
-  "sourceNote": "从2026-10-21完整运行中摘录本轮基础功能结果；未重新执行，不将完整测试类数量改写为本次独立运行。",
-  "reportedSuites": [
-    {
-      "name": "IterationTwoFixtureIntegrationTest",
-      "selection": "R201-R203",
-      "reportedTests": 9,
-      "failures": 0,
-      "errors": 0
+      "file": "第二轮验收测试数据/接口测试/R203/第3个测试实例/instance.json"
     },
     {
-      "name": "IterationTwoIntegrationTest",
-      "selection": "all",
-      "reportedTests": 9,
-      "failures": 0,
-      "errors": 0
+      "id": "R203-04",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R203/第4个测试实例/instance.json"
+    },
+    {
+      "id": "R203-05",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R203/第5个测试实例/instance.json"
+    },
+    {
+      "id": "R203-06",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R203/第6个测试实例/instance.json"
+    },
+    {
+      "id": "R203-07",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R203/第7个测试实例/instance.json"
+    },
+    {
+      "id": "R203-08",
+      "type": "接口测试",
+      "result": "通过",
+      "file": "第二轮验收测试数据/接口测试/R203/第8个测试实例/instance.json"
     }
   ]
 }

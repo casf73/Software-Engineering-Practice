@@ -1,0 +1,14 @@
+{
+  "id": "T01-02",
+  "caseId": "T01",
+  "title": "另一组错误密码",
+  "mode": "automated",
+  "input": {
+    "wrongPassword": "bad-password-02"
+  },
+  "expected": "错误密码不能创建会话；正确登录及退出流程正常",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

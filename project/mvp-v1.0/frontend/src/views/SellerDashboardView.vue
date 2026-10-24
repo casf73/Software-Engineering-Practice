@@ -6,6 +6,7 @@
         <el-menu-item index="overview">概览</el-menu-item>
         <el-menu-item index="product">商品管理</el-menu-item>
         <el-menu-item index="queue">购买意向</el-menu-item>
+        <el-menu-item index="customers">客户管理</el-menu-item>
         <el-menu-item index="categories">分类管理</el-menu-item>
         <el-menu-item index="account">账号管理</el-menu-item>
       </el-menu>
@@ -28,6 +29,7 @@
           <el-button @click="activeSection = 'queue'">查看购买意向</el-button>
         </el-card>
 
+      <SellerCustomers v-if="activeSection === 'customers'" />
       <SellerCategories v-if="activeSection === 'categories'" @changed="loadCategories" />
       <AppCard v-if="['product', 'queue', 'overview'].includes(activeSection)">
         <template #header><div class="section-title"><h2>商品列表</h2><el-button type="primary" @click="openProductDialog(true)">发布新商品</el-button></div></template>
@@ -61,6 +63,8 @@
             <el-table-column label="排位" width="86"><template #default="scope"><span class="queue-position">{{ scope.row.position ? String(scope.row.position).padStart(2, '0') : '—' }}</span></template></el-table-column>
             <el-table-column prop="name" label="买家" min-width="120" />
             <el-table-column prop="phone" label="联系电话" min-width="140" />
+          <el-table-column label="客户账号" min-width="120"><template #default="{ row }">{{ row.customerUsername || '访客' }}</template></el-table-column>
+          <el-table-column label="交易地点" min-width="160"><template #default="{ row }">{{ row.meetingLocation || '待线下确认' }}</template></el-table-column>
             <el-table-column label="排队时间" min-width="170"><template #default="scope">{{ formatDate(scope.row.queueAt) }}</template></el-table-column>
             <el-table-column label="状态" width="130"><template #default="scope"><StatusBadge :status="scope.row.status" /></template></el-table-column>
             <el-table-column label="操作" min-width="220" fixed="right">
@@ -151,6 +155,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import SellerCustomers from '../components/SellerCustomers.vue'
 import SellerCategories from '../components/SellerCategories.vue'
 import RichDescriptionEditor from '../components/common/RichDescriptionEditor.vue'
 import { safeDescription } from '../utils/richText'
@@ -171,6 +176,7 @@ const sectionMeta = {
   overview: { title: '概览', description: '查看当前商品、排队人数和交易状态。' },
   product: { title: '商品管理', description: '发布或编辑当前商品。' },
   queue: { title: '购买意向', description: '按排队顺序处理购买意向并登记交易结果。' },
+  customers: { title: '客户管理', description: '查看注册客户及其购买历史。' },
   categories: { title: '分类管理', description: '维护一级和二级商品分类。' },
   account: { title: '账号管理', description: '修改卖家登录密码。' },
 }

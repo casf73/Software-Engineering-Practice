@@ -151,3 +151,13 @@ a { color: inherit; text-decoration: none; }
 @media(max-width:640px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-item img,.catalog-no-image{height:110px}.catalog-filters>*{width:100%}.pager{gap:8px}.rich-source{font-size:16px}}
 
 .image-preview-item{width:105px;display:flex;flex-direction:column;gap:6px}.image-preview-item img{height:72px}.image-preview-item .el-button{position:static;width:auto;height:26px;border-radius:4px;background:white;color:#5574aa;border:1px solid #dcdfe6}
+
+/* 客户账号与购买记录：沿用现有表单、表格及白色页面样式。 */
+.customer-auth-card { max-width: 520px; margin: 0 auto 40px; }
+.customer-auth-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 22px; font-size: 14px; }
+.customer-account-page > .surface-card { margin-bottom: 22px; }
+.customer-profile-list { display: flex; flex-wrap: wrap; gap: 24px 50px; margin: 0; }
+.customer-profile-list dt { color: var(--text-secondary, #667085); font-size: 13px; margin-bottom: 8px; }
+.customer-profile-list dd { margin: 0; overflow-wrap: anywhere; }
+.customer-account-page .el-table { margin-top: 20px; }
+.header-nav { flex-wrap: wrap; }

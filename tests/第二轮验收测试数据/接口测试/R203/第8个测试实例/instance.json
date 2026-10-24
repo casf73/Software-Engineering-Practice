@@ -1,0 +1,49 @@
+{
+  "id": "R203-08",
+  "caseId": "R203",
+  "iteration": 2,
+  "type": "接口测试",
+  "title": "未登录不能改密",
+  "mode": "automated",
+  "designMethod": "权限隔离",
+  "preconditions": "独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "other",
+      "bodyFile": "请求数据02.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/password",
+      "status": 401,
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/session",
+      "status": 200,
+      "session": "other",
+      "assertions": {
+        "/authenticated": true
+      }
+    }
+  ],
+  "expected": "逐步验证 HTTP 状态码及响应字段，详见步骤断言。",
+  "result": "通过"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "T03-03",
+  "caseId": "T03",
+  "title": "137 号码三人队列",
+  "mode": "automated",
+  "input": {
+    "phonePrefix": "1370000000"
+  },
+  "expected": "重新排队移至队尾并保留原口令码",
+  "iteration": 1,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

@@ -1,0 +1,44 @@
+{
+  "对应接口实例": "R306-06",
+  "场景": "密码7位不足",
+  "输入集合": [
+    {
+      "步骤": 1,
+      "输入": {
+        "username": "buyer01",
+        "password": "aaaaaaa",
+        "phone": "13800000001",
+        "defaultLocation": "学校南门"
+      }
+    },
+    {
+      "步骤": 2,
+      "输入": {
+        "username": "pwd8",
+        "password": "aaaaaaaa",
+        "phone": "13800000001",
+        "defaultLocation": "北门"
+      }
+    },
+    {
+      "步骤": 3,
+      "输入": {
+        "username": "pwd128",
+        "password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "phone": "13800000001",
+        "defaultLocation": "北门"
+      }
+    },
+    {
+      "步骤": 4,
+      "输入": {
+        "username": "pwd129",
+        "password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "phone": "13800000001",
+        "defaultLocation": "北门"
+      }
+    }
+  ],
+  "搜索或页面尺寸": "按场景输入",
+  "本实例素材文件": []
+}

@@ -1,0 +1,50 @@
+{
+  "executedAt": "2026-10-23T19:36:36.080701+08:00",
+  "command": "mvn --offline --batch-mode test",
+  "tests": 178,
+  "failures": 0,
+  "errors": 0,
+  "suites": [
+    {
+      "name": "cn.codelyy.store.IterationOneAdditionalFixtureIntegrationTest",
+      "tests": "50",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "20.678"
+    },
+    {
+      "name": "cn.codelyy.store.IterationThreeFixtureIntegrationTest",
+      "tests": "64",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "15.003"
+    },
+    {
+      "name": "cn.codelyy.store.IterationTwoFixtureIntegrationTest",
+      "tests": "24",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "7.746"
+    },
+    {
+      "name": "cn.codelyy.store.IterationTwoIntegrationTest",
+      "tests": "9",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "5.761"
+    },
+    {
+      "name": "cn.codelyy.store.StoreFlowIntegrationTest",
+      "tests": "31",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "7.156"
+    }
+  ],
+  "note": "168个分轮接口实例，1个目录完整性检查，9个基础补充回归。页面功能测试144个待人工执行。"
+}

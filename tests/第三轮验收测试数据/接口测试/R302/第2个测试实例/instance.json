@@ -1,0 +1,81 @@
+{
+  "id": "R302-02",
+  "caseId": "R302",
+  "title": "禁止三级循环和同级重名",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "root": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据03.json",
+      "capture": {
+        "child": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 400,
+      "session": "seller",
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/categories/${root}",
+      "status": 400,
+      "session": "seller",
+      "bodyFile": "请求数据05.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 409,
+      "session": "seller",
+      "bodyFile": "请求数据06.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/categories",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据07.json",
+      "capture": {
+        "other": "/id"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/categories/${root}",
+      "status": 409,
+      "session": "seller",
+      "bodyFile": "请求数据08.json"
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言",
+  "iteration": 3,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

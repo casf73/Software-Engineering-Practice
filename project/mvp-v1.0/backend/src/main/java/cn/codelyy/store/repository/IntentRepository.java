@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IntentRepository extends JpaRepository<PurchaseIntent, Long> {
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths={"product"})
+    org.springframework.data.domain.Page<PurchaseIntent> findByCustomerIdOrderBySubmittedAtDescIdDesc(Long customerId,org.springframework.data.domain.Pageable pageable);
     @org.springframework.data.jpa.repository.Query("select i.product.id from PurchaseIntent i where i.id = :id")
     Optional<Long> findProductIdByIntentId(@org.springframework.data.repository.query.Param("id") Long id);
     Optional<PurchaseIntent> findByPasscode(String passcode);

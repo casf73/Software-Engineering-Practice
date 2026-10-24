@@ -1,0 +1,8 @@
+{
+  "name": "Keyboard键盘",
+  "price": 88.5,
+  "stock": 1,
+  "categoryId": "${child}",
+  "images": [],
+  "description": "<p>机械键盘 &amp; 办公</p>"
+}

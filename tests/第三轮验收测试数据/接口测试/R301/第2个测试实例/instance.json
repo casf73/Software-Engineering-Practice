@@ -1,0 +1,144 @@
+{
+  "id": "R301-02",
+  "caseId": "R301",
+  "title": "同时发布3件商品并分别排队",
+  "mode": "automated",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json",
+      "assertions": {
+        "/authenticated": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据02.json",
+      "capture": {
+        "p0": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p0}/intents",
+      "status": 201,
+      "bodyFile": "请求数据03.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "code0": "/passcode"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据04.json",
+      "capture": {
+        "p1": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p1}/intents",
+      "status": 201,
+      "bodyFile": "请求数据05.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "code1": "/passcode"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "bodyFile": "请求数据06.json",
+      "capture": {
+        "p2": "/id"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/products/${p2}/intents",
+      "status": 201,
+      "bodyFile": "请求数据07.json",
+      "assertions": {
+        "/position": 1
+      },
+      "capture": {
+        "code2": "/passcode"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products",
+      "status": 200,
+      "assertions": {
+        "/total": 3
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/current",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products/${p0}/trades/start",
+      "status": 200,
+      "session": "seller",
+      "capture": {
+        "trade": "/id"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/intents/${code0}",
+      "status": 200,
+      "assertions": {
+        "/status": "IN_TRADE"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/intents/${code1}",
+      "status": 200,
+      "assertions": {
+        "/status": "WAITING",
+        "/position": 1
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/trades/${trade}/result",
+      "status": 204,
+      "session": "seller",
+      "bodyFile": "请求数据13.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p1}",
+      "status": 200,
+      "assertions": {
+        "/stock": 2,
+        "/status": "ON_SALE"
+      }
+    }
+  ],
+  "expected": "全部步骤满足状态码和响应字段断言",
+  "iteration": 3,
+  "type": "接口测试",
+  "designMethod": "场景法",
+  "result": "通过"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "U04-03",
+  "caseId": "U04",
+  "iteration": 1,
+  "type": "功能测试",
+  "mode": "manual",
+  "title": "冻结拒绝新意向",
+  "preconditions": "仅验收首轮商品、口令码、队列和交易基础功能。使用隔离的手工测试数据目录。",
+  "designMethod": "场景法",
+  "steps": [
+    "准备本实例测试数据。",
+    "甲交易期间丙尝试提交",
+    "记录页面实际结果并保留截图。"
+  ],
+  "expected": "不接收新意向",
+  "result": "待人工执行",
+  "dataFile": "测试数据.json"
+}

@@ -165,7 +165,9 @@ class IterationTwoIntegrationTest {
         MockHttpSession second = login("123456");
         mvc.perform(put("/api/seller/password").session(first).contentType(MediaType.APPLICATION_JSON)
                 .content(password("123456", "new-password-2026"))).andExpect(status().isNoContent());
-        assertTrue(first.isInvalid());
+        assertFalse(first.isInvalid(), "改密只移除卖家身份，不能销毁独立客户会话");
+        assertNull(first.getAttribute(cn.codelyy.store.config.SellerAuthInterceptor.SESSION_KEY));
+        mvc.perform(get("/api/seller/workbench").session(first)).andExpect(status().isUnauthorized());
         mvc.perform(get("/api/seller/workbench").session(second)).andExpect(status().isUnauthorized());
         JsonNode session = body(mvc.perform(get("/api/seller/session").session(second)).andReturn());
         assertFalse(session.path("authenticated").asBoolean());
