@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三轮功能需求测验 Demo · 在线购物系统</title>
+<link rel="stylesheet" href="./vendor/element-plus.css"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app" v-cloak>
+<header class="header"><div class="header-inner"><strong>在线购物系统</strong><span>第三轮需求体验 Demo</span><el-button text @click="helpVisible=true">使用说明</el-button></div></header>
+<main>
+<section class="intro"><div><p class="eyebrow">第三次迭代 · 新增功能</p><h1>商品管理与客户功能体验</h1><p class="muted">每个模块均有示例数据，可直接体验。操作仅保存在当前页面，刷新即可恢复。</p></div><el-button @click="resetDemo">重置演示</el-button></section>
+<el-tabs v-model="view" class="main-tabs">
+<el-tab-pane label="商品浏览" name="browse">
+ <div class="section-head"><div><h2>浏览与搜索商品</h2><p class="muted">同时展示多个商品，按名称、描述及两级分类查找。</p></div><el-button @click="view='products'">体验发布商品</el-button></div>
+ <el-form inline class="filters" @submit.prevent="page=1">
+  <el-form-item><el-input v-model="search" clearable placeholder="搜索名称或描述，例如：键盘、办公" @input="page=1" aria-label="搜索商品"></el-input></el-form-item>
+  <el-form-item><el-cascader v-model="categoryFilter" :options="categoryTree" :props="{checkStrictly:true,emitPath:false}" clearable placeholder="全部分类" @change="page=1"></el-cascader></el-form-item>
+  <el-form-item><el-button @click="search='';categoryFilter=null;page=1">重置筛选</el-button></el-form-item>
+ </el-form>
+ <el-table :data="browsePage" empty-text="没有找到匹配商品，试试重置筛选">
+  <el-table-column label="商品" min-width="270"><template #default="{row}"><div class="product-cell"><img v-if="row.images.length" :src="row.images[0]" :alt="row.name"><div v-else class="image-placeholder mini">无图</div><div><strong>{{ row.name }}</strong><p class="muted">{{ plain(row.description).slice(0,52) }}</p></div></div></template></el-table-column>
+  <el-table-column label="分类" min-width="160"><template #default="{row}">{{ categoryName(row.categoryId) }}</template></el-table-column>
+  <el-table-column label="价格" width="110"><template #default="{row}">¥ {{ money(row.price) }}</template></el-table-column>
+  <el-table-column prop="stock" label="库存" width="90"></el-table-column>
+  <el-table-column label="操作" width="120"><template #default="{row}"><el-button link type="primary" @click="showDetail(row)">查看详情</el-button></template></el-table-column>
+ </el-table>
+ <div class="pager"><span class="muted">共 {{ browseItems.length }} 件商品</span><el-pagination v-model:current-page="page" :page-size="4" :total="browseItems.length" layout="prev,pager,next"></el-pagination></div>
+ <p class="note">演示建议：搜索“办公”，筛选“数码配件 / 键盘”，再点商品详情查看多图与富文本。</p>
+</el-tab-pane>
+<el-tab-pane label="商品管理" name="products">
+ <div class="section-head"><div><h2>多个商品独立管理</h2><p class="muted">查看独立库存和示例队列，体验售罄下架与补货。</p></div><el-button type="primary" @click="editProduct()">发布商品</el-button></div>
+ <el-table :data="products">
+  <el-table-column prop="id" label="编号" width="85"></el-table-column>
+  <el-table-column prop="name" label="商品" min-width="170"></el-table-column>
+  <el-table-column label="分类" min-width="160"><template #default="{row}">{{ categoryName(row.categoryId) }}</template></el-table-column>
+  <el-table-column prop="stock" label="库存" width="85"></el-table-column>
+  <el-table-column label="状态" width="110"><template #default="{row}"><el-tag :type="row.status==='在售'?'success':'info'" effect="plain">{{ row.status }}</el-tag></template></el-table-column>
+  <el-table-column label="图片" width="85"><template #default="{row}">{{ row.images.length }} 张</template></el-table-column>
+  <el-table-column label="操作" min-width="310"><template #default="{row}"><el-button link type="primary" @click="editProduct(row)">编辑</el-button><el-button link @click="showQueue(row)">独立队列</el-button><el-button link :disabled="row.status!=='在售'" @click="simulateSale(row)">模拟成交 1 件</el-button><el-button v-if="row.status==='下架'" link @click="restock(row)">补货上架</el-button></template></el-table-column>
+ </el-table>
+ <p class="note">“模拟成交”直接减库存；库存变为 0 后自动下架。选择库存为 1 的商品可快速体验，不需要先完成整个排队与交易流程。</p>
+</el-tab-pane>
+<el-tab-pane label="分类管理" name="categories">
+ <div class="section-head"><div><h2>一级与二级分类</h2><p class="muted">商品表单、公开筛选与分类名称在本页同步。</p></div><el-button type="primary" @click="editCategory()">新增分类</el-button></div>
+ <el-table :data="categoryRows" row-key="id">
+  <el-table-column label="分类名称" min-width="250"><template #default="{row}"><span :class="{'child-label':row.parentId}">{{ row.parentId?'└ ':'' }}{{ row.name }}</span></template></el-table-column>
+  <el-table-column label="层级" width="110"><template #default="{row}">{{ row.parentId?'二级':'一级' }}</template></el-table-column>
+  <el-table-column label="上级分类" min-width="160"><template #default="{row}">{{ categories.find(c=>c.id===row.parentId)?.name || '—' }}</template></el-table-column>
+  <el-table-column label="操作" width="180"><template #default="{row}"><el-button link type="primary" @click="editCategory(row)">编辑</el-button><el-button link type="danger" @click="removeCategory(row)">删除</el-button></template></el-table-column>
+ </el-table>
+</el-tab-pane>
+<el-tab-pane label="客户注册与登录" name="account">
+ <div class="account-layout">
+  <section><h2>{{ authMode==='register'?'注册客户账号':'客户登录' }}</h2><p class="muted">演示账号：buyer01 / demo12345；也可以创建一个本页临时账号。</p>
+   <el-radio-group v-model="authMode" class="mode-switch"><el-radio-button value="register">注册体验</el-radio-button><el-radio-button value="login">登录体验</el-radio-button></el-radio-group>
+   <el-form label-position="top" class="account-form" @submit.prevent="submitAccount">
+    <el-form-item label="用户名"><el-input v-model="accountForm.username" autocomplete="off"></el-input></el-form-item>
+    <el-form-item label="密码"><el-input v-model="accountForm.password" type="password" show-password autocomplete="off"></el-input></el-form-item>
+    <template v-if="authMode==='register'"><el-form-item label="联系电话"><el-input v-model="accountForm.phone"></el-input></el-form-item><el-form-item label="默认交易地点"><el-input v-model="accountForm.defaultLocation" placeholder="例如：学校南门"></el-input></el-form-item></template>
+    <el-button native-type="submit" type="primary">{{ authMode==='register'?'注册并体验':'登录' }}</el-button>
+   </el-form>
+  </section>
+  <section class="account-side"><h2>当前演示客户</h2><template v-if="currentCustomer"><el-descriptions :column="1"><el-descriptions-item label="用户名">{{ currentCustomer.username }}</el-descriptions-item><el-descriptions-item label="电话">{{ currentCustomer.phone }}</el-descriptions-item><el-descriptions-item label="默认交易地点">{{ currentCustomer.defaultLocation }}</el-descriptions-item></el-descriptions><div class="actions"><el-button @click="view='history'">查看我的购买</el-button><el-button @click="currentCustomerId=null">退出客户</el-button></div></template><el-empty v-else description="尚未选择演示客户" :image-size="80"></el-empty>
+   <p class="note">仅作基础必填判断。注册结果保存在本页，刷新后清空，不使用真实账号或数据库。</p>
+  </section>
+ </div>
+</el-tab-pane>
+<el-tab-pane label="我的购买" name="history">
+ <div class="section-head"><div><h2>客户购买历史</h2><p class="muted">示例已包含等待、成交和撤销记录，可独立查看。</p></div><el-select v-model="currentCustomerId" clearable placeholder="选择演示客户" style="width:210px"><el-option v-for="c in customers" :key="c.id" :label="c.username" :value="c.id"></el-option></el-select></div>
+ <template v-if="currentCustomer"><p class="identity">{{ currentCustomer.username }} <span class="muted">· 默认地点 {{ currentCustomer.defaultLocation }}</span></p><el-table :data="myOrders" empty-text="该客户还没有购买记录">
+  <el-table-column prop="id" label="记录编号" width="115"></el-table-column><el-table-column prop="productName" label="商品快照" min-width="180"></el-table-column><el-table-column label="下单价格" width="120"><template #default="{row}">¥ {{ money(row.price) }}</template></el-table-column><el-table-column prop="location" label="本次交易地点" min-width="170"></el-table-column><el-table-column prop="status" label="状态" width="105"></el-table-column><el-table-column prop="date" label="提交时间" min-width="155"></el-table-column>
+ </el-table><p class="note">切换 buyer01 与 buyer02 可体验各自历史。商品名称与价格使用下单时的快照；修改商品后，已有记录不会跟着变化。</p></template><el-empty v-else description="先选择一个演示客户，或到客户注册与登录页体验"></el-empty>
+</el-tab-pane>
+<el-tab-pane label="卖家客户管理" name="customers">
+ <div class="section-head"><div><h2>注册客户与购买历史</h2><p class="muted">此模块预置卖家视角，可直接查询。</p></div></div>
+ <el-input v-model="customerSearch" clearable placeholder="按用户名或电话搜索，例如 buyer01、13800000001" class="customer-search" aria-label="搜索客户"></el-input>
+ <el-table :data="filteredCustomers" empty-text="暂无匹配客户"><el-table-column prop="username" label="用户名" min-width="150"></el-table-column><el-table-column prop="phone" label="联系电话" min-width="160"></el-table-column><el-table-column prop="defaultLocation" label="默认交易地点" min-width="200"></el-table-column><el-table-column prop="created" label="注册日期" width="135"></el-table-column><el-table-column label="操作" width="150"><template #default="{row}"><el-button link type="primary" @click="selectedCustomer=row;customerHistoryVisible=true">查看购买历史</el-button></template></el-table-column></el-table>
+</el-tab-pane>
+</el-tabs>
+<footer>需求体验原型 · 本页模拟数据 · 刷新或重置恢复初始状态</footer>
+</main>
+<el-dialog v-model="detailVisible" title="商品详情与多图展示" width="930px">
+ <div v-if="selectedProduct" class="detail-layout"><section><img v-if="selectedProduct.images.length" :src="selectedProduct.images[imageIndex] || selectedProduct.images[0]" :alt="selectedProduct.name" class="gallery-main"><div v-else class="image-placeholder gallery-main">暂无图片</div><div class="thumbnails"><button v-for="(image,i) in selectedProduct.images" :key="i" :class="{selected:i===imageIndex}" @click="imageIndex=i"><img :src="image" :alt="'图片'+(i+1)"></button></div></section>
+ <section><h2>{{ selectedProduct.name }}</h2><p class="price">¥ {{ money(selectedProduct.price) }}</p><p class="muted">{{ categoryName(selectedProduct.categoryId) }} · 库存 {{ selectedProduct.stock }} · {{ selectedProduct.status }}</p><div class="rich-copy" v-html="cleanHtml(selectedProduct.description)"></div><el-divider></el-divider><h3>体验本次交易地点</h3><p class="muted">{{ currentCustomer?'当前客户：'+currentCustomer.username:'先到客户页登录，或使用默认演示客户。' }}</p><el-input v-model="orderLocation" placeholder="本次交易地点，可从客户默认地点调整"></el-input><el-button type="primary" class="order-button" :disabled="!currentCustomer || selectedProduct.status!=='在售'" @click="simulateOrder">模拟添加到我的购买</el-button><p class="note">只添加一条示例记录，不占用库存、不启动真实交易。</p></section></div>
+</el-dialog>
+<el-dialog v-model="productFormVisible" :title="productForm.id?'编辑商品':'发布商品'" width="800px" @opened="mountEditor">
+ <el-form label-position="top" @submit.prevent="saveProduct"><div class="form-grid"><el-form-item label="商品名称"><el-input v-model="productForm.name"></el-input></el-form-item><el-form-item label="价格（元）"><el-input-number v-model="productForm.price" :min="0.01" :precision="2" :step="1"></el-input-number></el-form-item><el-form-item label="库存"><el-input-number v-model="productForm.stock" :min="0" :step="1" :precision="0"></el-input-number></el-form-item><el-form-item label="两级分类"><el-cascader v-model="productForm.categoryId" :options="categoryTree" :props="{checkStrictly:true,emitPath:false}" clearable></el-cascader></el-form-item></div>
+ <el-form-item label="商品相册"><div class="image-editor"><input ref="fileInput" type="file" accept="image/png,image/jpeg" multiple hidden @change="addImages"><el-button @click="fileInput.click()">选择本地图片</el-button><span class="muted"> {{ productForm.images.length }} / 9 张 · 可不传图</span><div class="edit-images"><div v-for="(url,i) in productForm.images" :key="i"><img :src="url" :alt="'图片'+(i+1)"><el-button text type="danger" size="small" @click="productForm.images.splice(i,1)">移除</el-button></div></div></div></el-form-item>
+ <el-form-item label="富文本描述"><div class="editor-wrap"><div class="editor-toolbar"><el-button size="small" @mousedown.prevent @click="format('bold')">加粗</el-button><el-button size="small" @mousedown.prevent @click="format('italic')">斜体</el-button><el-button size="small" @mousedown.prevent @click="format('formatBlock','h3')">标题</el-button><el-button size="small" @mousedown.prevent @click="format('insertUnorderedList')">列表</el-button><el-button size="small" @mousedown.prevent @click="insertPhoto">插入相册首图</el-button></div><div ref="editor" class="rich-editor" contenteditable="true" role="textbox" aria-label="商品富文本描述" @input="captureDescription"></div></div></el-form-item>
+ </el-form><template #footer><el-button @click="productFormVisible=false">取消</el-button><el-button type="primary" :disabled="readingImages" @click="saveProduct">{{ readingImages?'正在读取图片':'保存商品' }}</el-button></template>
+</el-dialog>
+<el-dialog v-model="categoryFormVisible" :title="categoryForm.id?'编辑分类':'新增分类'" width="460px"><el-form label-position="top"><el-form-item label="分类名称"><el-input v-model="categoryForm.name"></el-input></el-form-item><el-form-item label="上级分类"><el-select v-model="categoryForm.parentId" clearable placeholder="不选择则为一级分类"><el-option v-for="c in categories.filter(c=>!c.parentId&&c.id!==categoryForm.id)" :key="c.id" :label="c.name" :value="c.id"></el-option></el-select></el-form-item></el-form><template #footer><el-button @click="categoryFormVisible=false">取消</el-button><el-button type="primary" @click="saveCategory">保存分类</el-button></template></el-dialog>
+<el-dialog v-model="queueVisible" :title="(queueProduct?.name || '')+' · 独立队列示例'" width="650px"><p class="muted">每件商品有自己的示例队列，切换商品可以对比。此处不演示完整交易流转。</p><el-table :data="queueProduct?.queue || []" empty-text="该商品暂无排队买家"><el-table-column type="index" label="排位" width="80"></el-table-column><el-table-column prop="name" label="买家"></el-table-column><el-table-column prop="phone" label="电话"></el-table-column><el-table-column prop="code" label="示例口令"></el-table-column></el-table></el-dialog>
+<el-dialog v-model="customerHistoryVisible" :title="(selectedCustomer?.username || '')+' · 购买历史'" width="850px"><p class="muted">联系电话 {{ selectedCustomer?.phone }} · 默认地点 {{ selectedCustomer?.defaultLocation }}</p><el-table :data="orders.filter(o=>o.customerId===selectedCustomer?.id)" empty-text="该客户暂无购买记录"><el-table-column prop="productName" label="商品快照" min-width="180"></el-table-column><el-table-column label="价格" width="110"><template #default="{row}">¥ {{ money(row.price) }}</template></el-table-column><el-table-column prop="location" label="本次地点" min-width="160"></el-table-column><el-table-column prop="status" label="状态" width="100"></el-table-column><el-table-column prop="date" label="提交时间" min-width="150"></el-table-column></el-table></el-dialog>
+<el-dialog v-model="helpVisible" title="使用说明" width="620px"><ol class="guide"><li>商品浏览：搜索、分类筛选、翻页，打开详情切换多张图片。</li><li>商品管理：独立发布多件商品；对库存为1的商品模拟成交，观察自动下架；可以补货。</li><li>编辑商品：上传图片、编辑富文本、选择两级分类。</li><li>分类管理：增加一级或二级分类，观察商品分类选择联动。</li><li>客户注册与登录：创建临时客户或使用 buyer01 / demo12345。</li><li>我的购买与卖家客户管理：切换预设客户，比较各自的历史记录。</li></ol><p class="note">本页直接在内存中模拟界面变化，没有接口、数据库或生产账号；各模块可单独体验，刷新会清空临时操作。</p></el-dialog>
+</div>
+<script src="./vendor/vue.global.prod.js"></script><script src="./vendor/element-plus.full.min.js"></script><script src="./app.js"></script>
+</body></html>
