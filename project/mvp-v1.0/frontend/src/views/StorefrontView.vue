@@ -48,21 +48,24 @@
           </div>
         </template>
         <el-alert v-if="product.status !== 'ON_SALE'" :title="product.status === 'MANUALLY_FROZEN' ? '商品已手动冻结' : '商品交易中'" description="暂不接收新的购买意向。仍在排队的买家可以查询、修改联系信息或撤销意向。" type="info" :closable="false" show-icon />
+        <template v-else-if="!customerSession.customer">
+          <el-alert title="请先登录客户账号" description="商品可以免登录浏览，提交购买意向需要先登录或注册客户账号。" type="info" :closable="false" show-icon />
+          <el-button type="primary" size="large" class="full-button" @click="goToCustomerLogin">登录 / 注册后提交</el-button>
+        </template>
         <template v-else>
-          <p class="form-intro">{{ customerSession.customer ? '确认联系信息和交易地点，提交后保存到我的购买记录。' : '留下姓名和联系电话，提交后即可获得专属口令码。' }}</p>
+          <p class="form-intro">确认联系信息和交易地点，提交后保存到我的购买记录。</p>
           <el-form ref="intentFormRef" :model="intentForm" :rules="intentRules" label-position="top" @submit.prevent="submitIntent">
             <el-form-item label="姓名" prop="name"><el-input v-model="intentForm.name" placeholder="请输入姓名" size="large" autocomplete="name" /></el-form-item>
             <el-form-item label="联系电话" prop="phone"><el-input v-model="intentForm.phone" placeholder="请输入联系电话" size="large" autocomplete="tel" /></el-form-item>
-            <el-form-item v-if="customerSession.customer" label="交易地点" prop="meetingLocation"><el-input v-model="intentForm.meetingLocation" maxlength="200" placeholder="本次交易地点，默认使用注册时填写的地点" /></el-form-item>
+            <el-form-item label="交易地点" prop="meetingLocation"><el-input v-model="intentForm.meetingLocation" maxlength="200" placeholder="本次交易地点，默认使用注册时填写的地点" /></el-form-item>
             <el-button type="primary" size="large" class="full-button" :loading="submitting" @click="submitIntent">提交购买意向</el-button>
           </el-form>
-          <p v-if="customerSession.customer" class="privacy-note">已登录：{{ customerSession.customer.username }}。可在 <RouterLink to="/customer/account">我的购买</RouterLink> 查看记录。</p>
-          <p v-else class="privacy-note">可以访客身份提交并保存口令码，或先 <RouterLink to="/customer/login">登录 / 注册</RouterLink> 以保存购买记录。</p>
+          <p class="privacy-note">已登录：{{ customerSession.customer.username }}。可在 <RouterLink to="/customer/account">我的购买</RouterLink> 查看记录。</p>
         </template>
       </AppCard>
     </div>
 
-    <el-alert class="store-guidance" title="排队说明" description="买家免注册提交意向，系统按有效提交时间排序；卖家开启交易并登记结果。" type="info" :closable="false" show-icon />
+    <el-alert class="store-guidance" title="排队说明" description="商品可免登录浏览；买家登录客户账号后提交意向，系统按有效提交时间排序；卖家开启交易并登记结果。" type="info" :closable="false" show-icon />
   </div>
 
   <AppDialog v-model="queryDialogVisible" title="口令码查询" width="520px">
@@ -110,7 +113,7 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { customerApi } from '../api/customerApi'
 import { customerSession, loadCustomerSession, clearCustomerSession } from '../stores/customerSession'
 import { ElMessage } from 'element-plus'
@@ -128,6 +131,10 @@ import { formatPrice } from '../utils/format'
 import { intentLabel, productLabel } from '../utils/status'
 
 const route = useRoute()
+const router = useRouter()
+function goToCustomerLogin() {
+  return router.push({ name: 'customer-login', query: { redirect: route.fullPath } })
+}
 const product = ref(null)
 const items = ref([]), total = ref(0), page = ref(0), search = ref(''), categoryId = ref(''), categories = ref([])
 const categoryOptions = computed(() => categories.value.filter(c => !c.parentId).flatMap(c => [{ ...c, label: c.name }, ...categories.value.filter(x => x.parentId === c.id).map(x => ({ ...x, label: c.name + ' / ' + x.name }))]))
@@ -173,21 +180,27 @@ async function loadProduct() {
 }
 
 async function submitIntent() {
+  if (!customerSession.customer) {
+    ElMessage.warning('请先登录客户账号')
+    await goToCustomerLogin()
+    return
+  }
   if (submitting.value || !intentFormRef.value || product.value?.status !== 'ON_SALE') return
   const valid = await intentFormRef.value.validate().catch(() => false)
   if (!valid) return
   submitting.value = true
   try {
     const body = { name: intentForm.name.trim(), phone: intentForm.phone.trim() }
-    const { data } = customerSession.customer
-      ? await customerApi.submitIntent(product.value.id, { ...body, meetingLocation: intentForm.meetingLocation.trim() })
-      : await catalogApi.submit(product.value.id, body)
+    const { data } = await customerApi.submitIntent(product.value.id, { ...body, meetingLocation: intentForm.meetingLocation.trim() })
     issuedPasscode.value = data.passcode
     issueDialogVisible.value = true
     fillCustomerContact()
   } catch (error) {
-    if (error.response?.status === 401) clearCustomerSession()
-    ElMessage.error(apiErrorMessage(error, '提交失败'))
+    if (error.response?.status === 401) {
+      clearCustomerSession()
+      ElMessage.warning('客户登录已失效，请重新登录')
+      await goToCustomerLogin()
+    } else ElMessage.error(apiErrorMessage(error, '提交失败'))
   }
   finally { submitting.value = false }
 }

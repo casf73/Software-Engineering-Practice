@@ -33,6 +33,7 @@ cn\codelyy\store\repository\SellerAccountRepository.class
 cn\codelyy\store\api\ApiExceptionHandler.class
 cn\codelyy\store\api\ApiModels$BuyerIntentView.class
 cn\codelyy\store\api\ApiModels$TradeResultRequest.class
+cn\codelyy\store\config\CustomerIntentAuthInterceptor.class
 cn\codelyy\store\service\RichDescription.class
 cn\codelyy\store\api\PublicController.class
 cn\codelyy\store\api\ApiModels$WorkbenchView.class
