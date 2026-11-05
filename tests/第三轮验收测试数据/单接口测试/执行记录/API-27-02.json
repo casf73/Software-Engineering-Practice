@@ -1,0 +1,19 @@
+{
+  "id" : "API-27-02",
+  "name" : "API-27-02 等待意向结束",
+  "executedAt" : "2026-11-05T10:12:31.718768600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/89/delist",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"口令码无效或已失效\"}"
+  } ]
+}

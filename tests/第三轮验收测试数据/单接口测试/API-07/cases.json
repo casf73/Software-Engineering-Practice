@@ -1,0 +1,59 @@
+{
+  "id": "API-07",
+  "name": "口令码意向查询",
+  "method": "GET",
+  "path": "/api/public/intents/{passcode}",
+  "scope": "补充回归",
+  "auth": "有效口令码",
+  "rows": [
+    [
+      "API-07-01",
+      "等待状态正常查询",
+      "使用WAITING意向的有效passcode",
+      "200；返回本人联系信息、WAITING、正确position和商品状态",
+      "通过",
+      "有效等价类",
+      "口令码意向查询\nGET /api/public/intents/{passcode}"
+    ],
+    [
+      "API-07-02",
+      "重排后查询排位",
+      "准备阶段将该等待意向重排，再使用原passcode查询",
+      "200；原码有效，排位与重排后的队列一致",
+      "通过",
+      "状态转换",
+      "口令码意向查询\nGET /api/public/intents/{passcode}"
+    ],
+    [
+      "API-07-03",
+      "成交后原码失效",
+      "准备阶段将该意向成交成功，再使用原passcode",
+      "404；不能继续用旧码操作已完成记录",
+      "通过",
+      "成交收尾",
+      "口令码意向查询\nGET /api/public/intents/{passcode}"
+    ],
+    [
+      "API-07-04",
+      "撤销后原码失效",
+      "准备阶段撤销该等待意向，再使用原passcode",
+      "404",
+      "通过",
+      "状态转换",
+      "口令码意向查询\nGET /api/public/intents/{passcode}"
+    ],
+    [
+      "API-07-05",
+      "不存在的口令码",
+      "使用格式合法但不存在的passcode",
+      "404；不返回其他意向内容",
+      "通过",
+      "不存在资源",
+      "口令码意向查询\nGET /api/public/intents/{passcode}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api07Test",
+  "executionRecord": "执行记录/API-07-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

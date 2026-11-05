@@ -1,0 +1,59 @@
+{
+  "id": "API-24",
+  "name": "冻结商品",
+  "method": "POST",
+  "path": "/api/seller/products/{id}/freeze",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-24-01",
+      "正常手动冻结",
+      "有效卖家、商品在售并有等待队列",
+      "200；状态为MANUALLY_FROZEN，队列和口令码保留",
+      "通过",
+      "状态转换",
+      "冻结商品\nPOST /api/seller/products/{id}/freeze"
+    ],
+    [
+      "API-24-02",
+      "冻结后拒绝新增",
+      "冻结在售商品后，以有效客户向该商品提交合法新意向",
+      "冻结200；新意向提交返回409，原队列不变",
+      "通过",
+      "业务后置条件",
+      "冻结商品\nPOST /api/seller/products/{id}/freeze"
+    ],
+    [
+      "API-24-03",
+      "其他商品不受影响",
+      "甲乙均在售；只冻结甲",
+      "200；甲手动冻结，乙状态和队列不变",
+      "通过",
+      "状态作用域",
+      "冻结商品\nPOST /api/seller/products/{id}/freeze"
+    ],
+    [
+      "API-24-04",
+      "未登录冻结",
+      "无卖家会话，商品有效",
+      "401；状态不变",
+      "通过",
+      "权限校验",
+      "冻结商品\nPOST /api/seller/products/{id}/freeze"
+    ],
+    [
+      "API-24-05",
+      "商品不存在",
+      "有效卖家，商品ID不存在",
+      "404",
+      "通过",
+      "不存在资源",
+      "冻结商品\nPOST /api/seller/products/{id}/freeze"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api24Test",
+  "executionRecord": "执行记录/API-24-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-32",
+  "name": "开始交易",
+  "method": "POST",
+  "path": "/api/seller/products/{id}/trades/start",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-32-01",
+      "队首开始交易",
+      "有效卖家、在售有库存商品、至少2个WAITING意向",
+      "200；只将队首设为IN_TRADE，返回IntentView，其他等待者不越序",
+      "通过",
+      "FIFO场景",
+      "开始交易\nPOST /api/seller/products/{id}/trades/start"
+    ],
+    [
+      "API-32-02",
+      "空队列拒绝开始",
+      "有效卖家、在售有库存商品、无WAITING意向",
+      "409；不创建交易，不扣库存",
+      "通过",
+      "空队列边界",
+      "开始交易\nPOST /api/seller/products/{id}/trades/start"
+    ],
+    [
+      "API-32-03",
+      "已有交易不能重复开始",
+      "有效卖家、商品已有IN_TRADE意向",
+      "409；不产生第二个并行交易",
+      "通过",
+      "状态约束",
+      "开始交易\nPOST /api/seller/products/{id}/trades/start"
+    ],
+    [
+      "API-32-04",
+      "未登录开始交易",
+      "无卖家会话，目标商品和队列合法",
+      "401",
+      "通过",
+      "权限校验",
+      "开始交易\nPOST /api/seller/products/{id}/trades/start"
+    ],
+    [
+      "API-32-05",
+      "商品不存在",
+      "有效卖家，不存在的商品ID",
+      "404",
+      "通过",
+      "不存在资源",
+      "开始交易\nPOST /api/seller/products/{id}/trades/start"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api32Test",
+  "executionRecord": "执行记录/API-32-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

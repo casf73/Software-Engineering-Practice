@@ -1,0 +1,13 @@
+{
+  "id" : "API-05-02",
+  "name" : "API-05-02 匿名提交被拒绝",
+  "executedAt" : "2026-11-05T10:12:28.411699600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/public/products/21/intents",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"请先登录客户账号\"}"
+  } ]
+}

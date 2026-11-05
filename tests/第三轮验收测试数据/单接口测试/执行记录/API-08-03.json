@@ -1,0 +1,13 @@
+{
+  "id" : "API-08-03",
+  "name" : "API-08-03 姓名为空",
+  "executedAt" : "2026-11-05T10:12:28.712616100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"must not be blank\"}"
+  } ]
+}

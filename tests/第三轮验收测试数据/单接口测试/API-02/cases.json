@@ -1,0 +1,59 @@
+{
+  "id": "API-02",
+  "name": "商品详情查询",
+  "method": "GET",
+  "path": "/api/public/products/{id}",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-02-01",
+      "查询在售商品",
+      "GET /{id}，id指向在售且有库存商品",
+      "200；id、名称、价格、库存、分类及描述与准备数据一致",
+      "通过",
+      "有效等价类",
+      "商品详情查询\nGET /api/public/products/{id}"
+    ],
+    [
+      "API-02-02",
+      "多图顺序展示",
+      "查询具有9张合法图片的商品",
+      "200；images包含9项，顺序与保存顺序一致",
+      "通过",
+      "数量上界",
+      "商品详情查询\nGET /api/public/products/{id}"
+    ],
+    [
+      "API-02-03",
+      "查询无图商品",
+      "查询images=[]的在售商品",
+      "200；images为空数组，其他商品字段正常",
+      "通过",
+      "0图边界",
+      "商品详情查询\nGET /api/public/products/{id}"
+    ],
+    [
+      "API-02-04",
+      "下架商品不可公开",
+      "id指向已下架商品",
+      "404；不公开该商品详情",
+      "通过",
+      "状态转换",
+      "商品详情查询\nGET /api/public/products/{id}"
+    ],
+    [
+      "API-02-05",
+      "商品不存在",
+      "使用不存在的合法正整数商品ID",
+      "404；无其他商品资料泄露",
+      "通过",
+      "不存在资源",
+      "商品详情查询\nGET /api/public/products/{id}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api02Test",
+  "executionRecord": "执行记录/API-02-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-29",
+  "name": "创建分类",
+  "method": "POST",
+  "path": "/api/seller/categories",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-29-01",
+      "创建一级分类",
+      "有效卖家；body={\"name\":\"电子产品\",\"parentId\":null}，同级无重名",
+      "201；parentId为空，名称正确",
+      "通过",
+      "有效一级分类",
+      "创建分类\nPOST /api/seller/categories"
+    ],
+    [
+      "API-29-02",
+      "创建二级分类",
+      "有效卖家；name=键盘，parentId指向已有一级分类",
+      "201；parentId正确",
+      "通过",
+      "有效层级",
+      "创建分类\nPOST /api/seller/categories"
+    ],
+    [
+      "API-29-03",
+      "同级重名",
+      "已有同父类“键盘”，再次创建",
+      "409；不新增重复分类",
+      "通过",
+      "重复等价类",
+      "创建分类\nPOST /api/seller/categories"
+    ],
+    [
+      "API-29-04",
+      "禁止三级分类",
+      "有效卖家；parentId指向二级分类",
+      "400；分类树不变",
+      "通过",
+      "层级边界",
+      "创建分类\nPOST /api/seller/categories"
+    ],
+    [
+      "API-29-05",
+      "未登录创建",
+      "无卖家会话，请求体合法",
+      "401；不创建分类",
+      "通过",
+      "权限校验",
+      "创建分类\nPOST /api/seller/categories"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api29Test",
+  "executionRecord": "执行记录/API-29-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

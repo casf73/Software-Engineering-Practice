@@ -1,0 +1,19 @@
+{
+  "id" : "API-33-01",
+  "name" : "API-33-01 成交成功扣1",
+  "executedAt" : "2026-11-05T10:12:32.023982100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/trades/48/result",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"口令码无效或已失效\"}"
+  } ]
+}

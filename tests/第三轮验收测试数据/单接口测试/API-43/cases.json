@@ -1,0 +1,59 @@
+{
+  "id": "API-43",
+  "name": "兼容当前商品开始交易",
+  "method": "POST",
+  "path": "/api/seller/trades/start",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-43-01",
+      "唯一商品队首交易",
+      "有效卖家；唯一在售有库存商品，有合法等待队列",
+      "200；正确队首进入IN_TRADE",
+      "通过",
+      "单一上下文、FIFO",
+      "兼容当前商品开始交易\nPOST /api/seller/trades/start"
+    ],
+    [
+      "API-43-02",
+      "多商品冲突",
+      "有效卖家；2个有效商品且均有等待者",
+      "409；不任意开始其中一个商品的交易",
+      "通过",
+      "兼容边界",
+      "兼容当前商品开始交易\nPOST /api/seller/trades/start"
+    ],
+    [
+      "API-43-03",
+      "唯一商品无等待者",
+      "有效卖家；唯一在售有库存商品，队列为空",
+      "409；不创建交易，不扣库存",
+      "通过",
+      "空队列边界",
+      "兼容当前商品开始交易\nPOST /api/seller/trades/start"
+    ],
+    [
+      "API-43-04",
+      "未登录开始交易",
+      "无卖家会话；唯一商品及等待队列有效",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品开始交易\nPOST /api/seller/trades/start"
+    ],
+    [
+      "API-43-05",
+      "仅客户身份开始交易",
+      "仅客户会话；唯一商品及等待队列有效",
+      "401",
+      "通过",
+      "角色隔离",
+      "兼容当前商品开始交易\nPOST /api/seller/trades/start"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api43Test",
+  "executionRecord": "执行记录/API-43-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

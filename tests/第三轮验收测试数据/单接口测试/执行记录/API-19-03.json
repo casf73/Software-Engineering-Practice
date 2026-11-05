@@ -1,0 +1,13 @@
+{
+  "id" : "API-19-03",
+  "name" : "API-19-03 仅客户身份改密",
+  "executedAt" : "2026-11-05T10:12:31.129057800+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/password",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

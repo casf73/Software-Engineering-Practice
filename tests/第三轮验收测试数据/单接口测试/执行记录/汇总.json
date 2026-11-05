@@ -1,0 +1,10 @@
+{
+  "interfaces": 43,
+  "tests": 215,
+  "passed": 215,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "verifiedAt": "2026-11-05T10:12:32.607037900+08:00",
+  "source": "JUnit XML + per-case execution records"
+}

@@ -1,0 +1,25 @@
+{
+  "id" : "API-18-04",
+  "name" : "API-18-04 双身份仅清除卖家",
+  "executedAt" : "2026-11-05T10:12:30.609831900+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/logout",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/seller/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":false}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/customer/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true,\"customer\":{\"id\":88,\"username\":\"buyer01\",\"phone\":\"13800000001\",\"defaultLocation\":\"学校南门\",\"createdAt\":\"2026-11-05T10:12:30.605832\"}}"
+  } ]
+}

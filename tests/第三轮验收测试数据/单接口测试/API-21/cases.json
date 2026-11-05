@@ -1,0 +1,59 @@
+{
+  "id": "API-21",
+  "name": "发布商品",
+  "method": "POST",
+  "path": "/api/seller/products",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-21-01",
+      "正常发布",
+      "有效卖家；name=机械键盘、price=88.50、stock=3、合法description和images",
+      "201；返回商品ID，字段正确，状态为在售",
+      "通过",
+      "有效等价类",
+      "发布商品\nPOST /api/seller/products"
+    ],
+    [
+      "API-21-02",
+      "名称为空",
+      "有效卖家；name=\"\"，其他字段合法",
+      "400；不创建商品",
+      "通过",
+      "必填校验",
+      "发布商品\nPOST /api/seller/products"
+    ],
+    [
+      "API-21-03",
+      "负库存",
+      "有效卖家；stock=-1，其他合法",
+      "400；不创建商品",
+      "通过",
+      "库存下界外",
+      "发布商品\nPOST /api/seller/products"
+    ],
+    [
+      "API-21-04",
+      "图片数量上界",
+      "有效卖家；images为9个真实上传结果地址，其他合法",
+      "201；9张图片及顺序完整保留",
+      "通过",
+      "数量上界",
+      "发布商品\nPOST /api/seller/products"
+    ],
+    [
+      "API-21-05",
+      "未登录发布",
+      "无卖家会话，请求体合法",
+      "401；不创建商品",
+      "通过",
+      "权限校验",
+      "发布商品\nPOST /api/seller/products"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api21Test",
+  "executionRecord": "执行记录/API-21-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

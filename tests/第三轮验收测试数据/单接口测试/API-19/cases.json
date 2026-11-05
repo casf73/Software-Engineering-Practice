@@ -1,0 +1,59 @@
+{
+  "id": "API-19",
+  "name": "卖家修改密码",
+  "method": "PUT",
+  "path": "/api/seller/password",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-19-01",
+      "合法改密",
+      "独立测试卖家账号已登录；currentPassword正确，newPassword为合法8～128位非空白密码",
+      "204、无正文；旧卖家会话失效，新密码可重新登录，客户身份保持",
+      "通过",
+      "密码与会话版本",
+      "卖家修改密码\nPUT /api/seller/password"
+    ],
+    [
+      "API-19-02",
+      "未登录改密",
+      "无卖家会话，body字段合法",
+      "401；密码不变",
+      "通过",
+      "未登录权限",
+      "卖家修改密码\nPUT /api/seller/password"
+    ],
+    [
+      "API-19-03",
+      "仅客户身份改密",
+      "仅客户会话，body字段合法",
+      "401；卖家密码不变",
+      "通过",
+      "角色隔离",
+      "卖家修改密码\nPUT /api/seller/password"
+    ],
+    [
+      "API-19-04",
+      "新密码低于下界",
+      "有效卖家会话；currentPassword正确，newPassword为7位",
+      "400；原密码仍可用",
+      "通过",
+      "下界外",
+      "卖家修改密码\nPUT /api/seller/password"
+    ],
+    [
+      "API-19-05",
+      "缺少当前密码",
+      "有效卖家会话；currentPassword=\"\"，newPassword合法",
+      "400；密码不变",
+      "通过",
+      "必填校验",
+      "卖家修改密码\nPUT /api/seller/password"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api19Test",
+  "executionRecord": "执行记录/API-19-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

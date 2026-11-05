@@ -1,0 +1,13 @@
+{
+  "id" : "API-02-01",
+  "name" : "API-02-01 查询在售商品",
+  "executedAt" : "2026-11-05T10:12:27.798560600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/products/7",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":7,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:27.782559\",\"stock\":2,\"categoryId\":3,\"categoryName\":\"电子产品\",\"parentCategoryId\":null}"
+  } ]
+}

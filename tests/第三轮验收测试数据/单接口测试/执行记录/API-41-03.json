@@ -1,0 +1,13 @@
+{
+  "id" : "API-41-03",
+  "name" : "API-41-03 不能解除交易冻结",
+  "executedAt" : "2026-11-05T10:12:32.496448100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/unfreeze",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"只有手动冻结的商品可以解冻；交易中请先登记交易结果\"}"
+  } ]
+}

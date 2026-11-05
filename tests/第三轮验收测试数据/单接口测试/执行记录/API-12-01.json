@@ -1,0 +1,13 @@
+{
+  "id" : "API-12-01",
+  "name" : "API-12-01 未登录查询",
+  "executedAt" : "2026-11-05T10:12:29.383559600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/customer/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":false,\"customer\":null}"
+  } ]
+}

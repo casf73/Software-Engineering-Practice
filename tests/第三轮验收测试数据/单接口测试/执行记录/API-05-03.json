@@ -1,0 +1,13 @@
+{
+  "id" : "API-05-03",
+  "name" : "API-05-03 仅卖家身份被拒绝",
+  "executedAt" : "2026-11-05T10:12:28.424702900+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/public/products/22/intents",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"请先登录客户账号\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-07-05",
+  "name" : "API-07-05 不存在的口令码",
+  "executedAt" : "2026-11-05T10:12:28.665623300+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/intents/UNKNOWN123",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"口令码无效或已失效\"}"
+  } ]
+}

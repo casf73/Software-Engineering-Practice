@@ -54,10 +54,10 @@ def manifest():
      body=json.loads((p.parent/st['bodyFile']).read_text(encoding='utf-8')) if 'bodyFile' in st else {}
      if body and not (st['path']=='/api/seller/login' and body.get('password')=='123456'):inputs.append(compact(body))
      if st.get('file'):inputs.append(f'文件={st["file"]}，MIME={st.get("mime")}，字节={ (p.parent/st["file"]).stat().st_size }')
-     steps.append(f'{i}. {st["method"]} {st["path"]} => {st["status"]}')
+     steps.append(f'{i}. {st["method"]} {st["path"]} => {st.get("status","历史数据预置")}')
      if st.get('assertions'):expected.append(compact(st['assertions']))
      if st.get('absent'):expected.append('不返回'+','.join(st['absent']))
-     requests.append([o['id'],i,st['method'],st['path'],st.get('session','访客'),json.dumps(body,ensure_ascii=False),st['status'],json.dumps(st.get('assertions',{}),ensure_ascii=False),st.get('bodyFile',st.get('file',''))])
+     requests.append([o['id'],i,st['method'],st['path'],st.get('session','访客'),json.dumps(body,ensure_ascii=False),st.get('status','历史数据预置'),json.dumps(st.get('assertions',{}),ensure_ascii=False),st.get('bodyFile',st.get('file',''))])
    else:
     inputs=[compact(o.get('input',{}))];steps=['读取该实例 input 字段，执行 StoreFlowIntegrationTest 中对应编号的参数化方法。'];expected=[o['expected']]
    o['dataSummary']='；'.join(dict.fromkeys(inputs)) or '无请求体；参数见操作步骤'
@@ -304,7 +304,7 @@ def test_documents(data):
 2026-10-23实际执行中接口实例已通过{passed}/{len(api)}，页面功能实例{len(func)}个待人工执行。首轮原有人工通过确认仅属于历史记录，不作为本次新整理实例的执行证据。
 
 '''
-  for kind in ('功能测试','接口测试'):
+  for kind in ('功能测试',('综合接口测试' if r==3 else '接口测试')):
    text+=f'## {kind}详细用例\n\n'
    for case,title in bundle['cases'].items():
     cases=[o for o in records if o['caseId']==case and o['type']==kind]

@@ -1,0 +1,59 @@
+{
+  "id": "API-17",
+  "name": "卖家会话查询",
+  "method": "GET",
+  "path": "/api/seller/session",
+  "scope": "补充回归",
+  "auth": "无",
+  "rows": [
+    [
+      "API-17-01",
+      "未登录查询",
+      "不携带会话",
+      "200；authenticated=false",
+      "通过",
+      "匿名状态",
+      "卖家会话查询\nGET /api/seller/session"
+    ],
+    [
+      "API-17-02",
+      "有效卖家查询",
+      "已登录卖家并保留Cookie",
+      "200；authenticated=true",
+      "通过",
+      "有效会话",
+      "卖家会话查询\nGET /api/seller/session"
+    ],
+    [
+      "API-17-03",
+      "仅客户身份查询",
+      "会话中只有客户身份",
+      "200；authenticated=false",
+      "通过",
+      "角色隔离",
+      "卖家会话查询\nGET /api/seller/session"
+    ],
+    [
+      "API-17-04",
+      "卖家退出后查询",
+      "准备阶段卖家登录后退出，再查询",
+      "200；authenticated=false",
+      "通过",
+      "会话转换",
+      "卖家会话查询\nGET /api/seller/session"
+    ],
+    [
+      "API-17-05",
+      "改密使旧会话失效",
+      "独立测试账号完成改密后，使用旧卖家会话查询",
+      "200；authenticated=false",
+      "通过",
+      "会话版本校验",
+      "卖家会话查询\nGET /api/seller/session"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api17Test",
+  "executionRecord": "执行记录/API-17-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

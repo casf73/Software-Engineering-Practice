@@ -1,0 +1,13 @@
+{
+  "id" : "API-11-03",
+  "name" : "API-11-03 账号不存在",
+  "executedAt" : "2026-11-05T10:12:29.357245400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/login",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"用户名或密码错误\"}"
+  } ]
+}

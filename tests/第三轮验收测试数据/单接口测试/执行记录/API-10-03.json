@@ -1,0 +1,13 @@
+{
+  "id" : "API-10-03",
+  "name" : "API-10-03 用户名超过上界",
+  "executedAt" : "2026-11-05T10:12:29.050638400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/register",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"用户名须为3至32位文字、数字、下划线或连字符\"}"
+  } ]
+}

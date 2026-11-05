@@ -1,0 +1,59 @@
+{
+  "id": "API-13",
+  "name": "客户退出",
+  "method": "POST",
+  "path": "/api/customer/logout",
+  "scope": "第三次评审",
+  "auth": "可重复退出",
+  "rows": [
+    [
+      "API-13-01",
+      "已登录客户退出",
+      "有效客户会话，执行POST",
+      "204、无正文；随后客户会话查询为未登录",
+      "通过",
+      "会话转换",
+      "客户退出\nPOST /api/customer/logout"
+    ],
+    [
+      "API-13-02",
+      "重复退出",
+      "已退出客户后再次请求退出",
+      "204、无正文",
+      "通过",
+      "幂等场景",
+      "客户退出\nPOST /api/customer/logout"
+    ],
+    [
+      "API-13-03",
+      "匿名退出",
+      "不携带会话",
+      "204、无正文",
+      "通过",
+      "匿名边界",
+      "客户退出\nPOST /api/customer/logout"
+    ],
+    [
+      "API-13-04",
+      "双身份仅清除客户",
+      "同一会话具有客户和卖家身份，执行客户退出",
+      "204；客户未登录，卖家身份仍有效",
+      "通过",
+      "身份隔离",
+      "客户退出\nPOST /api/customer/logout"
+    ],
+    [
+      "API-13-05",
+      "退出后私人接口受限",
+      "有效客户退出后，使用原客户端访问本人历史",
+      "退出204；随后本人历史返回401",
+      "通过",
+      "权限收尾",
+      "客户退出\nPOST /api/customer/logout"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api13Test",
+  "executionRecord": "执行记录/API-13-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

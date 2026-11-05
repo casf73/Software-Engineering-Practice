@@ -1,0 +1,59 @@
+{
+  "id": "API-40",
+  "name": "兼容当前商品冻结",
+  "method": "POST",
+  "path": "/api/seller/products/current/freeze",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-40-01",
+      "唯一商品冻结",
+      "有效卖家；唯一商品ON_SALE且有等待队列",
+      "200；手动冻结，原队列和口令码保留",
+      "通过",
+      "单一上下文",
+      "兼容当前商品冻结\nPOST /api/seller/products/current/freeze"
+    ],
+    [
+      "API-40-02",
+      "多商品冲突",
+      "有效卖家；2个有效商品",
+      "409；不冻结任意商品",
+      "通过",
+      "兼容边界",
+      "兼容当前商品冻结\nPOST /api/seller/products/current/freeze"
+    ],
+    [
+      "API-40-03",
+      "未登录冻结",
+      "无卖家会话；唯一商品",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品冻结\nPOST /api/seller/products/current/freeze"
+    ],
+    [
+      "API-40-04",
+      "仅客户身份冻结",
+      "仅客户会话；唯一商品",
+      "401",
+      "通过",
+      "角色隔离",
+      "兼容当前商品冻结\nPOST /api/seller/products/current/freeze"
+    ],
+    [
+      "API-40-05",
+      "下架历史商品不受影响",
+      "仅1个有效商品，另有已下架历史商品；冻结当前商品",
+      "200；只冻结当前商品，历史商品数据不变",
+      "通过",
+      "上下文作用域",
+      "兼容当前商品冻结\nPOST /api/seller/products/current/freeze"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api40Test",
+  "executionRecord": "执行记录/API-40-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

@@ -38,7 +38,7 @@ abstract class FixtureTestSupport {
  static Stream<Path> fixtures(int round) throws Exception {
   String name=round==1?"验收测试数据":round==2?"第二轮验收测试数据":"第三轮验收测试数据";
   Path dir=Path.of("").toAbsolutePath();
-  while(dir!=null){Path data=dir.resolve("tests").resolve(name).resolve("接口测试");
+  while(dir!=null){Path data=dir.resolve("tests").resolve(name).resolve(round==3?"综合接口测试":"接口测试");
    if(Files.isDirectory(data)){
     ObjectMapper reader=new ObjectMapper();List<Path> files=new ArrayList<>();
     try(var walk=Files.walk(data)){for(Path p:walk.filter(p->p.getFileName().toString().equals("instance.json")).sorted().toList()){
@@ -64,6 +64,17 @@ abstract class FixtureTestSupport {
   for(JsonNode step:fixture.path("steps")){
    index++;String label=fixture.path("id").asText()+" 第"+index+"步";
    String path=resolve(step.path("path"),variables).asText();String method=step.path("method").asText();
+   // Explicit fixture-only setup for a record created under the historical guest rules.
+   if(method.equals("SEED_LEGACY_INTENT")){
+    JsonNode data=mapper.readTree(Files.readString(file.getParent().resolve(step.path("bodyFile").asText()),StandardCharsets.UTF_8));
+    var product=products.findById(Long.valueOf(path)).orElseThrow();
+    var historical=new cn.codelyy.store.domain.PurchaseIntent();
+    historical.setProduct(product);historical.setName(data.path("name").asText());historical.setPhone(data.path("phone").asText());
+    historical.setProductNameSnapshot(product.getName());historical.setPriceSnapshot(product.getPrice());
+    historical.setPasscode("OLDVISITOR123");historical.setStatus(cn.codelyy.store.domain.IntentStatus.WAITING);
+    intents.saveAndFlush(historical);assertNull(historical.getCustomer());
+    variables.put("guest",TextNode.valueOf(historical.getPasscode()));continue;
+   }
    MockHttpServletRequestBuilder request;
    if(method.equals("UPLOAD")){
     Path upload=file.getParent().resolve(step.path("file").asText()).normalize();assertTrue(upload.startsWith(file.getParent()));

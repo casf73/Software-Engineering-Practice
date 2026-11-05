@@ -1,0 +1,59 @@
+{
+  "id": "API-39",
+  "name": "兼容当前商品编辑",
+  "method": "PUT",
+  "path": "/api/seller/products/current",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-39-01",
+      "正常编辑唯一商品",
+      "有效卖家；唯一可编辑商品；提交合法完整ProductRequest",
+      "200；仅更新该商品",
+      "通过",
+      "单一上下文",
+      "兼容当前商品编辑\nPUT /api/seller/products/current"
+    ],
+    [
+      "API-39-02",
+      "多商品冲突",
+      "有效卖家；2个有效商品；请求体合法",
+      "409；全部商品原数据不变",
+      "通过",
+      "兼容边界",
+      "兼容当前商品编辑\nPUT /api/seller/products/current"
+    ],
+    [
+      "API-39-03",
+      "非法价格",
+      "有效卖家；唯一可编辑商品；price=0",
+      "400；原商品不变",
+      "通过",
+      "价格下界外",
+      "兼容当前商品编辑\nPUT /api/seller/products/current"
+    ],
+    [
+      "API-39-04",
+      "交易中禁止编辑",
+      "有效卖家；唯一商品IN_TRADE；请求体合法",
+      "409",
+      "通过",
+      "状态约束",
+      "兼容当前商品编辑\nPUT /api/seller/products/current"
+    ],
+    [
+      "API-39-05",
+      "未登录编辑",
+      "无卖家会话；唯一商品及合法请求体",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品编辑\nPUT /api/seller/products/current"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api39Test",
+  "executionRecord": "执行记录/API-39-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

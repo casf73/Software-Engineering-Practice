@@ -1,0 +1,13 @@
+{
+  "id" : "API-32-01",
+  "name" : "API-32-01 队首开始交易",
+  "executedAt" : "2026-11-05T10:12:31.969853300+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/96/trades/start",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":43,\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"IN_TRADE\",\"position\":null,\"queueAt\":\"2026-11-05T10:12:31.960861\",\"meetingLocation\":\"学校南门\",\"customerUsername\":\"buyer01\"}"
+  } ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-12",
+  "name": "客户会话查询",
+  "method": "GET",
+  "path": "/api/customer/session",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-12-01",
+      "未登录查询",
+      "不携带会话",
+      "200；authenticated=false、customer=null",
+      "通过",
+      "匿名状态",
+      "客户会话查询\nGET /api/customer/session"
+    ],
+    [
+      "API-12-02",
+      "注册后查询",
+      "准备阶段成功注册客户并保留Cookie",
+      "200；authenticated=true，返回新注册客户资料",
+      "通过",
+      "会话建立",
+      "客户会话查询\nGET /api/customer/session"
+    ],
+    [
+      "API-12-03",
+      "登录后查询",
+      "准备阶段登录已有账号并保留Cookie",
+      "200；返回对应账号，不含密码及哈希",
+      "通过",
+      "会话与隐私",
+      "客户会话查询\nGET /api/customer/session"
+    ],
+    [
+      "API-12-04",
+      "客户退出后查询",
+      "准备阶段登录并退出客户，再使用原客户端查询",
+      "200；authenticated=false、customer=null",
+      "通过",
+      "会话转换",
+      "客户会话查询\nGET /api/customer/session"
+    ],
+    [
+      "API-12-05",
+      "退出卖家不影响客户",
+      "同一会话同时有客户和卖家身份，准备阶段只退出卖家",
+      "200；客户仍authenticated=true，customer保持原客户",
+      "通过",
+      "身份隔离",
+      "客户会话查询\nGET /api/customer/session"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api12Test",
+  "executionRecord": "执行记录/API-12-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-26",
+  "name": "重新上架商品",
+  "method": "POST",
+  "path": "/api/seller/products/{id}/relist",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-26-01",
+      "有库存下架商品上架",
+      "有效卖家、商品DELISTED且stock=3",
+      "200；恢复在售并进入公开列表",
+      "通过",
+      "状态转换",
+      "重新上架商品\nPOST /api/seller/products/{id}/relist"
+    ],
+    [
+      "API-26-02",
+      "库存为0不可上架",
+      "有效卖家、商品DELISTED且stock=0",
+      "409；仍下架",
+      "通过",
+      "库存边界",
+      "重新上架商品\nPOST /api/seller/products/{id}/relist"
+    ],
+    [
+      "API-26-03",
+      "未登录上架",
+      "无卖家会话，目标商品具备上架条件",
+      "401",
+      "通过",
+      "权限校验",
+      "重新上架商品\nPOST /api/seller/products/{id}/relist"
+    ],
+    [
+      "API-26-04",
+      "商品不存在",
+      "有效卖家，商品ID不存在",
+      "404",
+      "通过",
+      "不存在资源",
+      "重新上架商品\nPOST /api/seller/products/{id}/relist"
+    ],
+    [
+      "API-26-05",
+      "不恢复已结束意向",
+      "商品下架时原意向已结束；补货后重新上架",
+      "200；商品在售，原已结束意向不重新变为WAITING，旧码不恢复",
+      "通过",
+      "历史状态约束",
+      "重新上架商品\nPOST /api/seller/products/{id}/relist"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api26Test",
+  "executionRecord": "执行记录/API-26-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

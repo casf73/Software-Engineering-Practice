@@ -1,0 +1,13 @@
+{
+  "id" : "API-31-05",
+  "name" : "API-31-05 未登录删除",
+  "executedAt" : "2026-11-05T10:12:31.952860400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "DELETE",
+    "path" : "/api/seller/categories/34",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-03-02",
+  "name" : "API-03-02 分类层级正确",
+  "executedAt" : "2026-11-05T10:12:28.031441400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/categories",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "[{\"id\":6,\"name\":\"电子产品\",\"parentId\":null},{\"id\":7,\"name\":\"键盘\",\"parentId\":6}]"
+  } ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-15",
+  "name": "客户购买意向提交",
+  "method": "POST",
+  "path": "/api/customer/products/{id}/intents",
+  "scope": "第三次评审",
+  "auth": "客户",
+  "rows": [
+    [
+      "API-15-01",
+      "合法提交本次地点",
+      "有效客户、在售有库存商品；body={\"name\":\"联系人\",\"phone\":\"13900000001\",\"meetingLocation\":\"图书馆\"}",
+      "201；归属当前客户，地点使用图书馆，商品快照和排位正确",
+      "通过",
+      "有效场景",
+      "客户购买意向提交\nPOST /api/customer/products/{id}/intents"
+    ],
+    [
+      "API-15-02",
+      "未登录提交",
+      "无客户会话，商品与请求体合法",
+      "401；不创建记录",
+      "通过",
+      "未登录权限",
+      "客户购买意向提交\nPOST /api/customer/products/{id}/intents"
+    ],
+    [
+      "API-15-03",
+      "仅卖家身份提交",
+      "只有有效卖家会话，商品与请求体合法",
+      "401；不创建记录",
+      "通过",
+      "角色隔离",
+      "客户购买意向提交\nPOST /api/customer/products/{id}/intents"
+    ],
+    [
+      "API-15-04",
+      "本次地点为空",
+      "有效客户会话；meetingLocation=\"\"",
+      "400；不创建记录",
+      "通过",
+      "必填校验",
+      "客户购买意向提交\nPOST /api/customer/products/{id}/intents"
+    ],
+    [
+      "API-15-05",
+      "本次地点超过上界",
+      "有效客户会话；meetingLocation为201个字符",
+      "400；不创建记录",
+      "通过",
+      "上界外",
+      "客户购买意向提交\nPOST /api/customer/products/{id}/intents"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api15Test",
+  "executionRecord": "执行记录/API-15-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

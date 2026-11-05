@@ -1,0 +1,59 @@
+{
+  "id": "API-30",
+  "name": "编辑分类",
+  "method": "PUT",
+  "path": "/api/seller/categories/{id}",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-30-01",
+      "正常改名",
+      "有效卖家；将未重名的“键盘”改为“机械键盘”",
+      "200；名称更新，关联商品分类显示一致",
+      "通过",
+      "维护场景",
+      "编辑分类\nPUT /api/seller/categories/{id}"
+    ],
+    [
+      "API-30-02",
+      "拒绝循环",
+      "将一级分类的parentId改为其子分类ID",
+      "400；原树结构不变",
+      "通过",
+      "循环约束",
+      "编辑分类\nPUT /api/seller/categories/{id}"
+    ],
+    [
+      "API-30-03",
+      "拒绝三级结构",
+      "将待编辑分类的parentId指向二级分类",
+      "400；不产生三级分类",
+      "通过",
+      "层级边界",
+      "编辑分类\nPUT /api/seller/categories/{id}"
+    ],
+    [
+      "API-30-04",
+      "同级重名修改",
+      "同一父类已有“键盘”，将另一分类改为该名称",
+      "409；原分类名称保留",
+      "通过",
+      "重复约束",
+      "编辑分类\nPUT /api/seller/categories/{id}"
+    ],
+    [
+      "API-30-05",
+      "分类不存在",
+      "有效卖家，不存在的分类ID；请求体合法",
+      "404",
+      "通过",
+      "不存在资源",
+      "编辑分类\nPUT /api/seller/categories/{id}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api30Test",
+  "executionRecord": "执行记录/API-30-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

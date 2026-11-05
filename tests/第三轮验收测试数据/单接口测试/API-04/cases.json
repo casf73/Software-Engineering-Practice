@@ -1,0 +1,59 @@
+{
+  "id": "API-04",
+  "name": "兼容当前商品查询",
+  "method": "GET",
+  "path": "/api/public/products/current",
+  "scope": "补充回归",
+  "auth": "无",
+  "rows": [
+    [
+      "API-04-01",
+      "唯一有效商品",
+      "独立测试库仅有1个有效商品",
+      "200；返回该商品ID和详情",
+      "通过",
+      "单一上下文",
+      "兼容当前商品查询\nGET /api/public/products/current"
+    ],
+    [
+      "API-04-02",
+      "匿名访问唯一商品",
+      "不携带客户或卖家会话，保留唯一有效商品",
+      "200；公开查询不要求登录",
+      "通过",
+      "公开访问",
+      "兼容当前商品查询\nGET /api/public/products/current"
+    ],
+    [
+      "API-04-03",
+      "两个有效商品产生歧义",
+      "预置2个有效商品",
+      "409；不任意选择其中一个商品",
+      "通过",
+      "数量边界",
+      "兼容当前商品查询\nGET /api/public/products/current"
+    ],
+    [
+      "API-04-04",
+      "三个有效商品产生歧义",
+      "预置3个有效商品",
+      "409；不返回错误的当前商品",
+      "通过",
+      "数量扩展",
+      "兼容当前商品查询\nGET /api/public/products/current"
+    ],
+    [
+      "API-04-05",
+      "当前商品数据实时一致",
+      "唯一有效商品在准备阶段更新名称、价格及图片后查询",
+      "200；字段与该商品实际保存值一致",
+      "通过",
+      "数据一致性",
+      "兼容当前商品查询\nGET /api/public/products/current"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api04Test",
+  "executionRecord": "执行记录/API-04-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

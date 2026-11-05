@@ -1,0 +1,37 @@
+{
+  "id" : "API-19-01",
+  "name" : "API-19-01 合法改密",
+  "executedAt" : "2026-11-05T10:12:31.114503100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/password",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/seller/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":false}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/login",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/customer/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true,\"customer\":{\"id\":90,\"username\":\"buyer01\",\"phone\":\"13800000001\",\"defaultLocation\":\"学校南门\",\"createdAt\":\"2026-11-05T10:12:30.622832\"}}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/login",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"账号或密码错误\"}"
+  } ]
+}

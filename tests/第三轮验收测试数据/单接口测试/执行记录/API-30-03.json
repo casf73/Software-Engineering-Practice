@@ -1,0 +1,19 @@
+{
+  "id" : "API-30-03",
+  "name" : "API-30-03 拒绝三级结构",
+  "executedAt" : "2026-11-05T10:12:31.884578400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/categories/26",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"只支持两级分类，不能循环或指定二级分类为父分类\"}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/categories",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "[{\"id\":24,\"name\":\"电子产品\",\"parentId\":null},{\"id\":25,\"name\":\"键盘\",\"parentId\":24},{\"id\":26,\"name\":\"鼠标\",\"parentId\":null}]"
+  } ]
+}

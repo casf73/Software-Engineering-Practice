@@ -1,0 +1,13 @@
+{
+  "id" : "API-37-02",
+  "name" : "API-37-02 不同客户历史隔离",
+  "executedAt" : "2026-11-05T10:12:32.273194900+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers/183/orders",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[{\"id\":64,\"productId\":112,\"productName\":\"测试商品\",\"price\":88.50,\"name\":\"客户乙\",\"phone\":\"13800000001\",\"meetingLocation\":\"学校南门\",\"status\":\"WAITING\",\"submittedAt\":\"2026-11-05T10:12:32.266991\",\"position\":2,\"passcode\":null,\"productStatus\":\"ON_SALE\"}],\"total\":1,\"page\":0,\"size\":20}"
+  } ]
+}

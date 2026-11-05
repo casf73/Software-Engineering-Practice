@@ -1,0 +1,13 @@
+{
+  "id" : "API-15-01",
+  "name" : "API-15-01 合法提交本次地点",
+  "executedAt" : "2026-11-05T10:12:29.809808600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/products/51/intents",
+    "expectedStatus" : 201,
+    "actualStatus" : 201,
+    "response" : "{\"passcode\":\"KN444R9HX7\",\"position\":1}"
+  } ]
+}

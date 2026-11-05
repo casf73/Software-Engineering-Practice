@@ -1,0 +1,13 @@
+{
+  "id" : "API-13-03",
+  "name" : "API-13-03 匿名退出",
+  "executedAt" : "2026-11-05T10:12:29.700691600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/logout",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  } ]
+}

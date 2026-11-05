@@ -1,0 +1,19 @@
+{
+  "id" : "API-12-02",
+  "name" : "API-12-02 注册后查询",
+  "executedAt" : "2026-11-05T10:12:29.527283600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/register",
+    "expectedStatus" : 201,
+    "actualStatus" : 201,
+    "response" : "{\"authenticated\":true,\"customer\":{\"id\":55,\"username\":\"newbuyer\",\"phone\":\"13800000001\",\"defaultLocation\":\"学校南门\",\"createdAt\":\"2026-11-05T10:12:29.5212763\"}}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/customer/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true,\"customer\":{\"id\":55,\"username\":\"newbuyer\",\"phone\":\"13800000001\",\"defaultLocation\":\"学校南门\",\"createdAt\":\"2026-11-05T10:12:29.521276\"}}"
+  } ]
+}

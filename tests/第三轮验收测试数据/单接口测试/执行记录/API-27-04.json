@@ -1,0 +1,13 @@
+{
+  "id" : "API-27-04",
+  "name" : "API-27-04 商品不存在",
+  "executedAt" : "2026-11-05T10:12:31.736715500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/9223372036854775807/delist",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"商品不存在\"}"
+  } ]
+}

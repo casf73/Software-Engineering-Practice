@@ -1,0 +1,13 @@
+{
+  "id" : "API-37-01",
+  "name" : "API-37-01 正常查询并隐藏口令码",
+  "executedAt" : "2026-11-05T10:12:32.259991+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers/181/orders",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[{\"id\":62,\"productId\":111,\"productName\":\"测试商品\",\"price\":88.50,\"name\":\"联系人\",\"phone\":\"13800000001\",\"meetingLocation\":\"学校南门\",\"status\":\"WAITING\",\"submittedAt\":\"2026-11-05T10:12:32.252992\",\"position\":1,\"passcode\":null,\"productStatus\":\"ON_SALE\"}],\"total\":1,\"page\":0,\"size\":20}"
+  } ]
+}

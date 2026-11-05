@@ -1,0 +1,13 @@
+{
+  "id" : "API-38-03",
+  "name" : "API-38-03 未登录查询",
+  "executedAt" : "2026-11-05T10:12:32.334356600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/workbench",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

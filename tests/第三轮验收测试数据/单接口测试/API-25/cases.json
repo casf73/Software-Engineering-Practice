@@ -1,0 +1,59 @@
+{
+  "id": "API-25",
+  "name": "解冻商品",
+  "method": "POST",
+  "path": "/api/seller/products/{id}/unfreeze",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-25-01",
+      "手动冻结后解冻",
+      "有效卖家、商品为MANUALLY_FROZEN且库存大于0",
+      "200；恢复ON_SALE，原队列、排位和口令码保留",
+      "通过",
+      "状态转换",
+      "解冻商品\nPOST /api/seller/products/{id}/unfreeze"
+    ],
+    [
+      "API-25-02",
+      "不能解冻交易冻结",
+      "有效卖家、商品为IN_TRADE",
+      "409；交易状态不变",
+      "通过",
+      "状态约束",
+      "解冻商品\nPOST /api/seller/products/{id}/unfreeze"
+    ],
+    [
+      "API-25-03",
+      "未登录解冻",
+      "无卖家会话，目标为手动冻结商品",
+      "401",
+      "通过",
+      "权限校验",
+      "解冻商品\nPOST /api/seller/products/{id}/unfreeze"
+    ],
+    [
+      "API-25-04",
+      "商品不存在",
+      "有效卖家，商品ID不存在",
+      "404",
+      "通过",
+      "不存在资源",
+      "解冻商品\nPOST /api/seller/products/{id}/unfreeze"
+    ],
+    [
+      "API-25-05",
+      "解冻后恢复接单",
+      "解冻有库存商品后，有效客户提交合法新意向",
+      "解冻200；新意向201并按原队列接续排位",
+      "通过",
+      "业务后置条件",
+      "解冻商品\nPOST /api/seller/products/{id}/unfreeze"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api25Test",
+  "executionRecord": "执行记录/API-25-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

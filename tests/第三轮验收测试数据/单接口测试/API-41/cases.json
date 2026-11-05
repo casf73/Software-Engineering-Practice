@@ -1,0 +1,59 @@
+{
+  "id": "API-41",
+  "name": "兼容当前商品解冻",
+  "method": "POST",
+  "path": "/api/seller/products/current/unfreeze",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-41-01",
+      "唯一手动冻结商品解冻",
+      "有效卖家；唯一有效商品为MANUALLY_FROZEN且有库存",
+      "200；恢复ON_SALE，队列和口令码保留",
+      "通过",
+      "状态转换",
+      "兼容当前商品解冻\nPOST /api/seller/products/current/unfreeze"
+    ],
+    [
+      "API-41-02",
+      "多商品冲突",
+      "有效卖家；存在多个有效商品",
+      "409；不解冻任意商品",
+      "通过",
+      "兼容边界",
+      "兼容当前商品解冻\nPOST /api/seller/products/current/unfreeze"
+    ],
+    [
+      "API-41-03",
+      "不能解除交易冻结",
+      "有效卖家；唯一商品IN_TRADE",
+      "409；交易仍保持",
+      "通过",
+      "状态约束",
+      "兼容当前商品解冻\nPOST /api/seller/products/current/unfreeze"
+    ],
+    [
+      "API-41-04",
+      "未登录解冻",
+      "无卖家会话；唯一手动冻结商品",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品解冻\nPOST /api/seller/products/current/unfreeze"
+    ],
+    [
+      "API-41-05",
+      "仅客户身份解冻",
+      "仅客户会话；唯一手动冻结商品",
+      "401",
+      "通过",
+      "角色隔离",
+      "兼容当前商品解冻\nPOST /api/seller/products/current/unfreeze"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api41Test",
+  "executionRecord": "执行记录/API-41-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

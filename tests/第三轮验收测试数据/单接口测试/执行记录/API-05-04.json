@@ -1,0 +1,13 @@
+{
+  "id" : "API-05-04",
+  "name" : "API-05-04 非法电话被拒绝",
+  "executedAt" : "2026-11-05T10:12:28.444651200+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/public/products/23/intents",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"请输入有效联系电话\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-15-03",
+  "name" : "API-15-03 仅卖家身份提交",
+  "executedAt" : "2026-11-05T10:12:29.832814300+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/products/53/intents",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"请先登录客户账号\"}"
+  } ]
+}

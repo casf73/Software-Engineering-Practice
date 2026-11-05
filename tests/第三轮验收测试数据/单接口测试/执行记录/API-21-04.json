@@ -1,0 +1,67 @@
+{
+  "id" : "API-21-04",
+  "name" : "API-21-04 图片数量上界",
+  "executedAt" : "2026-11-05T10:12:31.354976700+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/95a7ba8e-1e09-4544-9d41-6ec9c68fdb64.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/8c0b62f6-660d-43a1-b952-e4b17d3deafc.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/d2b9a05a-07eb-455f-a5fa-3ad935f08776.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/a1b79656-8e85-48cb-95f5-de4b87ae53b9.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/c3eb31e6-56d0-4fcf-a8ed-f0bc8c4acb25.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/86b80eec-c1a1-45dd-b258-caaae3b66b6c.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/c394518f-e085-4f3a-b4bf-36b7fd5e0c57.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/bcbdd0ce-9bbb-442d-aeed-e5451d6d474f.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/d7e6288e-4a1c-4531-b3f5-47a827979d27.png\"}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/products",
+    "expectedStatus" : 201,
+    "actualStatus" : 201,
+    "response" : "{\"id\":63,\"name\":\"机械键盘\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[\"/uploads/95a7ba8e-1e09-4544-9d41-6ec9c68fdb64.png\",\"/uploads/8c0b62f6-660d-43a1-b952-e4b17d3deafc.png\",\"/uploads/d2b9a05a-07eb-455f-a5fa-3ad935f08776.png\",\"/uploads/a1b79656-8e85-48cb-95f5-de4b87ae53b9.png\",\"/uploads/c3eb31e6-56d0-4fcf-a8ed-f0bc8c4acb25.png\",\"/uploads/86b80eec-c1a1-45dd-b258-caaae3b66b6c.png\",\"/uploads/c394518f-e085-4f3a-b4bf-36b7fd5e0c57.png\",\"/uploads/bcbdd0ce-9bbb-442d-aeed-e5451d6d474f.png\",\"/uploads/d7e6288e-4a1c-4531-b3f5-47a827979d27.png\"],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:31.3529776\",\"stock\":3,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  } ]
+}

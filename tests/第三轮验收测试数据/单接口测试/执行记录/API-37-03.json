@@ -1,0 +1,13 @@
+{
+  "id" : "API-37-03",
+  "name" : "API-37-03 客户无历史记录",
+  "executedAt" : "2026-11-05T10:12:32.283194100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers/184/orders",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[],\"total\":0,\"page\":0,\"size\":20}"
+  } ]
+}

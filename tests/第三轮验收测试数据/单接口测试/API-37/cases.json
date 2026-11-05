@@ -1,0 +1,59 @@
+{
+  "id": "API-37",
+  "name": "卖家客户历史查询",
+  "method": "GET",
+  "path": "/api/seller/customers/{id}/orders",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-37-01",
+      "正常查询并隐藏口令码",
+      "有效卖家；指定客户有购买记录",
+      "200；快照、状态和地点正确，所有记录passcode固定为null",
+      "通过",
+      "隐私字段",
+      "卖家客户历史查询\nGET /api/seller/customers/{id}/orders"
+    ],
+    [
+      "API-37-02",
+      "不同客户历史隔离",
+      "甲乙均有记录，查询乙的ID",
+      "200；只返回乙的历史，不混入甲记录",
+      "通过",
+      "账号隔离",
+      "卖家客户历史查询\nGET /api/seller/customers/{id}/orders"
+    ],
+    [
+      "API-37-03",
+      "客户无历史记录",
+      "有效卖家；存在但无购买记录的客户",
+      "200；items=[]、total=0",
+      "通过",
+      "空集合边界",
+      "卖家客户历史查询\nGET /api/seller/customers/{id}/orders"
+    ],
+    [
+      "API-37-04",
+      "客户不存在",
+      "有效卖家；不存在的客户ID",
+      "404",
+      "通过",
+      "不存在资源",
+      "卖家客户历史查询\nGET /api/seller/customers/{id}/orders"
+    ],
+    [
+      "API-37-05",
+      "仅客户身份访问",
+      "无卖家身份，仅有效客户会话",
+      "401；不返回卖家视角历史",
+      "通过",
+      "角色隔离",
+      "卖家客户历史查询\nGET /api/seller/customers/{id}/orders"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api37Test",
+  "executionRecord": "执行记录/API-37-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

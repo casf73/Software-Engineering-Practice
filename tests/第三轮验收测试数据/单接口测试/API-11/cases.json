@@ -1,0 +1,59 @@
+{
+  "id": "API-11",
+  "name": "客户登录",
+  "method": "POST",
+  "path": "/api/customer/login",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-11-01",
+      "正确凭据登录",
+      "预置buyer01；提交正确username/password",
+      "200；authenticated=true、客户资料正确，完成会话编号轮换",
+      "通过",
+      "有效等价类",
+      "客户登录\nPOST /api/customer/login"
+    ],
+    [
+      "API-11-02",
+      "密码错误",
+      "已存在用户名，提交错误但长度合法的密码",
+      "401；不建立客户登录身份",
+      "通过",
+      "错误凭据",
+      "客户登录\nPOST /api/customer/login"
+    ],
+    [
+      "API-11-03",
+      "账号不存在",
+      "提交未注册用户名及格式合法密码",
+      "401；不建立客户身份",
+      "通过",
+      "不存在账号",
+      "客户登录\nPOST /api/customer/login"
+    ],
+    [
+      "API-11-04",
+      "缺少用户名",
+      "username=\"\"，password合法",
+      "400",
+      "通过",
+      "必填校验",
+      "客户登录\nPOST /api/customer/login"
+    ],
+    [
+      "API-11-05",
+      "密码超过请求上限",
+      "已存在用户名，password为129个字符",
+      "400；不产生登录身份",
+      "通过",
+      "上界外",
+      "客户登录\nPOST /api/customer/login"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api11Test",
+  "executionRecord": "执行记录/API-11-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

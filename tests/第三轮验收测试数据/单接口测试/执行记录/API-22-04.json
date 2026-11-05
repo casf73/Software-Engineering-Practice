@@ -1,0 +1,13 @@
+{
+  "id" : "API-22-04",
+  "name" : "API-22-04 交易中拒绝编辑",
+  "executedAt" : "2026-11-05T10:12:31.436758100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/products/68",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"交易进行中，暂时不能修改商品\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-40-05",
+  "name" : "API-40-05 下架历史商品不受影响",
+  "executedAt" : "2026-11-05T10:12:32.451471500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/freeze",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":131,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"MANUALLY_FROZEN\",\"createdAt\":\"2026-11-05T10:12:32.446471\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  } ]
+}

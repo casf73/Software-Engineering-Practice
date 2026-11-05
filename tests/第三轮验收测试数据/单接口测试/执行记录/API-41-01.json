@@ -1,0 +1,19 @@
+{
+  "id" : "API-41-01",
+  "name" : "API-41-01 唯一手动冻结商品解冻",
+  "executedAt" : "2026-11-05T10:12:32.472446100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/unfreeze",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":133,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:32.461447\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"WAITING\",\"position\":1,\"productStatus\":\"ON_SALE\"}"
+  } ]
+}

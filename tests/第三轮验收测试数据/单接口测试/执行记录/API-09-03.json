@@ -1,0 +1,13 @@
+{
+  "id" : "API-09-03",
+  "name" : "API-09-03 交易中本人不可撤销",
+  "executedAt" : "2026-11-05T10:12:28.829378+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "DELETE",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"已进入交易的买家不能撤销；只有仍在排队的意向可以撤销\"}"
+  } ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-03",
+  "name": "分类列表查询",
+  "method": "GET",
+  "path": "/api/public/categories",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-03-01",
+      "匿名读取分类",
+      "不携带会话，预置一级及二级分类",
+      "200；返回分类数组，无需登录",
+      "通过",
+      "公开访问",
+      "分类列表查询\nGET /api/public/categories"
+    ],
+    [
+      "API-03-02",
+      "分类层级正确",
+      "预置“电子产品/键盘”，读取分类列表",
+      "200；一级parentId为空，二级parentId指向对应一级ID",
+      "通过",
+      "层级关联",
+      "分类列表查询\nGET /api/public/categories"
+    ],
+    [
+      "API-03-03",
+      "空分类列表",
+      "独立测试库中不准备任何分类",
+      "200；返回[]",
+      "通过",
+      "空集合边界",
+      "分类列表查询\nGET /api/public/categories"
+    ],
+    [
+      "API-03-04",
+      "中文名称保留",
+      "预置中文及中英文混合分类名称",
+      "200；名称无乱码、无内容丢失",
+      "通过",
+      "字符等价类",
+      "分类列表查询\nGET /api/public/categories"
+    ],
+    [
+      "API-03-05",
+      "维护后读取最新数据",
+      "准备阶段将子类改名并删除一个无引用空分类，再执行GET",
+      "200；显示新名称，不再返回已删除分类",
+      "通过",
+      "数据一致性",
+      "分类列表查询\nGET /api/public/categories"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api03Test",
+  "executionRecord": "执行记录/API-03-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

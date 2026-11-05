@@ -1,0 +1,13 @@
+{
+  "id" : "API-35-05",
+  "name" : "API-35-05 客户身份不能访问",
+  "executedAt" : "2026-11-05T10:12:32.199429+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

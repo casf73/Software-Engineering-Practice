@@ -1,0 +1,59 @@
+{
+  "id": "API-14",
+  "name": "本人购买历史查询",
+  "method": "GET",
+  "path": "/api/customer/orders",
+  "scope": "第三次评审",
+  "auth": "客户",
+  "rows": [
+    [
+      "API-14-01",
+      "本人记录及快照",
+      "有效客户有1条意向；准备阶段修改对应商品名称和价格后查询",
+      "200；只返回本人记录，商品名称和价格仍为提交时快照，地点正确",
+      "通过",
+      "归属与快照",
+      "本人购买历史查询\nGET /api/customer/orders"
+    ],
+    [
+      "API-14-02",
+      "不同客户隔离",
+      "客户甲有记录；使用无记录客户乙的Cookie查询",
+      "200；items=[]、total=0，不返回甲的记录",
+      "通过",
+      "账号隔离",
+      "本人购买历史查询\nGET /api/customer/orders"
+    ],
+    [
+      "API-14-03",
+      "未登录访问",
+      "不携带客户会话",
+      "401；不返回私人历史",
+      "通过",
+      "未登录权限",
+      "本人购买历史查询\nGET /api/customer/orders"
+    ],
+    [
+      "API-14-04",
+      "合法空页",
+      "当前客户共1条记录，GET ?page=1&size=1",
+      "200；items=[]、total=1、page=1、size=1",
+      "通过",
+      "分页边界",
+      "本人购买历史查询\nGET /api/customer/orders"
+    ],
+    [
+      "API-14-05",
+      "非法分页大小",
+      "有效客户会话，GET ?size=0",
+      "400",
+      "通过",
+      "分页下界外",
+      "本人购买历史查询\nGET /api/customer/orders"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api14Test",
+  "executionRecord": "执行记录/API-14-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-10-04",
+  "name" : "API-10-04 密码低于下界",
+  "executedAt" : "2026-11-05T10:12:29.057638100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/register",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"size must be between 8 and 128\"}"
+  } ]
+}

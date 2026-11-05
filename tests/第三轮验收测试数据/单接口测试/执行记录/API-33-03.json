@@ -1,0 +1,19 @@
+{
+  "id" : "API-33-03",
+  "name" : "API-33-03 交易失败作废",
+  "executedAt" : "2026-11-05T10:12:32.050521900+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/trades/51/result",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"口令码无效或已失效\"}"
+  } ]
+}

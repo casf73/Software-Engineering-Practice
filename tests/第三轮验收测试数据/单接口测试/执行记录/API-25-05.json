@@ -1,0 +1,19 @@
+{
+  "id" : "API-25-05",
+  "name" : "API-25-05 解冻后恢复接单",
+  "executedAt" : "2026-11-05T10:12:31.622783+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/83/unfreeze",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":83,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:31.609782\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/customer/products/83/intents",
+    "expectedStatus" : 201,
+    "actualStatus" : 201,
+    "response" : "{\"passcode\":\"BKYMRNE34R\",\"position\":2}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-36-02",
+  "name" : "API-36-02 客户不存在",
+  "executedAt" : "2026-11-05T10:12:32.223472500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers/9223372036854775807",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"客户不存在\"}"
+  } ]
+}

@@ -9,8 +9,8 @@ def write(p,obj):
  p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 class Scenario:
  def __init__(self,r,case,n,title,method='场景法'):
-  self.folder=ROUNDS[r]/'接口测试'/case/f'第{n}个测试实例';self.folder.mkdir(parents=True,exist_ok=True)
-  self.meta={'id':f'{case}-{n:02d}','caseId':case,'iteration':r,'type':'接口测试','title':title,'mode':'automated','designMethod':method,'preconditions':'独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。','steps':[],'expected':'逐步验证 HTTP 状态码及响应字段，详见步骤断言。','result':'待执行'}
+  self.folder=ROUNDS[r]/('综合接口测试' if r==3 else '接口测试')/case/f'第{n}个测试实例';self.folder.mkdir(parents=True,exist_ok=True)
+  self.meta={'id':f'{case}-{n:02d}','caseId':case,'iteration':r,'type':('综合接口测试' if r==3 else '接口测试'),'title':title,'mode':'automated','designMethod':method,'preconditions':'独立内存 H2；每个实例前清理测试数据，卖家初始 admin/123456。','steps':[],'expected':'逐步验证 HTTP 状态码及响应字段，详见步骤断言。','result':'待执行'}
  def step(self,method,path,status=200,body=None,expect=None,capture=None,session='seller',save=None,file=None,mime=None,absent=None):
   row={'method':method,'path':path,'status':status}
   if session:row['session']=session
@@ -44,10 +44,10 @@ def migrate():
  # 只在指定测试目录内移动；目标已存在时拒绝覆盖。
  for r in (1,2):
   for d in list(ROUNDS[r].iterdir()):
-   if not d.is_dir() or d.name in ['功能测试','接口测试']:continue
+   if not d.is_dir() or d.name in ['功能测试','接口测试','综合接口测试','单接口测试']:continue
    if r==1 and (d.name.startswith('T') or d.name.startswith('U')):target=ROUNDS[r]/('接口测试' if d.name.startswith('T') else '功能测试')/d.name
    elif r==2 and d.name.startswith('R20'):
-    i=int(d.name[1:]);target=(ROUNDS[2]/'接口测试'/d.name) if i<=203 else (ROUNDS[3]/'接口测试'/f'R{301+i-204}')
+    i=int(d.name[1:]);target=(ROUNDS[2]/'接口测试'/d.name) if i<=203 else (ROUNDS[3]/'综合接口测试'/f'R{301+i-204}')
    else:continue
    if target.exists():raise RuntimeError(f'目标已存在，拒绝覆盖 {target}')
    target.parent.mkdir(parents=True,exist_ok=True)
@@ -269,7 +269,7 @@ def functional():
  for r in (2,3):
   for case in CASES[r]:
    for n in range(1,9):
-    api=ROUNDS[r]/'接口测试'/case/f'第{n}个测试实例'/'instance.json';src=json.loads(api.read_text(encoding='utf-8'))
+    api=ROUNDS[r]/('综合接口测试' if r==3 else '接口测试')/case/f'第{n}个测试实例'/'instance.json';src=json.loads(api.read_text(encoding='utf-8'))
     folder=ROUNDS[r]/'功能测试'/case/f'第{n}个测试实例';folder.mkdir(parents=True,exist_ok=True)
     inputs=[{'步骤':i+1,'输入':json.loads((api.parent/st['bodyFile']).read_text(encoding='utf-8'))} for i,st in enumerate(src['steps']) if 'bodyFile' in st]
     # 页面执行核验业务结果；接口专属畸形分页另在接口目录验证。
@@ -290,7 +290,7 @@ def functional():
   (root/'README.md').write_text(f'# 第{r}轮测试数据\n\n按 `功能测试或接口测试/总用例编号/第n个测试实例/` 保存；每个总用例8个实例。接口实例由JUnit读取请求文件执行；功能实例为网页人工测试，执行前均标记待执行。\n',encoding='utf-8')
 def strengthen():
  for case,n in [('R306',1),('R306',6),('R307',1),('R308',8)]:
-  folder=ROUNDS[3]/'接口测试'/case/f'第{n}个测试实例';obj=json.loads((folder/'instance.json').read_text(encoding='utf-8'))
+  folder=ROUNDS[3]/'综合接口测试'/case/f'第{n}个测试实例';obj=json.loads((folder/'instance.json').read_text(encoding='utf-8'))
   temp=Scenario(3,case,n,obj['title']);temp.meta=obj
   if case=='R306' and n==1:
    for key,value in [('phone','bad'),('phone','1'*31),('defaultLocation',' '),('defaultLocation','地'*201)]:
@@ -335,7 +335,29 @@ def functional_assets():
    if names:inputs['素材使用说明']='本文件夹中的图片供网页选择上传；oversized.png为5MB加1字节；invalid.txt用于错误格式。'
    write(data_path,inputs)
 
+
+def adapt_third_permissions():
+ root=ROUNDS[3]/'综合接口测试'
+ for f in root.rglob('instance.json'):
+  obj=json.loads(f.read_text(encoding='utf-8'));steps=[];registered=False
+  for step in obj['steps']:
+   public=step.get('method')=='POST' and (step.get('path')=='/api/public/intents' or (step.get('path','').startswith('/api/public/products/') and step['path'].endswith('/intents')))
+   if obj['id']=='R307-03' and public and step.get('status')==201 and not step.get('session'):
+    steps.append({'method':'POST','path':step['path'],'status':401,'bodyFile':step['bodyFile']})
+    step={'method':'SEED_LEGACY_INTENT','path':'${p}','bodyFile':step['bodyFile']}
+   elif public and not step.get('session') and step.get('status')!=401:
+    if not registered:
+     name='客户登录前置数据.json'
+     write(f.parent/name,{'username':'fixture'+obj['id'].replace('-',''),'password':'Buyer1234','phone':'13800000001','defaultLocation':'学校南门'})
+     steps.append({'method':'POST','path':'/api/customer/register','status':201,'bodyFile':name,'saveSession':'fixtureCustomer','assertions':{'/authenticated':True}})
+     registered=True
+    step['session']='fixtureCustomer'
+   steps.append(step)
+  obj['steps']=steps;obj['iteration']=3;obj['type']='综合接口测试';write(f,obj)
+
 def main():
- migrate();first_additional();second();third_a1();third_a2();strengthen();functional();functional_assets()
- for r,p in ROUNDS.items():print(f'第{r}轮：接口{len(list((p/"接口测试").rglob("instance.json")))}，功能{len(list((p/"功能测试").rglob("instance.json")))}')
+ migrate();first_additional();second();third_a1();third_a2();strengthen();adapt_third_permissions();functional();functional_assets()
+ for r,p in ROUNDS.items():
+  api_folder=p/("综合接口测试" if r==3 else "接口测试")
+  print(f'第{r}轮：接口{len(list(api_folder.rglob("instance.json")))}，功能{len(list((p/"功能测试").rglob("instance.json")))}')
 if __name__=='__main__':main()

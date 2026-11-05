@@ -1,0 +1,59 @@
+{
+  "id": "API-34",
+  "name": "等待意向处理",
+  "method": "POST",
+  "path": "/api/seller/intents/{intentId}/action",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-34-01",
+      "等待意向重排",
+      "有效卖家、至少2个WAITING意向；body={\"action\":\"REQUEUE\"}",
+      "204；目标移至本商品队尾，原口令码有效，其他商品不变",
+      "通过",
+      "队列场景",
+      "等待意向处理\nPOST /api/seller/intents/{intentId}/action"
+    ],
+    [
+      "API-34-02",
+      "等待意向作废",
+      "有效卖家、WAITING意向；body={\"action\":\"VOID\"}",
+      "204；意向VOIDED、原码失效，其他等待者正常前移",
+      "通过",
+      "状态转换",
+      "等待意向处理\nPOST /api/seller/intents/{intentId}/action"
+    ],
+    [
+      "API-34-03",
+      "非法操作名",
+      "有效卖家、WAITING意向；body={\"action\":\"UNKNOWN\"}",
+      "400；队列和状态不变",
+      "通过",
+      "无效枚举",
+      "等待意向处理\nPOST /api/seller/intents/{intentId}/action"
+    ],
+    [
+      "API-34-04",
+      "不能处理交易中意向",
+      "有效卖家、IN_TRADE意向；action为合法VOID",
+      "409；不绕过交易结果流程",
+      "通过",
+      "状态约束",
+      "等待意向处理\nPOST /api/seller/intents/{intentId}/action"
+    ],
+    [
+      "API-34-05",
+      "未登录处理",
+      "无卖家会话、有效WAITING意向及合法action",
+      "401",
+      "通过",
+      "权限校验",
+      "等待意向处理\nPOST /api/seller/intents/{intentId}/action"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api34Test",
+  "executionRecord": "执行记录/API-34-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

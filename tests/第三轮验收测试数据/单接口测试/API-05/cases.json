@@ -1,0 +1,59 @@
+{
+  "id": "API-05",
+  "name": "兼容指定商品意向提交",
+  "method": "POST",
+  "path": "/api/public/products/{id}/intents",
+  "scope": "第三次评审",
+  "auth": "客户",
+  "rows": [
+    [
+      "API-05-01",
+      "有效客户正常提交",
+      "有效客户会话；在售有库存商品；body={\"name\":\"联系人\",\"phone\":\"13800000001\"}",
+      "201；返回passcode和position，记录归属当前客户，地点使用客户默认地点",
+      "通过",
+      "有效身份、归属",
+      "兼容指定商品意向提交\nPOST /api/public/products/{id}/intents"
+    ],
+    [
+      "API-05-02",
+      "匿名提交被拒绝",
+      "不携带任何会话，商品和请求体合法",
+      "401；不创建意向、不改变队列",
+      "通过",
+      "未登录权限",
+      "兼容指定商品意向提交\nPOST /api/public/products/{id}/intents"
+    ],
+    [
+      "API-05-03",
+      "仅卖家身份被拒绝",
+      "仅保留有效卖家身份，商品和请求体合法",
+      "401；卖家身份不能替代客户身份",
+      "通过",
+      "角色隔离",
+      "兼容指定商品意向提交\nPOST /api/public/products/{id}/intents"
+    ],
+    [
+      "API-05-04",
+      "非法电话被拒绝",
+      "有效客户会话；phone=\"bad\"，其余合法",
+      "400；不创建记录",
+      "通过",
+      "无效等价类",
+      "兼容指定商品意向提交\nPOST /api/public/products/{id}/intents"
+    ],
+    [
+      "API-05-05",
+      "冻结商品拒绝新意向",
+      "有效客户会话；商品为MANUALLY_FROZEN；请求体合法",
+      "409；队列不新增记录",
+      "通过",
+      "状态转换",
+      "兼容指定商品意向提交\nPOST /api/public/products/{id}/intents"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api05Test",
+  "executionRecord": "执行记录/API-05-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

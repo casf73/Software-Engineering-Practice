@@ -1,0 +1,13 @@
+{
+  "id" : "API-08-02",
+  "name" : "API-08-02 非法电话",
+  "executedAt" : "2026-11-05T10:12:28.699616700+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"请输入有效联系电话\"}"
+  } ]
+}

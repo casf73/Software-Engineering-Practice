@@ -1,0 +1,59 @@
+{
+  "id": "API-28",
+  "name": "商品图片上传",
+  "method": "POST",
+  "path": "/api/seller/products/image",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-28-01",
+      "合法JPG",
+      "有效卖家；multipart/form-data，file为真实JPG且不超过5MB",
+      "200；返回本地图片url，可用于商品相册",
+      "通过",
+      "有效文件类型",
+      "商品图片上传\nPOST /api/seller/products/image"
+    ],
+    [
+      "API-28-02",
+      "合法PNG",
+      "有效卖家；file为真实PNG且不超过5MB",
+      "200；返回本地图片url",
+      "通过",
+      "有效文件类型",
+      "商品图片上传\nPOST /api/seller/products/image"
+    ],
+    [
+      "API-28-03",
+      "非法TXT",
+      "有效卖家；file为TXT文件，不伪装图片内容",
+      "400；不返回可用商品图片地址",
+      "通过",
+      "无效类型",
+      "商品图片上传\nPOST /api/seller/products/image"
+    ],
+    [
+      "API-28-04",
+      "大小超过上界",
+      "有效卖家；file为真实图片，大小5MB+1字节",
+      "400；拒绝超限文件",
+      "通过",
+      "大小边界",
+      "商品图片上传\nPOST /api/seller/products/image"
+    ],
+    [
+      "API-28-05",
+      "未登录上传",
+      "无卖家会话，上传合法图片",
+      "401",
+      "通过",
+      "权限校验",
+      "商品图片上传\nPOST /api/seller/products/image"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api28Test",
+  "executionRecord": "执行记录/API-28-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

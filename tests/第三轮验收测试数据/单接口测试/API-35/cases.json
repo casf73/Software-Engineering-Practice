@@ -1,0 +1,59 @@
+{
+  "id": "API-35",
+  "name": "卖家客户列表查询",
+  "method": "GET",
+  "path": "/api/seller/customers",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-35-01",
+      "用户名搜索",
+      "有效卖家；GET ?q=buyer，预置buyer01",
+      "200；包含匹配客户，资料不含密码及哈希",
+      "通过",
+      "用户名匹配",
+      "卖家客户列表查询\nGET /api/seller/customers"
+    ],
+    [
+      "API-35-02",
+      "电话搜索",
+      "有效卖家；GET ?q=13800000001",
+      "200；返回对应客户",
+      "通过",
+      "电话匹配",
+      "卖家客户列表查询\nGET /api/seller/customers"
+    ],
+    [
+      "API-35-03",
+      "无匹配结果",
+      "有效卖家；GET ?q=nomatch_unique",
+      "200；items=[]、total=0",
+      "通过",
+      "空结果等价类",
+      "卖家客户列表查询\nGET /api/seller/customers"
+    ],
+    [
+      "API-35-04",
+      "非法分页",
+      "有效卖家；GET ?size=0",
+      "400",
+      "通过",
+      "分页下界外",
+      "卖家客户列表查询\nGET /api/seller/customers"
+    ],
+    [
+      "API-35-05",
+      "客户身份不能访问",
+      "仅客户会话，GET合法查询",
+      "401；不返回客户管理列表",
+      "通过",
+      "角色隔离",
+      "卖家客户列表查询\nGET /api/seller/customers"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api35Test",
+  "executionRecord": "执行记录/API-35-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

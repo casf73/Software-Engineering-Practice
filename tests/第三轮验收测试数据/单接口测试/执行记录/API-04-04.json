@@ -1,0 +1,13 @@
+{
+  "id" : "API-04-04",
+  "name" : "API-04-04 三个有效商品产生歧义",
+  "executedAt" : "2026-11-05T10:12:28.273483300+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/products/current",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"当前有多个商品，请使用带商品编号的接口\"}"
+  } ]
+}

@@ -1,0 +1,19 @@
+{
+  "id" : "API-07-02",
+  "name" : "API-07-02 重排后查询排位",
+  "executedAt" : "2026-11-05T10:12:28.604073200+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/intents/5/action",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"WAITING\",\"position\":2,\"productStatus\":\"ON_SALE\"}"
+  } ]
+}

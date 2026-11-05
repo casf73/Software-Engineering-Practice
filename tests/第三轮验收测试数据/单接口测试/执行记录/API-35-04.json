@@ -1,0 +1,13 @@
+{
+  "id" : "API-35-04",
+  "name" : "API-35-04 非法分页",
+  "executedAt" : "2026-11-05T10:12:32.192424700+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/customers?size=0",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"请求参数不合法，请检查页码、数量和编号\"}"
+  } ]
+}

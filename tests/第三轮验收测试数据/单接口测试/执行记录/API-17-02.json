@@ -1,0 +1,13 @@
+{
+  "id" : "API-17-02",
+  "name" : "API-17-02 有效卖家查询",
+  "executedAt" : "2026-11-05T10:12:30.305733+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true}"
+  } ]
+}

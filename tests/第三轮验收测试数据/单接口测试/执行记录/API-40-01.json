@@ -1,0 +1,13 @@
+{
+  "id" : "API-40-01",
+  "name" : "API-40-01 唯一商品冻结",
+  "executedAt" : "2026-11-05T10:12:32.418174600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/freeze",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":126,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"MANUALLY_FROZEN\",\"createdAt\":\"2026-11-05T10:12:32.414171\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  } ]
+}

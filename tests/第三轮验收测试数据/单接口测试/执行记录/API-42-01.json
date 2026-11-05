@@ -1,0 +1,19 @@
+{
+  "id" : "API-42-01",
+  "name" : "API-42-01 唯一商品下架",
+  "executedAt" : "2026-11-05T10:12:32.528241100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/delist",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/products",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[],\"total\":0,\"page\":0,\"size\":20}"
+  } ]
+}

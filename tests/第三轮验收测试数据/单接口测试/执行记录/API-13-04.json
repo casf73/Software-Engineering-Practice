@@ -1,0 +1,25 @@
+{
+  "id" : "API-13-04",
+  "name" : "API-13-04 双身份仅清除客户",
+  "executedAt" : "2026-11-05T10:12:29.709693+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/logout",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/customer/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":false,\"customer\":null}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/seller/session",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"authenticated\":true}"
+  } ]
+}

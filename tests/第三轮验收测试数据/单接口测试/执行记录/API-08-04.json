@@ -1,0 +1,13 @@
+{
+  "id" : "API-08-04",
+  "name" : "API-08-04 交易中本人不可修改",
+  "executedAt" : "2026-11-05T10:12:28.730621700+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"只有仍在排队的买家可以修改联系信息\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-24-04",
+  "name" : "API-24-04 未登录冻结",
+  "executedAt" : "2026-11-05T10:12:31.546753300+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/79/freeze",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

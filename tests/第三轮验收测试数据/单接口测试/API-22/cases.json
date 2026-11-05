@@ -1,0 +1,59 @@
+{
+  "id": "API-22",
+  "name": "编辑商品",
+  "method": "PUT",
+  "path": "/api/seller/products/{id}",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-22-01",
+      "正常修改商品",
+      "有效卖家、非交易中商品；提交新名称、价格和合法描述",
+      "200；指定商品更新，商品ID不变，其他商品不受影响",
+      "通过",
+      "有效场景",
+      "编辑商品\nPUT /api/seller/products/{id}"
+    ],
+    [
+      "API-22-02",
+      "价格低于下界",
+      "有效卖家、可编辑商品；price=0，其他字段合法",
+      "400；商品原字段保持不变",
+      "通过",
+      "价格下界外",
+      "编辑商品\nPUT /api/seller/products/{id}"
+    ],
+    [
+      "API-22-03",
+      "库存改为0",
+      "有效卖家、在售商品；提交合法字段和stock=0",
+      "200；库存归零并下架，公开详情不可见",
+      "通过",
+      "状态转换",
+      "编辑商品\nPUT /api/seller/products/{id}"
+    ],
+    [
+      "API-22-04",
+      "交易中拒绝编辑",
+      "有效卖家、商品为IN_TRADE；请求体合法",
+      "409；商品和交易数据不变",
+      "通过",
+      "状态约束",
+      "编辑商品\nPUT /api/seller/products/{id}"
+    ],
+    [
+      "API-22-05",
+      "商品不存在",
+      "有效卖家；使用不存在的商品ID和合法请求体",
+      "404",
+      "通过",
+      "不存在资源",
+      "编辑商品\nPUT /api/seller/products/{id}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api22Test",
+  "executionRecord": "执行记录/API-22-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

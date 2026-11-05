@@ -1,0 +1,561 @@
+[
+  {
+    "id": "API-01",
+    "interface": "GET /api/public/products",
+    "name": "商品列表查询",
+    "class": "cn.codelyy.store.singleapi.Api01Test",
+    "cases": [
+      "API-01-01",
+      "API-01-02",
+      "API-01-03",
+      "API-01-04",
+      "API-01-05"
+    ]
+  },
+  {
+    "id": "API-02",
+    "interface": "GET /api/public/products/{id}",
+    "name": "商品详情查询",
+    "class": "cn.codelyy.store.singleapi.Api02Test",
+    "cases": [
+      "API-02-01",
+      "API-02-02",
+      "API-02-03",
+      "API-02-04",
+      "API-02-05"
+    ]
+  },
+  {
+    "id": "API-03",
+    "interface": "GET /api/public/categories",
+    "name": "分类列表查询",
+    "class": "cn.codelyy.store.singleapi.Api03Test",
+    "cases": [
+      "API-03-01",
+      "API-03-02",
+      "API-03-03",
+      "API-03-04",
+      "API-03-05"
+    ]
+  },
+  {
+    "id": "API-04",
+    "interface": "GET /api/public/products/current",
+    "name": "兼容当前商品查询",
+    "class": "cn.codelyy.store.singleapi.Api04Test",
+    "cases": [
+      "API-04-01",
+      "API-04-02",
+      "API-04-03",
+      "API-04-04",
+      "API-04-05"
+    ]
+  },
+  {
+    "id": "API-05",
+    "interface": "POST /api/public/products/{id}/intents",
+    "name": "兼容指定商品意向提交",
+    "class": "cn.codelyy.store.singleapi.Api05Test",
+    "cases": [
+      "API-05-01",
+      "API-05-02",
+      "API-05-03",
+      "API-05-04",
+      "API-05-05"
+    ]
+  },
+  {
+    "id": "API-06",
+    "interface": "POST /api/public/intents",
+    "name": "兼容当前商品意向提交",
+    "class": "cn.codelyy.store.singleapi.Api06Test",
+    "cases": [
+      "API-06-01",
+      "API-06-02",
+      "API-06-03",
+      "API-06-04",
+      "API-06-05"
+    ]
+  },
+  {
+    "id": "API-07",
+    "interface": "GET /api/public/intents/{passcode}",
+    "name": "口令码意向查询",
+    "class": "cn.codelyy.store.singleapi.Api07Test",
+    "cases": [
+      "API-07-01",
+      "API-07-02",
+      "API-07-03",
+      "API-07-04",
+      "API-07-05"
+    ]
+  },
+  {
+    "id": "API-08",
+    "interface": "PUT /api/public/intents/{passcode}",
+    "name": "口令码联系信息修改",
+    "class": "cn.codelyy.store.singleapi.Api08Test",
+    "cases": [
+      "API-08-01",
+      "API-08-02",
+      "API-08-03",
+      "API-08-04",
+      "API-08-05"
+    ]
+  },
+  {
+    "id": "API-09",
+    "interface": "DELETE /api/public/intents/{passcode}",
+    "name": "口令码意向撤销",
+    "class": "cn.codelyy.store.singleapi.Api09Test",
+    "cases": [
+      "API-09-01",
+      "API-09-02",
+      "API-09-03",
+      "API-09-04",
+      "API-09-05"
+    ]
+  },
+  {
+    "id": "API-10",
+    "interface": "POST /api/customer/register",
+    "name": "客户注册",
+    "class": "cn.codelyy.store.singleapi.Api10Test",
+    "cases": [
+      "API-10-01",
+      "API-10-02",
+      "API-10-03",
+      "API-10-04",
+      "API-10-05"
+    ]
+  },
+  {
+    "id": "API-11",
+    "interface": "POST /api/customer/login",
+    "name": "客户登录",
+    "class": "cn.codelyy.store.singleapi.Api11Test",
+    "cases": [
+      "API-11-01",
+      "API-11-02",
+      "API-11-03",
+      "API-11-04",
+      "API-11-05"
+    ]
+  },
+  {
+    "id": "API-12",
+    "interface": "GET /api/customer/session",
+    "name": "客户会话查询",
+    "class": "cn.codelyy.store.singleapi.Api12Test",
+    "cases": [
+      "API-12-01",
+      "API-12-02",
+      "API-12-03",
+      "API-12-04",
+      "API-12-05"
+    ]
+  },
+  {
+    "id": "API-13",
+    "interface": "POST /api/customer/logout",
+    "name": "客户退出",
+    "class": "cn.codelyy.store.singleapi.Api13Test",
+    "cases": [
+      "API-13-01",
+      "API-13-02",
+      "API-13-03",
+      "API-13-04",
+      "API-13-05"
+    ]
+  },
+  {
+    "id": "API-14",
+    "interface": "GET /api/customer/orders",
+    "name": "本人购买历史查询",
+    "class": "cn.codelyy.store.singleapi.Api14Test",
+    "cases": [
+      "API-14-01",
+      "API-14-02",
+      "API-14-03",
+      "API-14-04",
+      "API-14-05"
+    ]
+  },
+  {
+    "id": "API-15",
+    "interface": "POST /api/customer/products/{id}/intents",
+    "name": "客户购买意向提交",
+    "class": "cn.codelyy.store.singleapi.Api15Test",
+    "cases": [
+      "API-15-01",
+      "API-15-02",
+      "API-15-03",
+      "API-15-04",
+      "API-15-05"
+    ]
+  },
+  {
+    "id": "API-16",
+    "interface": "POST /api/seller/login",
+    "name": "卖家登录",
+    "class": "cn.codelyy.store.singleapi.Api16Test",
+    "cases": [
+      "API-16-01",
+      "API-16-02",
+      "API-16-03",
+      "API-16-04",
+      "API-16-05"
+    ]
+  },
+  {
+    "id": "API-17",
+    "interface": "GET /api/seller/session",
+    "name": "卖家会话查询",
+    "class": "cn.codelyy.store.singleapi.Api17Test",
+    "cases": [
+      "API-17-01",
+      "API-17-02",
+      "API-17-03",
+      "API-17-04",
+      "API-17-05"
+    ]
+  },
+  {
+    "id": "API-18",
+    "interface": "POST /api/seller/logout",
+    "name": "卖家退出",
+    "class": "cn.codelyy.store.singleapi.Api18Test",
+    "cases": [
+      "API-18-01",
+      "API-18-02",
+      "API-18-03",
+      "API-18-04",
+      "API-18-05"
+    ]
+  },
+  {
+    "id": "API-19",
+    "interface": "PUT /api/seller/password",
+    "name": "卖家修改密码",
+    "class": "cn.codelyy.store.singleapi.Api19Test",
+    "cases": [
+      "API-19-01",
+      "API-19-02",
+      "API-19-03",
+      "API-19-04",
+      "API-19-05"
+    ]
+  },
+  {
+    "id": "API-20",
+    "interface": "GET /api/seller/products",
+    "name": "卖家商品列表查询",
+    "class": "cn.codelyy.store.singleapi.Api20Test",
+    "cases": [
+      "API-20-01",
+      "API-20-02",
+      "API-20-03",
+      "API-20-04",
+      "API-20-05"
+    ]
+  },
+  {
+    "id": "API-21",
+    "interface": "POST /api/seller/products",
+    "name": "发布商品",
+    "class": "cn.codelyy.store.singleapi.Api21Test",
+    "cases": [
+      "API-21-01",
+      "API-21-02",
+      "API-21-03",
+      "API-21-04",
+      "API-21-05"
+    ]
+  },
+  {
+    "id": "API-22",
+    "interface": "PUT /api/seller/products/{id}",
+    "name": "编辑商品",
+    "class": "cn.codelyy.store.singleapi.Api22Test",
+    "cases": [
+      "API-22-01",
+      "API-22-02",
+      "API-22-03",
+      "API-22-04",
+      "API-22-05"
+    ]
+  },
+  {
+    "id": "API-23",
+    "interface": "GET /api/seller/products/{id}/workbench",
+    "name": "商品工作台查询",
+    "class": "cn.codelyy.store.singleapi.Api23Test",
+    "cases": [
+      "API-23-01",
+      "API-23-02",
+      "API-23-03",
+      "API-23-04",
+      "API-23-05"
+    ]
+  },
+  {
+    "id": "API-24",
+    "interface": "POST /api/seller/products/{id}/freeze",
+    "name": "冻结商品",
+    "class": "cn.codelyy.store.singleapi.Api24Test",
+    "cases": [
+      "API-24-01",
+      "API-24-02",
+      "API-24-03",
+      "API-24-04",
+      "API-24-05"
+    ]
+  },
+  {
+    "id": "API-25",
+    "interface": "POST /api/seller/products/{id}/unfreeze",
+    "name": "解冻商品",
+    "class": "cn.codelyy.store.singleapi.Api25Test",
+    "cases": [
+      "API-25-01",
+      "API-25-02",
+      "API-25-03",
+      "API-25-04",
+      "API-25-05"
+    ]
+  },
+  {
+    "id": "API-26",
+    "interface": "POST /api/seller/products/{id}/relist",
+    "name": "重新上架商品",
+    "class": "cn.codelyy.store.singleapi.Api26Test",
+    "cases": [
+      "API-26-01",
+      "API-26-02",
+      "API-26-03",
+      "API-26-04",
+      "API-26-05"
+    ]
+  },
+  {
+    "id": "API-27",
+    "interface": "POST /api/seller/products/{id}/delist",
+    "name": "下架商品",
+    "class": "cn.codelyy.store.singleapi.Api27Test",
+    "cases": [
+      "API-27-01",
+      "API-27-02",
+      "API-27-03",
+      "API-27-04",
+      "API-27-05"
+    ]
+  },
+  {
+    "id": "API-28",
+    "interface": "POST /api/seller/products/image",
+    "name": "商品图片上传",
+    "class": "cn.codelyy.store.singleapi.Api28Test",
+    "cases": [
+      "API-28-01",
+      "API-28-02",
+      "API-28-03",
+      "API-28-04",
+      "API-28-05"
+    ]
+  },
+  {
+    "id": "API-29",
+    "interface": "POST /api/seller/categories",
+    "name": "创建分类",
+    "class": "cn.codelyy.store.singleapi.Api29Test",
+    "cases": [
+      "API-29-01",
+      "API-29-02",
+      "API-29-03",
+      "API-29-04",
+      "API-29-05"
+    ]
+  },
+  {
+    "id": "API-30",
+    "interface": "PUT /api/seller/categories/{id}",
+    "name": "编辑分类",
+    "class": "cn.codelyy.store.singleapi.Api30Test",
+    "cases": [
+      "API-30-01",
+      "API-30-02",
+      "API-30-03",
+      "API-30-04",
+      "API-30-05"
+    ]
+  },
+  {
+    "id": "API-31",
+    "interface": "DELETE /api/seller/categories/{id}",
+    "name": "删除分类",
+    "class": "cn.codelyy.store.singleapi.Api31Test",
+    "cases": [
+      "API-31-01",
+      "API-31-02",
+      "API-31-03",
+      "API-31-04",
+      "API-31-05"
+    ]
+  },
+  {
+    "id": "API-32",
+    "interface": "POST /api/seller/products/{id}/trades/start",
+    "name": "开始交易",
+    "class": "cn.codelyy.store.singleapi.Api32Test",
+    "cases": [
+      "API-32-01",
+      "API-32-02",
+      "API-32-03",
+      "API-32-04",
+      "API-32-05"
+    ]
+  },
+  {
+    "id": "API-33",
+    "interface": "POST /api/seller/trades/{intentId}/result",
+    "name": "登记交易结果",
+    "class": "cn.codelyy.store.singleapi.Api33Test",
+    "cases": [
+      "API-33-01",
+      "API-33-02",
+      "API-33-03",
+      "API-33-04",
+      "API-33-05"
+    ]
+  },
+  {
+    "id": "API-34",
+    "interface": "POST /api/seller/intents/{intentId}/action",
+    "name": "等待意向处理",
+    "class": "cn.codelyy.store.singleapi.Api34Test",
+    "cases": [
+      "API-34-01",
+      "API-34-02",
+      "API-34-03",
+      "API-34-04",
+      "API-34-05"
+    ]
+  },
+  {
+    "id": "API-35",
+    "interface": "GET /api/seller/customers",
+    "name": "卖家客户列表查询",
+    "class": "cn.codelyy.store.singleapi.Api35Test",
+    "cases": [
+      "API-35-01",
+      "API-35-02",
+      "API-35-03",
+      "API-35-04",
+      "API-35-05"
+    ]
+  },
+  {
+    "id": "API-36",
+    "interface": "GET /api/seller/customers/{id}",
+    "name": "卖家客户详情查询",
+    "class": "cn.codelyy.store.singleapi.Api36Test",
+    "cases": [
+      "API-36-01",
+      "API-36-02",
+      "API-36-03",
+      "API-36-04",
+      "API-36-05"
+    ]
+  },
+  {
+    "id": "API-37",
+    "interface": "GET /api/seller/customers/{id}/orders",
+    "name": "卖家客户历史查询",
+    "class": "cn.codelyy.store.singleapi.Api37Test",
+    "cases": [
+      "API-37-01",
+      "API-37-02",
+      "API-37-03",
+      "API-37-04",
+      "API-37-05"
+    ]
+  },
+  {
+    "id": "API-38",
+    "interface": "GET /api/seller/workbench",
+    "name": "兼容当前商品工作台",
+    "class": "cn.codelyy.store.singleapi.Api38Test",
+    "cases": [
+      "API-38-01",
+      "API-38-02",
+      "API-38-03",
+      "API-38-04",
+      "API-38-05"
+    ]
+  },
+  {
+    "id": "API-39",
+    "interface": "PUT /api/seller/products/current",
+    "name": "兼容当前商品编辑",
+    "class": "cn.codelyy.store.singleapi.Api39Test",
+    "cases": [
+      "API-39-01",
+      "API-39-02",
+      "API-39-03",
+      "API-39-04",
+      "API-39-05"
+    ]
+  },
+  {
+    "id": "API-40",
+    "interface": "POST /api/seller/products/current/freeze",
+    "name": "兼容当前商品冻结",
+    "class": "cn.codelyy.store.singleapi.Api40Test",
+    "cases": [
+      "API-40-01",
+      "API-40-02",
+      "API-40-03",
+      "API-40-04",
+      "API-40-05"
+    ]
+  },
+  {
+    "id": "API-41",
+    "interface": "POST /api/seller/products/current/unfreeze",
+    "name": "兼容当前商品解冻",
+    "class": "cn.codelyy.store.singleapi.Api41Test",
+    "cases": [
+      "API-41-01",
+      "API-41-02",
+      "API-41-03",
+      "API-41-04",
+      "API-41-05"
+    ]
+  },
+  {
+    "id": "API-42",
+    "interface": "POST /api/seller/products/current/delist",
+    "name": "兼容当前商品下架",
+    "class": "cn.codelyy.store.singleapi.Api42Test",
+    "cases": [
+      "API-42-01",
+      "API-42-02",
+      "API-42-03",
+      "API-42-04",
+      "API-42-05"
+    ]
+  },
+  {
+    "id": "API-43",
+    "interface": "POST /api/seller/trades/start",
+    "name": "兼容当前商品开始交易",
+    "class": "cn.codelyy.store.singleapi.Api43Test",
+    "cases": [
+      "API-43-01",
+      "API-43-02",
+      "API-43-03",
+      "API-43-04",
+      "API-43-05"
+    ]
+  }
+]

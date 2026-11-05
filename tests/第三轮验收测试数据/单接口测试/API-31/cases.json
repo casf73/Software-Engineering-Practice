@@ -1,0 +1,59 @@
+{
+  "id": "API-31",
+  "name": "删除分类",
+  "method": "DELETE",
+  "path": "/api/seller/categories/{id}",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-31-01",
+      "删除空分类",
+      "有效卖家；分类无商品和子类引用",
+      "204、无正文；分类列表不再返回它",
+      "通过",
+      "有效删除",
+      "删除分类\nDELETE /api/seller/categories/{id}"
+    ],
+    [
+      "API-31-02",
+      "被商品引用",
+      "有效卖家；分类被至少1个商品引用",
+      "409；分类和关联保留",
+      "通过",
+      "商品引用约束",
+      "删除分类\nDELETE /api/seller/categories/{id}"
+    ],
+    [
+      "API-31-03",
+      "被子分类引用",
+      "有效卖家；一级分类下已有二级分类",
+      "409；父子结构保留",
+      "通过",
+      "层级引用约束",
+      "删除分类\nDELETE /api/seller/categories/{id}"
+    ],
+    [
+      "API-31-04",
+      "分类不存在",
+      "有效卖家，不存在的分类ID",
+      "404",
+      "通过",
+      "不存在资源",
+      "删除分类\nDELETE /api/seller/categories/{id}"
+    ],
+    [
+      "API-31-05",
+      "未登录删除",
+      "无卖家会话，目标为空分类",
+      "401；分类保留",
+      "通过",
+      "权限校验",
+      "删除分类\nDELETE /api/seller/categories/{id}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api31Test",
+  "executionRecord": "执行记录/API-31-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

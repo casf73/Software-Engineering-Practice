@@ -1,0 +1,13 @@
+{
+  "id" : "API-31-04",
+  "name" : "API-31-04 分类不存在",
+  "executedAt" : "2026-11-05T10:12:31.946852600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "DELETE",
+    "path" : "/api/seller/categories/9223372036854775807",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"分类不存在\"}"
+  } ]
+}

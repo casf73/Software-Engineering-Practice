@@ -1,0 +1,25 @@
+{
+  "id" : "API-04-05",
+  "name" : "API-04-05 当前商品数据实时一致",
+  "executedAt" : "2026-11-05T10:12:28.337245400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"url\":\"/uploads/2437860f-006a-455d-a0d9-803a3bf8dd13.png\"}"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/seller/products/19",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":19,\"name\":\"新名称\",\"price\":99.50,\"description\":\"<p>商品说明</p>\",\"images\":[\"/uploads/2437860f-006a-455d-a0d9-803a3bf8dd13.png\"],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:28.284005\",\"stock\":3,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/products/current",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":19,\"name\":\"新名称\",\"price\":99.50,\"description\":\"<p>商品说明</p>\",\"images\":[\"/uploads/2437860f-006a-455d-a0d9-803a3bf8dd13.png\"],\"status\":\"ON_SALE\",\"createdAt\":\"2026-11-05T10:12:28.284005\",\"stock\":3,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  } ]
+}

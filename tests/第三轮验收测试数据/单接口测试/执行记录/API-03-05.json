@@ -1,0 +1,25 @@
+{
+  "id" : "API-03-05",
+  "name" : "API-03-05 维护后读取最新数据",
+  "executedAt" : "2026-11-05T10:12:28.177510400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/categories/11",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":11,\"name\":\"机械键盘\",\"parentId\":10}"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/seller/categories/12",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/categories",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "[{\"id\":10,\"name\":\"电子产品\",\"parentId\":null},{\"id\":11,\"name\":\"机械键盘\",\"parentId\":10}]"
+  } ]
+}

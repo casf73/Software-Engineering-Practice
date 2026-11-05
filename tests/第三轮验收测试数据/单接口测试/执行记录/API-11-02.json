@@ -1,0 +1,13 @@
+{
+  "id" : "API-11-02",
+  "name" : "API-11-02 密码错误",
+  "executedAt" : "2026-11-05T10:12:29.347714800+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/login",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"用户名或密码错误\"}"
+  } ]
+}

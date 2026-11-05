@@ -1,0 +1,13 @@
+{
+  "id" : "API-42-03",
+  "name" : "API-42-03 未登录下架",
+  "executedAt" : "2026-11-05T10:12:32.542902800+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/current/delist",
+    "expectedStatus" : 401,
+    "actualStatus" : 401,
+    "response" : "{\"message\":\"卖家登录已失效，请重新登录\"}"
+  } ]
+}

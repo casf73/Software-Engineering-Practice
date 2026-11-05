@@ -1,0 +1,13 @@
+{
+  "id" : "API-20-03",
+  "name" : "API-20-03 合法空页",
+  "executedAt" : "2026-11-05T10:12:31.286260800+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/products?page=1&size=1",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[],\"total\":1,\"page\":1,\"size\":1}"
+  } ]
+}

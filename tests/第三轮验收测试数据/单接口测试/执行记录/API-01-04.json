@@ -1,0 +1,13 @@
+{
+  "id" : "API-01-04",
+  "name" : "API-01-04 关键字无匹配结果",
+  "executedAt" : "2026-11-05T10:12:27.698887600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/products?q=nomatch_unique",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[],\"total\":0,\"page\":0,\"size\":20}"
+  } ]
+}

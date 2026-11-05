@@ -1,0 +1,59 @@
+{
+  "id": "API-36",
+  "name": "卖家客户详情查询",
+  "method": "GET",
+  "path": "/api/seller/customers/{id}",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-36-01",
+      "正常查询客户",
+      "有效卖家；id指向buyer01",
+      "200；用户名、电话、默认地点及创建时间正确，不返回password/passwordHash",
+      "通过",
+      "字段及隐私",
+      "卖家客户详情查询\nGET /api/seller/customers/{id}"
+    ],
+    [
+      "API-36-02",
+      "客户不存在",
+      "有效卖家，不存在的客户ID",
+      "404",
+      "通过",
+      "不存在资源",
+      "卖家客户详情查询\nGET /api/seller/customers/{id}"
+    ],
+    [
+      "API-36-03",
+      "访客不能查询",
+      "无会话，目标客户存在",
+      "401",
+      "通过",
+      "未登录权限",
+      "卖家客户详情查询\nGET /api/seller/customers/{id}"
+    ],
+    [
+      "API-36-04",
+      "仅客户身份不能查询",
+      "仅客户会话，目标客户存在",
+      "401",
+      "通过",
+      "角色隔离",
+      "卖家客户详情查询\nGET /api/seller/customers/{id}"
+    ],
+    [
+      "API-36-05",
+      "双身份按卖家权限查询",
+      "同一会话具有有效客户与卖家身份，查询指定客户",
+      "200；返回指定ID资料，不误用会话中客户的ID",
+      "通过",
+      "身份及参数作用域",
+      "卖家客户详情查询\nGET /api/seller/customers/{id}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api36Test",
+  "executionRecord": "执行记录/API-36-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

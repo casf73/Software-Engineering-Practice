@@ -1,0 +1,59 @@
+{
+  "id": "API-10",
+  "name": "客户注册",
+  "method": "POST",
+  "path": "/api/customer/register",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-10-01",
+      "合法注册自动登录",
+      "body={\"username\":\"buyer01\",\"password\":\"Buyer1234\",\"phone\":\"13800000001\",\"defaultLocation\":\"学校南门\"}；账号未存在",
+      "201；authenticated=true，客户资料正确，不返回password或passwordHash",
+      "通过",
+      "有效等价类",
+      "客户注册\nPOST /api/customer/register"
+    ],
+    [
+      "API-10-02",
+      "用户名低于下界",
+      "username=\"ab\"，其余字段合法",
+      "400；不创建账号",
+      "通过",
+      "2位边界",
+      "客户注册\nPOST /api/customer/register"
+    ],
+    [
+      "API-10-03",
+      "用户名超过上界",
+      "username为33个x，其余合法",
+      "400；不创建账号",
+      "通过",
+      "33位边界",
+      "客户注册\nPOST /api/customer/register"
+    ],
+    [
+      "API-10-04",
+      "密码低于下界",
+      "password为7个合法非空白字符，其余合法",
+      "400；不创建账号",
+      "通过",
+      "7位边界",
+      "客户注册\nPOST /api/customer/register"
+    ],
+    [
+      "API-10-05",
+      "大小写重复账号",
+      "预置buyer01，再使用username=\"BUYER01\"及其他合法字段注册",
+      "409；不创建第二个账号",
+      "通过",
+      "归一重复",
+      "客户注册\nPOST /api/customer/register"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api10Test",
+  "executionRecord": "执行记录/API-10-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

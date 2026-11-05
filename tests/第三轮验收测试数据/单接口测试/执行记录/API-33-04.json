@@ -1,0 +1,19 @@
+{
+  "id" : "API-33-04",
+  "name" : "API-33-04 重复登记不再扣库存",
+  "executedAt" : "2026-11-05T10:12:32.064337500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/trades/52/result",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "POST",
+    "path" : "/api/seller/trades/52/result",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"商品当前没有进行中的交易\"}"
+  } ]
+}

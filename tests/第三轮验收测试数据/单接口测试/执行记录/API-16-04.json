@@ -1,0 +1,13 @@
+{
+  "id" : "API-16-04",
+  "name" : "API-16-04 用户名为空",
+  "executedAt" : "2026-11-05T10:12:30.153890600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/login",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"must not be blank\"}"
+  } ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "API-18",
+  "name": "卖家退出",
+  "method": "POST",
+  "path": "/api/seller/logout",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-18-01",
+      "已登录卖家退出",
+      "有效卖家会话执行POST",
+      "204、无正文；随后卖家会话查询为false",
+      "通过",
+      "会话转换",
+      "卖家退出\nPOST /api/seller/logout"
+    ],
+    [
+      "API-18-02",
+      "未登录请求退出",
+      "无卖家会话",
+      "401",
+      "通过",
+      "未登录权限",
+      "卖家退出\nPOST /api/seller/logout"
+    ],
+    [
+      "API-18-03",
+      "仅客户身份请求退出",
+      "只有客户会话",
+      "401；客户身份不受影响",
+      "通过",
+      "角色隔离",
+      "卖家退出\nPOST /api/seller/logout"
+    ],
+    [
+      "API-18-04",
+      "双身份仅清除卖家",
+      "同一会话具有客户和卖家身份，执行卖家退出",
+      "204；卖家未登录，客户会话保持有效",
+      "通过",
+      "身份隔离",
+      "卖家退出\nPOST /api/seller/logout"
+    ],
+    [
+      "API-18-05",
+      "退出后管理接口受限",
+      "卖家退出后使用原客户端查询卖家商品列表",
+      "退出204；随后管理接口返回401",
+      "通过",
+      "权限收尾",
+      "卖家退出\nPOST /api/seller/logout"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api18Test",
+  "executionRecord": "执行记录/API-18-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

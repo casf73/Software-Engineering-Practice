@@ -1,0 +1,25 @@
+{
+  "id" : "API-09-01",
+  "name" : "API-09-01 等待意向正常撤销",
+  "executedAt" : "2026-11-05T10:12:28.798374200+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "DELETE",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 204,
+    "actualStatus" : 204,
+    "response" : ""
+  }, {
+    "method" : "GET",
+    "path" : "/api/customer/orders",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"items\":[{\"id\":15,\"productId\":41,\"productName\":\"测试商品\",\"price\":88.50,\"name\":\"联系人\",\"phone\":\"13800000001\",\"meetingLocation\":\"学校南门\",\"status\":\"CANCELLED\",\"submittedAt\":\"2026-11-05T10:12:28.758727\",\"position\":null,\"passcode\":null,\"productStatus\":\"ON_SALE\"}],\"total\":1,\"page\":0,\"size\":20}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/intents/TESTCODE1",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"口令码无效或已失效\"}"
+  } ]
+}

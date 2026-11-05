@@ -1,0 +1,59 @@
+{
+  "id": "API-20",
+  "name": "卖家商品列表查询",
+  "method": "GET",
+  "path": "/api/seller/products",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-20-01",
+      "返回管理范围商品",
+      "有效卖家会话，准备在售与下架商品，GET ?page=0&size=10",
+      "200；管理列表包含两种状态，total正确",
+      "通过",
+      "状态覆盖",
+      "卖家商品列表查询\nGET /api/seller/products"
+    ],
+    [
+      "API-20-02",
+      "分页大小为1",
+      "有效卖家、至少2件商品，GET ?page=0&size=1",
+      "200；items数量为1，total保留真实数量",
+      "通过",
+      "分页边界",
+      "卖家商品列表查询\nGET /api/seller/products"
+    ],
+    [
+      "API-20-03",
+      "合法空页",
+      "有效卖家、共1件商品，GET ?page=1&size=1",
+      "200；items=[]、total=1",
+      "通过",
+      "空页边界",
+      "卖家商品列表查询\nGET /api/seller/products"
+    ],
+    [
+      "API-20-04",
+      "页码为负",
+      "有效卖家会话，GET ?page=-1",
+      "400",
+      "通过",
+      "下界外",
+      "卖家商品列表查询\nGET /api/seller/products"
+    ],
+    [
+      "API-20-05",
+      "未登录查询管理数据",
+      "不携带卖家会话",
+      "401；不返回管理列表",
+      "通过",
+      "权限校验",
+      "卖家商品列表查询\nGET /api/seller/products"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api20Test",
+  "executionRecord": "执行记录/API-20-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

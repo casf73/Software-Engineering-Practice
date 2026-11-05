@@ -1,0 +1,13 @@
+{
+  "id" : "API-06-01",
+  "name" : "API-06-01 唯一商品正常提交",
+  "executedAt" : "2026-11-05T10:12:28.493498200+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/public/intents",
+    "expectedStatus" : 201,
+    "actualStatus" : 201,
+    "response" : "{\"passcode\":\"SMKLKMX4DS\",\"position\":1}"
+  } ]
+}

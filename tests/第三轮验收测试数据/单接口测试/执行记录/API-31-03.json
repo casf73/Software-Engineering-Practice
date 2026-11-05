@@ -1,0 +1,19 @@
+{
+  "id" : "API-31-03",
+  "name" : "API-31-03 被子分类引用",
+  "executedAt" : "2026-11-05T10:12:31.939344500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "DELETE",
+    "path" : "/api/seller/categories/32",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"分类已被子分类或商品引用，请先调整关联\"}"
+  }, {
+    "method" : "GET",
+    "path" : "/api/public/categories",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "[{\"id\":32,\"name\":\"电子产品\",\"parentId\":null},{\"id\":33,\"name\":\"键盘\",\"parentId\":32}]"
+  } ]
+}

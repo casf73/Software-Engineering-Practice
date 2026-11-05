@@ -1,0 +1,59 @@
+{
+  "id": "API-01",
+  "name": "商品列表查询",
+  "method": "GET",
+  "path": "/api/public/products",
+  "scope": "第三次评审",
+  "auth": "无",
+  "rows": [
+    [
+      "API-01-01",
+      "匿名查询公开商品",
+      "不携带会话，GET ?page=0&size=10；预置在售与下架商品",
+      "200；items只包含公开有效商品，total与筛选结果一致",
+      "通过",
+      "有效等价类、状态过滤",
+      "商品列表查询\nGET /api/public/products"
+    ],
+    [
+      "API-01-02",
+      "关键字忽略大小写",
+      "预置名称“Keyboard键盘”，GET ?q=keyboard",
+      "200；包含该商品，不因大小写差异漏查",
+      "通过",
+      "匹配等价类",
+      "商品列表查询\nGET /api/public/products"
+    ],
+    [
+      "API-01-03",
+      "一级分类包含子分类",
+      "预置一级“电子产品”和二级“键盘”，商品关联二级；GET ?categoryId={一级分类ID}",
+      "200；返回该二级分类商品",
+      "通过",
+      "分类关联场景",
+      "商品列表查询\nGET /api/public/products"
+    ],
+    [
+      "API-01-04",
+      "关键字无匹配结果",
+      "GET ?q=nomatch_unique，确保没有匹配商品",
+      "200；items=[]、total=0，分页字段正常",
+      "通过",
+      "空结果等价类",
+      "商品列表查询\nGET /api/public/products"
+    ],
+    [
+      "API-01-05",
+      "非法分页下界",
+      "GET ?page=-1&size=10",
+      "400；拒绝非法页码，不返回成功分页数据",
+      "通过",
+      "边界值",
+      "商品列表查询\nGET /api/public/products"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api01Test",
+  "executionRecord": "执行记录/API-01-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

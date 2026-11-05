@@ -1,0 +1,13 @@
+{
+  "id" : "API-30-04",
+  "name" : "API-30-04 同级重名修改",
+  "executedAt" : "2026-11-05T10:12:31.893544400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/categories/29",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"同级分类名称重复\"}"
+  } ]
+}

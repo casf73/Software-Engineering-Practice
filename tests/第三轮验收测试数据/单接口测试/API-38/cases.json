@@ -1,0 +1,59 @@
+{
+  "id": "API-38",
+  "name": "兼容当前商品工作台",
+  "method": "GET",
+  "path": "/api/seller/workbench",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-38-01",
+      "唯一商品工作台",
+      "有效卖家；仅1个有效商品",
+      "200；product.id指向该商品，工作台字段齐全",
+      "通过",
+      "单一上下文",
+      "兼容当前商品工作台\nGET /api/seller/workbench"
+    ],
+    [
+      "API-38-02",
+      "多商品冲突",
+      "有效卖家；至少2个有效商品",
+      "409；不选取任意商品",
+      "通过",
+      "兼容边界",
+      "兼容当前商品工作台\nGET /api/seller/workbench"
+    ],
+    [
+      "API-38-03",
+      "未登录查询",
+      "无卖家会话；唯一商品",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品工作台\nGET /api/seller/workbench"
+    ],
+    [
+      "API-38-04",
+      "仅客户身份查询",
+      "只有客户会话；唯一商品",
+      "401",
+      "通过",
+      "角色隔离",
+      "兼容当前商品工作台\nGET /api/seller/workbench"
+    ],
+    [
+      "API-38-05",
+      "队列和交易对象一致",
+      "有效卖家；唯一商品有等待者及正在交易对象",
+      "200；队列、waitingCount及activeIntent与该商品一致",
+      "通过",
+      "上下文一致性",
+      "兼容当前商品工作台\nGET /api/seller/workbench"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api38Test",
+  "executionRecord": "执行记录/API-38-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

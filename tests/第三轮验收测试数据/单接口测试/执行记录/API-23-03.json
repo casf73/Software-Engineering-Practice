@@ -1,0 +1,13 @@
+{
+  "id" : "API-23-03",
+  "name" : "API-23-03 交易对象正确",
+  "executedAt" : "2026-11-05T10:12:31.487452400+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/seller/products/73/workbench",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"product\":{\"id\":73,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"IN_TRADE\",\"createdAt\":\"2026-11-05T10:12:31.480446\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null},\"intents\":[{\"id\":31,\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"IN_TRADE\",\"position\":null,\"queueAt\":\"2026-11-05T10:12:31.480446\",\"meetingLocation\":\"学校南门\",\"customerUsername\":\"buyer01\"},{\"id\":32,\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"WAITING\",\"position\":1,\"queueAt\":\"2026-11-05T10:12:31.481459\",\"meetingLocation\":\"学校南门\",\"customerUsername\":\"buyer01\"}],\"waitingCount\":1,\"activeIntent\":{\"id\":31,\"name\":\"联系人\",\"phone\":\"13800000001\",\"status\":\"IN_TRADE\",\"position\":null,\"queueAt\":\"2026-11-05T10:12:31.480446\",\"meetingLocation\":\"学校南门\",\"customerUsername\":\"buyer01\"}}"
+  } ]
+}

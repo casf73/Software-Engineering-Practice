@@ -1,0 +1,13 @@
+{
+  "id" : "API-28-03",
+  "name" : "API-28-03 非法TXT",
+  "executedAt" : "2026-11-05T10:12:31.781607100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/image",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"只支持 JPG 或 PNG 图片\"}"
+  } ]
+}

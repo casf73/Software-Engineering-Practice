@@ -1,0 +1,13 @@
+{
+  "id" : "API-11-05",
+  "name" : "API-11-05 密码超过请求上限",
+  "executedAt" : "2026-11-05T10:12:29.373550500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/customer/login",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"size must be between 0 and 128\"}"
+  } ]
+}

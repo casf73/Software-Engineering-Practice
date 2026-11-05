@@ -1,0 +1,19 @@
+{
+  "id" : "API-24-02",
+  "name" : "API-24-02 冻结后拒绝新增",
+  "executedAt" : "2026-11-05T10:12:31.526452500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/76/freeze",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "{\"id\":76,\"name\":\"测试商品\",\"price\":88.50,\"description\":\"<p>商品说明</p>\",\"images\":[],\"status\":\"MANUALLY_FROZEN\",\"createdAt\":\"2026-11-05T10:12:31.519443\",\"stock\":2,\"categoryId\":null,\"categoryName\":null,\"parentCategoryId\":null}"
+  }, {
+    "method" : "POST",
+    "path" : "/api/customer/products/76/intents",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"商品已手动冻结，暂不接受新的购买意向\"}"
+  } ]
+}

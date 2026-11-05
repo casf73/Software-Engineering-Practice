@@ -1,0 +1,13 @@
+{
+  "id" : "API-39-03",
+  "name" : "API-39-03 非法价格",
+  "executedAt" : "2026-11-05T10:12:32.385871600+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/products/current",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"must be greater than or equal to 0.01\"}"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "id" : "API-02-04",
+  "name" : "API-02-04 下架商品不可公开",
+  "executedAt" : "2026-11-05T10:12:27.966992+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/products/10",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"商品已下架\"}"
+  } ]
+}

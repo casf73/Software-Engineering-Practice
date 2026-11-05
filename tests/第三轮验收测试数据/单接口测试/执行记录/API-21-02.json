@@ -1,0 +1,13 @@
+{
+  "id" : "API-21-02",
+  "name" : "API-21-02 名称为空",
+  "executedAt" : "2026-11-05T10:12:31.319263100+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products",
+    "expectedStatus" : 400,
+    "actualStatus" : 400,
+    "response" : "{\"message\":\"must not be blank\"}"
+  } ]
+}

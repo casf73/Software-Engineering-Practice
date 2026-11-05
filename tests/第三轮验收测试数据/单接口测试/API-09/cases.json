@@ -1,0 +1,59 @@
+{
+  "id": "API-09",
+  "name": "口令码意向撤销",
+  "method": "DELETE",
+  "path": "/api/public/intents/{passcode}",
+  "scope": "补充回归",
+  "auth": "有效口令码",
+  "rows": [
+    [
+      "API-09-01",
+      "等待意向正常撤销",
+      "对WAITING意向的有效passcode执行DELETE",
+      "204、无正文；本人历史保留CANCELLED，原码失效",
+      "通过",
+      "状态转换",
+      "口令码意向撤销\nDELETE /api/public/intents/{passcode}"
+    ],
+    [
+      "API-09-02",
+      "同商品其他等待者可撤销",
+      "商品有其他客户IN_TRADE，本次passcode对应仍为WAITING的意向",
+      "204；仅撤销本等待者，不影响正在交易者",
+      "通过",
+      "状态作用域",
+      "口令码意向撤销\nDELETE /api/public/intents/{passcode}"
+    ],
+    [
+      "API-09-03",
+      "交易中本人不可撤销",
+      "passcode对应正在交易的意向",
+      "409；交易状态与库存不变",
+      "通过",
+      "状态约束",
+      "口令码意向撤销\nDELETE /api/public/intents/{passcode}"
+    ],
+    [
+      "API-09-04",
+      "重复撤销",
+      "已成功撤销后，再用同一passcode发起DELETE",
+      "404；不重复改变历史及队列",
+      "通过",
+      "重复操作",
+      "口令码意向撤销\nDELETE /api/public/intents/{passcode}"
+    ],
+    [
+      "API-09-05",
+      "不存在的口令码",
+      "使用格式合法但不存在的passcode",
+      "404",
+      "通过",
+      "不存在资源",
+      "口令码意向撤销\nDELETE /api/public/intents/{passcode}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api09Test",
+  "executionRecord": "执行记录/API-09-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

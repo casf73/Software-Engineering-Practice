@@ -1,0 +1,59 @@
+{
+  "id": "API-33",
+  "name": "登记交易结果",
+  "method": "POST",
+  "path": "/api/seller/trades/{intentId}/result",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-33-01",
+      "成交成功扣1",
+      "有效卖家、对应意向正在交易、库存2；body={\"success\":true,\"disposition\":null}",
+      "204；库存变1且恢复在售，意向TRADE_SUCCESS，原码失效",
+      "通过",
+      "成功分支",
+      "登记交易结果\nPOST /api/seller/trades/{intentId}/result"
+    ],
+    [
+      "API-33-02",
+      "交易失败重排",
+      "有效卖家、正在交易；body={\"success\":false,\"disposition\":\"REQUEUE\"}",
+      "204；库存不扣，意向回到本商品队尾，原码保留",
+      "通过",
+      "失败重排分支",
+      "登记交易结果\nPOST /api/seller/trades/{intentId}/result"
+    ],
+    [
+      "API-33-03",
+      "交易失败作废",
+      "有效卖家、正在交易；body={\"success\":false,\"disposition\":\"VOID\"}",
+      "204；库存不扣，意向结束，原码失效",
+      "通过",
+      "失败作废分支",
+      "登记交易结果\nPOST /api/seller/trades/{intentId}/result"
+    ],
+    [
+      "API-33-04",
+      "重复登记不再扣库存",
+      "已成功登记结果后，再对同一intentId登记",
+      "409；库存与历史状态不再改变",
+      "通过",
+      "幂等约束",
+      "登记交易结果\nPOST /api/seller/trades/{intentId}/result"
+    ],
+    [
+      "API-33-05",
+      "未登录登记",
+      "无卖家会话；正在交易的意向、合法请求体",
+      "401；交易和库存不变",
+      "通过",
+      "权限校验",
+      "登记交易结果\nPOST /api/seller/trades/{intentId}/result"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api33Test",
+  "executionRecord": "执行记录/API-33-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

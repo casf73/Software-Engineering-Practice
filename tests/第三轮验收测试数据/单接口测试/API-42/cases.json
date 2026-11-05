@@ -1,0 +1,59 @@
+{
+  "id": "API-42",
+  "name": "兼容当前商品下架",
+  "method": "POST",
+  "path": "/api/seller/products/current/delist",
+  "scope": "补充回归",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-42-01",
+      "唯一商品下架",
+      "有效卖家；唯一在售商品",
+      "204、无正文；公开列表不展示该商品",
+      "通过",
+      "单一上下文",
+      "兼容当前商品下架\nPOST /api/seller/products/current/delist"
+    ],
+    [
+      "API-42-02",
+      "多商品冲突",
+      "有效卖家；存在2个有效商品",
+      "409；不下架任意商品",
+      "通过",
+      "兼容边界",
+      "兼容当前商品下架\nPOST /api/seller/products/current/delist"
+    ],
+    [
+      "API-42-03",
+      "未登录下架",
+      "无卖家会话；唯一在售商品",
+      "401",
+      "通过",
+      "权限校验",
+      "兼容当前商品下架\nPOST /api/seller/products/current/delist"
+    ],
+    [
+      "API-42-04",
+      "仅客户身份下架",
+      "仅客户会话；唯一在售商品",
+      "401",
+      "通过",
+      "角色隔离",
+      "兼容当前商品下架\nPOST /api/seller/products/current/delist"
+    ],
+    [
+      "API-42-05",
+      "下架结束等待",
+      "有效卖家；唯一在售商品有WAITING意向",
+      "204；相关等待按主动下架结束，旧码失效",
+      "通过",
+      "业务后置条件",
+      "兼容当前商品下架\nPOST /api/seller/products/current/delist"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api42Test",
+  "executionRecord": "执行记录/API-42-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

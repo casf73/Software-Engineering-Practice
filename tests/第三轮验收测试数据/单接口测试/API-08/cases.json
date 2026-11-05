@@ -1,0 +1,59 @@
+{
+  "id": "API-08",
+  "name": "口令码联系信息修改",
+  "method": "PUT",
+  "path": "/api/public/intents/{passcode}",
+  "scope": "补充回归",
+  "auth": "有效口令码",
+  "rows": [
+    [
+      "API-08-01",
+      "等待者修改成功",
+      "有效WAITING意向；body={\"name\":\"新联系人\",\"phone\":\"13900000001\"}",
+      "200；联系信息更新，原口令码和排位保持不变",
+      "通过",
+      "有效场景",
+      "口令码联系信息修改\nPUT /api/public/intents/{passcode}"
+    ],
+    [
+      "API-08-02",
+      "非法电话",
+      "有效WAITING意向；phone=\"bad\"",
+      "400；原联系信息不变",
+      "通过",
+      "无效等价类",
+      "口令码联系信息修改\nPUT /api/public/intents/{passcode}"
+    ],
+    [
+      "API-08-03",
+      "姓名为空",
+      "有效WAITING意向；name=\"\"，电话合法",
+      "400；原数据不变",
+      "通过",
+      "必填校验",
+      "口令码联系信息修改\nPUT /api/public/intents/{passcode}"
+    ],
+    [
+      "API-08-04",
+      "交易中本人不可修改",
+      "有效口令码对应IN_TRADE意向；请求体合法",
+      "409；交易中联系信息不被修改",
+      "通过",
+      "状态约束",
+      "口令码联系信息修改\nPUT /api/public/intents/{passcode}"
+    ],
+    [
+      "API-08-05",
+      "已失效口令码",
+      "对已成交或已撤销意向的原码发起合法修改",
+      "404；不改变已结束记录",
+      "通过",
+      "失效边界",
+      "口令码联系信息修改\nPUT /api/public/intents/{passcode}"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api08Test",
+  "executionRecord": "执行记录/API-08-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

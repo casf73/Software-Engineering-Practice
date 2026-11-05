@@ -1,0 +1,59 @@
+{
+  "id": "API-27",
+  "name": "下架商品",
+  "method": "POST",
+  "path": "/api/seller/products/{id}/delist",
+  "scope": "第三次评审",
+  "auth": "卖家",
+  "rows": [
+    [
+      "API-27-01",
+      "正常下架",
+      "有效卖家、在售商品",
+      "204、无正文；公开列表不展示，公开详情404",
+      "通过",
+      "状态转换",
+      "下架商品\nPOST /api/seller/products/{id}/delist"
+    ],
+    [
+      "API-27-02",
+      "等待意向结束",
+      "在售商品有等待意向，执行下架",
+      "204；等待意向按主动下架结束，原口令码失效",
+      "通过",
+      "业务后置条件",
+      "下架商品\nPOST /api/seller/products/{id}/delist"
+    ],
+    [
+      "API-27-03",
+      "商品之间隔离",
+      "甲乙均在售；仅下架甲",
+      "204；乙的状态、库存和队列不变",
+      "通过",
+      "商品隔离",
+      "下架商品\nPOST /api/seller/products/{id}/delist"
+    ],
+    [
+      "API-27-04",
+      "商品不存在",
+      "有效卖家，商品ID不存在",
+      "404",
+      "通过",
+      "不存在资源",
+      "下架商品\nPOST /api/seller/products/{id}/delist"
+    ],
+    [
+      "API-27-05",
+      "未登录下架",
+      "无卖家会话，目标商品有效",
+      "401；商品不变",
+      "通过",
+      "权限校验",
+      "下架商品\nPOST /api/seller/products/{id}/delist"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api27Test",
+  "executionRecord": "执行记录/API-27-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

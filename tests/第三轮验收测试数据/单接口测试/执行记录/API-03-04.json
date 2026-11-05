@@ -1,0 +1,13 @@
+{
+  "id" : "API-03-04",
+  "name" : "API-03-04 中文名称保留",
+  "executedAt" : "2026-11-05T10:12:28.063942500+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "GET",
+    "path" : "/api/public/categories",
+    "expectedStatus" : 200,
+    "actualStatus" : 200,
+    "response" : "[{\"id\":8,\"name\":\"电子产品\",\"parentId\":null},{\"id\":9,\"name\":\"USB键盘\",\"parentId\":null}]"
+  } ]
+}

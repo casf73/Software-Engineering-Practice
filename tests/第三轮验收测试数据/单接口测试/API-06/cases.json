@@ -1,0 +1,59 @@
+{
+  "id": "API-06",
+  "name": "兼容当前商品意向提交",
+  "method": "POST",
+  "path": "/api/public/intents",
+  "scope": "第三次评审",
+  "auth": "客户",
+  "rows": [
+    [
+      "API-06-01",
+      "唯一商品正常提交",
+      "有效客户会话；唯一有效在售商品；合法name和phone",
+      "201；关联唯一商品及当前客户，地点使用默认地点",
+      "通过",
+      "单一上下文",
+      "兼容当前商品意向提交\nPOST /api/public/intents"
+    ],
+    [
+      "API-06-02",
+      "多商品上下文冲突",
+      "有效客户会话；预置2个有效商品；请求体合法",
+      "409；不向任意商品写入意向",
+      "通过",
+      "兼容边界",
+      "兼容当前商品意向提交\nPOST /api/public/intents"
+    ],
+    [
+      "API-06-03",
+      "匿名提交被拒绝",
+      "无会话；唯一商品及请求体合法",
+      "401；不创建记录",
+      "通过",
+      "未登录权限",
+      "兼容当前商品意向提交\nPOST /api/public/intents"
+    ],
+    [
+      "API-06-04",
+      "仅卖家身份被拒绝",
+      "仅卖家会话；唯一商品及请求体合法",
+      "401；不创建记录",
+      "通过",
+      "角色隔离",
+      "兼容当前商品意向提交\nPOST /api/public/intents"
+    ],
+    [
+      "API-06-05",
+      "非法电话被拒绝",
+      "有效客户会话；唯一商品；phone=\"bad\"",
+      "400；不创建记录",
+      "通过",
+      "无效等价类",
+      "兼容当前商品意向提交\nPOST /api/public/intents"
+    ]
+  ],
+  "testClass": "cn.codelyy.store.singleapi.Api06Test",
+  "executionRecord": "执行记录/API-06-NN.json",
+  "lastExecution": "2026-11-05",
+  "result": "5例全部通过"
+}

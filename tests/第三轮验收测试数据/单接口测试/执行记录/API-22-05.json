@@ -1,0 +1,13 @@
+{
+  "id" : "API-22-05",
+  "name" : "API-22-05 商品不存在",
+  "executedAt" : "2026-11-05T10:12:31.445291+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "PUT",
+    "path" : "/api/seller/products/9223372036854775807",
+    "expectedStatus" : 404,
+    "actualStatus" : 404,
+    "response" : "{\"message\":\"商品不存在\"}"
+  } ]
+}

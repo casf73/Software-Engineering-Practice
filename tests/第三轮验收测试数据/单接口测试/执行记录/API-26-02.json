@@ -1,0 +1,13 @@
+{
+  "id" : "API-26-02",
+  "name" : "API-26-02 库存为0不可上架",
+  "executedAt" : "2026-11-05T10:12:31.650813800+08:00",
+  "result" : "通过",
+  "requests" : [ {
+    "method" : "POST",
+    "path" : "/api/seller/products/85/relist",
+    "expectedStatus" : 409,
+    "actualStatus" : 409,
+    "response" : "{\"message\":\"仅有库存的下架商品可重新上架\"}"
+  } ]
+}
