@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在线购物系统｜第四轮功能测验 Demo</title>
+  <link rel="stylesheet" href="./vendor/element-plus.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <header class="mast">
+    <div class="frame mast-inner">
+      <span>在线购物系统</span>
+      <span class="muted">第四轮功能测验 Demo</span>
+      <el-button class="push" plain @click="resetDemo">重置演示</el-button>
+    </div>
+  </header>
+  <main class="frame">
+    <div class="intro">
+      <h1>从选购到定制交付</h1>
+      <p class="muted">演示数据仅保留在当前页面。可切换客户与卖家视角，查看同一笔订单的变化。</p>
+    </div>
+    <el-tabs v-model="page">
+      <el-tab-pane label="购物车与收藏" name="shopping">
+        <section class="section">
+          <div class="section-head">
+            <div><h2>{{ shelf === 'cart' ? '购物车' : '收藏夹' }}</h2><p class="muted">{{ shelf === 'cart' ? '勾选需要结算的商品，其余商品留在购物车。' : '下架和无货商品保留在收藏夹中。' }}</p></div>
+            <el-radio-group v-model="shelf" aria-label="切换清单">
+              <el-radio-button value="cart">购物车</el-radio-button>
+              <el-radio-button value="favorites">收藏夹</el-radio-button>
+            </el-radio-group>
+          </div>
+          <div v-if="shelf === 'cart'">
+            <el-table :data="cart" row-key="id" empty-text="购物车为空" @selection-change="selected = $event.map(row => row.id)">
+              <el-table-column type="selection" width="50"></el-table-column>
+              <el-table-column prop="name" label="商品" min-width="145"></el-table-column>
+              <el-table-column label="单价" width="92"><template #default="{ row }">{{ money(row.price) }}</template></el-table-column>
+              <el-table-column label="库存" width="80"><template #default="{ row }">{{ row.stock }}</template></el-table-column>
+              <el-table-column label="数量" width="142"><template #default="{ row }"><el-input-number :model-value="row.quantity" @update:model-value="updateQuantity(row.id, $event)" :min="1" :precision="0" size="small" :aria-label="row.name + '的数量'"></el-input-number></template></el-table-column>
+              <el-table-column label="操作" width="106"><template #default="{ row }"><el-button link @click="removeCart(row.id)">移除</el-button></template></el-table-column>
+            </el-table>
+            <div class="actions">
+              <span>已选 {{ selected.length }} 种 · {{ money(selectedTotal) }}</span>
+              <el-button :disabled="!selected.length" @click="moveToFavorites">所选商品转收藏</el-button>
+              <el-button type="primary" :disabled="!selected.length" @click="checkout">结算所选商品</el-button>
+            </div>
+          </div>
+          <el-table v-else :data="favoriteRows" empty-text="收藏夹为空" row-key="id">
+            <el-table-column prop="name" label="商品" min-width="145"></el-table-column>
+            <el-table-column label="单价" width="100"><template #default="{ row }">{{ money(row.price) }}</template></el-table-column>
+            <el-table-column label="状态" min-width="95"><template #default="{ row }">{{ availability(row) }}</template></el-table-column>
+            <el-table-column label="操作" min-width="166"><template #default="{ row }">
+              <el-button link type="primary" @click="productDetail = row">查看详情</el-button>
+              <el-button link @click="favorites = favorites.filter(id => id !== row.id)">取消收藏</el-button>
+            </template></el-table-column>
+          </el-table>
+        </section>
+        <section class="section catalog">
+          <h2>演示商品</h2>
+          <ul>
+            <li v-for="product in products" :key="product.id">
+              <div><strong>{{ product.name }}</strong><p class="muted">{{ money(product.price) }} · {{ availability(product) }}</p></div>
+              <el-button plain @click="productDetail = product">查看详情</el-button>
+            </li>
+          </ul>
+        </section>
+      </el-tab-pane>
+      <el-tab-pane label="订单与库存" name="orders">
+        <section class="section">
+          <div class="section-head">
+            <div><h2>{{ role === 'buyer' ? '我的订单' : '卖家订单管理' }}</h2><p class="muted">{{ role === 'buyer' ? '发货前可取消整单。' : '按顺序推进状态，交易完成前可取消整单。' }}</p></div>
+            <el-radio-group v-model="role" aria-label="切换订单视角">
+              <el-radio-button value="buyer">客户视角</el-radio-button>
+              <el-radio-button value="seller">卖家视角</el-radio-button>
+            </el-radio-group>
+          </div>
+          <div class="stock">当前库存：<span v-for="product in products" :key="product.id">{{ product.name }} {{ product.stock }} 件</span></div>
+          <el-empty v-if="!orders.length" description="结算或确认定制方案后，订单会出现在这里。"></el-empty>
+          <article v-for="order in orders" :key="order.id" class="order">
+            <div class="order-head"><h3>订单 {{ order.id }}</h3><span class="state">{{ label(order.status) }}</span></div>
+            <ul class="line-items"><li v-for="line in order.lines" :key="line.id">{{ line.name }} × {{ line.quantity }} · {{ money(line.price) }}<span v-if="line.design"> · 定制</span></li></ul>
+            <p v-if="order.lines[0].design" class="muted">定制方案：{{ designDescription(order.lines[0].design) }} · 匠人 {{ order.lines[0].artisan }}</p>
+            <p>合计 {{ money(order.total) }}</p>
+            <details><summary>{{ order.lines[0].design ? '制作与订单时间轴' : '订单时间轴' }}</summary>
+              <el-timeline class="timeline">
+                <el-timeline-item v-for="(event, index) in order.events" :key="index" :timestamp="event.at">{{ label(event.status) }}</el-timeline-item>
+              </el-timeline>
+            </details>
+            <div class="actions">
+              <el-button v-if="role === 'seller' && next(order)" type="primary" @click="advance(order)">{{ label(next(order)) }}</el-button>
+              <el-button v-if="canCancel(order)" @click="cancelOrder(order)">取消整单</el-button>
+            </div>
+          </article>
+        </section>
+      </el-tab-pane>
+      <el-tab-pane label="在线定制" name="design">
+        <section class="section">
+          <div class="section-head">
+            <div><h2>{{ customProduct.name }} · 在线定制</h2><p class="muted">{{ money(customProduct.price) }} · {{ availability(customProduct) }}</p></div>
+            <el-button plain @click="artisanOpen = true">匠人主页</el-button>
+          </div>
+          <div class="designer">
+            <el-form label-position="top" @submit.prevent>
+              <el-form-item label="模板"><el-select v-model="design.template" aria-label="模板"><el-option v-for="option in templates" :key="option.id" :label="option.name" :value="option.id"></el-option></el-select></el-form-item>
+              <el-form-item label="定制文字"><el-input v-model="design.text" maxlength="60" show-word-limit placeholder="例如：毕业快乐"></el-input></el-form-item>
+              <el-form-item label="图案"><el-select v-model="design.motif" aria-label="图案"><el-option v-for="option in motifs" :key="option.id" :label="option.name" :value="option.id"></el-option></el-select></el-form-item>
+              <el-form-item label="配色"><el-select v-model="design.color" aria-label="配色"><el-option v-for="option in colors" :key="option.id" :label="option.name" :value="option.id"></el-option></el-select></el-form-item>
+            </el-form>
+            <div><h3>实时预览</h3><gift-preview :design="design"></gift-preview></div>
+          </div>
+          <div class="actions">
+            <el-button @click="applySample">填入示例方案</el-button>
+            <el-button type="primary" :disabled="!validDesign || !customProduct.stock" @click="confirmDesign">确认定制方案</el-button>
+          </div>
+        </section>
+      </el-tab-pane>
+    </el-tabs>
+  </main>
+  <el-dialog :model-value="Boolean(productDetail)" :title="productDetail?.name || '商品详情'" @update:model-value="productDetail = null">
+    <template v-if="productDetail">
+      <p>{{ money(productDetail.price) }} · {{ availability(productDetail) }}</p>
+      <p>{{ productDetail.description }}</p>
+      <div class="actions">
+        <el-button :disabled="!productDetail.stock" @click="addCart(productDetail)">加入购物车</el-button>
+        <el-button :disabled="favorites.includes(productDetail.id)" @click="favorite(productDetail.id)">收藏商品</el-button>
+        <el-button v-if="productDetail.id === customProduct.id" type="primary" @click="productDetail = null; page = 'design'">开始定制</el-button>
+      </div>
+    </template>
+  </el-dialog>
+  <el-dialog v-model="artisanOpen" title="木作工坊">
+    <p>由匠人手工打磨木牌，核对定制内容后制作。当前作品为「{{ customProduct.name }}」。</p>
+    <p class="muted">定制下单后，从订单页面查看备货、制作与发货进度。</p>
+  </el-dialog>
+  <el-dialog v-model="designOpen" title="确认定制订单">
+    <p>{{ customProduct.name }} × 1 · {{ money(customProduct.price) }}</p>
+    <gift-preview v-if="confirmed" :design="confirmed"></gift-preview>
+    <template #footer>
+      <el-button @click="designOpen = false">返回修改</el-button>
+      <el-button type="primary" @click="submitCustom">生成定制订单</el-button>
+    </template>
+  </el-dialog>
+</div>
+<script src="./vendor/vue.global.prod.js"></script>
+<script src="./vendor/element-plus.full.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
