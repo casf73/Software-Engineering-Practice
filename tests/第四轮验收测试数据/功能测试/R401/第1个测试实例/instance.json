@@ -1,0 +1,10 @@
+{
+  "id": "R401-F01",
+  "iteration": 4,
+  "title": "添加并查询购物车",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "客户登录，从商品详情点击加入购物车，再打开购物车",
+  "expected": "列表显示商品甲、单价20元、数量1",
+  "result": "待人工执行"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "R403-F06",
+  "iteration": 4,
+  "title": "买家只读",
+  "designMethod": "角色隔离",
+  "dataFile": "测试数据.json",
+  "steps": "客户查看订单操作区",
+  "expected": "没有商家状态推进按钮",
+  "result": "待人工执行"
+}

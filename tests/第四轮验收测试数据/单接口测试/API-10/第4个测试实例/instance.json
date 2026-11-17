@@ -1,0 +1,40 @@
+{
+  "id": "API-10-04",
+  "iteration": 4,
+  "title": "非法分页",
+  "designMethod": "边界值",
+  "endpoint": "GET /api/customer/shop-orders",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/shop-orders?size=0",
+      "status": 400,
+      "session": "buyer"
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

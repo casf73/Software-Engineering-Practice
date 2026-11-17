@@ -1,0 +1,10 @@
+{
+  "id": "R402-F02",
+  "iteration": 4,
+  "title": "单项移入收藏",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "勾选甲并转收藏",
+  "expected": "甲从购物车移除，乙保留，收藏有甲",
+  "result": "待人工执行"
+}

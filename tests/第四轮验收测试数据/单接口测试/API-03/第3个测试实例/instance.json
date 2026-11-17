@@ -1,0 +1,53 @@
+{
+  "id": "API-03-03",
+  "iteration": 4,
+  "title": "重复移除",
+  "designMethod": "幂等性",
+  "endpoint": "DELETE /api/customer/cart/{id}",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/cart/${p}",
+      "status": 200,
+      "session": "buyer",
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customer/cart/${p}",
+      "status": 204,
+      "session": "buyer"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customer/cart/${p}",
+      "status": 204,
+      "session": "buyer"
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

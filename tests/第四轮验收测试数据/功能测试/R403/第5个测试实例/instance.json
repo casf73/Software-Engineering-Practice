@@ -1,0 +1,10 @@
+{
+  "id": "R403-F05",
+  "iteration": 4,
+  "title": "交易完成",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "卖家点击交易完成",
+  "expected": "订单完成，库存不再扣减",
+  "result": "待人工执行"
+}

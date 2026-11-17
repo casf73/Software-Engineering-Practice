@@ -1,0 +1,10 @@
+{
+  "id": "R404-F08",
+  "iteration": 4,
+  "title": "取消后不可恢复",
+  "designMethod": "终态约束",
+  "dataFile": "测试数据.json",
+  "steps": "刷新卖家与客户列表",
+  "expected": "只有已取消状态和时间轴，不能推进",
+  "result": "待人工执行"
+}

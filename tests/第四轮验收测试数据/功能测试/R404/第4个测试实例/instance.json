@@ -1,0 +1,10 @@
+{
+  "id": "R404-F04",
+  "iteration": 4,
+  "title": "发货后客户不可取消",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "以客户身份刷新订单",
+  "expected": "无取消入口",
+  "result": "待人工执行"
+}

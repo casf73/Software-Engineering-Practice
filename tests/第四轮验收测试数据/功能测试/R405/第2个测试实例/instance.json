@@ -1,0 +1,10 @@
+{
+  "id": "R405-F02",
+  "iteration": 4,
+  "title": "普通商品无工作台",
+  "designMethod": "有效等价类",
+  "dataFile": "测试数据.json",
+  "steps": "进入商品详情",
+  "expected": "有普通商品操作，未显示定制工作台",
+  "result": "待人工执行"
+}
