@@ -1,0 +1,10 @@
+{
+  "id": "R401-F03",
+  "iteration": 4,
+  "title": "拒绝非法数量",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "逐一在数量输入框尝试保存",
+  "expected": "提示正整数，保留上次合法数量",
+  "result": "待人工执行"
+}

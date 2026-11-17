@@ -1,0 +1,15 @@
+{
+  "id": "API-17-04",
+  "iteration": 4,
+  "title": "不存在商品",
+  "designMethod": "无效等价类",
+  "endpoint": "GET /api/public/products/{id}/customization",
+  "steps": [
+    {
+      "method": "GET",
+      "path": "/api/public/products/999999/customization",
+      "status": 404
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

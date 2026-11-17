@@ -1,0 +1,10 @@
+{
+  "id": "R401-F07",
+  "iteration": 4,
+  "title": "超库存结算",
+  "designMethod": "上界外",
+  "dataFile": "测试数据.json",
+  "steps": "保存购物车数量4后确认结算",
+  "expected": "提示缺货，购物车和订单不变",
+  "result": "待人工执行"
+}

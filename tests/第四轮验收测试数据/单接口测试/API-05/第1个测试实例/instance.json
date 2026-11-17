@@ -1,0 +1,43 @@
+{
+  "id": "API-05-01",
+  "iteration": 4,
+  "title": "收藏夹空状态",
+  "designMethod": "等价类",
+  "endpoint": "GET /api/customer/favorites",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/favorites",
+      "status": 200,
+      "session": "buyer",
+      "assertions": {
+        "": []
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "R401-F02",
+  "iteration": 4,
+  "title": "调整数量",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "在购物车编辑数量并刷新页面",
+  "expected": "数量2保存，商品实际库存保持3",
+  "result": "待人工执行"
+}

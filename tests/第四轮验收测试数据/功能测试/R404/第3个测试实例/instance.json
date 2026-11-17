@@ -1,0 +1,10 @@
+{
+  "id": "R404-F03",
+  "iteration": 4,
+  "title": "备货完成时取消",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "客户点击取消并确认",
+  "expected": "订单取消并恢复库存",
+  "result": "待人工执行"
+}

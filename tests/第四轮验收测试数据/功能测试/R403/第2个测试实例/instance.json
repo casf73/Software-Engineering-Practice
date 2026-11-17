@@ -1,0 +1,10 @@
+{
+  "id": "R403-F02",
+  "iteration": 4,
+  "title": "商家确认",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "卖家点击商家确认，客户刷新",
+  "expected": "显示商家确认",
+  "result": "待人工执行"
+}

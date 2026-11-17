@@ -1,0 +1,96 @@
+{
+  "id": "API-11-03",
+  "iteration": 4,
+  "title": "客户开始发货后拒绝取消",
+  "designMethod": "状态边界",
+  "endpoint": "POST /api/customer/shop-orders/{id}/cancel",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/cart/${p}",
+      "status": 200,
+      "session": "buyer",
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/checkout",
+      "status": 201,
+      "session": "buyer",
+      "capture": {
+        "o": "/id"
+      },
+      "bodyFile": "请求数据05.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/shop-orders/${o}/status",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/status": "CONFIRMED"
+      },
+      "bodyFile": "请求数据06.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/shop-orders/${o}/status",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/status": "PREPARED"
+      },
+      "bodyFile": "请求数据07.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/shop-orders/${o}/status",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/status": "SHIPPING"
+      },
+      "bodyFile": "请求数据08.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/shop-orders/${o}/cancel",
+      "status": 409,
+      "session": "buyer"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}",
+      "status": 200,
+      "assertions": {
+        "/stock": 2,
+        "/status": "ON_SALE"
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

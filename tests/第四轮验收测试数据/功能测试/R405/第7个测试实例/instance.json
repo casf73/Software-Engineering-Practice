@@ -1,0 +1,10 @@
+{
+  "id": "R405-F07",
+  "iteration": 4,
+  "title": "确认后才生成订单",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "打开确认弹窗，先返回修改，再确认并提交",
+  "expected": "第一次无订单，第二次生成一件，方案正确",
+  "result": "待人工执行"
+}

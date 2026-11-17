@@ -1,0 +1,40 @@
+{
+  "id": "API-16-04",
+  "iteration": 4,
+  "title": "不存在的配置目标",
+  "designMethod": "无效等价类",
+  "endpoint": "GET /api/seller/products/{id}/customization",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/products/999999/customization",
+      "status": 404,
+      "session": "seller"
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

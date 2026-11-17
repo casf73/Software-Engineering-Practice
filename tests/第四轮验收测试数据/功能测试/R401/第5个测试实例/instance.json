@@ -1,0 +1,10 @@
+{
+  "id": "R401-F05",
+  "iteration": 4,
+  "title": "勾选部分结算",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "仅选甲，确认订单",
+  "expected": "一笔40元订单，乙仍在购物车",
+  "result": "待人工执行"
+}

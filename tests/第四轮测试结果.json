@@ -1,0 +1,1079 @@
+{
+  "iteration": 4,
+  "automated": {
+    "total": 133,
+    "passed": 133,
+    "failed": 0,
+    "notRun": 0
+  },
+  "manual": {
+    "total": 48,
+    "pending": 48
+  },
+  "results": [
+    {
+      "id": "R401-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:30.200294500+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:30.475316500+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:30.779270300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:31.086289300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:31.349980400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:31.627877400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:31.893066100+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R401-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R401/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:32.162242700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:32.435601800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:32.706897800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:33.002160200+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:33.300793300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:33.574217+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:33.844505100+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:34.112565+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R402-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R402/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:34.366067800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:34.767531600+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:35.067800800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:35.335703400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:35.637616300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:35.919033+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:36.183679300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:36.578591900+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R403-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R403/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:36.975587700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:37.246907200+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:37.517312+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:37.796746300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:38.063279700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:38.507860800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:38.809714300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:39.100189700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R404-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R404/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:39.389209+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:39.682868400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:39.963915400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:40.232101600+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:40.497486300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:40.765541600+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:41.035745700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:41.301601400+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R405-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R405/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:41.591447800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:41.870834500+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:42.130186+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:42.398502+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:42.640438300+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:42.902108500+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-06",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第6个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:43.171595700+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-07",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第7个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:43.451961800+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "R406-08",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/综合接口测试/R406/第8个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:43.725782900+08:00",
+      "result": "通过",
+      "category": "综合接口测试"
+    },
+    {
+      "id": "API-01-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-01/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:06.179363200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-01-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-01/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:06.668316800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-01-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-01/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:06.991284800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-01-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-01/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:07.425372600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-01-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-01/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:07.897949500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-02-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-02/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:07.908965500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-02-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-02/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:08.188649200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-02-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-02/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:08.492655600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-02-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-02/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:08.793753200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-02-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-02/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:09.105592900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-03-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-03/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:09.401711400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-03-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-03/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:09.710338200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-03-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-03/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:09.999867+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-03-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-03/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:10.287031900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-03-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-03/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:10.696364+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-04-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-04/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:10.971992900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-04-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-04/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:11.256539400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-04-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-04/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:11.527615400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-04-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-04/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:11.797732300+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-04-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-04/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:12.084121200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-05-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-05/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:12.363250200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-05-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-05/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:12.631096400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-05-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-05/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:12.913651100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-05-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-05/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:13.209417300+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-05-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-05/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:13.613308500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-06-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-06/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:13.621812+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-06-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-06/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:13.886938100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-06-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-06/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:14.163529900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-06-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-06/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:14.448702400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-06-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-06/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:14.744752600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-07-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-07/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:15.036744800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-07-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-07/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:15.330790+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-07-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-07/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:15.609780200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-07-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-07/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:15.897622500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-07-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-07/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:16.309072900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-08-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-08/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:16.318244500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-08-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-08/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:16.643146600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-08-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-08/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:16.921978700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-08-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-08/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:17.264620800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-08-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-08/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:17.558409400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-09-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-09/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:17.837323300+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-09-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-09/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:18.156174200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-09-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-09/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:18.432527100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-09-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-09/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:18.717148900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-09-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-09/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:18.993927700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-10-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-10/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:19.284410400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-10-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-10/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:19.573053700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-10-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-10/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:19.996531800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-10-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-10/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:20.288944200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-10-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-10/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:20.574462900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-11-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-11/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:20.585679800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-11-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-11/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:20.893769800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-11-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-11/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:21.193616900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-11-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-11/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:21.489882700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-11-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-11/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:21.928241800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-12-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-12/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:22.232419800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-12-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-12/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:22.684551800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-12-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-12/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:22.976294700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-12-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-12/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:23.260426500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-12-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-12/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:23.529590600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-13-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-13/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:23.536063700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-13-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-13/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:23.874588800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-13-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-13/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:24.207056100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-13-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-13/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:24.525855100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-13-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-13/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:24.840370800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-14-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-14/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:25.114484800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-14-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-14/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:25.397501+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-14-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-14/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:25.668995300+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-14-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-14/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:25.935141500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-14-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-14/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:26.215862400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-15-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-15/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:26.493204200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-15-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-15/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:26.755039100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-15-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-15/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:27.009743300+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-15-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-15/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:27.269970400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-15-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-15/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:27.525617700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-16-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-16/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:27.768119600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-16-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-16/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:28.041010500+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-16-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-16/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:28.325814+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-16-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-16/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:28.618206900+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-16-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-16/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:28.894244100+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-17-01",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-17/第1个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:29.155366800+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-17-02",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-17/第2个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:29.405442200+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-17-03",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-17/第3个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:29.663615700+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-17-04",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-17/第4个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:29.933752400+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    },
+    {
+      "id": "API-17-05",
+      "iteration": 4,
+      "source": "tests/第四轮验收测试数据/单接口测试/API-17/第5个测试实例/instance.json",
+      "executedAt": "2026-11-16T13:53:29.940751600+08:00",
+      "result": "通过",
+      "category": "单接口测试"
+    }
+  ]
+}

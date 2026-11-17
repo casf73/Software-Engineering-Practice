@@ -1,0 +1,10 @@
+{
+  "id": "R404-F05",
+  "iteration": 4,
+  "title": "发货后卖家取消",
+  "designMethod": "状态边界",
+  "dataFile": "测试数据.json",
+  "steps": "卖家取消整单",
+  "expected": "订单已取消，库存回补",
+  "result": "待人工执行"
+}

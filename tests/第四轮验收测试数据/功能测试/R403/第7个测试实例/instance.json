@@ -1,0 +1,10 @@
+{
+  "id": "R403-F07",
+  "iteration": 4,
+  "title": "客户历史隔离",
+  "designMethod": "权限隔离",
+  "dataFile": "测试数据.json",
+  "steps": "退出甲后登录乙查询",
+  "expected": "乙看不到甲的订单",
+  "result": "待人工执行"
+}

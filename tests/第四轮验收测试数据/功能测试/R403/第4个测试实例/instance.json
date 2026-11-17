@@ -1,0 +1,10 @@
+{
+  "id": "R403-F04",
+  "iteration": 4,
+  "title": "开始发货",
+  "designMethod": "状态边界",
+  "dataFile": "测试数据.json",
+  "steps": "卖家点击开始发货",
+  "expected": "新增发货节点，客户取消入口消失",
+  "result": "待人工执行"
+}

@@ -1,0 +1,73 @@
+{
+  "id": "R401-08",
+  "iteration": 4,
+  "title": "保留其他商品",
+  "designMethod": "场景法",
+  "endpoint": null,
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "q": "/id"
+      },
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/cart/${p}",
+      "status": 200,
+      "session": "buyer",
+      "bodyFile": "请求数据05.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/cart/${q}",
+      "status": 200,
+      "session": "buyer",
+      "bodyFile": "请求数据06.json"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/customer/cart/${p}",
+      "status": 204,
+      "session": "buyer"
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/cart",
+      "status": 200,
+      "session": "buyer",
+      "assertions": {
+        "/0/productId": "${q}"
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}
