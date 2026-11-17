@@ -28,6 +28,21 @@ public class Product {
 
     @Column(nullable=false, columnDefinition="integer default 1")
     private int stock = 1;
+    private Boolean customizable;
+    private Boolean orderSoldOut;
+    @Column(length=60)
+    private String artisanName;
+    @Column(length=500)
+    private String artisanBio;
+
+    public boolean isCustomizable() { return Boolean.TRUE.equals(customizable); }
+    public void setCustomizable(boolean value) { customizable = value; }
+    public boolean isOrderSoldOut() { return Boolean.TRUE.equals(orderSoldOut); }
+    public void setOrderSoldOut(boolean value) { orderSoldOut = value; }
+    public String getArtisanName() { return artisanName; }
+    public void setArtisanName(String value) { artisanName = value; }
+    public String getArtisanBio() { return artisanBio; }
+    public void setArtisanBio(String value) { artisanBio = value; }
     @ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="category_id")
     private Category category;
     public int getStock(){return stock;}

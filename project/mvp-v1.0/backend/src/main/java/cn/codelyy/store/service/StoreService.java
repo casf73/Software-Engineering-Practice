@@ -165,6 +165,7 @@ public class StoreService {
         Product product = lockProduct(productId);
         if (product.getStatus() == ProductStatus.IN_TRADE) throw ApiException.conflict("交易进行中，暂时不能修改商品");
         applyProductRequest(product, request);
+        if (request.stock() != null) product.setOrderSoldOut(false);
         if(product.getStock()==0)closeProduct(product,IntentStatus.PRODUCT_DELISTED);
         return productView(product);
     }
@@ -260,6 +261,7 @@ public class StoreService {
     @Transactional public ProductView relistProduct(Long id){
         Product p=lockProduct(id);
         if(p.getStatus()!=ProductStatus.DELISTED||p.getStock()<=0)throw ApiException.conflict("仅有库存的下架商品可重新上架");
+        p.setOrderSoldOut(false);
         p.setStatus(ProductStatus.ON_SALE);return productView(p);
     }
     private void closeProduct(Product p,IntentStatus status){
