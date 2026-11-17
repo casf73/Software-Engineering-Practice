@@ -39,6 +39,7 @@
           </div>
           <p>库存 {{ product.stock }} · {{ product.categoryName || '未分类' }}</p><div class="rich-description" v-html="safeDescription(product.description)" />
         </div>
+        <ProductCommerce :key="product.id" :product="product" />
       </AppCard>
 
       <AppCard class="intent-card">
@@ -112,6 +113,7 @@
 </template>
 
 <script setup>
+import ProductCommerce from "../components/ProductCommerce.vue"
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { customerApi } from '../api/customerApi'
@@ -131,6 +133,17 @@ import { formatPrice } from '../utils/format'
 import { intentLabel, productLabel } from '../utils/status'
 
 const route = useRoute()
+
+async function loadLinkedProduct(id) {
+  if (typeof id !== 'string' || !/^\d+$/.test(id)) return
+  try {
+    const { data } = await catalogApi.product(id)
+    if (route.query.product === id) product.value = data
+  } catch (error) {
+    if (route.query.product === id) ElMessage.error(apiErrorMessage(error, '商品暂不可查看'))
+  }
+}
+watch(() => route.query.product, loadLinkedProduct)
 const router = useRouter()
 function goToCustomerLogin() {
   return router.push({ name: 'customer-login', query: { redirect: route.fullPath } })
@@ -277,6 +290,7 @@ onMounted(async () => {
   await loadCustomerSession(true).catch(() => {})
   if (typeof route.query.passcode === 'string') openQueryDialog(route.query.passcode)
   await loadProduct()
+  await loadLinkedProduct(route.query.product)
   try { categories.value = (await catalogApi.categories()).data } catch (e) { ElMessage.error(apiErrorMessage(e, '分类加载失败')) }
 })
 </script>
