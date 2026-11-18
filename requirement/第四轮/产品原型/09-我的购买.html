@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的购买 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link is-active" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>我的购买</h1><p class="page-desc">查看账号资料与历史购买意向，意向按提交时间倒序排列。</p></div>
+  <div class="heading-actions"><a class="btn" href="04-购物车.html">去购物车</a><a class="btn" href="07-我的订单.html">我的订单</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>账号资料</h2><span class="muted small">客户账号</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>用户名</dt><dd>mjw</dd></div>
+      <div><dt>联系电话</dt><dd>138 0000 6021</dd></div>
+      <div><dt>默认交易地点</dt><dd>图书馆南门</dd></div>
+      <div><dt>注册时间</dt><dd>2026-11-02 09:14</dd></div>
+      <div><dt>历史意向</dt><dd>3 条</dd></div>
+      <div><dt>订单</dt><dd>2 笔</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>购买记录</h2><span class="muted small">仅显示当前账号的数据</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>商品</th><th>交易地点</th><th style="width:140px">状态</th><th style="width:170px">提交时间</th><th style="width:110px">操作</th></tr></thead>
+        <tbody>
+          <tr><td>木纹令牌</td><td>图书馆南门</td><td><span class="tag tag--success">交易完成</span></td><td>2026-11-16 10:02</td><td><a class="btn btn--text" href="07-我的订单.html">查看订单</a></td></tr>
+          <tr><td>手作相框</td><td>三食堂门口</td><td><span class="tag tag--warning">等待中</span></td><td>2026-11-15 18:40</td><td><a class="btn btn--text" href="10-口令码查询.html">查询排位</a></td></tr>
+          <tr><td>编织钥匙扣</td><td>图书馆南门</td><td><span class="tag tag--info">已撤销</span></td><td>2026-11-12 12:05</td><td><a class="btn btn--text" href="10-口令码查询.html">查看</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="notice">账号之间数据隔离：登录其他客户账号时看不到这里的记录；退出登录后浏览商品不影响已有意向。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/customer/account</code></span></div><div class="proto-nav"><a href="08-客户登录与注册.html">← 上一页</a><a href="index.html">原型总览</a><a href="10-口令码查询.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

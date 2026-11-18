@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>客户登录与注册 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link is-active" href="08-客户登录与注册.html">客户登录 / 注册</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>客户账号</h1><p class="page-desc">登录后提交的购买意向会保存在自己的购买记录中；在线定制下单需要先登录。</p></div>
+  <div class="heading-actions"><a class="btn" href="01-商品浏览.html">继续浏览商品</a></div>
+</div>
+
+<div class="card" style="max-width:520px;margin:0 auto 20px">
+  <div class="card__body">
+    <div class="tabs" data-tabs>
+      <div class="tab is-active" data-tab="login">客户登录</div>
+      <div class="tab" data-tab="register">客户注册</div>
+    </div>
+
+    <div class="tab-panel is-active" data-panel="login">
+      <div class="field"><label>用户名</label><input class="input" value="mjw" autocomplete="username"></div>
+      <div class="field"><label>密码</label><input class="input" type="password" value="12345678" autocomplete="current-password"></div>
+      <button class="btn btn--primary btn--block btn--lg" type="button">登录</button>
+      <div class="login-foot"><span>没有账号？<a href="08-客户登录与注册.html" data-goto-tab="register">去注册</a></span><a href="01-商品浏览.html">继续浏览商品</a></div>
+    </div>
+
+    <div class="tab-panel" data-panel="register">
+      <div class="field"><label>用户名</label><input class="input" placeholder="3～32 位文字、数字、下划线或短横线"></div>
+      <div class="field"><label>密码</label><input class="input" type="password" placeholder="8～128 位"></div>
+      <div class="field"><label>确认密码</label><input class="input" type="password"></div>
+      <div class="field"><label>联系电话</label><input class="input" placeholder="例如：138 0000 6021"></div>
+      <div class="field"><label>默认交易地点</label><input class="input" placeholder="例如：图书馆南门；提交意向时可调整"></div>
+      <button class="btn btn--primary btn--block btn--lg" type="button">注册并登录</button>
+      <div class="login-foot"><span>已有账号？<a href="08-客户登录与注册.html" data-goto-tab="login">去登录</a></span><a href="01-商品浏览.html">继续浏览商品</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="notice" style="max-width:520px;margin:0 auto">客户账号与卖家账号相互独立：客户账号用于购买意向、购物车、收藏与订单；卖家账号用于商品、分类与订单管理。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/customer/login、/customer/register</code></span></div><div class="proto-nav"><a href="07-我的订单.html">← 上一页</a><a href="index.html">原型总览</a><a href="09-我的购买.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

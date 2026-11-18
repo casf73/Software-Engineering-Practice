@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>客户管理 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+<div class="seller-layout">
+  <aside class="sidebar">
+    <div class="sidebar__title">卖家后台</div>
+    <a class="menu-item" href="12-卖家概览.html">概览</a><a class="menu-item" href="13-商品管理.html">商品管理</a><a class="menu-item" href="14-购买意向队列.html">购买意向</a><a class="menu-item is-active" href="15-客户管理.html">客户管理</a><a class="menu-item" href="16-分类管理.html">分类管理</a><a class="menu-item" href="18-账号管理.html">账号管理</a>
+    <div class="sidebar__divider"></div>
+    <a class="menu-item" href="17-卖家订单管理.html">订单管理</a>
+  </aside>
+  <div class="seller-content">
+
+<div class="page-heading">
+  <div><h1>客户管理</h1><p class="page-desc">查看已注册客户资料与其历史订单，便于线下核对。</p></div>
+  
+</div>
+
+<div class="card">
+  <div class="card__body">
+    <form class="inline-form" onsubmit="return false">
+      <input class="input" placeholder="搜索用户名或电话" aria-label="搜索客户">
+      <button class="btn btn--primary" type="button">查询</button>
+      <button class="btn" type="button">重置</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>客户列表</h2><span class="muted small">共 2 位 · 第 1 页</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>用户名</th><th>联系电话</th><th>默认交易地点</th><th style="width:170px">注册时间</th><th style="width:90px">订单数</th><th style="width:110px">操作</th></tr></thead>
+        <tbody>
+          <tr class="is-selected"><td>mjw</td><td>138 0000 6021</td><td>图书馆南门</td><td>2026-11-02 09:14</td><td class="num">2</td><td><button class="btn btn--text" type="button">查看详情</button></td></tr>
+          <tr><td>zhouyuan</td><td>139 0000 3388</td><td>三食堂门口</td><td>2026-11-05 20:31</td><td class="num">0</td><td><button class="btn btn--text" type="button">查看详情</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p class="state-caption">客户详情</p>
+<div class="card">
+  <div class="card__header"><h2>mjw</h2><span class="tag">2026-11-02 注册</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>联系电话</dt><dd>138 0000 6021</dd></div>
+      <div><dt>默认交易地点</dt><dd>图书馆南门</dd></div>
+      <div><dt>累计订单</dt><dd>2 笔 · 合计 ¥48.00</dd></div>
+    </dl>
+    <div class="divider"></div>
+    <p class="muted small" style="margin-bottom:8px">历史订单</p>
+    <table class="table table--compact">
+      <thead><tr><th>订单</th><th>商品</th><th style="width:100px">金额</th><th style="width:110px">状态</th><th style="width:160px">时间</th></tr></thead>
+      <tbody>
+        <tr><td class="num">#403</td><td>手作相框、编织钥匙扣</td><td class="num">¥20.00</td><td><span class="tag">客户下单</span></td><td>2026-11-18 16:58</td></tr>
+        <tr><td class="num">#401</td><td>木纹令牌（定制）</td><td class="num">¥28.00</td><td><span class="tag tag--warning">备货完成</span></td><td>2026-11-16 10:02</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="notice">仅展示已完成注册的客户；访客提交的意向只在购买意向队列中出现，不进入客户列表。</div>
+
+  </div>
+</div>
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/seller/dashboard（客户管理）</code></span></div><div class="proto-nav"><a href="14-购买意向队列.html">← 上一页</a><a href="index.html">原型总览</a><a href="16-分类管理.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>
