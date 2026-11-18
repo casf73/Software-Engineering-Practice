@@ -1,0 +1,6 @@
+{
+  "requestId": "test-key-0001",
+  "productIds": [
+    "${p}"
+  ]
+}

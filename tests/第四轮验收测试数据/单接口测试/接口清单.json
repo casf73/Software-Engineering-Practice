@@ -1,0 +1,138 @@
+[
+  {
+    "id": "API-01",
+    "method": "GET",
+    "path": "/api/customer/cart",
+    "title": "查看购物车",
+    "group": "R401",
+    "total": 5
+  },
+  {
+    "id": "API-02",
+    "method": "PUT",
+    "path": "/api/customer/cart/{id}",
+    "title": "设置购物车数量",
+    "group": "R401",
+    "total": 5
+  },
+  {
+    "id": "API-03",
+    "method": "DELETE",
+    "path": "/api/customer/cart/{id}",
+    "title": "移除购物车商品",
+    "group": "R401",
+    "total": 5
+  },
+  {
+    "id": "API-04",
+    "method": "POST",
+    "path": "/api/customer/cart/favorites",
+    "title": "所选商品转收藏",
+    "group": "R402",
+    "total": 5
+  },
+  {
+    "id": "API-05",
+    "method": "GET",
+    "path": "/api/customer/favorites",
+    "title": "查看收藏",
+    "group": "R402",
+    "total": 5
+  },
+  {
+    "id": "API-06",
+    "method": "PUT",
+    "path": "/api/customer/favorites/{id}",
+    "title": "新增收藏",
+    "group": "R402",
+    "total": 5
+  },
+  {
+    "id": "API-07",
+    "method": "DELETE",
+    "path": "/api/customer/favorites/{id}",
+    "title": "取消收藏",
+    "group": "R402",
+    "total": 5
+  },
+  {
+    "id": "API-08",
+    "method": "POST",
+    "path": "/api/customer/checkout",
+    "title": "勾选结算",
+    "group": "R401",
+    "total": 5
+  },
+  {
+    "id": "API-09",
+    "method": "POST",
+    "path": "/api/customer/products/{id}/custom-orders",
+    "title": "创建定制订单",
+    "group": "R405",
+    "total": 5
+  },
+  {
+    "id": "API-10",
+    "method": "GET",
+    "path": "/api/customer/shop-orders",
+    "title": "查看本人订单",
+    "group": "R403",
+    "total": 5
+  },
+  {
+    "id": "API-11",
+    "method": "POST",
+    "path": "/api/customer/shop-orders/{id}/cancel",
+    "title": "客户整单取消",
+    "group": "R404",
+    "total": 5
+  },
+  {
+    "id": "API-12",
+    "method": "GET",
+    "path": "/api/seller/shop-orders",
+    "title": "卖家查询订单",
+    "group": "R403",
+    "total": 5
+  },
+  {
+    "id": "API-13",
+    "method": "PUT",
+    "path": "/api/seller/shop-orders/{id}/status",
+    "title": "推进订单状态",
+    "group": "R403",
+    "total": 5
+  },
+  {
+    "id": "API-14",
+    "method": "POST",
+    "path": "/api/seller/shop-orders/{id}/cancel",
+    "title": "卖家整单取消",
+    "group": "R404",
+    "total": 5
+  },
+  {
+    "id": "API-15",
+    "method": "PUT",
+    "path": "/api/seller/products/{id}/customization",
+    "title": "保存定制与匠人设置",
+    "group": "R406",
+    "total": 5
+  },
+  {
+    "id": "API-16",
+    "method": "GET",
+    "path": "/api/seller/products/{id}/customization",
+    "title": "卖家查询定制设置",
+    "group": "R406",
+    "total": 5
+  },
+  {
+    "id": "API-17",
+    "method": "GET",
+    "path": "/api/public/products/{id}/customization",
+    "title": "公开查看定制与匠人资料",
+    "group": "R406",
+    "total": 5
+  }
+]

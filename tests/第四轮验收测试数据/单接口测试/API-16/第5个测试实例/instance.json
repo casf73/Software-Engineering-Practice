@@ -1,0 +1,40 @@
+{
+  "id": "API-16-05",
+  "iteration": 4,
+  "title": "客户不可读取卖家接口",
+  "designMethod": "权限隔离",
+  "endpoint": "GET /api/seller/products/{id}/customization",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/seller/products/${p}/customization",
+      "status": 401,
+      "session": "buyer"
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

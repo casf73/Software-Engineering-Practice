@@ -1,0 +1,10 @@
+{
+  "id": "R405-F06",
+  "iteration": 4,
+  "title": "文字上限60",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "观察计数和预览",
+  "expected": "最多60字，预览保持可读",
+  "result": "待人工执行"
+}

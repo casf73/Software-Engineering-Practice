@@ -1,0 +1,10 @@
+{
+  "id": "R402-F06",
+  "iteration": 4,
+  "title": "下架仍保留收藏",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "卖家主动下架甲，客户刷新收藏",
+  "expected": "甲仍在收藏，标记已下架",
+  "result": "待人工执行"
+}

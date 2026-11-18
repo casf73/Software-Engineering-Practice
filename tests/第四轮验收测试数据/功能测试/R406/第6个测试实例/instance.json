@@ -1,0 +1,10 @@
+{
+  "id": "R406-F06",
+  "iteration": 4,
+  "title": "制作进度按序呈现",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "卖家确认、备货、发货，客户刷新时间轴",
+  "expected": "节点顺序与发生时间正确",
+  "result": "待人工执行"
+}

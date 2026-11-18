@@ -1,0 +1,10 @@
+{
+  "id": "R403-F01",
+  "iteration": 4,
+  "title": "下单后初始状态",
+  "designMethod": "状态转换",
+  "dataFile": "测试数据.json",
+  "steps": "客户提交后打开我的订单",
+  "expected": "显示客户下单和一条时间轴",
+  "result": "待人工执行"
+}

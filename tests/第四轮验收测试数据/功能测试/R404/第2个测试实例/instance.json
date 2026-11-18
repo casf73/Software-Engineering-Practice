@@ -1,0 +1,10 @@
+{
+  "id": "R404-F02",
+  "iteration": 4,
+  "title": "确认后取消",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "客户取消，无需商家批准",
+  "expected": "立即取消，库存恢复",
+  "result": "待人工执行"
+}

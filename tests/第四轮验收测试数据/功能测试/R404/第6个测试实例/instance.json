@@ -1,0 +1,10 @@
+{
+  "id": "R404-F06",
+  "iteration": 4,
+  "title": "完成后拒绝取消",
+  "designMethod": "终态约束",
+  "dataFile": "测试数据.json",
+  "steps": "检查双方操作区",
+  "expected": "均无取消按钮，库存不回补",
+  "result": "待人工执行"
+}

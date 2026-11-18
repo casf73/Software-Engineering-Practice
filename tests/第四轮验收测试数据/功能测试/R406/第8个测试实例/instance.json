@@ -1,0 +1,10 @@
+{
+  "id": "R406-F08",
+  "iteration": 4,
+  "title": "历史保留匠人快照",
+  "designMethod": "快照场景",
+  "dataFile": "测试数据.json",
+  "steps": "卖家把匠人更名为新名称",
+  "expected": "历史订单仍显示木作工坊",
+  "result": "待人工执行"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "R402-F04",
+  "iteration": 4,
+  "title": "移动已收藏商品",
+  "designMethod": "幂等性",
+  "dataFile": "测试数据.json",
+  "steps": "把甲从购物车转入收藏",
+  "expected": "收藏只显示一条甲",
+  "result": "待人工执行"
+}

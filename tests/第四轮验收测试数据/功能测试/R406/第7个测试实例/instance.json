@@ -1,0 +1,10 @@
+{
+  "id": "R406-F07",
+  "iteration": 4,
+  "title": "取消后的制作时间轴",
+  "designMethod": "终态约束",
+  "dataFile": "测试数据.json",
+  "steps": "客户取消整单并刷新",
+  "expected": "保留之前节点，最后为已取消",
+  "result": "待人工执行"
+}

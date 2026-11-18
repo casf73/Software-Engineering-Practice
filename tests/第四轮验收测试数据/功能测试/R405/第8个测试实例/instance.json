@@ -1,0 +1,10 @@
+{
+  "id": "R405-F08",
+  "iteration": 4,
+  "title": "保存方案和价格快照",
+  "designMethod": "快照场景",
+  "dataFile": "测试数据.json",
+  "steps": "下单后由卖家改商品名称和价格，再刷新订单",
+  "expected": "原订单名称、单价和定制方案不变",
+  "result": "待人工执行"
+}

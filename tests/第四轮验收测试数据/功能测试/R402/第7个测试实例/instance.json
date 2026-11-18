@@ -1,0 +1,10 @@
+{
+  "id": "R402-F07",
+  "iteration": 4,
+  "title": "售罄仍保留收藏",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "客户结算甲一件，刷新收藏",
+  "expected": "甲仍在收藏，显示无货",
+  "result": "待人工执行"
+}

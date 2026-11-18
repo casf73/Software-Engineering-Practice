@@ -1,0 +1,53 @@
+{
+  "id": "API-17-01",
+  "iteration": 4,
+  "title": "匿名读取有匠人资料",
+  "designMethod": "场景法",
+  "endpoint": "GET /api/public/products/{id}/customization",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/products/${p}/customization",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/customizable": true
+      },
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}/customization",
+      "status": 200,
+      "assertions": {
+        "/artisanName": "木作工坊",
+        "/customizable": true
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}
