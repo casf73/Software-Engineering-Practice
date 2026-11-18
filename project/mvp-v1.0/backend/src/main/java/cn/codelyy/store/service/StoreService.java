@@ -250,11 +250,12 @@ public class StoreService {
         if(p.getStatus()==ProductStatus.DELISTED)throw ApiException.notFound("商品已下架");
         return productView(p);
     }
-    @Transactional(readOnly=true) public PageView<ProductView> catalog(String q,Long categoryId,int page,int size,boolean includeDelisted){
+    @Transactional(readOnly=true) public PageView<ProductView> catalog(String q,Long categoryId,int page,int size,boolean includeDelisted,Boolean customizable){
         String keyword=q==null?"":q.trim().toLowerCase(Locale.ROOT);
         var all=products.findAll().stream().filter(p->includeDelisted||LIVE_STATUSES.contains(p.getStatus()))
             .filter(p->keyword.isEmpty()||p.getName().toLowerCase(Locale.ROOT).contains(keyword)||p.getDescription()!=null&&org.springframework.web.util.HtmlUtils.htmlUnescape(p.getDescription().replaceAll("<[^>]*>"," ")).toLowerCase(Locale.ROOT).contains(keyword))
             .filter(p->categoryId==null||p.getCategory()!=null&&(categoryId.equals(p.getCategory().getId())||p.getCategory().getParent()!=null&&categoryId.equals(p.getCategory().getParent().getId())))
+            .filter(p->customizable==null||customizable==p.isCustomizable())
             .sorted(Comparator.comparing(Product::getId).reversed()).toList();
         return new PageView<>(all.stream().skip((long)page*size).limit(size).map(this::productView).toList(),all.size(),page,size);
     }
@@ -317,7 +318,8 @@ public class StoreService {
         return new ProductView(product.getId(), product.getName(), product.getPrice(), product.getDescription(),
                 product.getImageUrls() == null || product.getImageUrls().isBlank()
                         ? List.of() : Arrays.stream(product.getImageUrls().split(Pattern.quote("|"))).toList(),
-                product.getStatus(), product.getCreatedAt(), product.getStock(),product.getCategory()==null?null:product.getCategory().getId(),product.getCategory()==null?null:product.getCategory().getName(),product.getCategory()==null||product.getCategory().getParent()==null?null:product.getCategory().getParent().getId());
+                product.getStatus(), product.getCreatedAt(), product.getStock(),product.getCategory()==null?null:product.getCategory().getId(),product.getCategory()==null?null:product.getCategory().getName(),product.getCategory()==null||product.getCategory().getParent()==null?null:product.getCategory().getParent().getId(),
+                product.isCustomizable(), product.getArtisanName());
     }
 
     private IntentView intentView(PurchaseIntent intent, Integer position) {
