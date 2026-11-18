@@ -12,16 +12,23 @@
       <select v-model="categoryId" class="native-select" aria-label="商品分类" @change="page = 0; loadProduct()"><option value="">全部分类</option><option v-for="c in categoryOptions" :key="c.id" :value="c.id">{{ c.label }}</option></select>
       <el-button native-type="submit" type="primary">搜索</el-button><el-button @click="search = ''; categoryId = ''; page = 0; loadProduct()">重置</el-button>
     </form>
+    <div v-if="customizableOnly" class="custom-banner">
+      <div>
+        <strong>在线定制专区</strong>
+        <p>以下商品支持自选模板、定制文字与图案。选中商品后，在详情下方确认定制方案，即可生成一件定制订单。</p>
+      </div>
+      <el-button @click="clearCustomizableFilter">查看全部商品</el-button>
+    </div>
     <div v-if="items.length" class="catalog-grid">
       <button v-for="item in items" :key="item.id" class="catalog-item" :class="{ selected: product?.id === item.id }" @click="selectProduct(item)">
         <img v-if="item.images?.length" :src="item.images[0]" :alt="item.name"><span v-else class="catalog-no-image">暂无图片</span>
-        <strong>{{ item.name }}</strong><span>¥{{ formatPrice(item.price) }} · 库存 {{ item.stock }}</span><small>{{ item.categoryName || '未分类' }} · {{ productLabel(item.status) }}</small>
+        <strong>{{ item.name }}<span v-if="item.customizable" class="custom-tag">可定制</span></strong><span>¥{{ formatPrice(item.price) }} · 库存 {{ item.stock }}</span><small>{{ item.categoryName || '未分类' }} · {{ productLabel(item.status) }}</small>
       </button>
     </div>
     <div class="pager"><el-button :disabled="page === 0 || loading" @click="page--; loadProduct()">上一页</el-button><span>共 {{ total }} 件 · 第 {{ page + 1 }} 页</span><el-button :disabled="(page + 1) * 12 >= total || loading" @click="page++; loadProduct()">下一页</el-button></div>
     <div v-if="loading" class="loading-panel"><el-skeleton :rows="6" animated /></div>
     <el-card v-else-if="!product" class="empty-product-panel" shadow="never">
-      <EmptyState title="暂无在售商品" description="卖家上架商品后会显示在这里。" />
+      <EmptyState :title="customizableOnly ? '暂无支持定制的商品' : '暂无在售商品'" :description="customizableOnly ? '卖家启用在线定制后，商品会显示在这里。' : '卖家上架商品后会显示在这里。'" />
     </el-card>
     <div v-else class="store-layout">
       <AppCard class="product-card">
@@ -145,6 +152,14 @@ async function loadLinkedProduct(id) {
 }
 watch(() => route.query.product, loadLinkedProduct)
 const router = useRouter()
+const customizableOnly = computed(() => route.query.customizable === '1')
+function clearCustomizableFilter() {
+  const query = { ...route.query }
+  delete query.customizable
+  delete query.product
+  router.push({ path: '/', query })
+}
+watch(() => route.query.customizable, () => { page.value = 0; loadProduct() })
 function goToCustomerLogin() {
   return router.push({ name: 'customer-login', query: { redirect: route.fullPath } })
 }
@@ -183,7 +198,7 @@ const contactForm = reactive({ name: '', phone: '' })
 async function loadProduct() {
   loading.value = true
   try {
-    const { data } = await catalogApi.products({ q: search.value, categoryId: categoryId.value || undefined, page: page.value, size: 12 })
+    const { data } = await catalogApi.products({ q: search.value, categoryId: categoryId.value || undefined, customizable: customizableOnly.value ? true : undefined, page: page.value, size: 12 })
     items.value = data.items; total.value = data.total
     product.value = data.items.find(x => x.id === product.value?.id) || data.items[0] || null
   } catch (error) {
