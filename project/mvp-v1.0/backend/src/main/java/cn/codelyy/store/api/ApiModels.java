@@ -33,7 +33,7 @@ public final class ApiModels {
             @NotBlank @Size(min = 8, max = 128, message = "新密码须为 8 至 128 位") String newPassword) {}
     public record IntentActionRequest(@NotBlank String action) {}
     public record TradeResultRequest(@NotNull Boolean success, String disposition) {}
-    public record ProductView(Long id, String name, BigDecimal price, String description, List<String> images, ProductStatus status, LocalDateTime createdAt, int stock, Long categoryId, String categoryName, Long parentCategoryId, Boolean customizable, String artisanName) {}
+    public record ProductView(Long id, String name, BigDecimal price, String description, List<String> images, ProductStatus status, LocalDateTime createdAt, int stock, Long categoryId, String categoryName, Long parentCategoryId) {}
     public record IntentView(Long id, String name, String phone, IntentStatus status, Integer position, LocalDateTime queueAt, String meetingLocation, String customerUsername) {}
     public record BuyerIntentView(String name, String phone, IntentStatus status, Integer position, ProductStatus productStatus) {}
     public record IssuedIntentView(String passcode, Integer position) {}

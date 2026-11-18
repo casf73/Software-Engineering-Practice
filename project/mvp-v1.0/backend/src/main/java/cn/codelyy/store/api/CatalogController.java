@@ -13,10 +13,9 @@ public class CatalogController {
  private final StoreService store;private final CatalogService catalog;private final CustomerService customers;
  public CatalogController(StoreService s,CatalogService c,CustomerService customers){store=s;catalog=c;this.customers=customers;}
  @GetMapping("/public/products") public PageView<ProductView> browse(@RequestParam(defaultValue="") @Size(max=100) String q,@RequestParam(required=false) Long categoryId,
-  @RequestParam(required=false) Boolean customizable,
-  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,false,customizable);}
+  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,false);}
  @GetMapping("/seller/products") public PageView<ProductView> all(@RequestParam(defaultValue="") @Size(max=100) String q,@RequestParam(required=false) Long categoryId,
-  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,true,null);}
+  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,true);}
  @GetMapping("/public/products/{id}") public ProductView product(@PathVariable Long id){return store.getProduct(id);}
  @PostMapping("/public/products/{id}/intents") @ResponseStatus(HttpStatus.CREATED)
  public IssuedIntentView submit(@PathVariable Long id,@Valid @RequestBody IntentRequest r,HttpServletRequest request){
