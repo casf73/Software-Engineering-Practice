@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收藏夹 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link is-active" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>收藏夹</h1><p class="page-desc">下架和无货商品仍保留在收藏夹中，方便日后辨认。</p></div>
+  <div class="heading-actions"><a class="btn" href="04-购物车.html">去购物车</a><a class="btn" href="01-商品浏览.html">继续购物</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>收藏的商品</h2><span class="muted small">共 2 种</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>商品</th><th style="width:110px">单价</th><th style="width:170px">状态</th><th style="width:190px">操作</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>陶瓷书签</td>
+            <td class="num">¥16.00</td>
+            <td><span class="tag tag--info">已下架 · 无货</span></td>
+            <td class="table__actions">
+              <a class="btn btn--text" href="02-商品详情.html">查看详情</a>
+              <button class="btn btn--text" type="button">取消收藏</button>
+            </td>
+          </tr>
+          <tr>
+            <td>编织钥匙扣</td>
+            <td class="num">¥8.00</td>
+            <td><span class="tag tag--success">在售 · 库存 1</span></td>
+            <td class="table__actions">
+              <a class="btn btn--text" href="02-商品详情.html">查看详情</a>
+              <button class="btn btn--text" type="button">取消收藏</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="notice">收藏夹不占用库存，也不参与结算；需要购买时先到商品详情页加入购物车。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/customer/favorites</code></span></div><div class="proto-nav"><a href="04-购物车.html">← 上一页</a><a href="index.html">原型总览</a><a href="06-结算与下单.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

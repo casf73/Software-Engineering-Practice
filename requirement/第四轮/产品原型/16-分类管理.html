@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分类管理 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+<div class="seller-layout">
+  <aside class="sidebar">
+    <div class="sidebar__title">卖家后台</div>
+    <a class="menu-item" href="12-卖家概览.html">概览</a><a class="menu-item" href="13-商品管理.html">商品管理</a><a class="menu-item" href="14-购买意向队列.html">购买意向</a><a class="menu-item" href="15-客户管理.html">客户管理</a><a class="menu-item is-active" href="16-分类管理.html">分类管理</a><a class="menu-item" href="18-账号管理.html">账号管理</a>
+    <div class="sidebar__divider"></div>
+    <a class="menu-item" href="17-卖家订单管理.html">订单管理</a>
+  </aside>
+  <div class="seller-content">
+
+<div class="page-heading">
+  <div><h1>分类管理</h1><p class="page-desc">维护两级商品分类，供商品发布与首页筛选使用。</p></div>
+  
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>分类列表</h2><span class="muted small">一级 3 个 · 二级 4 个</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th style="width:160px">一级分类</th><th>二级分类</th><th style="width:110px">商品数</th><th style="width:150px">操作</th></tr></thead>
+        <tbody>
+          <tr><td>木作</td><td>木牌</td><td class="num">1</td><td class="table__actions"><button class="btn btn--text" type="button">编辑</button><button class="btn btn--text" type="button">删除</button></td></tr>
+          <tr><td></td><td><span class="muted">↳ </span>相框</td><td class="num">1</td><td class="table__actions"><button class="btn btn--text" type="button">编辑</button><button class="btn btn--text" type="button">删除</button></td></tr>
+          <tr><td>编织</td><td>钥匙扣</td><td class="num">1</td><td class="table__actions"><button class="btn btn--text" type="button">编辑</button><button class="btn btn--text" type="button">删除</button></td></tr>
+          <tr><td>陶瓷</td><td>书签</td><td class="num">1</td><td class="table__actions"><button class="btn btn--text" type="button">编辑</button><button class="btn btn--text" type="button">删除</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>新建分类</h2></div>
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field"><label>分类名称</label><input class="input" placeholder="例如：木作"></div>
+      <div class="field"><label>上级分类</label>
+        <select class="select"><option>顶级分类</option><option>木作</option><option>编织</option><option>陶瓷</option></select>
+      </div>
+    </div>
+    <button class="btn btn--primary" type="button">保存分类</button>
+    <p class="field-hint">最多两级：选择顶级分类即创建一级分类，选择上级分类即创建其二级分类。</p>
+  </div>
+</div>
+
+<div class="notice">删除分类前需要先移除或转移该分类下的商品；已被商品引用的分类不能直接删除。</div>
+
+  </div>
+</div>
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/seller/dashboard（分类管理）</code></span></div><div class="proto-nav"><a href="15-客户管理.html">← 上一页</a><a href="index.html">原型总览</a><a href="17-卖家订单管理.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>结算与下单 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link is-active" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>结算与下单</h1><p class="page-desc">确认所选商品后生成一笔订单；任一商品库存不足时整单不生成。</p></div>
+  <div class="heading-actions"><a class="btn" href="04-购物车.html">返回购物车</a></div>
+</div>
+
+<p class="state-caption">确认弹窗</p>
+<div class="mock-dialog">
+  <div class="dialog__header"><span>确认结算</span><span class="muted small">2 种商品</span></div>
+  <div class="dialog__body">
+    <p class="muted small" style="margin-bottom:12px">所选商品将合并成一笔订单。</p>
+    <table class="table table--compact">
+      <thead><tr><th>商品</th><th style="width:90px">单价</th><th style="width:70px">数量</th><th style="width:90px">小计</th></tr></thead>
+      <tbody>
+        <tr><td>木纹令牌</td><td class="num">¥28.00</td><td class="num">1</td><td class="num">¥28.00</td></tr>
+        <tr><td>手作相框</td><td class="num">¥12.00</td><td class="num">1</td><td class="num">¥12.00</td></tr>
+      </tbody>
+    </table>
+    <div class="summary-row" style="margin-top:12px">
+      <span class="muted">合计</span>
+      <span class="price price--sm">¥40.00</span>
+    </div>
+    <p class="muted small" style="margin-top:10px">下单后库存立即扣减；未勾选的商品继续留在购物车。</p>
+  </div>
+  <div class="dialog__footer">
+    <button class="btn" type="button">返回</button>
+    <a class="btn btn--primary" href="07-我的订单.html">确认下单</a>
+  </div>
+</div>
+
+<p class="state-caption">下单成功后</p>
+<div class="alert alert--success">
+  <i class="alert__icon">✓</i>
+  <div><strong>订单已生成</strong><br>订单号 #403 · 合计 ¥40.00。可在「我的订单」查看状态与时间轴。</div>
+</div>
+<div class="btn-row" style="margin-bottom:20px">
+  <a class="btn btn--primary" href="07-我的订单.html">查看订单</a>
+  <a class="btn" href="01-商品浏览.html">继续购物</a>
+</div>
+
+<p class="state-caption">异常状态：库存不足</p>
+<div class="alert alert--warning">
+  <i class="alert__icon">!</i>
+  <div><strong>编织钥匙扣 库存不足，本次未生成订单</strong><br>购物车、库存与订单均保持原状，可调整数量后重新结算。</div>
+</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>购物车「结算所选商品」</code></span></div><div class="proto-nav"><a href="05-收藏夹.html">← 上一页</a><a href="index.html">原型总览</a><a href="07-我的订单.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

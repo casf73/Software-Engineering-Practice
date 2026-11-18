@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品浏览 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link is-active" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>商品</h1><p class="page-desc">浏览、搜索商品，选择商品提交购买意向，或为支持定制的商品发起在线定制。</p></div>
+  <div class="heading-actions"><a class="btn" href="10-口令码查询.html">口令码查询</a></div>
+</div>
+
+<form class="inline-form" onsubmit="return false" style="margin-bottom:16px">
+  <input class="input" type="search" placeholder="搜索商品名称或描述" aria-label="搜索商品" style="flex:1;min-width:220px">
+  <select class="select" aria-label="商品分类">
+    <option>全部分类</option>
+    <option>木作 / 木牌</option>
+    <option>木作 / 相框</option>
+    <option>编织 / 钥匙扣</option>
+    <option>陶瓷 / 书签</option>
+  </select>
+  <button class="btn btn--primary" type="button">搜索</button>
+  <button class="btn" type="button">重置</button>
+</form>
+
+<div class="custom-banner">
+  <div>
+    <strong>在线定制专区</strong>
+    <p>支持定制的商品会在卡片上标注「可定制」。选中后可在详情页选择模板、填写文字、挑图案并实时预览。</p>
+  </div>
+  <a class="btn" href="03-在线定制.html">查看可定制商品</a>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>商品列表</h2><span class="muted small">共 4 件 · 第 1 页</span></div>
+  <div class="card__body">
+    <div class="grid-catalog">
+      <a class="catalog-item is-selected" href="02-商品详情.html">
+        <span class="thumb"><svg viewBox="0 0 240 180" role="img" aria-label="木纹令牌"><rect width="240" height="180" fill="#faf8f4"/><rect x="58" y="32" width="124" height="116" rx="12" fill="#dcbd93"/><rect x="65" y="39" width="110" height="102" rx="9" fill="none" stroke="#b98f5f"/><circle cx="120" cy="76" r="14" fill="none" stroke="#8d6440" stroke-width="2"/><path d="M112 76h16M120 68v16" stroke="#8d6440" stroke-width="2"/><text x="120" y="115" text-anchor="middle" font-family="serif" font-size="15" fill="#7b5533">木纹令牌</text><text x="120" y="131" text-anchor="middle" font-size="8" letter-spacing="2" fill="#96714e">HANDMADE</text></svg></span>
+        <strong>木纹令牌 <span class="tag tag--custom">可定制</span></strong>
+        <span class="meta">¥28.00 · 库存 5</span>
+        <small class="muted small">木作 / 木牌 · 在售</small>
+      </a>
+      <a class="catalog-item" href="02-商品详情.html">
+        <span class="thumb"><svg viewBox="0 0 240 180" role="img" aria-label="手作相框"><rect width="240" height="180" fill="#faf8f4"/><rect x="54" y="30" width="132" height="120" rx="4" fill="#c99a63"/><rect x="67" y="43" width="106" height="94" fill="#f6f1e8"/><circle cx="98" cy="72" r="11" fill="#e6d3b8"/><path d="M73 131l26-32 18 20 15-13 24 25z" fill="#d8c3a3"/></svg></span>
+        <strong>手作相框</strong>
+        <span class="meta">¥12.00 · 库存 2</span>
+        <small class="muted small">木作 / 相框 · 在售</small>
+      </a>
+      <a class="catalog-item" href="02-商品详情.html">
+        <span class="thumb"><svg viewBox="0 0 240 180" role="img" aria-label="编织钥匙扣"><rect width="240" height="180" fill="#faf8f4"/><circle cx="120" cy="96" r="42" fill="none" stroke="#9a6b3f" stroke-width="11"/><circle cx="120" cy="96" r="31" fill="none" stroke="#c9a06b" stroke-width="4" stroke-dasharray="6 6"/><circle cx="120" cy="50" r="13" fill="none" stroke="#b98f5f" stroke-width="5"/><path d="M120 37v-9" stroke="#8d6440" stroke-width="4"/></svg></span>
+        <strong>编织钥匙扣</strong>
+        <span class="meta">¥8.00 · 库存 1</span>
+        <small class="muted small">编织 / 钥匙扣 · 在售</small>
+      </a>
+      <a class="catalog-item" href="02-商品详情.html">
+        <span class="thumb"><svg viewBox="0 0 240 180" role="img" aria-label="陶瓷书签"><rect width="240" height="180" fill="#faf8f4"/><path d="M92 30h56v112l-28-19-28 19z" fill="#e2e9f1" stroke="#b9c6d6"/><circle cx="120" cy="68" r="11" fill="none" stroke="#8fa3bb"/><text x="120" y="104" text-anchor="middle" font-family="serif" font-size="13" fill="#6f8299">书签</text><path d="M120 142v14" stroke="#c1a06a" stroke-width="3"/></svg></span>
+        <strong>陶瓷书签</strong>
+        <span class="meta">¥16.00 · 库存 0</span>
+        <small class="muted small">陶瓷 / 书签 · 已下架</small>
+      </a>
+    </div>
+    <div class="pager">
+      <button class="btn btn--sm is-disabled">上一页</button>
+      <span>共 4 件 · 第 1 页</span>
+      <button class="btn btn--sm is-disabled">下一页</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="empty-panel">
+    <span>从上方选择一件商品，查看详情、购买意向与定制入口</span>
+    <span class="small">列表按发布时间倒序；支持搜索名称、描述与两级分类筛选</span>
+    <a class="link" href="02-商品详情.html">查看「木纹令牌」详情 →</a>
+  </div>
+</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/</code></span></div><div class="proto-nav"><a class="is-disabled">← 上一页</a><a href="index.html">原型总览</a><a href="02-商品详情.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>
