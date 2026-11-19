@@ -18,6 +18,10 @@ export const commerceApi = {
     http.post(`/customer/products/${productId}/custom-orders`, { requestId, design }),
   customization: productId => http.get(`/public/products/${productId}/customization`),
 
+  // 卖家定制设置
+  sellerCustomization: productId => http.get(`/seller/products/${productId}/customization`),
+  configure: (productId, settings) => http.put(`/seller/products/${productId}/customization`, settings),
+
   // 商城订单
   orders: params => http.get('/customer/shop-orders', { params }),
   cancelOrder: id => http.post(`/customer/shop-orders/${id}/cancel`),
