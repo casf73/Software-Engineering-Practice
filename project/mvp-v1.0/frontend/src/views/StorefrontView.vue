@@ -11,10 +11,41 @@
       <div><strong>在线定制专区</strong><p>标有「可定制」的商品支持选择模板、文字和图案，实时预览。</p></div>
       <RouterLink to="/customization">查看可定制商品</RouterLink>
     </div>
-    <form class="catalog-filters" @submit.prevent="page = 0; loadProduct()">
-      <el-input v-model="search" placeholder="搜索商品名称或描述" maxlength="100" clearable aria-label="搜索商品" />
+    <form class="catalog-filters" @submit.prevent="submitSearch()">
+      <div class="search-field" @focusin="openSearchHints" @focusout="closeSearchHintsOnExit"
+        @keydown.esc.prevent="searchHintsOpen = false">
+        <el-input v-model="search" placeholder="搜索商品名称或描述" maxlength="100" clearable
+          autocomplete="off" aria-label="搜索商品" @click="openSearchHints"
+          :aria-controls="searchHintsOpen ? 'product-search-hints' : undefined" />
+        <div v-if="searchHintsOpen" id="product-search-hints" class="search-hints" role="region" aria-label="商品搜索建议">
+          <section aria-labelledby="search-history-title">
+            <div class="search-hints-heading">
+              <strong id="search-history-title">历史搜索</strong>
+              <button v-if="searchHistory.length" class="search-clear" type="button"
+                @mousedown.prevent @click="clearSearchHistory">清空</button>
+            </div>
+            <p v-if="!searchHistory.length" class="search-hints-empty">暂无搜索记录</p>
+            <ul v-else>
+              <li v-for="keyword in searchHistory" :key="keyword">
+                <button type="button" @click="submitSearch(keyword)">{{ keyword }}</button>
+              </li>
+            </ul>
+          </section>
+          <section aria-labelledby="hot-search-title">
+            <strong id="hot-search-title">搜索热点</strong>
+            <p v-if="!hotKeywords.length" class="search-hints-empty">{{ hotSearchLoading ? '正在加载…' : '暂时无法加载热点' }}</p>
+            <ol v-else>
+              <li v-for="(keyword, index) in hotKeywords" :key="keyword">
+                <button type="button" @click="submitSearch(keyword)">
+                  <span class="search-rank">{{ index + 1 }}</span>{{ keyword }}
+                </button>
+              </li>
+            </ol>
+          </section>
+        </div>
+      </div>
       <select v-model="categoryId" class="native-select" aria-label="商品分类" @change="page = 0; loadProduct()"><option value="">全部分类</option><option v-for="c in categoryOptions" :key="c.id" :value="c.id">{{ c.label }}</option></select>
-      <el-button native-type="submit" type="primary">搜索</el-button><el-button @click="search = ''; categoryId = ''; page = 0; loadProduct()">重置</el-button>
+      <el-button native-type="submit" type="primary">搜索</el-button><el-button @click="resetSearch">重置</el-button>
     </form>
     <div v-if="customizableOnly" class="custom-banner">
           <div>
@@ -32,7 +63,8 @@
     <div class="pager"><el-button :disabled="page === 0 || loading" @click="page--; loadProduct()">上一页</el-button><span>共 {{ total }} 件 · 第 {{ page + 1 }} 页</span><el-button :disabled="(page + 1) * 12 >= total || loading" @click="page++; loadProduct()">下一页</el-button></div>
     <div v-if="loading" class="loading-panel"><el-skeleton :rows="6" animated /></div>
     <el-card v-else-if="!product" class="empty-product-panel" shadow="never">
-      <EmptyState title="暂无在售商品" description="卖家上架商品后会显示在这里。" />
+      <EmptyState :title="appliedSearch ? '没有找到匹配商品' : '暂无在售商品'"
+        :description="appliedSearch ? '试试其他关键词，或调整商品分类。' : '卖家上架商品后会显示在这里。'" />
     </el-card>
     <div v-else class="store-layout">
       <AppCard class="product-card">
@@ -161,6 +193,64 @@ function goToCustomerLogin() {
 }
 const product = ref(null)
 const items = ref([]), total = ref(0), page = ref(0), search = ref(''), categoryId = ref(''), categories = ref([])
+const appliedSearch = ref('')
+const searchHintsOpen = ref(false)
+const searchHistory = ref([])
+const hotKeywords = ref([])
+const hotSearchLoading = ref(false)
+const historyKey = computed(() => `storefront-search-history:${customerSession.customer?.id ?? 'guest'}`)
+let catalogVersion = 0
+
+watch(historyKey, key => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || '[]')
+    searchHistory.value = Array.isArray(saved) ? saved.filter(term => typeof term === 'string').slice(0, 8) : []
+  } catch { searchHistory.value = [] }
+}, { immediate: true })
+
+function saveSearchHistory() {
+  try { localStorage.setItem(historyKey.value, JSON.stringify(searchHistory.value)) }
+  catch { /* 存储不可用时仍可在当前页面使用历史 */ }
+}
+
+function clearSearchHistory() {
+  searchHistory.value = []
+  saveSearchHistory()
+}
+
+async function openSearchHints() {
+  if (searchHintsOpen.value) return
+  searchHintsOpen.value = true
+  if (hotSearchLoading.value) return
+  hotSearchLoading.value = true
+  try { hotKeywords.value = (await catalogApi.hotSearches()).data }
+  catch { /* 保留已有热点，搜索仍可使用 */ }
+  finally { hotSearchLoading.value = false }
+}
+
+function closeSearchHintsOnExit(event) {
+  if (!event.currentTarget.contains(event.relatedTarget)) searchHintsOpen.value = false
+}
+
+function submitSearch(value = search.value) {
+  const keyword = value.trim()
+  search.value = keyword
+  appliedSearch.value = keyword
+  searchHintsOpen.value = false
+  page.value = 0
+  if (keyword) {
+    searchHistory.value = [keyword, ...searchHistory.value.filter(term => term.toLowerCase() !== keyword.toLowerCase())].slice(0, 8)
+    saveSearchHistory()
+  }
+  return loadProduct(Boolean(keyword))
+}
+
+function resetSearch() {
+  search.value = ''
+  categoryId.value = ''
+  return submitSearch()
+}
+
 const categoryOptions = computed(() => categories.value.filter(c => !c.parentId).flatMap(c => [{ ...c, label: c.name }, ...categories.value.filter(x => x.parentId === c.id).map(x => ({ ...x, label: c.name + ' / ' + x.name }))]))
 function selectProduct(item) { product.value = item }
 const loading = ref(true)
@@ -191,16 +281,22 @@ const savingContact = ref(false)
 const contactFormRef = ref()
 const contactForm = reactive({ name: '', phone: '' })
 
-async function loadProduct() {
+async function loadProduct(recordSearch = false) {
+  const version = ++catalogVersion
+  const category = categoryId.value || undefined
   loading.value = true
   try {
-    const { data } = await catalogApi.products({ q: search.value, categoryId: categoryId.value || undefined, page: page.value, size: 12 })
+    const { data } = await (recordSearch
+      ? catalogApi.searchProducts(appliedSearch.value, category)
+      : catalogApi.products({ q: appliedSearch.value, categoryId: category, page: page.value, size: 12 }))
+    if (version !== catalogVersion) return
     items.value = data.items; total.value = data.total
     product.value = data.items.find(x => x.id === product.value?.id) || data.items[0] || null
   } catch (error) {
+    if (version !== catalogVersion) return
     if (error.response?.status === 404 || error.response?.status === 204) product.value = null
     else ElMessage.error(apiErrorMessage(error, '暂时无法加载商品'))
-  } finally { loading.value = false }
+  } finally { if (version === catalogVersion) loading.value = false }
 }
 
 async function submitIntent() {
@@ -309,4 +405,16 @@ onMounted(async () => {
 <style scoped>
 .customization-entry { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-block: 1px solid #e1e5ec; padding: 16px 0; margin-bottom: 20px; }
 .customization-entry p { margin: 5px 0 0; color: #64748b; font-size: 14px; }
+.search-field { flex: 1 1 260px; min-width: 0; position: relative; }
+.search-field :deep(.el-input) { min-width: 0; }
+.search-hints { position: absolute; top: calc(100% + 6px); inset-inline: 0; z-index: 10; padding: 12px; background: var(--el-bg-color); border: 1px solid var(--el-border-color-light); border-radius: 6px; box-shadow: var(--el-box-shadow-light); }
+.search-hints section + section { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--el-border-color-lighter); }
+.search-hints-heading { display: flex; justify-content: space-between; align-items: center; }
+.search-hints ul, .search-hints ol { margin: 4px 0 0; padding: 0; list-style: none; }
+.search-hints button { cursor: pointer; border: 0; border-radius: 4px; background: transparent; color: inherit; font: inherit; }
+.search-hints li button { width: 100%; padding: 5px 8px; text-align: left; overflow-wrap: anywhere; }
+.search-hints button:hover, .search-hints button:focus-visible { background: var(--el-fill-color-light); }
+.search-hints .search-clear { padding: 3px 6px; color: var(--el-color-primary); }
+.search-hints-empty { margin: 4px 8px; color: var(--el-text-color-secondary); }
+.search-rank { display: inline-block; min-width: 1.5em; color: var(--el-color-primary); font-weight: 600; }
 </style>
