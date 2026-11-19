@@ -19,7 +19,7 @@ const router = createRouter({
       meta: { sellerArea: true },
       children: [
         { path: 'dashboard', name: 'seller-dashboard', component: () => import('../views/SellerDashboardView.vue') },
-        { path: 'shop-orders', name: 'seller-orders', component: () => import('../views/ShopOrdersView.vue') },
+        { path: 'shop-orders', name: 'seller-orders', component: () => import('../views/ShopOrdersView.vue'), props: { seller: true } },
       ],
     },
   ],

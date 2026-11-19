@@ -25,6 +25,9 @@ export const commerceApi = {
   // 商城订单
   orders: params => http.get('/customer/shop-orders', { params }),
   cancelOrder: id => http.post(`/customer/shop-orders/${id}/cancel`),
+  sellerOrders: params => http.get('/seller/shop-orders', { params }),
+  advanceSellerOrder: (id, status) => http.put(`/seller/shop-orders/${id}/status`, { status }),
+  cancelSellerOrder: id => http.post(`/seller/shop-orders/${id}/cancel`),
 }
 
 // 幂等键：后端要求 [A-Za-z0-9_-]{8,64}

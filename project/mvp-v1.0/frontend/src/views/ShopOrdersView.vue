@@ -1,14 +1,15 @@
 <template>
-  <main class="content-width">
-    <PageHeader title="我的订单" description="商城订单的备货、发货与签收进度；未发货订单可在此取消。">
+  <section :class="{ 'content-width': !seller }">
+    <PageHeader :title="seller ? '订单管理' : '我的订单'"
+      :description="seller ? '查看客户订单，按顺序处理订单状态。' : '商城订单的备货、发货与签收进度；未发货订单可在此取消。'">
       <template #actions>
-        <el-button :disabled="loading" @click="reload">刷新</el-button>
+        <el-button :disabled="loading || busyId !== 0" @click="reload">刷新</el-button>
       </template>
     </PageHeader>
 
     <el-alert v-if="error" :title="error" type="error" :closable="false" />
     <p v-if="loading">正在加载…</p>
-    <p v-else-if="!orders.length && !error">暂无订单。<RouterLink to="/">去逛逛</RouterLink></p>
+    <p v-else-if="!orders.length && !error">暂无订单。<RouterLink v-if="!seller" to="/">去逛逛</RouterLink></p>
 
     <ul v-else class="order-list">
       <li v-for="order in orders" :key="order.id">
@@ -17,11 +18,16 @@
           <el-tag :type="tagType(order.status)">{{ statusLabel(order.status) }}</el-tag>
           <span>合计 ¥{{ formatPrice(order.total) }}</span>
           <span class="muted">{{ formatDateTime(order.createdAt) }}</span>
+          <span v-if="seller" class="muted">客户：{{ order.customer }}</span>
+          <el-button v-if="seller && nextOrderStatus[order.status]" size="small" type="primary"
+            :disabled="busyId !== 0 || loading" @click="advance(order)">
+            {{ nextOrderAction[order.status] }}
+          </el-button>
           <el-button
             v-if="canCancel(order.status)"
             size="small"
             :loading="busyId === order.id"
-            :disabled="busyId !== 0"
+            :disabled="busyId !== 0 || loading"
             @click="cancel(order)"
           >取消订单</el-button>
         </div>
@@ -43,19 +49,23 @@
     </ul>
 
     <div v-if="orders.length < total" class="more">
-      <el-button :disabled="loading" @click="loadMore">加载更多</el-button>
+      <el-button :disabled="loading || busyId !== 0" @click="loadMore">加载更多</el-button>
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import PageHeader from '../components/common/PageHeader.vue'
 import { commerceApi } from '../api/commerceApi'
 import { apiErrorMessage } from '../api/http'
 import { formatDateTime, formatPrice } from '../utils/format'
 
+const props = defineProps({ seller: Boolean })
+const route = useRoute()
+const router = useRouter()
 const orders = ref([])
 const total = ref(0)
 const page = ref(0)
@@ -77,7 +87,17 @@ const colors = { ink: '墨蓝', rose: '玫瑰红', forest: '森林绿' }
 
 const statusLabel = status => statusLabels[status] || '状态未知'
 const tagType = status => statusTags[status] || 'info'
-const canCancel = status => ['PLACED', 'CONFIRMED', 'PREPARED'].includes(status)
+const nextOrderStatus = { PLACED: 'CONFIRMED', CONFIRMED: 'PREPARED', PREPARED: 'SHIPPING', SHIPPING: 'COMPLETED' }
+const nextOrderAction = { PLACED: '确认订单', CONFIRMED: '备货完成', PREPARED: '开始发货', SHIPPING: '完成交易' }
+const canCancel = status => Boolean(nextOrderStatus[status]) && (props.seller || status !== 'SHIPPING')
+
+function redirectExpiredSeller(e) {
+  if (!props.seller || e.response?.status !== 401) return false
+  if (route.name === 'seller-orders') {
+    router.replace({ name: 'seller-login', query: { redirect: route.fullPath } })
+  }
+  return true
+}
 const designLabel = design => [
   templates[design.template],
   design.motifLabel || (Object.hasOwn(motifs, design.motif) ? motifs[design.motif] : design.motif),
@@ -86,15 +106,17 @@ const designLabel = design => [
 ].filter(Boolean).join(' / ')
 
 async function fetchPage(next) {
+  if (loading.value || busyId.value) return
   loading.value = true
   error.value = ''
   try {
-    const { data } = await commerceApi.orders({ page: next, size: 20 })
+    const getOrders = props.seller ? commerceApi.sellerOrders : commerceApi.orders
+    const { data } = await getOrders({ page: next, size: 20 })
     orders.value = next === 0 ? data.items : [...orders.value, ...data.items]
     total.value = data.total
     page.value = next
   } catch (e) {
-    error.value = apiErrorMessage(e)
+    if (!redirectExpiredSeller(e)) error.value = apiErrorMessage(e)
   } finally {
     loading.value = false
   }
@@ -103,23 +125,35 @@ async function fetchPage(next) {
 const reload = () => fetchPage(0)
 const loadMore = () => fetchPage(page.value + 1)
 
+async function updateOrder(order, action, successMessage) {
+  if (busyId.value || loading.value) return
+  busyId.value = order.id
+  try {
+    const { data } = await action()
+    const index = orders.value.findIndex(row => row.id === order.id)
+    if (index >= 0) orders.value[index] = data
+    ElMessage.success(successMessage)
+  } catch (e) {
+    if (!redirectExpiredSeller(e)) ElMessage.error(apiErrorMessage(e))
+  } finally {
+    busyId.value = 0
+  }
+}
+
+function advance(order) {
+  if (!props.seller || !nextOrderStatus[order.status]) return
+  return updateOrder(order, () => commerceApi.advanceSellerOrder(order.id, nextOrderStatus[order.status]), '订单状态已更新')
+}
+
 async function cancel(order) {
+  if (busyId.value || loading.value || !canCancel(order.status)) return
   try {
     await ElMessageBox.confirm(`确认取消订单 #${order.id}？取消后库存会退回。`, '取消订单', { type: 'warning' })
   } catch {
     return
   }
-  busyId.value = order.id
-  try {
-    const { data } = await commerceApi.cancelOrder(order.id)
-    const index = orders.value.findIndex(row => row.id === order.id)
-    if (index >= 0) orders.value[index] = data
-    ElMessage.success('订单已取消')
-  } catch (e) {
-    ElMessage.error(apiErrorMessage(e))
-  } finally {
-    busyId.value = 0
-  }
+  const cancelOrder = props.seller ? commerceApi.cancelSellerOrder : commerceApi.cancelOrder
+  return updateOrder(order, () => cancelOrder(order.id), '订单已取消')
 }
 
 onMounted(reload)
