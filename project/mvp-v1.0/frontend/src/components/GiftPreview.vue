@@ -1,13 +1,17 @@
 <template>
-  <div class="gift-preview" :class="[design.template, design.color]" aria-label="定制效果预览">
-    <span v-if="symbols[design.motif]" class="gift-motif">{{ symbols[design.motif] }}</span>
+  <div class="gift-preview" :class="[design.template, design.color]" :style="customColor" aria-label="定制效果预览">
+    <span v-if="motif" class="gift-motif">{{ motif }}</span>
     <span class="gift-text">{{ design.text || (design.motif === 'none' ? '在此预览定制文字' : '') }}</span>
   </div>
 </template>
 
 <script setup>
-defineProps({ design: { type: Object, required: true } })
-const symbols = { heart: '♥', star: '★', leaf: '❧' }
+import { computed } from 'vue'
+
+const props = defineProps({ design: { type: Object, required: true } })
+const symbols = new Map([['heart', '♥'], ['star', '★'], ['leaf', '❧']])
+const motif = computed(() => props.design.motif === 'none' ? '' : symbols.get(props.design.motif) ?? props.design.motif)
+const customColor = computed(() => /^#[0-9a-f]{6}$/i.test(props.design.color) ? { color: props.design.color } : undefined)
 </script>
 
 <style scoped>

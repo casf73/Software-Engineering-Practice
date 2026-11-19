@@ -8,6 +8,8 @@ import cn.codelyy.store.commerce.ShoppingEntry.Kind;
 import cn.codelyy.store.domain.*;
 import cn.codelyy.store.repository.IntentRepository;
 import cn.codelyy.store.repository.ProductRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import org.springframework.stereotype.Service;
@@ -21,10 +23,21 @@ public class CommerceService {
     private final ProductRepository products;
     private final IntentRepository intents;
 
-    public CommerceService(EntityManager db, ProductRepository products, IntentRepository intents) {
+    private final ObjectMapper mapper;
+    private static final CustomOptions DEFAULT_OPTIONS = new CustomOptions(
+            List.of("classic", "modern", "craft"),
+            List.of(new CustomChoice("无", "none"), new CustomChoice("爱心", "heart"),
+                    new CustomChoice("星星", "star"), new CustomChoice("枝叶", "leaf")),
+            List.of(new CustomChoice("墨蓝", "ink"), new CustomChoice("玫瑰红", "rose"),
+                    new CustomChoice("森林绿", "forest")),
+            true, "");
+
+    public CommerceService(EntityManager db, ProductRepository products, IntentRepository intents,
+                           ObjectMapper mapper) {
         this.db = db;
         this.products = products;
         this.intents = intents;
+        this.mapper = mapper;
     }
 
     @Transactional(readOnly=true)
@@ -102,9 +115,17 @@ public class CommerceService {
 
         Product product = lockProduct(productId);
         if (!product.isCustomizable()) throw ApiException.conflict("此商品未开放定制");
+        CustomOptions options = options(product);
+        if (!options.templates().contains(design.template()))
+            throw ApiException.badRequest("该商品未开放此模板，请刷新后重新选择");
+        CustomChoice motif = requiredChoice(options.motifs(), design.motif(), "图案");
+        CustomChoice color = requiredChoice(options.colors(), design.color(), "配色");
+        if (!options.allowText() && !design.text().isEmpty())
+            throw ApiException.badRequest("该商品不接受定制文字");
         reserve(product, 1);
         ShopOrder order = new ShopOrder(customer, request.requestId(), signature);
-        order.addLine(product, 1, design);
+        order.addLine(product, 1, new Design(design.template(), design.text(), motif.value(), color.value(),
+                motif.label(), color.label()));
         db.persist(order);
         return view(order);
     }
@@ -154,6 +175,11 @@ public class CommerceService {
         product.setArtisanBio(clean(settings.artisanBio()));
         if (product.getArtisanName().isEmpty() && !product.getArtisanBio().isEmpty())
             throw ApiException.badRequest("填写介绍时请填写匠人名称");
+        if (settings.options() != null) {
+            CustomOptions options = normalizeOptions(settings.options());
+            try { product.setCustomizationOptions(mapper.writeValueAsString(options)); }
+            catch (JsonProcessingException e) { throw new IllegalStateException("无法保存定制选项", e); }
+        }
         return settings(product);
     }
 
@@ -255,7 +281,47 @@ public class CommerceService {
     }
 
     private CustomSettings settings(Product product) {
-        return new CustomSettings(product.isCustomizable(), clean(product.getArtisanName()), clean(product.getArtisanBio()));
+        return new CustomSettings(product.isCustomizable(), clean(product.getArtisanName()),
+                clean(product.getArtisanBio()), options(product));
+    }
+
+    private CustomOptions options(Product product) {
+        String saved = product.getCustomizationOptions();
+        if (saved == null) return DEFAULT_OPTIONS;
+        try { return mapper.readValue(saved, CustomOptions.class); }
+        catch (JsonProcessingException e) { throw new IllegalStateException("无法读取定制选项", e); }
+    }
+
+    private CustomOptions normalizeOptions(CustomOptions options) {
+        List<CustomChoice> motifs = normalizeChoices(options.motifs(), false);
+        List<CustomChoice> colors = normalizeChoices(options.colors(), true);
+        if (!options.allowText() && motifs.stream().allMatch(choice -> choice.value().equals("none")))
+            throw ApiException.badRequest("关闭定制文字时，请至少提供一种实际图案");
+        return new CustomOptions(options.templates().stream().distinct().toList(), motifs, colors,
+                options.allowText(), clean(options.textHint()));
+    }
+
+    private List<CustomChoice> normalizeChoices(List<CustomChoice> choices, boolean colors) {
+        Set<String> values = new HashSet<>();
+        List<CustomChoice> result = new ArrayList<>();
+        for (CustomChoice choice : choices) {
+            String value = choice.value().strip();
+            if (colors) {
+                value = value.toLowerCase(Locale.ROOT);
+                if (!value.matches("ink|rose|forest|#[0-9a-f]{6}"))
+                    throw ApiException.badRequest("配色请填写六位十六进制色值，例如 #21583d");
+            } else if (value.isEmpty() || value.indexOf(':') >= 0 || value.codePoints().anyMatch(Character::isISOControl)) {
+                throw ApiException.badRequest("图案不能为空，也不能包含冒号或控制字符");
+            }
+            if (!values.add(value)) throw ApiException.badRequest("同一商品的图案或配色不能重复");
+            result.add(new CustomChoice(choice.label().strip(), value));
+        }
+        return result;
+    }
+
+    private CustomChoice requiredChoice(List<CustomChoice> choices, String value, String field) {
+        return choices.stream().filter(choice -> choice.value().equals(value)).findFirst()
+                .orElseThrow(() -> ApiException.badRequest("该商品未开放此" + field + "，请刷新后重新选择"));
     }
 
     private String clean(String value) { return value == null ? "" : value.strip(); }

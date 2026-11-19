@@ -78,8 +78,12 @@ const colors = { ink: '墨蓝', rose: '玫瑰红', forest: '森林绿' }
 const statusLabel = status => statusLabels[status] || '状态未知'
 const tagType = status => statusTags[status] || 'info'
 const canCancel = status => ['PLACED', 'CONFIRMED', 'PREPARED'].includes(status)
-const designLabel = design =>
-  [templates[design.template], motifs[design.motif], colors[design.color]].filter(Boolean).join(' / ')
+const designLabel = design => [
+  templates[design.template],
+  design.motifLabel || (Object.hasOwn(motifs, design.motif) ? motifs[design.motif] : design.motif),
+  design.colorLabel || colors[design.color] || design.color,
+  design.text,
+].filter(Boolean).join(' / ')
 
 async function fetchPage(next) {
   loading.value = true

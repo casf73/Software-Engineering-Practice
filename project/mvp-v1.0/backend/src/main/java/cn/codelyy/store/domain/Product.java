@@ -34,6 +34,11 @@ public class Product {
     private String artisanName;
     @Column(length=500)
     private String artisanBio;
+    @Column(length=8192)
+    private String customizationOptions;
+
+    public String getCustomizationOptions() { return customizationOptions; }
+    public void setCustomizationOptions(String value) { customizationOptions = value; }
 
     public boolean isCustomizable() { return Boolean.TRUE.equals(customizable); }
     public void setCustomizable(boolean value) { customizable = value; }

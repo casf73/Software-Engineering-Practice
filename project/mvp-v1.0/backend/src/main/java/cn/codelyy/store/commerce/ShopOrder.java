@@ -69,6 +69,8 @@ public class ShopOrder {
         @Column(length=20) String motif;
         @Column(length=20) String color;
         @Column(length=60) String artisanName;
+        @Column(length=20) String motifLabel;
+        @Column(length=20) String colorLabel;
 
         protected Line() {}
 
@@ -83,11 +85,13 @@ public class ShopOrder {
                 motif = design.motif();
                 color = design.color();
                 artisanName = product.getArtisanName();
+                motifLabel = design.motifLabel();
+                colorLabel = design.colorLabel();
             }
         }
 
         Design design() {
-            return template == null ? null : new Design(template, text, motif, color);
+            return template == null ? null : new Design(template, text, motif, color, motifLabel, colorLabel);
         }
     }
 
