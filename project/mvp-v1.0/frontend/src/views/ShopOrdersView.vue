@@ -1,110 +1,133 @@
 <template>
-  <section :class="{ 'content-width': !seller }">
-    <PageHeader :title="seller ? '卖家订单管理' : '我的订单'">
-      <template #actions><RouterLink :to="seller ? '/seller/dashboard' : '/customer/cart'">{{ seller ? '返回卖家后台' : '返回购物车' }}</RouterLink></template>
+  <main class="content-width">
+    <PageHeader title="我的订单" description="商城订单的备货、发货与签收进度；未发货订单可在此取消。">
+      <template #actions>
+        <el-button :disabled="loading" @click="reload">刷新</el-button>
+      </template>
     </PageHeader>
+
     <el-alert v-if="error" :title="error" type="error" :closable="false" />
-    <p v-if="loading">正在加载订单…</p>
-    <p v-else-if="!rows.length && !error">暂无订单。</p>
-    <AppCard v-for="order in rows" :key="order.id" class="order-card">
-      <template #header><h3>订单 #{{ order.id }} · {{ labels[order.status] }}</h3></template>
-      <p v-if="seller">客户 {{ order.customer }}</p>
-      <ul>
-        <li v-for="line in order.items" :key="line.productId">
-          {{ line.name }} · {{ line.quantity }} 件 × ¥{{ formatPrice(line.unitPrice) }}
-          <template v-if="line.design">
-            <p>定制方案{{ line.artisanName ? ' · 匠人 ' + line.artisanName : '' }}</p>
-            <GiftPreview :design="line.design" />
-          </template>
-        </li>
-      </ul>
-      <p>总金额 ¥{{ formatPrice(order.total) }}</p>
-      <details>
-        <summary>{{ order.items.some(line => line.design) ? '制作与订单时间轴' : '订单时间轴' }}</summary>
-        <ol><li v-for="(entry, i) in order.timeline" :key="i">{{ labels[entry.status] }} · {{ formatDate(entry.time) }}</li></ol>
-      </details>
-      <div class="order-actions">
-        <el-button v-if="seller && next[order.status]" type="primary" :disabled="busy" @click="advance(order)">{{ labels[next[order.status]] }}</el-button>
-        <el-button v-if="canCancel(order)" :disabled="busy" @click="cancel(order)">取消整单</el-button>
-      </div>
-    </AppCard>
-    <div v-if="total > 20" class="order-actions">
-      <el-button :disabled="page === 0 || busy || loading" @click="page--; load()">上一页</el-button>
-      <span>第 {{ page + 1 }} 页</span>
-      <el-button :disabled="(page + 1) * 20 >= total || busy || loading" @click="page++; load()">下一页</el-button>
+    <p v-if="loading">正在加载…</p>
+    <p v-else-if="!orders.length && !error">暂无订单。<RouterLink to="/">去逛逛</RouterLink></p>
+
+    <ul v-else class="order-list">
+      <li v-for="order in orders" :key="order.id">
+        <div class="order-head">
+          <strong>订单 #{{ order.id }}</strong>
+          <el-tag :type="tagType(order.status)">{{ statusLabel(order.status) }}</el-tag>
+          <span>合计 ¥{{ formatPrice(order.total) }}</span>
+          <span class="muted">{{ formatDateTime(order.createdAt) }}</span>
+          <el-button
+            v-if="canCancel(order.status)"
+            size="small"
+            :loading="busyId === order.id"
+            :disabled="busyId !== 0"
+            @click="cancel(order)"
+          >取消订单</el-button>
+        </div>
+
+        <ul class="order-lines">
+          <li v-for="(line, index) in order.items" :key="index">
+            {{ line.name }} × {{ line.quantity }} · ¥{{ formatPrice(line.unitPrice) }}
+            <span v-if="line.artisanName" class="muted">匠人：{{ line.artisanName }}</span>
+            <span v-if="line.design" class="design">定制：{{ designLabel(line.design) }}</span>
+          </li>
+        </ul>
+
+        <p v-if="order.timeline?.length" class="timeline">
+          <span v-for="(event, index) in order.timeline" :key="index">
+            {{ statusLabel(event.status) }} · {{ formatDateTime(event.time) }}
+          </span>
+        </p>
+      </li>
+    </ul>
+
+    <div v-if="orders.length < total" class="more">
+      <el-button :disabled="loading" @click="loadMore">加载更多</el-button>
     </div>
-  </section>
+  </main>
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import PageHeader from '../components/common/PageHeader.vue'
 import { commerceApi } from '../api/commerceApi'
 import { apiErrorMessage } from '../api/http'
-import AppCard from '../components/common/AppCard.vue'
-import PageHeader from '../components/common/PageHeader.vue'
-import GiftPreview from '../components/GiftPreview.vue'
-import { formatDate, formatPrice } from '../utils/format'
+import { formatDateTime, formatPrice } from '../utils/format'
 
-const route = useRoute()
-const router = useRouter()
-const seller = computed(() => route.name === 'seller-orders')
-const labels = { PLACED: '客户下单', CONFIRMED: '商家确认', PREPARED: '备货完成', SHIPPING: '开始发货', COMPLETED: '交易完成', CANCELLED: '已取消' }
-const next = { PLACED: 'CONFIRMED', CONFIRMED: 'PREPARED', PREPARED: 'SHIPPING', SHIPPING: 'COMPLETED' }
-const rows = ref([])
+const orders = ref([])
 const total = ref(0)
 const page = ref(0)
-const error = ref('')
 const loading = ref(false)
-const busy = ref(false)
-let loadVersion = 0
+const busyId = ref(0)
+const error = ref('')
 
-function canCancel(order) {
-  return Boolean(next[order.status]) && (seller.value || order.status !== 'SHIPPING')
+const statusLabels = {
+  PLACED: '待确认', CONFIRMED: '已确认', PREPARED: '备货中',
+  SHIPPING: '已发货', COMPLETED: '已完成', CANCELLED: '已取消',
 }
+const statusTags = {
+  PLACED: 'primary', CONFIRMED: 'primary', PREPARED: 'warning',
+  SHIPPING: 'warning', COMPLETED: 'success', CANCELLED: 'info',
+}
+const templates = { classic: '经典留白', modern: '现代简约', craft: '手作纸纹' }
+const motifs = { none: '无', heart: '爱心', star: '星星', leaf: '枝叶' }
+const colors = { ink: '墨蓝', rose: '玫瑰红', forest: '森林绿' }
 
-async function load() {
-  const version = ++loadVersion
+const statusLabel = status => statusLabels[status] || '状态未知'
+const tagType = status => statusTags[status] || 'info'
+const canCancel = status => ['PLACED', 'CONFIRMED', 'PREPARED'].includes(status)
+const designLabel = design =>
+  [templates[design.template], motifs[design.motif], colors[design.color]].filter(Boolean).join(' / ')
+
+async function fetchPage(next) {
   loading.value = true
   error.value = ''
   try {
-    const { data } = await commerceApi.orders(seller.value, page.value)
-    if (version === loadVersion) { rows.value = data.items; total.value = data.total }
+    const { data } = await commerceApi.orders({ page: next, size: 20 })
+    orders.value = next === 0 ? data.items : [...orders.value, ...data.items]
+    total.value = data.total
+    page.value = next
   } catch (e) {
-    if (version !== loadVersion) return
-    if (seller.value && e.response?.status === 401) router.replace('/seller/login')
-    else error.value = apiErrorMessage(e)
-  } finally { if (version === loadVersion) loading.value = false }
+    error.value = apiErrorMessage(e)
+  } finally {
+    loading.value = false
+  }
 }
 
-async function act(action) {
-  if (busy.value) return
-  busy.value = true
-  try { await action() }
-  catch (e) { ElMessage.error(apiErrorMessage(e)) }
-  finally { await load(); busy.value = false }
-}
-
-function advance(order) { return act(() => commerceApi.advance(order.id, next[order.status])) }
+const reload = () => fetchPage(0)
+const loadMore = () => fetchPage(page.value + 1)
 
 async function cancel(order) {
-  const sellerOrder = seller.value
   try {
-    await ElMessageBox.confirm(`取消订单 #${order.id} 后将恢复库存，订单不能再次推进。`, '确认取消订单', {
-      type: 'warning', confirmButtonText: '确认取消订单', cancelButtonText: '保留订单',
-      closeOnClickModal: false,
-    })
+    await ElMessageBox.confirm(`确认取消订单 #${order.id}？取消后库存会退回。`, '取消订单', { type: 'warning' })
+  } catch {
+    return
   }
-  catch { return }
-  return act(() => commerceApi.cancel(sellerOrder, order.id))
+  busyId.value = order.id
+  try {
+    const { data } = await commerceApi.cancelOrder(order.id)
+    const index = orders.value.findIndex(row => row.id === order.id)
+    if (index >= 0) orders.value[index] = data
+    ElMessage.success('订单已取消')
+  } catch (e) {
+    ElMessage.error(apiErrorMessage(e))
+  } finally {
+    busyId.value = 0
+  }
 }
 
-watch(seller, () => { page.value = 0; rows.value = []; load() }, { immediate: true })
+onMounted(reload)
 </script>
 
 <style scoped>
-.order-card { margin: 16px 0; }
-.order-card li { margin: 8px 0; }
-.order-actions { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.order-list { list-style: none; padding: 0; display: grid; gap: 14px; }
+.order-list > li { border: 1px solid #e1e5ec; border-radius: 6px; padding: 14px; }
+.order-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.order-head .muted, .order-lines .muted { color: #7b8494; }
+.order-lines { list-style: none; padding: 8px 0 0; display: grid; gap: 6px; }
+.order-lines .design { margin-left: 10px; color: #7b8494; }
+.timeline { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 0; color: #7b8494; font-size: 13px; }
+.more { display: flex; justify-content: center; padding-top: 16px; }
 </style>

@@ -16,6 +16,13 @@
       <select v-model="categoryId" class="native-select" aria-label="商品分类" @change="page = 0; loadProduct()"><option value="">全部分类</option><option v-for="c in categoryOptions" :key="c.id" :value="c.id">{{ c.label }}</option></select>
       <el-button native-type="submit" type="primary">搜索</el-button><el-button @click="search = ''; categoryId = ''; page = 0; loadProduct()">重置</el-button>
     </form>
+    <div v-if="customizableOnly" class="custom-banner">
+          <div>
+            <strong>在线定制专区</strong>
+            <p>以下商品支持自选模板、定制文字与图案。选中商品后，在详情下方确认定制方案，即可生成一件定制订单。</p>
+          </div>
+          <el-button @click="clearCustomizableFilter">查看全部商品</el-button>
+        </div>
     <div v-if="items.length" class="catalog-grid">
       <button v-for="item in items" :key="item.id" class="catalog-item" :class="{ selected: product?.id === item.id }" @click="selectProduct(item)">
         <img v-if="item.images?.length" :src="item.images[0]" :alt="item.name"><span v-else class="catalog-no-image">暂无图片</span>

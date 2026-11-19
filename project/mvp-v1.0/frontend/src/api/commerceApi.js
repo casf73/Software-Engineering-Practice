@@ -1,23 +1,32 @@
 import http from './http'
 
 export const commerceApi = {
+  // 购物车
   cart: () => http.get('/customer/cart'),
-  quantity: (id, quantity) => http.put(`/customer/cart/${id}`, { quantity }),
-  removeCart: id => http.delete(`/customer/cart/${id}`),
-  favorites: () => http.get('/customer/favorites'),
-  favorite: id => http.put(`/customer/favorites/${id}`),
-  removeFavorite: id => http.delete(`/customer/favorites/${id}`),
+  quantity: (productId, quantity) => http.put(`/customer/cart/${productId}`, { quantity }),
+  removeCart: productId => http.delete(`/customer/cart/${productId}`),
   move: productIds => http.post('/customer/cart/favorites', { productIds }),
-  checkout: (productIds, requestId) => http.post('/customer/checkout', { productIds, requestId }),
-  customOrder: (id, design, requestId) => http.post(`/customer/products/${id}/custom-orders`, { design, requestId }),
-  customization: id => http.get(`/public/products/${id}/customization`),
-  sellerCustomization: id => http.get(`/seller/products/${id}/customization`),
-  configure: (id, settings) => http.put(`/seller/products/${id}/customization`, settings),
-  orders: (seller, page) => http.get(`/${seller ? 'seller' : 'customer'}/shop-orders`, { params: { page } }),
-  advance: (id, status) => http.put(`/seller/shop-orders/${id}/status`, { status }),
-  cancel: (seller, id) => http.post(`/${seller ? 'seller' : 'customer'}/shop-orders/${id}/cancel`),
+
+  // 收藏夹
+  favorites: () => http.get('/customer/favorites'),
+  favorite: productId => http.put(`/customer/favorites/${productId}`),
+  removeFavorite: productId => http.delete(`/customer/favorites/${productId}`),
+
+  // 下单
+  checkout: (productIds, requestId) => http.post('/customer/checkout', { requestId, productIds }),
+  customOrder: (productId, design, requestId) =>
+    http.post(`/customer/products/${productId}/custom-orders`, { requestId, design }),
+  customization: productId => http.get(`/public/products/${productId}/customization`),
+
+  // 商城订单
+  orders: params => http.get('/customer/shop-orders', { params }),
+  cancelOrder: id => http.post(`/customer/shop-orders/${id}/cancel`),
 }
 
+// 幂等键：后端要求 [A-Za-z0-9_-]{8,64}
 export function newOrderRequestId() {
-  return Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('')
+  const bytes = new Uint8Array(16)
+  if (globalThis.crypto?.getRandomValues) globalThis.crypto.getRandomValues(bytes)
+  else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256)
+  return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('')
 }

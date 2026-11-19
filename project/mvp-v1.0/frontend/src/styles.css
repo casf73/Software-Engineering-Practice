@@ -161,3 +161,10 @@ a { color: inherit; text-decoration: none; }
 .customer-profile-list dd { margin: 0; overflow-wrap: anywhere; }
 .customer-account-page .el-table { margin-top: 20px; }
 .header-nav { flex-wrap: wrap; }
+
+/* 在线定制入口：商品卡片标记与专区说明条。 */
+.custom-tag { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 10px; border: 1px solid #cfe7da; background: #eef7f1; color: #2f7d4f; font-size: 11px; font-weight: 400; vertical-align: middle; }
+.custom-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 4px; padding: 14px 18px; border: 1px solid #cfe7da; border-left: 4px solid #2f7d4f; border-radius: 6px; background: #f4faf6; }
+.custom-banner strong { display: block; margin-bottom: 4px; font-size: 15px; }
+.custom-banner p { margin: 0; color: var(--el-text-color-secondary); font-size: 13px; line-height: 1.7; }
+
