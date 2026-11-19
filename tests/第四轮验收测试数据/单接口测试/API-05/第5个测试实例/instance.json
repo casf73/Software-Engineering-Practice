@@ -1,0 +1,15 @@
+{
+  "id": "API-05-05",
+  "iteration": 4,
+  "title": "匿名访问",
+  "designMethod": "权限隔离",
+  "endpoint": "GET /api/customer/favorites",
+  "steps": [
+    {
+      "method": "GET",
+      "path": "/api/customer/favorites",
+      "status": 401
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

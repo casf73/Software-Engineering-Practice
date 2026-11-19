@@ -1,0 +1,10 @@
+{
+  "id": "R402-F01",
+  "iteration": 4,
+  "title": "从详情收藏",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "登录后从详情收藏并打开收藏夹",
+  "expected": "显示甲一条收藏",
+  "result": "待人工执行"
+}

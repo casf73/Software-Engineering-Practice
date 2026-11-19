@@ -1,0 +1,41 @@
+{
+  "id": "API-06-03",
+  "iteration": 4,
+  "title": "商品不存在",
+  "designMethod": "无效等价类",
+  "endpoint": "PUT /api/customer/favorites/{id}",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/favorites/999999",
+      "status": 404,
+      "session": "buyer",
+      "bodyFile": "请求数据04.json"
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

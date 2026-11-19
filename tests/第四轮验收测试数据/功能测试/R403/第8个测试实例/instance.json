@@ -1,0 +1,10 @@
+{
+  "id": "R403-F08",
+  "iteration": 4,
+  "title": "多个订单并存",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "将第一笔确认后刷新列表",
+  "expected": "可同时显示客户下单与商家确认两种状态",
+  "result": "待人工执行"
+}

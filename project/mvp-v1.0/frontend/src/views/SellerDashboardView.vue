@@ -10,6 +10,7 @@
         <el-menu-item index="categories">分类管理</el-menu-item>
         <el-menu-item index="account">账号管理</el-menu-item>
       </el-menu>
+      <RouterLink to="/seller/shop-orders" class="nav-link">订单管理</RouterLink>
     </aside>
     <div class="seller-content">
       <PageHeader :title="sectionMeta[activeSection].title" :description="sectionMeta[activeSection].description">
@@ -36,6 +37,9 @@
         <form class="catalog-filters" @submit.prevent="productPage = 0; refresh()"><el-input v-model="productSearch" placeholder="搜索商品" maxlength="100" clearable/><el-button native-type="submit">搜索</el-button><el-button @click="productSearch = ''; productPage = 0; refresh()">重置</el-button></form>
         <el-table :data="productRows" stripe><el-table-column prop="id" label="编号" width="80"/><el-table-column prop="name" label="商品" min-width="120"/><el-table-column prop="categoryName" label="分类"/><el-table-column prop="stock" label="库存" width="90"/><el-table-column label="状态"><template #default="s"><StatusBadge kind="product" :status="s.row.status" /></template></el-table-column><el-table-column label="操作"><template #default="s"><el-button link type="primary" :disabled="selectedProductId === s.row.id" @click="chooseProduct(s.row.id)">{{ selectedProductId === s.row.id ? '已选择' : '选择商品' }}</el-button></template></el-table-column></el-table>
         <div class="pager"><el-button :disabled="productPage === 0" @click="productPage--; refresh()">上一页</el-button><span>共 {{ productTotal }} 件 · 第 {{ productPage + 1 }} 页</span><el-button :disabled="(productPage + 1) * 20 >= productTotal" @click="productPage++; refresh()">下一页</el-button></div>
+      </AppCard>
+      <AppCard v-if="activeSection === 'product' && workbench.product">
+        <SellerCustomization :key="workbench.product.id" :product-id="workbench.product.id" />
       </AppCard>
       <AppCard v-if="activeSection === 'product'" class="seller-product-card">
         <template #header>
@@ -152,6 +156,7 @@
 </template>
 
 <script setup>
+import SellerCustomization from "../components/SellerCustomization.vue"
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'

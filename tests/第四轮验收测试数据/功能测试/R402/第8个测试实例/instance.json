@@ -1,0 +1,10 @@
+{
+  "id": "R402-F08",
+  "iteration": 4,
+  "title": "通过详情重新加入",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "打开收藏详情再加入购物车",
+  "expected": "甲进购物车，收藏不自动移除",
+  "result": "待人工执行"
+}

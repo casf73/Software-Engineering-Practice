@@ -1,0 +1,10 @@
+{
+  "id": "R405-F03",
+  "iteration": 4,
+  "title": "实时切换三种模板",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "分别选经典、现代、手作模板",
+  "expected": "预览随选择变化，文字保留",
+  "result": "待人工执行"
+}

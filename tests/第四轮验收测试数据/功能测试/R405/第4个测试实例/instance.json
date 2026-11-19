@@ -1,0 +1,10 @@
+{
+  "id": "R405-F04",
+  "iteration": 4,
+  "title": "实时图案和颜色",
+  "designMethod": "组合场景",
+  "dataFile": "测试数据.json",
+  "steps": "先输入文字，再切换图案颜色",
+  "expected": "图案和颜色立即更新",
+  "result": "待人工执行"
+}

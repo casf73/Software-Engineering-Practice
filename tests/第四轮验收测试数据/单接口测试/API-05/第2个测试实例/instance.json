@@ -1,0 +1,51 @@
+{
+  "id": "API-05-02",
+  "iteration": 4,
+  "title": "查看正常收藏",
+  "designMethod": "场景法",
+  "endpoint": "GET /api/customer/favorites",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/customer/favorites/${p}",
+      "status": 204,
+      "session": "buyer",
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/customer/favorites",
+      "status": 200,
+      "session": "buyer",
+      "assertions": {
+        "/0/productId": "${p}",
+        "/0/stock": 3
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "R406-F03",
+  "iteration": 4,
+  "title": "隐藏无名匠人入口",
+  "designMethod": "空值等价类",
+  "dataFile": "测试数据.json",
+  "steps": "打开商品详情",
+  "expected": "不显示空白匠人主页入口",
+  "result": "待人工执行"
+}

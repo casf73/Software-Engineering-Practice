@@ -1,0 +1,10 @@
+{
+  "id": "R401-F04",
+  "iteration": 4,
+  "title": "移除单个商品",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "对甲点击移除",
+  "expected": "只保留乙",
+  "result": "待人工执行"
+}

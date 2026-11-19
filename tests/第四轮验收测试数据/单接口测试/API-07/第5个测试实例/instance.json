@@ -1,0 +1,15 @@
+{
+  "id": "API-07-05",
+  "iteration": 4,
+  "title": "匿名取消",
+  "designMethod": "权限隔离",
+  "endpoint": "DELETE /api/customer/favorites/{id}",
+  "steps": [
+    {
+      "method": "DELETE",
+      "path": "/api/customer/favorites/1",
+      "status": 401
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

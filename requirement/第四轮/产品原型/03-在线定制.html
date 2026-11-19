@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在线定制 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link is-active" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="crumb"><a href="02-商品详情.html">木纹令牌</a> / 在线定制</div>
+<div class="page-heading">
+  <div><h1>在线定制</h1><p class="page-desc">选择模板、填写文字、挑图案，确认预览后生成一件定制订单。</p></div>
+  <div class="heading-actions">
+    <button class="btn" type="button" data-dialog-open="artisanDialog">匠人主页</button>
+    <a class="btn" href="02-商品详情.html">返回商品详情</a>
+  </div>
+</div>
+
+<div class="custom-banner">
+  <div>
+    <strong>定制流程</strong>
+    <p>填写方案 → 确认预览 → 生成定制订单 → 匠人备货制作 → 发货。方案会作为快照保存在订单里，之后修改商品不影响历史订单。</p>
+  </div>
+  <span class="tag tag--custom">木纹令牌 · ¥28.00 · 库存 5</span>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>定制工作台</h2><span class="muted small">带 * 的方案至少填写一项</span></div>
+  <div class="card__body">
+    <form class="designer" id="designStudio" onsubmit="return false">
+      <div class="designer__form">
+        <div class="field">
+          <label for="d-template">模板</label>
+          <select class="select" id="d-template" name="template">
+            <option value="classic">经典留白</option>
+            <option value="modern">现代简约</option>
+            <option value="craft" selected>手作纸纹</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d-text">定制文字（最多 60 字）</label>
+          <input class="input" id="d-text" name="text" maxlength="60" value="毕业快乐" placeholder="例如：毕业快乐">
+          <p class="field-hint">文字与图案至少填写一项，否则不能确认方案。</p>
+        </div>
+        <div class="field">
+          <label for="d-motif">图案</label>
+          <select class="select" id="d-motif" name="motif">
+            <option value="none">无</option>
+            <option value="heart">爱心 ♥</option>
+            <option value="star">星星 ★</option>
+            <option value="leaf" selected>枝叶 ❧</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d-color">配色</label>
+          <select class="select" id="d-color" name="color">
+            <option value="ink">墨蓝</option>
+            <option value="rose">玫瑰红</option>
+            <option value="forest" selected>森林绿</option>
+          </select>
+        </div>
+      </div>
+      <div class="designer__preview">
+        <h3>实时预览</h3>
+        <div class="gift classic ink" id="giftPreview">
+          <span class="motif" id="giftMotif" hidden></span>
+          <span id="giftText">在此预览定制文字</span>
+        </div>
+        <div class="design-summary" id="designSummary"></div>
+      </div>
+    </form>
+    <div class="divider"></div>
+    <div class="btn-row">
+      <button class="btn" type="button" data-fill-sample>填入示例方案</button>
+      <button class="btn btn--primary" type="button" id="confirmDesign" data-dialog-open="confirmDialog">确认定制方案</button>
+      <span class="muted small">未登录时会先跳转客户登录，登录后回到本页继续。</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>匠人信息</h2></div>
+  <div class="card__body">
+    <div class="artisan" style="padding-top:0;margin-top:0;border-top:0">
+      <div class="artisan__avatar">刘</div>
+      <div class="artisan__body">
+        <strong>刘云炎 · 木作工坊</strong>
+        <p>手工打磨木牌，逐件制作；定制内容确认后约 3 天完成。作品：木纹令牌。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dialog-overlay" id="confirmDialog">
+  <div class="dialog">
+    <div class="dialog__header"><span>确认定制订单</span><button class="dialog__close" type="button" data-dialog-close>×</button></div>
+    <div class="dialog__body">
+      <p style="margin-bottom:12px">木纹令牌 · 1 件 · ¥28.00</p>
+      <div class="gift craft forest">
+        <span class="motif">❧</span>
+        <span>毕业快乐</span>
+      </div>
+      <div class="design-summary">
+        <span>模板 <b>手作纸纹</b></span>
+        <span>图案 <b>枝叶 ❧</b></span>
+        <span>配色 <b>森林绿</b></span>
+        <span>匠人 <b>刘云炎</b></span>
+      </div>
+      <p class="muted small" style="margin-top:12px">确认后将生成一件定制订单，方案随订单保存，不可再修改。</p>
+    </div>
+    <div class="dialog__footer">
+      <button class="btn" type="button" data-dialog-close>返回修改</button>
+      <a class="btn btn--primary" href="07-我的订单.html">生成定制订单</a>
+    </div>
+  </div>
+</div>
+
+<div class="dialog-overlay" id="artisanDialog">
+  <div class="dialog">
+    <div class="dialog__header"><span>匠人主页</span><button class="dialog__close" type="button" data-dialog-close>×</button></div>
+    <div class="dialog__body">
+      <div class="artisan">
+        <div class="artisan__avatar">刘</div>
+        <div class="artisan__body">
+          <strong>刘云炎 · 木作工坊</strong>
+          <p>从事木作十二年，擅长木牌、相框与小型摆件。每件定制都会亲自核对文字与图案，再上漆打磨。</p>
+        </div>
+      </div>
+      <p class="muted small" style="margin-top:14px">作品：木纹令牌</p>
+    </div>
+    <div class="dialog__footer"><button class="btn" type="button" data-dialog-close>关闭</button></div>
+  </div>
+</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/ 商品详情内「在线定制工作台」</code></span></div><div class="proto-nav"><a href="02-商品详情.html">← 上一页</a><a href="index.html">原型总览</a><a href="04-购物车.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

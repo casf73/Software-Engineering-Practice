@@ -1,0 +1,10 @@
+{
+  "id": "R401-F08",
+  "iteration": 4,
+  "title": "空车不可提交",
+  "designMethod": "空值等价类",
+  "dataFile": "测试数据.json",
+  "steps": "打开购物车",
+  "expected": "空车提示及浏览入口，无可用结算按钮",
+  "result": "待人工执行"
+}

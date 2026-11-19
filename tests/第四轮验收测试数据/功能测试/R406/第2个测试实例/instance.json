@@ -1,0 +1,10 @@
+{
+  "id": "R406-F02",
+  "iteration": 4,
+  "title": "买家打开匠人主页",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "从详情点击匠人主页",
+  "expected": "显示名称、介绍和作品",
+  "result": "待人工执行"
+}

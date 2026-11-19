@@ -1,0 +1,43 @@
+{
+  "id": "API-17-02",
+  "iteration": 4,
+  "title": "普通商品默认关闭",
+  "designMethod": "等价类",
+  "endpoint": "GET /api/public/products/{id}/customization",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}/customization",
+      "status": 200,
+      "assertions": {
+        "/customizable": false,
+        "/artisanBio": ""
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

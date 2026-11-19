@@ -1,0 +1,10 @@
+{
+  "id": "R406-F04",
+  "iteration": 4,
+  "title": "拒绝缺失匠人名称",
+  "designMethod": "无效等价类",
+  "dataFile": "测试数据.json",
+  "steps": "卖家保存设置",
+  "expected": "提示填写匠人名称，旧设置保持",
+  "result": "待人工执行"
+}

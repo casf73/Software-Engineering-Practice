@@ -1,0 +1,10 @@
+{
+  "id": "R405-F05",
+  "iteration": 4,
+  "title": "空方案禁止确认",
+  "designMethod": "边界值",
+  "dataFile": "测试数据.json",
+  "steps": "观察确认定制按钮",
+  "expected": "按钮禁用，未创建订单",
+  "result": "待人工执行"
+}

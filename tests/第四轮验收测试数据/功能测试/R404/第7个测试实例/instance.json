@@ -1,0 +1,10 @@
+{
+  "id": "R404-F07",
+  "iteration": 4,
+  "title": "整单恢复数量",
+  "designMethod": "事务一致性",
+  "dataFile": "测试数据.json",
+  "steps": "取消合并订单",
+  "expected": "甲回补2、乙回补1，无部分取消选项",
+  "result": "待人工执行"
+}

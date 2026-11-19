@@ -1,0 +1,73 @@
+{
+  "id": "R405-05",
+  "iteration": 4,
+  "title": "重复确认只生成一单",
+  "designMethod": "幂等性",
+  "endpoint": null,
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/seller/login",
+      "status": 200,
+      "saveSession": "seller",
+      "bodyFile": "请求数据01.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/register",
+      "status": 201,
+      "saveSession": "buyer",
+      "bodyFile": "请求数据02.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/seller/products",
+      "status": 201,
+      "session": "seller",
+      "capture": {
+        "p": "/id"
+      },
+      "bodyFile": "请求数据03.json"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/seller/products/${p}/customization",
+      "status": 200,
+      "session": "seller",
+      "assertions": {
+        "/customizable": true
+      },
+      "bodyFile": "请求数据04.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/products/${p}/custom-orders",
+      "status": 201,
+      "session": "buyer",
+      "capture": {
+        "o": "/id"
+      },
+      "bodyFile": "请求数据05.json"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer/products/${p}/custom-orders",
+      "status": 201,
+      "session": "buyer",
+      "assertions": {
+        "/id": "${o}"
+      },
+      "bodyFile": "请求数据06.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/products/${p}",
+      "status": 200,
+      "assertions": {
+        "/stock": 2,
+        "/status": "ON_SALE"
+      }
+    }
+  ],
+  "expected": "逐步核对HTTP状态、返回字段与业务结果"
+}

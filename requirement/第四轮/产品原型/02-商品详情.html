@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品详情与购买意向 · 在线购物系统第四轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link is-active" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="crumb"><a href="01-商品浏览.html">商品列表</a> / 木纹令牌</div>
+<div class="store-layout">
+  <div class="card">
+    <div class="product-media">
+      <svg viewBox="0 0 240 180" role="img" aria-label="木纹令牌"><rect width="240" height="180" fill="#faf8f4"/><rect x="58" y="32" width="124" height="116" rx="12" fill="#dcbd93"/><rect x="65" y="39" width="110" height="102" rx="9" fill="none" stroke="#b98f5f"/><circle cx="120" cy="76" r="14" fill="none" stroke="#8d6440" stroke-width="2"/><path d="M112 76h16M120 68v16" stroke="#8d6440" stroke-width="2"/><text x="120" y="115" text-anchor="middle" font-family="serif" font-size="15" fill="#7b5533">木纹令牌</text><text x="120" y="131" text-anchor="middle" font-size="8" letter-spacing="2" fill="#96714e">HANDMADE</text></svg>
+      <span class="media-badge tag tag--success">在售</span>
+    </div>
+    <div class="product-copy">
+      <div class="title-row">
+        <h2>木纹令牌</h2>
+        <div class="price"><small>¥</small>28.00</div>
+      </div>
+      <p class="meta-line">库存 5 · 木作 / 木牌 · <span class="tag tag--custom">可定制</span></p>
+      <p class="desc">手工打磨的木纹令牌，可自选模板、祝福文字与图案，由匠人核对方位后逐件制作。适合毕业、生日与周年纪念。</p>
+      <div class="divider"></div>
+      <div class="btn-row">
+        <button class="btn" type="button">加入购物车</button>
+        <button class="btn" type="button">收藏商品</button>
+        <button class="btn" type="button" data-dialog-open="artisanDialog">匠人主页</button>
+        <a class="btn btn--primary" href="03-在线定制.html">开始定制</a>
+      </div>
+      <div class="artisan">
+        <div class="artisan__avatar">刘</div>
+        <div class="artisan__body">
+          <strong>匠人 刘云炎 · 木作工坊</strong>
+          <p>手工打磨木牌，逐件制作；定制内容确认后约 3 天完成。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header"><h2>提交购买意向</h2></div>
+    <div class="card__body">
+      <p class="muted small" style="margin-bottom:14px">确认联系信息和交易地点，提交后保存到「我的购买」。</p>
+      <div class="field"><label>姓名</label><input class="input" value="mjw"></div>
+      <div class="field"><label>联系电话</label><input class="input" value="138 0000 6021"></div>
+      <div class="field"><label>交易地点</label><input class="input" value="图书馆南门"></div>
+      <button class="btn btn--primary btn--block btn--lg" type="button">提交购买意向</button>
+      <p class="muted small" style="margin-top:12px">已登录：mjw。可在 <a class="link" href="09-我的购买.html">我的购买</a> 查看记录。</p>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert--info" style="margin-top:16px">
+  <i class="alert__icon">i</i>
+  <div><strong>排队说明</strong><br>商品可免登录浏览；买家登录客户账号后提交意向，系统按有效提交时间排序；卖家开启交易并登记结果。</div>
+</div>
+
+<div class="dialog-overlay" id="artisanDialog">
+  <div class="dialog">
+    <div class="dialog__header"><span>匠人主页</span><button class="dialog__close" type="button" data-dialog-close>×</button></div>
+    <div class="dialog__body">
+      <div class="artisan">
+        <div class="artisan__avatar">刘</div>
+        <div class="artisan__body">
+          <strong>刘云炎 · 木作工坊</strong>
+          <p>从事木作十二年，擅长木牌、相框与小型摆件。每件定制都会亲自核对文字与图案，再上漆打磨。</p>
+        </div>
+      </div>
+      <p class="muted small" style="margin-top:14px">作品：木纹令牌</p>
+      <p class="muted small">定制订单生成后，可在「订单」里查看备货制作与发货进度。</p>
+    </div>
+    <div class="dialog__footer"><button class="btn" type="button" data-dialog-close>关闭</button></div>
+  </div>
+</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/?product=1</code></span></div><div class="proto-nav"><a href="01-商品浏览.html">← 上一页</a><a href="index.html">原型总览</a><a href="03-在线定制.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

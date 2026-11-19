@@ -1,0 +1,10 @@
+{
+  "id": "R405-F01",
+  "iteration": 4,
+  "title": "开启定制入口",
+  "designMethod": "场景法",
+  "dataFile": "测试数据.json",
+  "steps": "进入商品详情",
+  "expected": "出现工作台以及模板、文字、图案和颜色",
+  "result": "待人工执行"
+}
