@@ -270,7 +270,11 @@ public class CommerceService {
 
     private Item view(ShoppingEntry row) {
         Product product = row.product;
-        return new Item(product.getId(), product.getName(), product.getPrice(), product.getStock(), product.getStatus(), row.quantity);
+        String images = product.getImageUrls();
+        int separator = images == null ? -1 : images.indexOf('|');
+        String thumbnail = separator < 0 ? images : images.substring(0, separator);
+        return new Item(product.getId(), product.getName(), product.getPrice(), product.getStock(),
+                product.getStatus(), row.quantity, thumbnail == null || thumbnail.isBlank() ? null : thumbnail);
     }
 
     private Order view(ShopOrder order) {

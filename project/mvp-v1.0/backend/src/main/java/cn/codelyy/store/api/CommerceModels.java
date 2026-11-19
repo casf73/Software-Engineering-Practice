@@ -36,7 +36,7 @@ public final class CommerceModels {
                                @NotBlank @Size(max=12) String value) {}
     public record Advance(@NotNull Status status) {}
     public record Item(Long productId, String name, BigDecimal price, int stock, ProductStatus status,
-                       Integer quantity) {}
+                       Integer quantity, String thumbnailUrl) {}
     public record OrderLine(Long productId, String name, BigDecimal unitPrice, int quantity,
                             Design design, String artisanName) {}
     public record Event(Status status, LocalDateTime time) {}

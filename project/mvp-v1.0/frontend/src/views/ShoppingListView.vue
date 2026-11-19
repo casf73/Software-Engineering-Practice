@@ -6,6 +6,7 @@
     <p v-else-if="!rows.length && !error">列表为空。<RouterLink to="/">浏览商品</RouterLink></p>
     <ul v-else class="shopping-list">
       <li v-for="row in rows" :key="row.productId">
+        <ProductImage class="shopping-thumbnail" :src="row.thumbnailUrl || ''" :alt="row.name" />
         <label v-if="cart"><input v-model="selected" type="checkbox" :value="row.productId" :disabled="busy" /> 选择 {{ row.name }}</label>
         <RouterLink :to="{ name: 'storefront', query: { product: row.productId } }">{{ cart ? '查看详情' : row.name }}</RouterLink>
         <span>¥{{ formatPrice(row.price) }} · {{ row.stock === 0 ? '无货' : productLabel(row.status) }}</span>
@@ -43,6 +44,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import PageHeader from '../components/common/PageHeader.vue'
+import ProductImage from '../components/common/ProductImage.vue'
 import { commerceApi, newOrderRequestId } from '../api/commerceApi'
 import { apiErrorMessage } from '../api/http'
 import { formatPrice } from '../utils/format'
@@ -128,6 +130,9 @@ watch(cart, () => { checkoutOpen.value = false; rows.value = []; selected.value 
 .shopping-list { list-style: none; padding: 0; }
 .shopping-list li, .shopping-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid #e1e5ec; }
 .shopping-list input[type="number"] { width: 86px; }
+.shopping-thumbnail.product-image { flex: 0 0 72px; width: 72px; height: 72px; min-height: 0; aspect-ratio: 1; border-radius: 4px; }
+.shopping-thumbnail :deep(img) { object-fit: contain; }
+.shopping-thumbnail :deep(.product-image-placeholder) { padding: 4px; font-size: 12px; text-align: center; }
 .checkout-summary { list-style: none; padding: 0; margin: 16px 0; }
 .checkout-summary li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--el-border-color-lighter); }
 .checkout-summary li span:first-child { overflow-wrap: anywhere; }
