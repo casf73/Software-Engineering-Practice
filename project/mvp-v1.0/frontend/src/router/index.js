@@ -12,9 +12,9 @@ const router = createRouter({
     { path: '/customer/cart', name: 'customer-cart', component: () => import('../views/ShoppingListView.vue'), meta: { customerOnly: true } },
     { path: '/customer/favorites', name: 'customer-favorites', component: () => import('../views/ShoppingListView.vue'), meta: { customerOnly: true } },
     { path: '/customer/shop-orders', name: 'customer-orders', component: () => import('../views/ShopOrdersView.vue'), meta: { customerOnly: true } },
-    { path: '/seller/shop-orders', name: 'seller-orders', component: () => import('../views/ShopOrdersView.vue') },
-    { path: '/seller/login', name: 'seller-login', component: () => import('../views/SellerLoginView.vue') },
-    { path: '/seller/dashboard', name: 'seller-dashboard', component: () => import('../views/SellerDashboardView.vue'), meta: { sellerOnly: true } },
+    { path: '/seller/shop-orders', name: 'seller-orders', component: () => import('../views/ShopOrdersView.vue'), meta: { sellerArea: true } },
+    { path: '/seller/login', name: 'seller-login', component: () => import('../views/SellerLoginView.vue'), meta: { sellerArea: true } },
+    { path: '/seller/dashboard', name: 'seller-dashboard', component: () => import('../views/SellerDashboardView.vue'), meta: { sellerArea: true } },
   ],
   scrollBehavior: () => ({ top: 0 }),
 })

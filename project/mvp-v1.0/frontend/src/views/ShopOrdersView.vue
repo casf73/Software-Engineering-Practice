@@ -89,9 +89,15 @@ async function act(action) {
 function advance(order) { return act(() => commerceApi.advance(order.id, next[order.status])) }
 
 async function cancel(order) {
-  try { await ElMessageBox.confirm('整单取消后将恢复库存，订单不能再次推进。', '确认取消', { type: 'warning' }) }
+  const sellerOrder = seller.value
+  try {
+    await ElMessageBox.confirm(`取消订单 #${order.id} 后将恢复库存，订单不能再次推进。`, '确认取消订单', {
+      type: 'warning', confirmButtonText: '确认取消订单', cancelButtonText: '保留订单',
+      closeOnClickModal: false,
+    })
+  }
   catch { return }
-  return act(() => commerceApi.cancel(seller.value, order.id))
+  return act(() => commerceApi.cancel(sellerOrder, order.id))
 }
 
 watch(seller, () => { page.value = 0; rows.value = []; load() }, { immediate: true })

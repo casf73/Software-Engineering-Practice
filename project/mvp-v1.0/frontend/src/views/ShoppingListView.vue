@@ -17,15 +17,31 @@
     <div v-if="cart && rows.length" class="shopping-actions">
       <span>已选 {{ selected.length }} 种 · ¥{{ formatPrice(totalCents / 100) }}</span>
       <el-button :disabled="busy || !selected.length" @click="move">所选商品转收藏</el-button>
-      <el-button type="primary" :disabled="busy || !selected.length" @click="checkout">提交所选商品订单</el-button>
+      <el-button type="primary" :disabled="busy || !selectedRows.length" @click="checkoutOpen = true">提交所选商品订单</el-button>
     </div>
+    <el-dialog v-model="checkoutOpen" title="确认下单" width="min(520px, 92vw)" align-center
+      :show-close="false" :close-on-click-modal="false" :close-on-press-escape="!busy">
+      <p>所选商品将合成一笔订单，未勾选的商品仍留在购物车。</p>
+      <ul class="checkout-summary">
+        <li v-for="row in selectedRows" :key="row.productId">
+          <span>{{ row.name }} × {{ row.quantity }}</span>
+          <span>¥{{ formatPrice(lineTotalCents(row) / 100) }}</span>
+        </li>
+      </ul>
+      <p class="checkout-total">共 {{ totalQuantity }} 件 · 合计 ¥{{ formatPrice(totalCents / 100) }}</p>
+      <el-alert v-if="checkoutError" :title="checkoutError" type="error" :closable="false" />
+      <template #footer>
+        <el-button :disabled="busy" @click="checkoutOpen = false">返回购物车</el-button>
+        <el-button type="primary" :loading="busy" :disabled="!selectedRows.length" @click="checkout">确认下单</el-button>
+      </template>
+    </el-dialog>
   </main>
 </template>
 
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import PageHeader from '../components/common/PageHeader.vue'
 import { commerceApi, newOrderRequestId } from '../api/commerceApi'
 import { apiErrorMessage } from '../api/http'
@@ -40,8 +56,12 @@ const selected = ref([])
 const loading = ref(false)
 const busy = ref(false)
 const error = ref('')
-const totalCents = computed(() => rows.value.filter(row => selected.value.includes(row.productId))
-  .reduce((sum, row) => sum + Math.round(Number(row.price) * 100) * row.quantity, 0))
+const checkoutOpen = ref(false)
+const checkoutError = ref('')
+const selectedRows = computed(() => rows.value.filter(row => selected.value.includes(row.productId)))
+const lineTotalCents = row => Math.round(Number(row.price) * 100) * row.quantity
+const totalCents = computed(() => selectedRows.value.reduce((sum, row) => sum + lineTotalCents(row), 0))
+const totalQuantity = computed(() => selectedRows.value.reduce((sum, row) => sum + row.quantity, 0))
 let pendingCheckout
 let loadVersion = 0
 
@@ -84,25 +104,33 @@ function remove(row) {
 function move() { return act(() => commerceApi.move([...selected.value])) }
 
 async function checkout() {
-  if (busy.value || !selected.value.length) return
-  const ids = [...selected.value].sort((a, b) => a - b)
+  if (busy.value || !checkoutOpen.value || !selectedRows.value.length) return
+  const ids = selectedRows.value.map(row => row.productId).sort((a, b) => a - b)
   const signature = ids.join(',')
-  try { await ElMessageBox.confirm('将所选商品合成一笔订单。', '确认下单', { type: 'info' }) }
-  catch { return }
   if (pendingCheckout?.signature !== signature) pendingCheckout = { signature, key: newOrderRequestId() }
-  return act(async () => {
+  busy.value = true
+  checkoutError.value = ''
+  try {
     await commerceApi.checkout(ids, pendingCheckout.key)
     pendingCheckout = null
+    checkoutOpen.value = false
     ElMessage.success('订单已生成')
-    router.push('/customer/shop-orders')
-  })
+    await router.push('/customer/shop-orders')
+  } catch (e) { checkoutError.value = apiErrorMessage(e) }
+  finally { busy.value = false }
 }
 
-watch(cart, () => { rows.value = []; selected.value = []; load() }, { immediate: true })
+watch(checkoutOpen, open => { if (open) checkoutError.value = '' })
+watch(cart, () => { checkoutOpen.value = false; rows.value = []; selected.value = []; load() }, { immediate: true })
 </script>
 
 <style scoped>
 .shopping-list { list-style: none; padding: 0; }
 .shopping-list li, .shopping-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid #e1e5ec; }
 .shopping-list input[type="number"] { width: 86px; }
+.checkout-summary { list-style: none; padding: 0; margin: 16px 0; }
+.checkout-summary li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--el-border-color-lighter); }
+.checkout-summary li span:first-child { overflow-wrap: anywhere; }
+.checkout-summary li span:last-child { white-space: nowrap; }
+.checkout-total { text-align: right; font-weight: 600; }
 </style>
