@@ -1,18 +1,5 @@
 <template>
-  <div class="content-width dashboard-page seller-layout">
-    <aside class="seller-sidebar" aria-label="卖家后台目录">
-      <div class="seller-sidebar-title">卖家后台</div>
-      <el-menu :default-active="activeSection" @select="activeSection = $event">
-        <el-menu-item index="overview">概览</el-menu-item>
-        <el-menu-item index="product">商品管理</el-menu-item>
-        <el-menu-item index="queue">购买意向</el-menu-item>
-        <el-menu-item index="customers">客户管理</el-menu-item>
-        <el-menu-item index="categories">分类管理</el-menu-item>
-        <el-menu-item index="account">账号管理</el-menu-item>
-      </el-menu>
-      <RouterLink to="/seller/shop-orders" class="nav-link">订单管理</RouterLink>
-    </aside>
-    <div class="seller-content">
+  <div class="seller-content">
       <PageHeader :title="sectionMeta[activeSection].title" :description="sectionMeta[activeSection].description">
         <template #actions><el-button @click="refresh">刷新数据</el-button><el-button @click="logout">退出登录</el-button></template>
       </PageHeader>
@@ -99,7 +86,6 @@
       </AppCard>
       <p v-if="activeSection === 'queue'" class="privacy-note dashboard-note">买家姓名和电话仅在卖家工作台中展示。</p>
       </template>
-    </div>
   </div>
 
   <AppDialog v-model="freezeDialogVisible" :title="freezeAction === 'freeze' ? '手动冻结商品' : '解除手动冻结'" width="460px">
@@ -176,7 +162,7 @@ import { formatDate, formatPrice } from '../utils/format'
 import { productLabel } from '../utils/status'
 
 const router = useRouter()
-const activeSection = ref('overview')
+const activeSection = defineModel('activeSection', { type: String, required: true })
 const sectionMeta = {
   overview: { title: '概览', description: '查看当前商品、排队人数和交易状态。' },
   product: { title: '商品管理', description: '发布或编辑当前商品。' },

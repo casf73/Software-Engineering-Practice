@@ -1,5 +1,5 @@
 <template>
-  <main class="content-width">
+  <section :class="{ 'content-width': !seller }">
     <PageHeader :title="seller ? '卖家订单管理' : '我的订单'">
       <template #actions><RouterLink :to="seller ? '/seller/dashboard' : '/customer/cart'">{{ seller ? '返回卖家后台' : '返回购物车' }}</RouterLink></template>
     </PageHeader>
@@ -33,7 +33,7 @@
       <span>第 {{ page + 1 }} 页</span>
       <el-button :disabled="(page + 1) * 20 >= total || busy || loading" @click="page++; load()">下一页</el-button>
     </div>
-  </main>
+  </section>
 </template>
 
 <script setup>
