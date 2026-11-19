@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import {
-  ElAlert, ElButton, ElCard, ElConfigProvider, ElDialog, ElEmpty,
+  ElAlert, ElButton, ElCard, ElCheckbox, ElConfigProvider, ElDialog, ElEmpty,
   ElForm, ElFormItem, ElInput, ElMenu, ElMenuItem, ElRadio,
   ElRadioGroup, ElResult, ElSkeleton, ElTable, ElTableColumn, ElTag,
 } from 'element-plus'
@@ -8,6 +8,7 @@ import 'element-plus/theme-chalk/base.css'
 import 'element-plus/theme-chalk/el-alert.css'
 import 'element-plus/theme-chalk/el-button.css'
 import 'element-plus/theme-chalk/el-card.css'
+import 'element-plus/theme-chalk/el-checkbox.css'
 import 'element-plus/theme-chalk/el-config-provider.css'
 import 'element-plus/theme-chalk/el-dialog.css'
 import 'element-plus/theme-chalk/el-empty.css'
@@ -33,7 +34,7 @@ import './styles.css'
 
 const app = createApp(App)
 app.use(router)
-;[ElAlert, ElButton, ElCard, ElConfigProvider, ElDialog, ElEmpty,
+;[ElAlert, ElButton, ElCard, ElCheckbox, ElConfigProvider, ElDialog, ElEmpty,
   ElForm, ElFormItem, ElInput, ElMenu, ElMenuItem, ElRadio,
   ElRadioGroup, ElResult, ElSkeleton, ElTable, ElTableColumn, ElTag]
   .forEach((component) => app.use(component))
