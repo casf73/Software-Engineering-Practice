@@ -5,6 +5,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'storefront', component: () => import('../views/StorefrontView.vue') },
+    { path: '/customization', name: 'customization', component: () => import('../views/CustomizationView.vue') },
     { path: '/customer/login', name: 'customer-login', component: () => import('../views/CustomerAuthView.vue') },
     { path: '/customer/register', name: 'customer-register', component: () => import('../views/CustomerAuthView.vue') },
     { path: '/customer/account', name: 'customer-account', component: () => import('../views/CustomerAccountView.vue'), meta: { customerOnly: true } },

@@ -13,7 +13,7 @@ public class CatalogController {
  private final StoreService store;private final CatalogService catalog;private final CustomerService customers;
  public CatalogController(StoreService s,CatalogService c,CustomerService customers){store=s;catalog=c;this.customers=customers;}
  @GetMapping("/public/products") public PageView<ProductView> browse(@RequestParam(defaultValue="") @Size(max=100) String q,@RequestParam(required=false) Long categoryId,
-  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,false);}
+  @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size,@RequestParam(defaultValue="false") boolean customizable){return store.catalog(q,categoryId,page,size,false,customizable);}
  @GetMapping("/seller/products") public PageView<ProductView> all(@RequestParam(defaultValue="") @Size(max=100) String q,@RequestParam(required=false) Long categoryId,
   @RequestParam(defaultValue="0") @Min(0) @Max(1000000) int page,@RequestParam(defaultValue="20") @Min(1) @Max(100) int size){return store.catalog(q,categoryId,page,size,true);}
  @GetMapping("/public/products/{id}") public ProductView product(@PathVariable Long id){return store.getProduct(id);}

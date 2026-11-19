@@ -4,6 +4,7 @@
       <RouterLink class="brand" to="/" aria-label="返回商品首页">在线购物系统</RouterLink>
       <nav class="header-nav" aria-label="主导航">
         <RouterLink to="/" class="nav-link">商品</RouterLink>
+        <RouterLink to="/customization" class="nav-link">在线定制</RouterLink>
         <RouterLink v-if="customerSession.customer" to="/customer/account" class="nav-link">我的购买 · {{ customerSession.customer.username }}</RouterLink>
         <RouterLink v-else to="/customer/login" class="nav-link">客户登录 / 注册</RouterLink>
         <template v-if="customerSession.customer">

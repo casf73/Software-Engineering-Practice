@@ -2,11 +2,15 @@
   <div class="content-width">
     <PageHeader
       title="商品"
-      description="浏览、搜索商品，选择商品提交购买意向。"
+      description="浏览、搜索商品，提交购买意向，或选择可定制商品设计专属礼品。"
     >
       <template #actions><el-button @click="openQueryDialog()">口令码查询</el-button></template>
     </PageHeader>
 
+    <div class="customization-entry">
+      <div><strong>在线定制专区</strong><p>标有「可定制」的商品支持选择模板、文字和图案，实时预览。</p></div>
+      <RouterLink to="/customization">查看可定制商品</RouterLink>
+    </div>
     <form class="catalog-filters" @submit.prevent="page = 0; loadProduct()">
       <el-input v-model="search" placeholder="搜索商品名称或描述" maxlength="100" clearable aria-label="搜索商品" />
       <select v-model="categoryId" class="native-select" aria-label="商品分类" @change="page = 0; loadProduct()"><option value="">全部分类</option><option v-for="c in categoryOptions" :key="c.id" :value="c.id">{{ c.label }}</option></select>
@@ -15,7 +19,7 @@
     <div v-if="items.length" class="catalog-grid">
       <button v-for="item in items" :key="item.id" class="catalog-item" :class="{ selected: product?.id === item.id }" @click="selectProduct(item)">
         <img v-if="item.images?.length" :src="item.images[0]" :alt="item.name"><span v-else class="catalog-no-image">暂无图片</span>
-        <strong>{{ item.name }}</strong><span>¥{{ formatPrice(item.price) }} · 库存 {{ item.stock }}</span><small>{{ item.categoryName || '未分类' }} · {{ productLabel(item.status) }}</small>
+        <strong>{{ item.name }} <el-tag v-if="item.customizable" size="small" effect="plain">可定制</el-tag></strong><span>¥{{ formatPrice(item.price) }} · 库存 {{ item.stock }}</span><small>{{ item.categoryName || '未分类' }} · {{ productLabel(item.status) }}</small>
       </button>
     </div>
     <div class="pager"><el-button :disabled="page === 0 || loading" @click="page--; loadProduct()">上一页</el-button><span>共 {{ total }} 件 · 第 {{ page + 1 }} 页</span><el-button :disabled="(page + 1) * 12 >= total || loading" @click="page++; loadProduct()">下一页</el-button></div>
@@ -294,3 +298,8 @@ onMounted(async () => {
   try { categories.value = (await catalogApi.categories()).data } catch (e) { ElMessage.error(apiErrorMessage(e, '分类加载失败')) }
 })
 </script>
+
+<style scoped>
+.customization-entry { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-block: 1px solid #e1e5ec; padding: 16px 0; margin-bottom: 20px; }
+.customization-entry p { margin: 5px 0 0; color: #64748b; font-size: 14px; }
+</style>

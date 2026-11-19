@@ -1,14 +1,22 @@
 <template>
   <section class="product-commerce">
-    <div class="commerce-actions">
+    <div v-if="!studio" class="commerce-actions">
       <el-button :disabled="busy || product.status !== 'ON_SALE' || product.stock < 1" @click="addToCart">加入购物车</el-button>
       <el-button :disabled="busy" @click="favorite">收藏商品</el-button>
       <el-button v-if="settings?.artisanName" @click="artisanOpen = true">匠人主页</el-button>
     </div>
 
-    <div v-if="settings?.customizable" class="custom-workbench">
+    <el-button v-if="!studio && settings?.customizable" type="primary"
+      :disabled="product.status !== 'ON_SALE' || product.stock < 1"
+      @click="router.push({ name: 'customization', query: { product: product.id } })">开始定制</el-button>
+    <p v-if="studio && settingsLoading">正在加载定制设置…</p>
+    <el-alert v-else-if="studio && settingsError" :title="settingsError" type="error" :closable="false" />
+    <el-alert v-else-if="studio && settings && !settings.customizable" title="该商品已关闭在线定制，请返回选择其他商品。" type="info" :closable="false" />
+    <el-button v-if="studio && settings?.artisanName" @click="artisanOpen = true">匠人主页</el-button>
+    <div v-if="studio && settings?.customizable" class="custom-workbench">
       <h3>在线定制工作台</h3>
       <p>选模板、填文字、挑图案，确认预览后生成一件定制订单。</p>
+      <div class="designer-layout">
       <el-form label-position="top">
         <el-form-item label="模板">
           <select v-model="design.template" aria-label="模板"><option value="classic">经典留白</option><option value="modern">现代简约</option><option value="craft">手作纸纹</option></select>
@@ -21,7 +29,9 @@
           <select v-model="design.color" aria-label="颜色"><option value="ink">墨蓝</option><option value="rose">玫瑰红</option><option value="forest">森林绿</option></select>
         </el-form-item>
       </el-form>
-      <GiftPreview :design="design" />
+      <div><h3>实时预览</h3><GiftPreview :design="design" /></div>
+      </div>
+      <el-button @click="Object.assign(design, { template: 'craft', text: '毕业快乐', motif: 'leaf', color: 'forest' })">填入示例方案</el-button>
       <el-button type="primary" :disabled="busy || product.status !== 'ON_SALE' || product.stock < 1 || (!design.text.trim() && design.motif === 'none')" @click="confirmDesign">
         确认定制方案
       </el-button>
@@ -45,7 +55,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { commerceApi, newOrderRequestId } from '../api/commerceApi'
@@ -55,15 +65,32 @@ import { formatPrice } from '../utils/format'
 import AppDialog from './common/AppDialog.vue'
 import GiftPreview from './GiftPreview.vue'
 
-const { product } = defineProps({ product: { type: Object, required: true } })
+const { product, studio } = defineProps({ product: { type: Object, required: true }, studio: Boolean })
 const route = useRoute()
 const router = useRouter()
 const busy = ref(false)
 const settings = ref(null)
+const settingsLoading = ref(true)
+const settingsError = ref('')
 const artisanOpen = ref(false)
 const confirmOpen = ref(false)
 const confirmed = ref(null)
 const design = reactive({ template: 'classic', text: '', motif: 'none', color: 'ink' })
+const draftKey = `custom-design-${product.id}`
+if (studio) {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(draftKey))
+    if (saved && ['classic', 'modern', 'craft'].includes(saved.template) &&
+        ['none', 'heart', 'star', 'leaf'].includes(saved.motif) &&
+        ['ink', 'rose', 'forest'].includes(saved.color) &&
+        typeof saved.text === 'string' && saved.text.length <= 60) Object.assign(design, saved)
+  } catch { /* 草稿不可用时使用默认方案 */ }
+}
+watch(design, value => {
+  if (studio) {
+    try { sessionStorage.setItem(draftKey, JSON.stringify(value)) } catch { /* 草稿存储不可用时仍可编辑 */ }
+  }
+})
 let requestId
 let confirmedSignature
 
@@ -113,6 +140,7 @@ function submitDesign() {
   return act(async () => {
     await commerceApi.customOrder(product.id, confirmed.value, requestId)
     confirmOpen.value = false
+    try { sessionStorage.removeItem(draftKey) } catch { /* 不影响已生成订单 */ }
     ElMessage.success('定制订单已生成')
     router.push('/customer/shop-orders')
   })
@@ -120,7 +148,8 @@ function submitDesign() {
 
 onMounted(async () => {
   try { settings.value = (await commerceApi.customization(product.id)).data }
-  catch (error) { if (error.response?.status !== 404) ElMessage.error(apiErrorMessage(error)) }
+  catch (error) { settingsError.value = apiErrorMessage(error, '定制设置暂不可用') }
+  finally { settingsLoading.value = false }
 })
 </script>
 
@@ -131,5 +160,7 @@ onMounted(async () => {
 .custom-workbench { border-top: 1px solid #e1e5ec; padding-top: 16px; }
 .custom-workbench h3, .custom-workbench p { margin: 0; }
 .custom-workbench select { padding: 8px; border: 1px solid #ccd4e1; border-radius: 4px; }
+.designer-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 680px) { .designer-layout { grid-template-columns: 1fr; } }
 .artisan-bio { white-space: pre-wrap; overflow-wrap: anywhere; }
 </style>
