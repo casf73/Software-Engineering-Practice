@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原型总览 · 在线购物系统第五轮产品原型（挑战 C）</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="08-客户登录与注册.html">客户登录 / 注册</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="index-hero">
+  <h1>在线购物系统 · 第五轮产品原型（挑战 C）</h1>
+  <p>在第四轮原型基础上增补挑战 C：订单线上支付、收货地址与物流配送、按件售后服务。新增页面已并入用户端与卖家端分类，同时在下方单列「挑战 C 新增」分组，便于按本轮范围评审。</p>
+</div>
+
+<div class="alert alert--info" style="margin-top:20px">
+  <i class="alert__icon">i</i>
+  <div><strong>使用说明</strong><br>纯静态 HTML，无需启动后端或安装依赖，用浏览器打开本页即可。数据为演示数据，按钮不会真实落库；「原型」标注条给出对应的实装路由，便于和源码逐页对照。</div>
+</div>
+
+<h2 class="index-group">用户端（16 个页面）</h2>
+<div class="index-grid"><a class="index-card" href="01-商品浏览.html"><span class="index-card__no">01</span><strong>商品浏览</strong><small>搜索、分类筛选、分页；可定制商品带标记。</small><small style="margin-top:6px">实装路由：<code>/</code></small></a><a class="index-card" href="02-商品详情.html"><span class="index-card__no">02</span><strong>商品详情与购买意向</strong><small>商品信息、加入购物车、收藏、匠人主页、提交意向。</small><small style="margin-top:6px">实装路由：<code>/ 选中商品</code></small></a><a class="index-card" href="03-在线定制.html"><span class="index-card__no">03</span><strong>在线定制</strong><small>模板、文字、图案、配色与实时预览，确认后生成定制订单。</small><small style="margin-top:6px">实装路由：<code>商品详情内工作台</code></small></a><a class="index-card" href="04-购物车.html"><span class="index-card__no">04</span><strong>购物车</strong><small>勾选结算、调整数量、转收藏，未勾选商品保留。</small><small style="margin-top:6px">实装路由：<code>/customer/cart</code></small></a><a class="index-card" href="05-收藏夹.html"><span class="index-card__no">05</span><strong>收藏夹</strong><small>下架与无货商品保留，可查看详情或取消收藏。</small><small style="margin-top:6px">实装路由：<code>/customer/favorites</code></small></a><a class="index-card" href="06-确认订单.html"><span class="index-card__no">06</span><strong>确认订单</strong><small>选择收货地址、核对商品与金额，提交后进入待支付。</small><small style="margin-top:6px">实装路由：<code>购物车结算</code></small></a><a class="index-card" href="07-我的订单.html"><span class="index-card__no">07</span><strong>我的订单</strong><small>待支付、已支付、已发货与完成状态，物流与售后入口。</small><small style="margin-top:6px">实装路由：<code>/customer/shop-orders</code></small></a><a class="index-card" href="08-客户登录与注册.html"><span class="index-card__no">08</span><strong>客户登录与注册</strong><small>登录与注册两个页签，注册需填写默认交易地点。</small><small style="margin-top:6px">实装路由：<code>/customer/login、/customer/register</code></small></a><a class="index-card" href="09-我的购买.html"><span class="index-card__no">09</span><strong>我的购买</strong><small>账号资料与历史购买记录，账号间数据隔离。</small><small style="margin-top:6px">实装路由：<code>/customer/account</code></small></a><a class="index-card" href="10-口令码查询.html"><span class="index-card__no">10</span><strong>口令码查询</strong><small>凭口令码查询排位、修改联系信息、撤销意向。</small><small style="margin-top:6px">实装路由：<code>首页口令码查询</code></small></a><a class="index-card" href="19-支付方式与收银台.html"><span class="index-card__no">19</span><strong>支付方式与收银台</strong><small>C1 支付：银行卡、信用卡、支付宝、微信四选一，不支持组合支付。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="20-支付结果.html"><span class="index-card__no">20</span><strong>支付结果</strong><small>C1 支付：成功、结果确认中与失败三种状态，订单状态必须与支付一致。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="21-收货地址管理.html"><span class="index-card__no">21</span><strong>收货地址管理</strong><small>C2 配送：多个地址、唯一默认地址，下单可临时改选。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="22-物流查询.html"><span class="index-card__no">22</span><strong>物流查询</strong><small>C2 配送：物流服务商、运单号与轨迹，不做异常预警。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="23-售后申请.html"><span class="index-card__no">23</span><strong>售后申请</strong><small>C3 售后：按件发起，申请单含标题、描述与图片。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="24-售后详情.html"><span class="index-card__no">24</span><strong>售后详情</strong><small>C3 售后：协商进度、退货收货、退款原路与库存回补。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+</div>
+
+<h2 class="index-group">卖家端（10 个页面）</h2>
+<div class="index-grid"><a class="index-card" href="11-卖家登录.html"><span class="index-card__no">11</span><strong>卖家登录</strong><small>卖家账号密码登录，进入工作台。</small><small style="margin-top:6px">实装路由：<code>/seller/login</code></small></a><a class="index-card" href="12-卖家概览.html"><span class="index-card__no">12</span><strong>卖家概览</strong><small>当前商品、待处理意向与本次交易概况。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="13-商品管理.html"><span class="index-card__no">13</span><strong>商品管理</strong><small>发布、编辑、冻结、下架；为单个商品启用在线定制。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="14-购买意向队列.html"><span class="index-card__no">14</span><strong>购买意向队列</strong><small>按时间排序，作废、排到队尾、开始交易。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="15-客户管理.html"><span class="index-card__no">15</span><strong>客户管理</strong><small>客户资料与历史订单查询。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="16-分类管理.html"><span class="index-card__no">16</span><strong>分类管理</strong><small>两级分类维护，供发布与筛选使用。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="17-卖家订单管理.html"><span class="index-card__no">17</span><strong>卖家订单管理</strong><small>发货录入物流、推进状态、取消整单并回补库存。</small><small style="margin-top:6px">实装路由：<code>/seller/shop-orders</code></small></a><a class="index-card" href="18-账号管理.html"><span class="index-card__no">18</span><strong>账号管理</strong><small>修改卖家密码，修改后旧会话失效。</small><small style="margin-top:6px">实装路由：<code>/seller/dashboard</code></small></a><a class="index-card" href="25-卖家发货.html"><span class="index-card__no">25</span><strong>卖家发货</strong><small>C2 配送：选择物流服务商并录入运单号完成发货。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a><a class="index-card" href="26-卖家售后管理.html"><span class="index-card__no">26</span><strong>卖家售后管理</strong><small>C3 售后：确认收货后处理退款或换货，金额不可修改。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+</div>
+
+
+<h2 class="index-group">挑战 C 新增（8 个页面）</h2>
+<div class="index-grid">
+<a class="index-card" href="19-支付方式与收银台.html"><span class="index-card__no">19</span><strong>支付方式与收银台</strong><small>C1 支付：银行卡、信用卡、支付宝、微信四选一，不支持组合支付。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="20-支付结果.html"><span class="index-card__no">20</span><strong>支付结果</strong><small>C1 支付：成功、结果确认中与失败三种状态，订单状态必须与支付一致。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="21-收货地址管理.html"><span class="index-card__no">21</span><strong>收货地址管理</strong><small>C2 配送：多个地址、唯一默认地址，下单可临时改选。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="22-物流查询.html"><span class="index-card__no">22</span><strong>物流查询</strong><small>C2 配送：物流服务商、运单号与轨迹，不做异常预警。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="23-售后申请.html"><span class="index-card__no">23</span><strong>售后申请</strong><small>C3 售后：按件发起，申请单含标题、描述与图片。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="24-售后详情.html"><span class="index-card__no">24</span><strong>售后详情</strong><small>C3 售后：协商进度、退货收货、退款原路与库存回补。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="25-卖家发货.html"><span class="index-card__no">25</span><strong>卖家发货</strong><small>C2 配送：选择物流服务商并录入运单号完成发货。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+<a class="index-card" href="26-卖家售后管理.html"><span class="index-card__no">26</span><strong>卖家售后管理</strong><small>C3 售后：确认收货后处理退款或换货，金额不可修改。</small><small style="margin-top:6px">本轮新增，尚未实装</small></a>
+</div>
+
+
+
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>—</code></span></div><div class="proto-nav"><a class="is-disabled">← 上一页</a><a href="index.html">原型总览</a><a href="01-商品浏览.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

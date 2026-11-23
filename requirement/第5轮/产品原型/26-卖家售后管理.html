@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卖家售后管理 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link is-active" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+<div class="seller-layout">
+  <aside class="sidebar">
+    <div class="sidebar__title">卖家后台</div>
+    <a class="menu-item" href="12-卖家概览.html">概览</a><a class="menu-item" href="13-商品管理.html">商品管理</a><a class="menu-item" href="14-购买意向队列.html">购买意向</a><a class="menu-item" href="15-客户管理.html">客户管理</a><a class="menu-item" href="16-分类管理.html">分类管理</a><a class="menu-item" href="18-账号管理.html">账号管理</a>
+    <div class="sidebar__divider"></div>
+    <a class="menu-item" href="17-卖家订单管理.html">订单管理</a>
+  </aside>
+  <div class="seller-content">
+
+<div class="page-heading">
+  <div><h1>售后管理</h1><p class="page-desc">确认收到退货包裹后处理退款或换货；退款按原路退回，金额不可修改。</p></div>
+  <div class="heading-actions"><a class="btn" href="17-卖家订单管理.html">返回订单管理</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>售后申请</h2><span class="muted small">共 2 条</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th style="width:160px">售后单</th><th style="width:80px">订单</th><th>商品</th><th>标题</th><th style="width:150px">申请时间</th><th style="width:120px">状态</th><th style="width:150px">操作</th></tr></thead>
+        <tbody>
+          <tr class="is-selected">
+            <td class="num">AS-20261123-01</td><td>#401</td><td>木纹令牌 × 1</td><td>收到的木牌表面有划痕</td><td>2026-11-22 10:24</td>
+            <td><span class="tag tag--warning">待收货</span></td>
+            <td><button class="btn btn--text" type="button">确认收货并处理</button></td>
+          </tr>
+          <tr>
+            <td class="num">AS-20261121-02</td><td>#398</td><td>手作相框 × 1</td><td>相框边角磕碰</td><td>2026-11-21 15:10</td>
+            <td><span class="tag tag--success">已完成 · 退款</span></td>
+            <td><button class="btn btn--text" type="button">查看</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p class="state-caption">处理售后 AS-20261123-01</p>
+<div class="card">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field"><label>关联订单</label><input class="input" value="#401 · 木纹令牌 × 1" disabled></div>
+      <div class="field"><label>客户</label><input class="input" value="mjw" disabled></div>
+    </div>
+    <div class="field"><label>问题描述</label><textarea class="textarea" disabled>拆箱后发现木牌正面有一道约 2 厘米的划痕，位置在文字右上方，影响观感。希望退货或更换。</textarea></div>
+    <div class="field">
+      <label>处理方式</label>
+      <div class="pay-methods" style="max-width:520px">
+        <label class="pay-method"><input type="radio" name="result" checked><span class="pay-method__body"><strong>退款</strong><small>原路退回支付渠道</small></span></label>
+        <label class="pay-method"><input type="radio" name="result"><span class="pay-method__body"><strong>换货</strong><small>重新寄出同款商品</small></span></label>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>退款金额</label><input class="input" value="¥28.00" disabled></div>
+      <div class="field"><label>退回渠道</label><input class="input" value="支付宝（原路退回）" disabled></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn--primary" type="button">确认收货并处理</button>
+      <span class="inline-note">退货入库后商品库存 +1；系统不自动退款。</span>
+    </div>
+  </div>
+</div>
+
+<div class="notice">不设商家响应时限，也没有超时自动同意；退款金额不可调整，退款与渠道对账后才算完成。</div>
+
+  </div>
+</div>
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="25-卖家发货.html">← 上一页</a><a href="index.html">原型总览</a><a href="index.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>购物车 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link is-active" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>购物车</h1><p class="page-desc">勾选需要结算的商品，其余商品会保留在购物车。</p></div>
+  <div class="heading-actions"><a class="btn" href="05-收藏夹.html">去收藏夹</a><a class="btn" href="01-商品浏览.html">继续购物</a></div>
+</div>
+
+<div class="alert alert--info">
+  <i class="alert__icon">i</i>
+  <div>结算只会处理勾选的商品；未勾选的商品、库存与收藏关系保持不变。</div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>购物车商品</h2><span class="muted small">共 3 种</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th style="width:56px" class="is-center">选择</th><th>商品</th><th style="width:100px">单价</th><th style="width:90px">库存</th><th style="width:130px">数量</th><th style="width:110px">小计</th><th style="width:100px">操作</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-selected">
+            <td class="is-center"><input class="js-select" type="checkbox" checked data-price="28" data-quantity="1" aria-label="选择 木纹令牌"></td>
+            <td><a class="link" href="02-商品详情.html">木纹令牌</a> <span class="tag tag--custom">可定制</span></td>
+            <td class="num">¥28.00</td>
+            <td class="num">5</td>
+            <td><input class="input" style="width:78px;height:28px" value="1" aria-label="木纹令牌数量"></td>
+            <td class="num">¥28.00</td>
+            <td><button class="btn btn--text" type="button">移除</button></td>
+          </tr>
+          <tr class="is-selected">
+            <td class="is-center"><input class="js-select" type="checkbox" checked data-price="12" data-quantity="1" aria-label="选择 手作相框"></td>
+            <td><a class="link" href="02-商品详情.html">手作相框</a></td>
+            <td class="num">¥12.00</td>
+            <td class="num">2</td>
+            <td><input class="input" style="width:78px;height:28px" value="1" aria-label="手作相框数量"></td>
+            <td class="num">¥12.00</td>
+            <td><button class="btn btn--text" type="button">移除</button></td>
+          </tr>
+          <tr>
+            <td class="is-center"><input class="js-select" type="checkbox" data-price="8" data-quantity="1" aria-label="选择 编织钥匙扣"></td>
+            <td><a class="link" href="02-商品详情.html">编织钥匙扣</a></td>
+            <td class="num">¥8.00</td>
+            <td class="num">1</td>
+            <td><input class="input" style="width:78px;height:28px" value="1" aria-label="编织钥匙扣数量"></td>
+            <td class="num">¥8.00</td>
+            <td><button class="btn btn--text" type="button">移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card__footer">
+    <div class="summary-row">
+      <span class="js-cart-summary">已选 2 种 · ¥40.00</span>
+      <div class="btn-row">
+        <button class="btn" type="button">所选商品转收藏</button>
+        <a class="btn btn--primary js-checkout" href="06-确认订单.html">结算所选商品</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="notice">转收藏为单向操作：商品从购物车移除并加入收藏夹，不会自动回到购物车。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/customer/cart</code></span></div><div class="proto-nav"><a href="03-在线定制.html">← 上一页</a><a href="index.html">原型总览</a><a href="05-收藏夹.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

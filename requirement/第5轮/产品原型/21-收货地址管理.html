@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收货地址管理 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link is-active" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>收货地址</h1><p class="page-desc">可维护多个收货地址，其中一个为默认地址；下单时默认带出，也可临时改选。</p></div>
+  <div class="heading-actions"><a class="btn btn--primary" href="21-收货地址管理.html">新增地址</a><a class="btn" href="09-我的购买.html">返回账号</a></div>
+</div>
+
+<div class="address-grid">
+  <div class="address-card is-default">
+    <span class="address-card__default tag tag--success">默认地址</span>
+    <div class="address-card__head"><strong>麻津午</strong><span class="muted small">138 0000 6021</span></div>
+    <p>江苏省南京市玄武区××路 12 号 3 栋 502</p>
+    <div class="address-card__actions">
+      <span class="muted small">当前默认</span>
+      <button class="btn btn--text" type="button">编辑</button>
+      <button class="btn btn--text" type="button">删除</button>
+    </div>
+  </div>
+  <div class="address-card">
+    <div class="address-card__head"><strong>mjw</strong><span class="muted small">139 0000 3388</span></div>
+    <p>上海市徐汇区××路 88 号 12 层</p>
+    <div class="address-card__actions">
+      <button class="btn btn--text" type="button">设为默认</button>
+      <button class="btn btn--text" type="button">编辑</button>
+      <button class="btn btn--text" type="button">删除</button>
+    </div>
+  </div>
+  <div class="address-card">
+    <div class="address-card__head"><strong>周予安</strong><span class="muted small">137 0000 9912</span></div>
+    <p>浙江省杭州市西湖区××街 6 号</p>
+    <div class="address-card__actions">
+      <button class="btn btn--text" type="button">设为默认</button>
+      <button class="btn btn--text" type="button">编辑</button>
+      <button class="btn btn--text" type="button">删除</button>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <div class="card__header"><h2>新增收货地址</h2><span class="muted small">默认地址有且只有一个</span></div>
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field"><label>收货人</label><input class="input" placeholder="请输入收货人姓名"></div>
+      <div class="field"><label>手机号</label><input class="input" placeholder="用于快递联系"></div>
+      <div class="field"><label>所在地区</label>
+        <select class="select"><option>江苏省 / 南京市 / 玄武区</option><option>上海市 / 上海市 / 徐汇区</option><option>浙江省 / 杭州市 / 西湖区</option></select>
+      </div>
+      <div class="field"><label>详细地址</label><input class="input" placeholder="街道、门牌号、楼层房间号"></div>
+    </div>
+    <label class="checkbox" style="margin-bottom:14px"><input type="checkbox"> 设为默认收货地址</label>
+    <div class="btn-row"><button class="btn btn--primary" type="button">保存地址</button><button class="btn" type="button">取消</button></div>
+  </div>
+</div>
+
+<div class="notice">删除默认地址后需要重新指定一个默认地址；下单时改选其他地址不改变默认设置。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="20-支付结果.html">← 上一页</a><a href="index.html">原型总览</a><a href="22-物流查询.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

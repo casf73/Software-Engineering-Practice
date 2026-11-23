@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>售后详情 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link is-active" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>售后详情</h1><p class="page-desc">售后单 AS-20261123-01 · 商家确认收货后处理退款或换货。</p></div>
+  <div class="heading-actions"><a class="btn" href="07-我的订单.html">返回订单</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>申请内容</h2><span class="tag tag--success">已完成</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>关联订单</dt><dd>#401</dd></div>
+      <div><dt>商品</dt><dd>木纹令牌 × 1</dd></div>
+      <div><dt>标题</dt><dd>收到的木牌表面有划痕</dd></div>
+      <div><dt>提交时间</dt><dd>2026-11-22 10:24</dd></div>
+    </dl>
+    <p class="muted small" style="margin:14px 0 8px">问题描述</p>
+    <p>拆箱后发现木牌正面有一道约 2 厘米的划痕，位置在文字右上方，影响观感。希望退货或更换。</p>
+    <div class="uploader" style="margin-top:14px">
+      <span class="uploader__item">划痕位置照片</span>
+      <span class="uploader__item">整体包装照片</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>处理进度</h2><span class="muted small">客户不能修改或撤销申请</span></div>
+  <div class="card__body">
+    <div class="steps">
+      <div class="step is-done">已提交</div>
+      <div class="step is-done">商家处理中</div>
+      <div class="step is-done">待寄回</div>
+      <div class="step is-done">商家已收货</div>
+      <div class="step is-done">已完成</div>
+    </div>
+    <ul class="timeline">
+      <li class="is-done">已完成 · 退款 ¥28.00 原路退回支付宝<time>2026-11-23 11:08</time></li>
+      <li class="is-done">商家已收货 · 商家在后台确认收到退货包裹<time>2026-11-23 10:52</time></li>
+      <li class="is-done">待寄回 · 客户已寄回商品，顺丰 SF9876543210987<time>2026-11-22 16:40</time></li>
+      <li class="is-done">商家处理中 · 商家已受理，线下与客户协商<time>2026-11-22 11:02</time></li>
+      <li class="is-done">已提交 · 售后申请提交成功<time>2026-11-22 10:24</time></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>处理结果</h2></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>处理方式</dt><dd>退款</dd></div>
+      <div><dt>退款金额</dt><dd class="price price--sm">¥28.00</dd></div>
+      <div><dt>退回渠道</dt><dd>支付宝（原路退回）</dd></div>
+      <div><dt>库存</dt><dd>退货入库，商品库存 +1</dd></div>
+    </dl>
+    <p class="inline-note" style="margin-top:12px">退款金额不可修改，不存在扣运费或扣优惠券；退款需与支付渠道对得上账。</p>
+  </div>
+</div>
+
+<div class="notice">退货包裹由商家在后台确认收货后才处理，系统不自动触发退款或换货；换货的出入库细节未细化。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="23-售后申请.html">← 上一页</a><a href="index.html">原型总览</a><a href="25-卖家发货.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品管理 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+<div class="seller-layout">
+  <aside class="sidebar">
+    <div class="sidebar__title">卖家后台</div>
+    <a class="menu-item" href="12-卖家概览.html">概览</a><a class="menu-item is-active" href="13-商品管理.html">商品管理</a><a class="menu-item" href="14-购买意向队列.html">购买意向</a><a class="menu-item" href="15-客户管理.html">客户管理</a><a class="menu-item" href="16-分类管理.html">分类管理</a><a class="menu-item" href="18-账号管理.html">账号管理</a>
+    <div class="sidebar__divider"></div>
+    <a class="menu-item" href="17-卖家订单管理.html">订单管理</a>
+  </aside>
+  <div class="seller-content">
+
+<div class="page-heading">
+  <div><h1>商品管理</h1><p class="page-desc">发布、编辑、冻结与下架商品，并为单个商品启用在线定制。</p></div>
+  <div class="heading-actions"><a class="btn btn--primary" href="13-商品管理.html">发布新商品</a><button class="btn" type="button">刷新数据</button></div>
+</div>
+
+<div class="alert alert--info">
+  <i class="alert__icon">i</i>
+  <div>在下方列表点「选择商品」后，才会出现该商品的定制设置与操作区。定制按商品单独启用。</div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>商品列表</h2><span class="muted small">共 4 件 · 第 1 页</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th style="width:70px">编号</th><th>商品</th><th>分类</th><th style="width:80px">库存</th><th style="width:100px">状态</th><th style="width:100px">在线定制</th><th style="width:120px">操作</th></tr></thead>
+        <tbody>
+          <tr class="is-selected"><td class="num">4</td><td>木纹令牌</td><td>木作 / 木牌</td><td class="num">5</td><td><span class="tag tag--success">在售</span></td><td><span class="tag tag--custom">已启用</span></td><td><button class="btn btn--text is-disabled">已选择</button></td></tr>
+          <tr><td class="num">3</td><td>手作相框</td><td>木作 / 相框</td><td class="num">2</td><td><span class="tag tag--success">在售</span></td><td>未启用</td><td><button class="btn btn--text" type="button">选择商品</button></td></tr>
+          <tr><td class="num">2</td><td>编织钥匙扣</td><td>编织 / 钥匙扣</td><td class="num">1</td><td><span class="tag tag--success">在售</span></td><td>未启用</td><td><button class="btn btn--text" type="button">选择商品</button></td></tr>
+          <tr><td class="num">1</td><td>陶瓷书签</td><td>陶瓷 / 书签</td><td class="num">0</td><td><span class="tag tag--info">已下架</span></td><td>未启用</td><td><button class="btn btn--text" type="button">选择商品</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pager"><button class="btn btn--sm is-disabled">上一页</button><span>共 4 件 · 第 1 页</span><button class="btn btn--sm is-disabled">下一页</button></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>定制与匠人资料</h2><span class="tag tag--custom">木纹令牌</span></div>
+  <div class="card__body">
+    <div class="field">
+      <label class="checkbox" style="margin-bottom:12px"><input type="checkbox" checked> 启用在线定制</label>
+      <p class="field-hint">启用后买家在商品详情页看到「在线定制工作台」，可提交定制订单。</p>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>匠人名称</label><input class="input" value="刘云炎" maxlength="60"></div>
+      <div class="field"><label>作品名称</label><input class="input" value="木纹令牌" disabled></div>
+    </div>
+    <div class="field"><label>匠人介绍</label><textarea class="textarea" maxlength="500">手工打磨木牌，逐件制作；定制内容确认后约 3 天完成。</textarea></div>
+    <div class="btn-row">
+      <button class="btn btn--primary" type="button">保存定制设置</button>
+      <span class="muted small">保存后立即对买家生效，历史订单中的方案快照不受影响。</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>选中商品 · 木纹令牌</h2><span class="tag tag--success">在售</span></div>
+  <div class="card__body">
+    <div class="seller-product">
+      <span class="thumb"><svg viewBox="0 0 240 180" role="img" aria-label="木纹令牌"><rect width="240" height="180" fill="#faf8f4"/><rect x="58" y="32" width="124" height="116" rx="12" fill="#dcbd93"/><rect x="65" y="39" width="110" height="102" rx="9" fill="none" stroke="#b98f5f"/><circle cx="120" cy="76" r="14" fill="none" stroke="#8d6440" stroke-width="2"/><path d="M112 76h16M120 68v16" stroke="#8d6440" stroke-width="2"/><text x="120" y="115" text-anchor="middle" font-family="serif" font-size="15" fill="#7b5533">木纹令牌</text><text x="120" y="131" text-anchor="middle" font-size="8" letter-spacing="2" fill="#96714e">HANDMADE</text></svg></span>
+      <div>
+        <div class="title-row"><h3 style="font-size:18px">木纹令牌</h3><div class="price price--sm">¥28.00</div></div>
+        <p class="meta-line">库存：5 · 木作 / 木牌</p>
+        <p class="desc">手工打磨的木纹令牌，可自选模板、祝福文字与图案。</p>
+        <p class="meta-line">发布时间：2026-11-16 09:40</p>
+        <div class="btn-row" style="margin-top:14px">
+          <button class="btn" type="button">编辑商品</button>
+          <button class="btn" type="button">手动冻结</button>
+          <button class="btn btn--primary" type="button">与队首买家开始交易</button>
+          <button class="btn btn--plain-danger" type="button">商品下架</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/seller/dashboard（商品管理）</code></span></div><div class="proto-nav"><a href="12-卖家概览.html">← 上一页</a><a href="index.html">原型总览</a><a href="14-购买意向队列.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

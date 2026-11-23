@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卖家订单管理 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link is-active" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>卖家订单管理</h1><p class="page-desc">按顺序推进订单状态：待支付由客户完成，已支付后确认与备货，发货后录入物流；交易完成前可取消整单并回补库存。</p></div>
+  <div class="heading-actions"><a class="btn" href="26-卖家售后管理.html">售后管理</a><a class="btn" href="12-卖家概览.html">返回卖家后台</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h3>订单 #403 · 已支付 · 待发货</h3><span class="tag">已支付</span></div>
+  <div class="card__body">
+    <p class="muted small" style="margin-bottom:10px">客户 mjw · 微信支付 ¥20.00 · 2026-11-23 13:52</p>
+    <ul class="muted small" style="margin-bottom:12px">
+      <li>手作相框 × 1 · ¥12.00</li>
+      <li>编织钥匙扣 × 1 · ¥8.00</li>
+    </ul>
+    <p class="price price--sm">合计 ¥20.00</p>
+    <div class="divider"></div>
+    <ul class="timeline"><li class="is-current">支付成功 · 待发货<time>2026-11-23 13:52</time></li><li class="is-done">客户下单<time>2026-11-23 13:50</time></li></ul>
+    <div class="btn-row" style="margin-top:14px">
+      <a class="btn btn--primary" href="25-卖家发货.html">发货</a>
+      <button class="btn" type="button">取消整单（原路退款）</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h3>订单 #401 · 备货完成（定制）</h3><span class="tag tag--warning">备货完成</span></div>
+  <div class="card__body">
+    <p class="muted small" style="margin-bottom:10px">客户 mjw · 2026-11-16 10:02</p>
+    <p style="margin-bottom:10px">木纹令牌 × 1 · ¥28.00 <span class="tag tag--custom">定制</span></p>
+    <div class="gift craft forest" style="max-width:300px"><span class="motif">❧</span><span>毕业快乐</span></div>
+    <div class="design-summary">
+      <span>模板 <b>手作纸纹</b></span>
+      <span>图案 <b>枝叶 ❧</b></span>
+      <span>配色 <b>森林绿</b></span>
+      <span>匠人 <b>刘云炎</b></span>
+    </div>
+    <p class="price price--sm" style="margin-top:12px">合计 ¥28.00</p>
+    <div class="divider"></div>
+    <ul class="timeline">
+      <li class="is-done">客户下单<time>2026-11-16 09:58</time></li>
+      <li class="is-done">支付成功 · 支付宝支付<time>2026-11-16 10:02</time></li>
+      <li class="is-done">商家确认<time>2026-11-16 10:30</time></li>
+      <li class="is-done">备货完成 · 匠人已按方案制作<time>2026-11-17 15:20</time></li>
+      <li class="is-current">等待填写物流并发货<time>—</time></li>
+    </ul>
+    <div class="btn-row" style="margin-top:14px">
+      <a class="btn btn--primary" href="25-卖家发货.html">填写物流并发货</a>
+      <button class="btn" type="button">取消整单</button>
+    </div>
+  </div>
+</div>
+
+<div class="notice">状态顺序：待支付 → 已支付 → 商家确认 → 备货完成 → 已发货 → 交易完成。待支付由客户完成支付，24 小时未支付系统自动取消；已支付订单取消时按原渠道退款；发货需录入物流服务商与运单号，客户可在订单里查询物流。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>/seller/shop-orders（本轮调整）</code></span></div><div class="proto-nav"><a href="16-分类管理.html">← 上一页</a><a href="index.html">原型总览</a><a href="18-账号管理.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支付结果 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link is-active" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>支付结果</h1><p class="page-desc">支付完成后按渠道返回的结果展示；结果未确认时订单保持待支付。</p></div>
+  <div class="heading-actions"><a class="btn" href="07-我的订单.html">我的订单</a></div>
+</div>
+
+<p class="state-caption">支付成功</p>
+<div class="card">
+  <div class="card__body">
+    <div class="result-panel">
+      <div class="result-panel__icon is-success">✓</div>
+      <h2>支付成功</h2>
+      <p>订单 #404 · 支付宝支付 · ¥40.00<br>支付时间 2026-11-23 14:02:11</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="07-我的订单.html">查看订单</a>
+        <a class="btn" href="01-商品浏览.html">继续购物</a>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="inline-note" style="margin:-8px 0 18px">订单状态由「待支付」变为「已支付」，库存按件扣减；此后进入商家确认与备货。</p>
+
+<p class="state-caption">支付结果处理中（渠道已扣款但回调未到达）</p>
+<div class="card">
+  <div class="card__body">
+    <div class="result-panel">
+      <div class="result-panel__icon is-warning">⋯</div>
+      <h2>支付结果确认中</h2>
+      <p>订单 #404 仍为「待支付」，请勿重复下单。<br>系统会与支付渠道核对结果，确认到账后再更新订单状态。</p>
+      <div class="btn-row">
+        <button class="btn btn--primary" type="button">刷新支付状态</button>
+        <a class="btn" href="19-支付方式与收银台.html">重新支付</a>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="inline-note" style="margin:-8px 0 18px">回调未到达时，订单不得直接置为已支付；主动查询或人工对账属于实现手段，需求只约束最终状态一致。</p>
+
+<p class="state-caption">支付失败</p>
+<div class="card">
+  <div class="card__body">
+    <div class="result-panel">
+      <div class="result-panel__icon is-danger">×</div>
+      <h2>支付未完成</h2>
+      <p>银行通道超时，本次未扣款。<br>订单仍为「待支付」，可在剩余时间内重新支付。</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="19-支付方式与收银台.html">重新支付</a>
+        <a class="btn" href="07-我的订单.html">返回订单</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="notice">三种结果都必须保证「支付状态与订单状态一致」：不得出现钱已收但订单待支付，也不得出现订单已支付但未收到钱；退款时按原渠道退回并与渠道对账。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="19-支付方式与收银台.html">← 上一页</a><a href="index.html">原型总览</a><a href="21-收货地址管理.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

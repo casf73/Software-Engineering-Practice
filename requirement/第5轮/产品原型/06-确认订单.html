@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>确认订单 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link is-active" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>确认订单</h1><p class="page-desc">确认收货地址与商品金额后提交订单；提交后订单进入「待支付」，24 小时内完成支付。</p></div>
+  <div class="heading-actions"><a class="btn" href="04-购物车.html">返回购物车</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>收货地址</h2><a class="btn btn--text" href="21-收货地址管理.html">管理收货地址</a></div>
+  <div class="card__body">
+    <label class="pay-method" style="margin-bottom:10px">
+      <input type="radio" name="addr" checked>
+      <span class="pay-method__body"><strong>麻津午 · 138 0000 6021</strong><small>江苏省南京市玄武区××路 12 号 3 栋 502（默认地址）</small></span>
+    </label>
+    <label class="pay-method">
+      <input type="radio" name="addr">
+      <span class="pay-method__body"><strong>mjw · 139 0000 3388</strong><small>上海市徐汇区××路 88 号 12 层</small></span>
+    </label>
+    <p class="inline-note" style="margin-top:10px">这里改选地址不会改变账号的默认地址设置。</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>商品清单</h2><span class="muted small">2 种商品</span></div>
+  <div class="card__body card__body--flush">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>商品</th><th style="width:100px">单价</th><th style="width:80px">数量</th><th style="width:100px">小计</th></tr></thead>
+        <tbody>
+          <tr><td>木纹令牌 <span class="tag tag--custom">可定制</span></td><td class="num">¥28.00</td><td class="num">1</td><td class="num">¥28.00</td></tr>
+          <tr><td>手作相框</td><td class="num">¥12.00</td><td class="num">1</td><td class="num">¥12.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card__footer">
+    <div class="summary-row">
+      <span class="muted">合计 <span class="price price--sm">¥40.00</span></span>
+      <div class="btn-row">
+        <a class="btn" href="04-购物车.html">返回修改</a>
+        <a class="btn btn--primary" href="19-支付方式与收银台.html">提交订单并支付</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert--info">
+  <i class="alert__icon">i</i>
+  <div><strong>库存与支付</strong><br>提交时只校验库存是否足够，不扣减也不锁定；支付成功后按件扣减，待支付超过 24 小时自动取消并释放占用。</div>
+</div>
+
+<p class="state-caption">异常状态：库存不足</p>
+<div class="alert alert--warning">
+  <i class="alert__icon">!</i>
+  <div><strong>编织钥匙扣 库存不足，本次未生成订单</strong><br>购物车、库存与订单均保持原状，可调整数量后重新结算。</div>
+</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>购物车「结算所选商品」（本轮调整）</code></span></div><div class="proto-nav"><a href="05-收藏夹.html">← 上一页</a><a href="index.html">原型总览</a><a href="07-我的订单.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>
