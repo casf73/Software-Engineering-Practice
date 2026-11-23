@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支付方式与收银台 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link is-active" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>收银台</h1><p class="page-desc">订单 #404 已创建，选择一个支付渠道完成支付。一个订单只能使用一种支付方式。</p></div>
+  <div class="heading-actions"><a class="btn" href="07-我的订单.html">稍后支付</a></div>
+</div>
+
+<div class="alert alert--warning">
+  <i class="alert__icon">!</i>
+  <div><strong>请在 24 小时内完成支付</strong><br>超时后系统自动取消订单并释放库存占用；订单在支付成功前保持「待支付」。</div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>订单信息</h2><span class="tag tag--warning">待支付</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>订单号</dt><dd>#404</dd></div>
+      <div><dt>商品</dt><dd>木纹令牌 × 1、手作相框 × 1</dd></div>
+      <div><dt>提交时间</dt><dd>2026-11-23 14:01:35</dd></div>
+      <div><dt>剩余支付时间</dt><dd><span class="countdown">23:47:12</span></dd></div>
+      <div><dt>收货地址</dt><dd>麻津午 · 138 0000 6021 · 江苏省南京市玄武区××路 12 号</dd></div>
+      <div><dt>应付金额</dt><dd class="price price--sm">¥40.00</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>选择支付方式</h2><span class="muted small">四选一，不支持组合支付</span></div>
+  <div class="card__body">
+    <div class="pay-methods">
+      <label class="pay-method">
+        <input type="radio" name="pay" checked>
+        <span class="pay-method__icon">卡</span>
+        <span class="pay-method__body"><strong>银行卡支付</strong><small>储蓄卡，需输入卡号</small></span>
+      </label>
+      <label class="pay-method">
+        <input type="radio" name="pay">
+        <span class="pay-method__icon">信</span>
+        <span class="pay-method__body"><strong>信用卡支付</strong><small>支持常见信用卡</small></span>
+      </label>
+      <label class="pay-method">
+        <input type="radio" name="pay">
+        <span class="pay-method__icon">支</span>
+        <span class="pay-method__body"><strong>支付宝支付</strong><small>扫码或跳转支付宝</small></span>
+      </label>
+      <label class="pay-method">
+        <input type="radio" name="pay">
+        <span class="pay-method__icon">微</span>
+        <span class="pay-method__body"><strong>微信支付</strong><small>扫码或跳转微信</small></span>
+      </label>
+    </div>
+
+    <p class="section-caption" style="margin-top:18px">银行卡支付信息（示例）</p>
+    <div class="form-grid">
+      <div class="field"><label>持卡人姓名</label><input class="input" value="麻津午"></div>
+      <div class="field"><label>卡号</label><input class="input" value="6222 0000 0000 0000" disabled></div>
+      <div class="field"><label>有效期</label><input class="input" value="09/29" disabled></div>
+      <div class="field"><label>安全码</label><input class="input" value="***" disabled></div>
+    </div>
+    <p class="inline-note">选择支付宝或微信支付时，此处展示渠道二维码。原型只演示选择结果，不发起真实支付。</p>
+
+    <div class="amount-line">
+      <span class="muted">应付金额</span>
+      <span class="price">¥40.00</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--primary btn--lg" href="20-支付结果.html">立即支付 ¥40.00</a>
+      <a class="btn" href="06-确认订单.html">返回确认订单</a>
+    </div>
+  </div>
+</div>
+
+<div class="notice">支付结果以渠道返回为准，退款严格原路退回原支付渠道；支付状态与订单状态必须一致，不允许出现已收款但订单仍待支付的情况。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="18-账号管理.html">← 上一页</a><a href="index.html">原型总览</a><a href="20-支付结果.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

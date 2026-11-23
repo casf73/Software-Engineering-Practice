@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卖家发货 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="12-卖家概览.html">卖家工作台</a><a class="nav-link is-active" href="17-卖家订单管理.html">订单管理</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">退出登录</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+<div class="seller-layout">
+  <aside class="sidebar">
+    <div class="sidebar__title">卖家后台</div>
+    <a class="menu-item" href="12-卖家概览.html">概览</a><a class="menu-item" href="13-商品管理.html">商品管理</a><a class="menu-item" href="14-购买意向队列.html">购买意向</a><a class="menu-item" href="15-客户管理.html">客户管理</a><a class="menu-item" href="16-分类管理.html">分类管理</a><a class="menu-item" href="18-账号管理.html">账号管理</a>
+    <div class="sidebar__divider"></div>
+    <a class="menu-item" href="17-卖家订单管理.html">订单管理</a>
+  </aside>
+  <div class="seller-content">
+
+<div class="page-heading">
+  <div><h1>订单发货</h1><p class="page-desc">订单已支付，录入物流服务商与运单号后完成发货。</p></div>
+  <div class="heading-actions"><a class="btn" href="17-卖家订单管理.html">返回订单列表</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>订单 #403</h2><span class="tag">已支付 · 待发货</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>客户</dt><dd>mjw</dd></div>
+      <div><dt>支付方式</dt><dd>微信支付 · ¥20.00</dd></div>
+      <div><dt>支付时间</dt><dd>2026-11-23 13:52</dd></div>
+      <div><dt>收货地址</dt><dd>麻津午 · 138 0000 6021 · 江苏省南京市玄武区××路 12 号 3 栋 502</dd></div>
+    </dl>
+    <div class="divider"></div>
+    <table class="table table--compact">
+      <thead><tr><th>商品</th><th style="width:90px">单价</th><th style="width:70px">数量</th><th style="width:90px">小计</th></tr></thead>
+      <tbody>
+        <tr><td>手作相框</td><td class="num">¥12.00</td><td class="num">1</td><td class="num">¥12.00</td></tr>
+        <tr><td>编织钥匙扣</td><td class="num">¥8.00</td><td class="num">1</td><td class="num">¥8.00</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>物流信息</h2><span class="muted small">一次发货一个运单号</span></div>
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field"><label>物流服务商</label>
+        <select class="select"><option>顺丰速运</option><option>京东物流</option><option>中通快递</option><option>圆通速递</option></select>
+      </div>
+      <div class="field"><label>运单号</label><input class="input" placeholder="请输入运单号"></div>
+    </div>
+    <div class="field"><label>发货备注（可选）</label><input class="input" placeholder="例如：已做防震包装"></div>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="17-卖家订单管理.html">确认发货</a>
+      <a class="btn" href="17-卖家订单管理.html">取消</a>
+    </div>
+    <p class="inline-note" style="margin-top:10px">发货后订单变为「已发货」，客户可在订单里查看物流单号与轨迹。</p>
+  </div>
+</div>
+
+  </div>
+</div>
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="24-售后详情.html">← 上一页</a><a href="index.html">原型总览</a><a href="26-卖家售后管理.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

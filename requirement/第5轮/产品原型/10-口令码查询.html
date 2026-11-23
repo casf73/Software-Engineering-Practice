@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>口令码查询 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link is-active" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>口令码查询</h1><p class="page-desc">凭提交意向时获得的口令码查询排位、修改联系信息或撤销意向。</p></div>
+  <div class="heading-actions"><a class="btn" href="01-商品浏览.html">返回商品</a></div>
+</div>
+
+<div class="alert alert--warning">
+  <i class="alert__icon">!</i>
+  <div>口令码只在提交购买意向时显示一次，关闭弹窗后不会再次出现，请自行保存。</div>
+</div>
+
+<div class="card">
+  <div class="card__body">
+    <form class="inline-form" onsubmit="return false">
+      <input class="input" style="width:260px" placeholder="输入口令码，例如 K7F2Q9" aria-label="口令码">
+      <button class="btn btn--primary" type="button">查询</button>
+      <span class="muted small">口令码不区分大小写</span>
+    </form>
+  </div>
+</div>
+
+<p class="state-caption">查询结果：等待中</p>
+<div class="card">
+  <div class="card__header"><h2>手作相框</h2><span class="tag tag--warning">等待中</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>当前排位</dt><dd>第 02 位</dd></div>
+      <div><dt>姓名</dt><dd>mjw</dd></div>
+      <div><dt>联系电话</dt><dd>138 0000 6021</dd></div>
+      <div><dt>交易地点</dt><dd>三食堂门口</dd></div>
+      <div><dt>提交时间</dt><dd>2026-11-15 18:40</dd></div>
+      <div><dt>口令码</dt><dd>K7F2Q9</dd></div>
+    </dl>
+    <div class="divider"></div>
+    <div class="btn-row">
+      <button class="btn" type="button">修改联系信息</button>
+      <button class="btn btn--plain-danger" type="button">撤销意向</button>
+      <span class="muted small">修改联系信息不会改变排位；撤销后口令码立即失效。</span>
+    </div>
+  </div>
+</div>
+
+<p class="state-caption">修改联系信息</p>
+<div class="card">
+  <div class="card__body">
+    <div class="form-grid">
+      <div class="field"><label>姓名</label><input class="input" value="mjw"></div>
+      <div class="field"><label>联系电话</label><input class="input" value="138 0000 6021"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn--primary" type="button">保存修改</button>
+      <button class="btn" type="button">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="notice">只有状态为「等待中」的意向可以修改联系信息或撤销；已开始交易或已作废的意向只能查看。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>首页「口令码查询」</code></span></div><div class="proto-nav"><a href="09-我的购买.html">← 上一页</a><a href="index.html">原型总览</a><a href="11-卖家登录.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物流查询 · 在线购物系统第五轮产品原型</title>
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="01-商品浏览.html">在线购物系统</a>
+    <nav class="header-nav" aria-label="主导航"><a class="nav-link" href="01-商品浏览.html">商品</a><a class="nav-link" href="03-在线定制.html">在线定制</a><a class="nav-link" href="09-我的购买.html">我的购买 · mjw</a><a class="nav-link" href="04-购物车.html">购物车</a><a class="nav-link" href="05-收藏夹.html">收藏夹</a><a class="nav-link is-active" href="07-我的订单.html">订单</a><span class="nav-sep"></span><a class="nav-link" href="11-卖家登录.html">卖家后台</a></nav>
+  </div>
+</header>
+<main class="app-main">
+  <div class="content-width">
+
+<div class="page-heading">
+  <div><h1>物流查询</h1><p class="page-desc">订单发货后可查看物流单号与跟踪信息。</p></div>
+  <div class="heading-actions"><a class="btn" href="07-我的订单.html">返回订单</a></div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>订单 #401 · 木纹令牌（定制）</h2><span class="tag tag--success">已发货</span></div>
+  <div class="card__body">
+    <dl class="dl">
+      <div><dt>物流服务商</dt><dd>顺丰速运</dd></div>
+      <div><dt>运单号</dt><dd>SF1234567890123</dd></div>
+      <div><dt>发货时间</dt><dd>2026-11-20 09:12</dd></div>
+      <div><dt>收货地址</dt><dd>麻津午 · 138 0000 6021 · 江苏省南京市玄武区××路 12 号 3 栋 502</dd></div>
+    </dl>
+    <div class="divider"></div>
+    <div class="btn-row">
+      <button class="btn" type="button">复制运单号</button>
+      <button class="btn" type="button">在顺丰官网查看</button>
+      <span class="muted small">跳转第三方页面或系统内嵌展示轨迹均可</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__header"><h2>物流轨迹</h2><span class="muted small">最后更新 2026-11-21 08:05</span></div>
+  <div class="card__body">
+    <div class="steps">
+      <div class="step is-done">已揽收</div>
+      <div class="step is-done">运输中</div>
+      <div class="step is-current">派送中</div>
+      <div class="step">已签收</div>
+    </div>
+    <ul class="timeline">
+      <li class="is-current">派送中 · 快件已到达南京玄武区营业点，正在派送<time>2026-11-21 08:05</time></li>
+      <li class="is-done">运输中 · 快件已到达南京转运中心<time>2026-11-20 22:31</time></li>
+      <li class="is-done">运输中 · 快件已从上海转运中心发出<time>2026-11-20 18:40</time></li>
+      <li class="is-done">已揽收 · 顺丰速运已收取快件<time>2026-11-20 09:12</time></li>
+    </ul>
+  </div>
+</div>
+
+<div class="notice">系统只提供物流查询，不做「长时间未更新」的异常预警；物流状态以物流服务商返回为准。</div>
+
+  </div>
+</main>
+<footer class="proto-bar"><div class="proto-bar__left"><span class="proto-badge">原型</span><span class="proto-route">实装对应：<code>本轮新增（尚未实装）</code></span></div><div class="proto-nav"><a href="21-收货地址管理.html">← 上一页</a><a href="index.html">原型总览</a><a href="23-售后申请.html">下一页 →</a></div></footer>
+<script src="assets/prototype.js"></script>
+</body>
+</html>
